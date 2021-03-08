@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+    web:
+        build:
+            context: docker/nginx
+        ports:
+            - "1000:80"
+            - "1001:443"
+        expose:
+            - "1001"
+        volumes:
+            - ./code:/var/www/html/code
+            - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
+        links:
+            - php
+        networks:
+            - game
+    php:
+        build: docker/php
+        volumes:
+            - ./code:/var/www/html/code
+        networks:
+            - game
+networks:
+    game:
+        external: true
