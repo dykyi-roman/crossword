@@ -1,0 +1,6 @@
+/logs
+/database
+/storage/*.key
+/storage/*
+/vendor
+/.idea
