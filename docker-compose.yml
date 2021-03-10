@@ -3,6 +3,7 @@ services:
     web:
         build:
             context: docker/nginx
+        container_name: game_web
         ports:
             - "1000:80"
             - "1001:443"
@@ -17,8 +18,32 @@ services:
             - game
     php:
         build: docker/php
+        container_name: game_php
         volumes:
             - ./code:/var/www/html/code
+        links:
+            - elasticsearch
+        networks:
+            - game
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+        container_name: game_es
+        environment:
+            - discovery.type=single-node
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+            nofile:
+                soft: 65536
+                hard: 65536
+        cap_add:
+            - IPC_LOCK
+        volumes:
+            - ./code/data/elasticsearch:/usr/share/elasticsearch/data
+        ports:
+            - 9200:9200
+            - 9300:9300
         networks:
             - game
 networks:

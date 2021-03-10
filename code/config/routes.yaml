@@ -1,3 +1,11 @@
-index:
+#swager
+swager:
     path: /
-    controller: App\Dictionary\UI\Web\IndexController::index
+    controller: App\Dictionary\UI\Web\SwaggerIndexPageAction
+swager.update:
+    path: /swagger/update
+    controller: App\Dictionary\UI\Web\SwaggerUpdateAction
+#api
+words.word:
+    path: /words/{language}/word
+    controller: App\Dictionary\UI\Web\WordAction

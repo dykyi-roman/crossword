@@ -1,4 +1,3 @@
 twig:
     paths:
-        '%kernel.project_dir%/src/Dictionary/UI/Web/Templates': dictionary
         '%kernel.project_dir%/src/Game/UI/Web/Templates': game
