@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/Dictionary/UI/Web'
-    ELASTIC_HOST: '%env(resolve:ELASTIC_HOST)%'
 
 services:
     # default configuration for services in *this* file
@@ -33,3 +32,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Dictionary\Infrastructure\Elastic\ClientFactory:
+        arguments:
+            - ['%env(resolve:ELASTIC_HOST_1)%']
+
+    App\Dictionary\Infrastructure\Elastic\WordsStorage: ~
+
+    App\Dictionary\Domain\Service\WordsStorageInterface: '@App\Dictionary\Infrastructure\Elastic\WordsStorage'

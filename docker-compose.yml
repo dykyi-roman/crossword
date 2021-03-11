@@ -40,7 +40,7 @@ services:
         cap_add:
             - IPC_LOCK
         volumes:
-            - ./code/data/elasticsearch:/usr/share/elasticsearch/data
+            - ./docker/data/elasticsearch:/usr/share/elasticsearch/data
         ports:
             - 9200:9200
             - 9300:9300

@@ -16,7 +16,8 @@
         "symfony/messenger": "5.2.*",
         "symfony/twig-bundle": "5.2.*",
         "symfony/yaml": "5.2.*",
-        "zircote/swagger-php": "^3.1"
+        "zircote/swagger-php": "^3.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"
