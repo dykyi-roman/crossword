@@ -10,11 +10,11 @@ final class WordException extends RuntimeException
 {
     public static function wordIsNotFound(string $mask, string $language): self
     {
-        return new self(sprintf('The word is ot found by mask "%s" in the "%s" index', $mask, $language));
+        return new self(sprintf('The word is ot found by mask "%s" in the "%s" dictionary', $mask, $language));
     }
 
-    public static function failedToWrite(string $word, string $language): self
+    public static function failedToAddNewWord(string $word, string $language): self
     {
-        return new self(sprintf('The word "%s" is not write in the "%s" index', $word, $language));
+        return new self(sprintf('The word "%s" is not write in the "%s" dictionary', $word, $language));
     }
 }

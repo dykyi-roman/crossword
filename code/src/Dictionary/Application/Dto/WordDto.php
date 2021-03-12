@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Infrastructure\Elastic;
+namespace App\Dictionary\Application\Dto;
 
 final class WordDto
 {

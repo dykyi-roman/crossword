@@ -45,16 +45,6 @@ final class WordAction extends AbstractController
      *          )
      *     ),
      *     @OA\Parameter(
-     *         name="length",
-     *         in="query",
-     *         description="word length",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="integer",
-     *             format="int32"
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         name="mask",
      *         in="query",
      *         description="Search words where second symbol is 'e' => `.e.*`. Search words where start from `t` symbol and size 4 letters => `t...`. Search any words that containt with 4 letters => `....`",
@@ -73,7 +63,7 @@ final class WordAction extends AbstractController
         } catch (Throwable $exception) {
             $logger->error($exception->getMessage());
 
-            $response = new FailedResponse($exception->getMessage(), [], HttpStatusCode::HTTP_ERROR);
+            $response = new FailedResponse($exception->getMessage(), HttpStatusCode::HTTP_ERROR);
         }
 
         return new JsonResponse($response->body(), $response->status());

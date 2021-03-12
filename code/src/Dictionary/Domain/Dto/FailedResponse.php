@@ -10,19 +10,17 @@ use App\Dictionary\Domain\Enum\ResponseStatus;
 final class FailedResponse implements ResponseInterface
 {
     private int $status;
-    private array $data;
     private string $message;
 
-    public function __construct(string $message, array $data = [], $status = HttpStatusCode::HTTP_NO_CONTENT)
+    public function __construct(string $message, $status = HttpStatusCode::HTTP_NO_CONTENT)
     {
         $this->message = $message;
         $this->status = $status;
-        $this->data = $data;
     }
 
     public function body(): array
     {
-        return ['status' => ResponseStatus::FAILED, 'data' => $this->data, 'error' => $this->message];
+        return ['status' => ResponseStatus::FAILED, 'error' => $this->message];
     }
 
     public function status(): int

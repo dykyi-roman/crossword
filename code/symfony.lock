@@ -236,6 +236,9 @@
     "twig/twig": {
         "version": "v3.3.0"
     },
+    "webmozart/assert": {
+        "version": "1.10.0"
+    },
     "zircote/swagger-php": {
         "version": "3.1.0"
     }

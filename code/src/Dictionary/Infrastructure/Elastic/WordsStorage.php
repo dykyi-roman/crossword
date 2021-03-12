@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Elastic;
 
+use App\Dictionary\Application\Dto\WordCollectionDto;
+use App\Dictionary\Application\Dto\WordDto;
 use App\Dictionary\Domain\Exception\WordException;
 use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Model\WordCollection;
@@ -20,7 +22,7 @@ final class WordsStorage implements WordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function find(string $language, string $mask, ?int $length = null): WordCollection
+    public function find(string $language, string $mask): WordCollection
     {
         $params = [
             'index' => $language,
@@ -37,9 +39,7 @@ final class WordsStorage implements WordsStorageInterface
             $response = $this->client->search($params);
             $collection = new WordCollection();
             array_map(
-                fn (WordDto $word) => $collection->add(
-                    new Word($word->language(), $word->word(), $word->definition())
-                ),
+                fn (WordDto $word) => $collection->add(new Word($word->language(), $word->word(), $word->definition())),
                 (new WordCollectionDto($response))->words()
             );
 
@@ -49,10 +49,9 @@ final class WordsStorage implements WordsStorageInterface
         }
     }
 
-    public function write(Word $word): void
+    public function add(Word $word): void
     {
-        try
-        {
+        try {
             $this->client->index(
                 [
                     'index' => $word->language(),
@@ -63,8 +62,8 @@ final class WordsStorage implements WordsStorageInterface
                     ],
                 ]
             );
-        }catch (Throwable $exception) {
-            throw WordException::failedToWrite($word->language(), $word->word());
+        } catch (Throwable $exception) {
+            throw WordException::failedToAddNewWord($word->language(), $word->word());
         }
     }
 }

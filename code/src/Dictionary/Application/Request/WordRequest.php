@@ -14,13 +14,6 @@ final class WordRequest
         $this->requestStack = $requestStack;
     }
 
-    public function length(): ?int
-    {
-        RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
-
-        return (int) $request->query->get('length');
-    }
-
     public function mask(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());

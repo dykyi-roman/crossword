@@ -6,8 +6,9 @@ namespace App\Dictionary\Application\Assert;
 
 use App\Dictionary\Application\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Request;
+use Webmozart\Assert\Assert;
 
-final class RequestAssert
+final class RequestAssert extends Assert
 {
     public static function missingRequest(?Request $request): void
     {

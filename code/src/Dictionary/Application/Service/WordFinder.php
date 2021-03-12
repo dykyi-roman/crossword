@@ -24,7 +24,7 @@ final class WordFinder
      */
     public function findByRequest(WordRequest $request): ResponseInterface
     {
-        $words = $this->wordsStorage->find($request->language(), $request->mask(), $request->length());
+        $words = $this->wordsStorage->find($request->language(), $request->mask());
         if ($words->count()) {
             return new SuccessResponse($words->jsonSerialize());
         }

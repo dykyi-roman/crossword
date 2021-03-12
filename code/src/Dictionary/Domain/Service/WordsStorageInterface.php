@@ -10,10 +10,10 @@ use App\Dictionary\Domain\Model\WordCollection;
 
 interface WordsStorageInterface
 {
-    public function write(Word $word): void;
+    public function add(Word $word): void;
 
     /**
      * @throws WordException
      */
-    public function find(string $language, string $mask, ?int $length = null): WordCollection;
+    public function find(string $language, string $mask): WordCollection;
 }

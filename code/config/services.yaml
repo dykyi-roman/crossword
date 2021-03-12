@@ -5,7 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/Dictionary/UI/Web'
-
+    dictionary:
+        en: '%kernel.project_dir%/data/english.txt'
+        ru: '%kernel.project_dir%/data/russian.txt'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -17,7 +19,7 @@ services:
     App\:
         resource: '../src/*'
         exclude:
-            - '../src/Game/Model/'
+            - '../src/Game/Domain/Model/'
             - '../src/Crossword/Domain/Model/'
             - '../src/Dictionary/Domain/Model/'
             - '../src/Dictionary/Domain/Dto/'
@@ -33,10 +35,23 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    GuzzleHttp\Client: ~
+    App\Dictionary\Infrastructure\HttpClient\GuzzleClient:
+        - '@GuzzleHttp\Client'
+
     App\Dictionary\Infrastructure\Elastic\ClientFactory:
         arguments:
             - ['%env(resolve:ELASTIC_HOST_1)%']
 
+    App\Dictionary\UI\Console\WordsPopulate:
+        arguments:
+            $dictionaryList: '%dictionary%'
+
+    App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
+    App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor: ~
     App\Dictionary\Infrastructure\Elastic\WordsStorage: ~
 
+    Psr\Http\Client\ClientInterface: '@App\Dictionary\Infrastructure\HttpClient\GuzzleClient'
+    App\Dictionary\Domain\Service\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'
     App\Dictionary\Domain\Service\WordsStorageInterface: '@App\Dictionary\Infrastructure\Elastic\WordsStorage'
+    App\Dictionary\Domain\Service\FileReaderInterface: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
