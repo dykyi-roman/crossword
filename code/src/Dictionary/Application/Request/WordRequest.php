@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Request;
 
-use App\Dictionary\Application\Assert\RequestAssert;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Shared\Application\Assert\RequestAssert;
+use App\Shared\Application\Request\AbstractRequest;
 
-final class WordRequest
+final class WordRequest extends AbstractRequest
 {
-    public function __construct(RequestStack $requestStack)
-    {
-        $this->requestStack = $requestStack;
-    }
+    private const LENGTH = '10';
 
     public function mask(): string
     {
@@ -26,5 +23,12 @@ final class WordRequest
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
         return $request->get('language');
+    }
+
+    public function length(): int
+    {
+        RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
+
+        return (int) $request->headers->get('X-LENGTH', self::LENGTH);
     }
 }

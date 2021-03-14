@@ -7,7 +7,6 @@ namespace App\Dictionary\UI\Web;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-#[Route('/', methods: ['GET'], name: 'web.swagger.index')]
 final class SwaggerIndexPageAction extends AbstractController
 {
     public function __invoke(): RedirectResponse

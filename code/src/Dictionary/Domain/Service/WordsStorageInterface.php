@@ -4,16 +4,22 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Service;
 
-use App\Dictionary\Domain\Exception\WordException;
+use App\Dictionary\Domain\Exception\FailedWriteToStorageException;
+use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
 use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Model\WordCollection;
 
 interface WordsStorageInterface
 {
+    /**
+     * @throws FailedWriteToStorageException
+     */
     public function add(Word $word): void;
 
     /**
-     * @throws WordException
+     * @throws WordNotFoundInStorageException
      */
-    public function find(string $language, string $mask): WordCollection;
+    public function find(string $language, string $mask, int $length): WordCollection;
+
+    public function language(): array;
 }

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Elastic;
 
-use App\Dictionary\Application\Dto\WordCollectionDto;
-use App\Dictionary\Application\Dto\WordDto;
-use App\Dictionary\Domain\Exception\WordException;
+use App\Dictionary\Application\Dto\StorageWordCollection;
+use App\Dictionary\Application\Dto\StorageWord;
+use App\Dictionary\Domain\Exception\FailedWriteToStorageException;
+use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
 use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Model\WordCollection;
 use App\Dictionary\Domain\Service\WordsStorageInterface;
@@ -22,7 +23,7 @@ final class WordsStorage implements WordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function find(string $language, string $mask): WordCollection
+    public function find(string $language, string $mask, int $length): WordCollection
     {
         $params = [
             'index' => $language,
@@ -37,15 +38,18 @@ final class WordsStorage implements WordsStorageInterface
 
         try {
             $response = $this->client->search($params);
+            shuffle($response['hits']['hits']);
             $collection = new WordCollection();
             array_map(
-                fn (WordDto $word) => $collection->add(new Word($word->language(), $word->word(), $word->definition())),
-                (new WordCollectionDto($response))->words()
+                fn (StorageWord $word) => $collection->add(
+                    new Word($word->language(), $word->word(), $word->definition())
+                ),
+                (new StorageWordCollection(array_slice($response['hits']['hits'], 0, $length)))->words()
             );
 
             return $collection;
         } catch (Throwable $exception) {
-            throw WordException::wordIsNotFound($language, $mask);
+            throw new WordNotFoundInStorageException($mask, $language);
         }
     }
 
@@ -63,7 +67,12 @@ final class WordsStorage implements WordsStorageInterface
                 ]
             );
         } catch (Throwable $exception) {
-            throw WordException::failedToAddNewWord($word->language(), $word->word());
+            throw new FailedWriteToStorageException($word->word(), $word->language());
         }
+    }
+
+    public function language(): array
+    {
+        return array_keys($this->client->indices()->getSettings());
     }
 }

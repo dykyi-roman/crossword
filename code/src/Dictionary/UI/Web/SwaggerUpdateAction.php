@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-#[Route('/swagger/update', methods: ['GET'], name: 'web.swagger.update')]
 class SwaggerUpdateAction extends AbstractController
 {
     public function __invoke(ParameterBagInterface $bag): Response

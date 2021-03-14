@@ -46,6 +46,21 @@ services:
             - 9300:9300
         networks:
             - game
+    rabbit:
+        image: "rabbitmq:3-management"
+        container_name: game_rabbit
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "${RABBITMQ_ERLANG_COOKIE}"
+            RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+            RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+            RABBITMQ_DEFAULT_VHOST: "${RABBITMQ_DEFAULT_VHOST}"
+        ports:
+            - 1004:15672
+            - 1005:5672
+        volumes:
+            - ./docker/rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+        networks:
+            - game
 networks:
     game:
         external: true

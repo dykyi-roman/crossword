@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
         libicu-dev \
         libevent-dev \
         uuid-dev \
+        librabbitmq-dev \
+        libssh-dev \
         libgeoip-dev \
         libmemcached-dev \
         openssl \
@@ -42,6 +44,3 @@ RUN docker-php-ext-install -j$(nproc) iconv \
         && docker-php-ext-enable mysqli \
         && docker-php-ext-install pdo_mysql \
         && docker-php-ext-enable pdo_mysql
-
-RUN pecl install memcached
-RUN docker-php-ext-enable memcached

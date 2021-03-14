@@ -10,14 +10,21 @@ namespace App\Dictionary\Domain\Messages\Message;
 final class WordMessage
 {
     private string $word;
+    private string $language;
 
-    public function __construct(string $word)
+    public function __construct(string $word, string $language)
     {
         $this->word = $word;
+        $this->language = $language;
     }
 
     public function word(): string
     {
         return $this->word;
+    }
+
+    public function language(): string
+    {
+        return $this->language;
     }
 }

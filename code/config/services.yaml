@@ -4,10 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/Dictionary/UI/Web'
-    dictionary:
+    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/Dictionary/UI/Rest'
+    dictionary_storage:
         en: '%kernel.project_dir%/data/english.txt'
         ru: '%kernel.project_dir%/data/russian.txt'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -32,26 +33,50 @@ services:
         resource: '../src/Dictionary/UI/Web'
         tags: ['controller.service_arguments']
 
+    App\Dictionary\UI\Rest\:
+        resource: '../src/Dictionary/UI/Rest'
+        tags: ['controller.service_arguments']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    #  ---------------- Shared -------------------
+
     GuzzleHttp\Client: ~
-    App\Dictionary\Infrastructure\HttpClient\GuzzleClient:
+    App\Shared\Infrastructure\HttpClient\GuzzleClient:
         - '@GuzzleHttp\Client'
+
+    App\Shared\Infrastructure\HttpClient\ResponseDataExtractor: ~
+
+    Psr\Http\Client\ClientInterface: '@App\Shared\Infrastructure\HttpClient\GuzzleClient'
+    App\Shared\Domain\Service\ResponseDataExtractorInterface: '@App\Shared\Infrastructure\HttpClient\ResponseDataExtractor'
+    #  ---------------- Dictionary ----------------
 
     App\Dictionary\Infrastructure\Elastic\ClientFactory:
         arguments:
             - ['%env(resolve:ELASTIC_HOST_1)%']
 
-    App\Dictionary\UI\Console\WordsPopulate:
+    App\Dictionary\UI\Console\WordsPopulateCommand:
         arguments:
-            $dictionaryList: '%dictionary%'
+            $dictionaryList: '%dictionary_storage%'
+
+    App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway:
+        arguments:
+            $host: '%env(resolve:GOOGLE_DICTIONARY_API)%'
+        calls:
+            - setNext: ['@App\Dictionary\Infrastructure\Gateway\WordDefinitionWikipediaApiGateway']
+
+    App\Dictionary\Infrastructure\Gateway\WordDefinitionWikipediaApiGateway:
+        arguments:
+            $host: '%env(resolve:WIKIPEDIA_DICTIONARY_API)%'
 
     App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
-    App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor: ~
     App\Dictionary\Infrastructure\Elastic\WordsStorage: ~
 
-    Psr\Http\Client\ClientInterface: '@App\Dictionary\Infrastructure\HttpClient\GuzzleClient'
-    App\Dictionary\Domain\Service\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'
+    App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway'
     App\Dictionary\Domain\Service\WordsStorageInterface: '@App\Dictionary\Infrastructure\Elastic\WordsStorage'
     App\Dictionary\Domain\Service\FileReaderInterface: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
+
+    #  ---------------- Crossword ----------------
+
+    #  ---------------- Game ---------------------
+
