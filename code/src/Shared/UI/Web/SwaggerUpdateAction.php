@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\UI\Web;
+namespace App\Shared\UI\Web;
 
 use function OpenApi\scan;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

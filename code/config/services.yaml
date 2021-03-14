@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/Dictionary/UI/Rest'
+    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src'
     dictionary_storage:
         en: '%kernel.project_dir%/data/english.txt'
         ru: '%kernel.project_dir%/data/russian.txt'
@@ -29,8 +29,8 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Dictionary\UI\Web\:
-        resource: '../src/Dictionary/UI/Web'
+    App\Shared\UI\Web\:
+        resource: '../src/Shared/UI/Web'
         tags: ['controller.service_arguments']
 
     App\Dictionary\UI\Rest\:

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\UI\Web;
+namespace App\Shared\UI\Web;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-final class SwaggerIndexPageAction extends AbstractController
+final class SwaggerIndexAction extends AbstractController
 {
     public function __invoke(): RedirectResponse
     {
