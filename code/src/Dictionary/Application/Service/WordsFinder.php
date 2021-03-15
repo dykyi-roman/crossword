@@ -12,23 +12,24 @@ use Psr\Log\LoggerInterface;
 
 final class WordsFinder
 {
-    private WordsStorageInterface $wordsStorage;
     private LoggerInterface $logger;
+    private WordsStorageInterface $wordsStorage;
 
     public function __construct(WordsStorageInterface $wordsStorage, LoggerInterface $logger)
     {
-        $this->wordsStorage = $wordsStorage;
         $this->logger = $logger;
+        $this->wordsStorage = $wordsStorage;
     }
 
     public function findByRequest(WordRequest $request): WordCollection
     {
         try {
-            $words = $this->wordsStorage->find($request->language(), $request->mask(), $request->length());
+            $words = $this->wordsStorage->search($request->language(), $request->mask(), $request->length());
         } catch (WordNotFoundInStorageException $exception) {
             $this->logger->error($exception->getMessage());
 
-            //todo .. search use API snake calls
+            //TODO: Continue to search use foreign API.
+
             $words = new WordCollection();
         }
 

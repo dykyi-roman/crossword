@@ -18,10 +18,10 @@ abstract class AbstractWordDefinition implements WordDefinitionApiGatewayInterfa
         return $next;
     }
 
-    public function find(string $word, string $language): string
+    public function search(string $word, string $language): string
     {
         if ($this->next instanceof WordDefinitionApiGatewayInterface) {
-            return $this->next->find($word, $language);
+            return $this->next->search($word, $language);
         }
 
         throw new DefinitionNotFoundInApiGateway($word, $language);

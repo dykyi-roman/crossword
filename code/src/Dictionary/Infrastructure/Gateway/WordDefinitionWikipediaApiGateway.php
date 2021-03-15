@@ -29,7 +29,7 @@ final class WordDefinitionWikipediaApiGateway extends AbstractWordDefinition
         $this->logger = $logger;
     }
 
-    public function find(string $word, string $language): string
+    public function search(string $word, string $language): string
     {
         $uri = sprintf(
             'https://%s.%s?action=query&format=json&titles=%s&prop=extracts&exintro&explaintext',
@@ -48,9 +48,9 @@ final class WordDefinitionWikipediaApiGateway extends AbstractWordDefinition
                 return str_replace($word, '___', (string) explode('.', $text)[0]);
             }
 
-            return parent::find($word, $language);
+            return parent::search($word, $language);
         } catch (Throwable $exception) {
-            return parent::find($word, $language);
+            return parent::search($word, $language);
         }
     }
 }

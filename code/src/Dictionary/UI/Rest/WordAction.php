@@ -50,11 +50,10 @@ final class WordAction extends AbstractController
         $response = new ResponseFactory($request->format());
 
         $words = $wordsFinder->findByRequest($request);
-
         if ($words->count()) {
             return $response->success($words->jsonSerialize());
         }
 
-        return $response->failed('Word is not found');
+        return $response->failed('Word is not found in the dictionary.');
     }
 }

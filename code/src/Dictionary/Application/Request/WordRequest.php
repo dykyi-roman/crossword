@@ -9,7 +9,7 @@ use App\SharedKernel\Application\Request\AbstractRequest;
 
 final class WordRequest extends AbstractRequest
 {
-    private const LENGTH = '10';
+    private const LENGTH = '50';
 
     public function mask(): string
     {

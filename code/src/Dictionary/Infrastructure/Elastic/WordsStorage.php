@@ -23,7 +23,7 @@ final class WordsStorage implements WordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function find(string $language, string $mask, int $length): WordCollection
+    public function search(string $language, string $mask, int $length): WordCollection
     {
         $params = [
             'index' => $language,

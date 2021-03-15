@@ -25,19 +25,19 @@ final class WordDefinitionGoogleApiGateway extends AbstractWordDefinition
         $this->responseDataExtractor = $responseDataExtractor;
     }
 
-    public function find(string $word, string $language): string
+    public function search(string $word, string $language): string
     {
         try {
             $uri = sprintf('https://%s/%s/%s', $this->host, $language, $word);
             $response = $this->client->sendRequest(new Request('GET', $uri));
             $payload = $this->responseDataExtractor->extract($response);
             if (array_key_exists('resolution', $payload) && array_key_exists('message', $payload)) {
-                return parent::find($word, $language);
+                return parent::search($word, $language);
             }
 
             return $payload[0]['meanings'][0]['definitions'][0]['definition'];
         } catch (Throwable $exception) {
-            return parent::find($word, $language);
+            return parent::search($word, $language);
         }
     }
 }

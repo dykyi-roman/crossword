@@ -11,7 +11,7 @@ interface WordDefinitionApiGatewayInterface
     /**
      * @throws DefinitionNotFoundInApiGateway
      */
-    public function find(string $word, string $language): string;
+    public function search(string $word, string $language): string;
 
     public function setNext(self $apiGateway): self;
 }

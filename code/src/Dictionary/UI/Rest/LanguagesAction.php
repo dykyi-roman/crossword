@@ -30,6 +30,11 @@ final class LanguagesAction
     {
         $response = new ResponseFactory($request->format());
 
-        return $response->success($supportedLanguages->list());
+        $languages = $supportedLanguages->list();
+        if (count($languages)) {
+            return $response->success($languages);
+        }
+
+        return $response->failed('Dictionary is empty.');
     }
 }
