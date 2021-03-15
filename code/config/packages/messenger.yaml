@@ -4,11 +4,10 @@ framework:
         # failure_transport: failed
 
         transports:
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            # async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
+             async: '%env(MESSENGER_TRANSPORT_DSN)%'
              sync: 'sync://'
+            # failed: 'doctrine://default?queue_name=failed'
 
         routing:
-            # Change to async on the prod
-             'App\Dictionary\Domain\Messages\Message\WordMessage': sync
+             'App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage': sync
+             'App\Dictionary\Domain\Messages\Message\SaveToStorageMessage': sync

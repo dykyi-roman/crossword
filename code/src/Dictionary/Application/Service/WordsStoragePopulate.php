@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Dictionary\Application\Service;
 
 use App\Dictionary\Application\Dto\WordsStoragePopulateCriteria;
-use App\Dictionary\Domain\Messages\Message\WordMessage;
+use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
 use App\Dictionary\Domain\Service\FileReaderInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -36,7 +36,7 @@ final class WordsStoragePopulate
             $this->fileReader->open($criteria->filePath());
             foreach ($this->fileReader->rows() as $row) {
                 if (null !== $word = $this->wordProcessing($row)) {
-                    $this->messageBus->dispatch(new WordMessage($word, $criteria->language()));
+                    $this->messageBus->dispatch(new SearchWordDefinitionMessage($word, $criteria->language()));
                     $count++;
                 }
             }

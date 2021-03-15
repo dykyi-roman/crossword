@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Application\Request;
+namespace App\SharedKernel\Application\Request;
 
-use App\Shared\Application\Assert\RequestAssert;
+use App\SharedKernel\Application\Assert\RequestAssert;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractRequest

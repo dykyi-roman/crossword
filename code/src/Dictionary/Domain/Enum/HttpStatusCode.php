@@ -11,7 +11,5 @@ final class HttpStatusCode
 {
     public const HTTP_OK = 200;
 
-    public const HTTP_NO_CONTENT = 204;
-
     public const HTTP_ERROR = 500;
 }

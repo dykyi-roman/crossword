@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\HttpClient;
+namespace App\SharedKernel\Infrastructure\HttpClient;
 
-use App\Shared\Domain\Service\ResponseDataExtractorInterface;
+use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
 use Psr\Http\Message\ResponseInterface;
 
 final class ResponseDataExtractor implements ResponseDataExtractorInterface

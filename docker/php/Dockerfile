@@ -21,6 +21,11 @@ RUN apt-get update && apt-get install -y \
         git \
         && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install -y -f librabbitmq-dev \
+	&& docker-php-source extract \
+	&& mkdir /usr/src/php/ext/amqp \
+	&& curl -L https://github.com/php-amqp/php-amqp/archive/master.tar.gz | tar -xzC /usr/src/php/ext/amqp --strip-components=1
+
 RUN apt-get install -y $PHPIZE_DEPS
 
 RUN docker-php-ext-install -j$(nproc) iconv \
@@ -43,4 +48,6 @@ RUN docker-php-ext-install -j$(nproc) iconv \
         && docker-php-ext-install mysqli \
         && docker-php-ext-enable mysqli \
         && docker-php-ext-install pdo_mysql \
-        && docker-php-ext-enable pdo_mysql
+        && docker-php-ext-enable pdo_mysql \
+        && docker-php-ext-install amqp \
+        && docker-php-ext-enable amqp

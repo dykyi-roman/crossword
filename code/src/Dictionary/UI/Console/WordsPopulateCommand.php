@@ -7,7 +7,7 @@ namespace App\Dictionary\UI\Console;
 use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Dto\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
-use App\Shared\UI\Console\AbstractCommand;
+use App\SharedKernel\UI\Console\AbstractCommand;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

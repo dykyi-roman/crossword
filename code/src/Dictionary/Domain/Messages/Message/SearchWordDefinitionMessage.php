@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Dictionary\Domain\Messages\Message;
 
 /**
- * @see WordMessageHandler
+ * @see SearchWordDefinitionMessageHandler
  */
-final class WordMessage
+final class SearchWordDefinitionMessage
 {
     private string $word;
     private string $language;

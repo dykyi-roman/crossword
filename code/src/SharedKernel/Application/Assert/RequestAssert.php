@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Application\Assert;
+namespace App\SharedKernel\Application\Assert;
 
 use App\Dictionary\Application\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Request;

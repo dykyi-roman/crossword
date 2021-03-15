@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Application\Response;
+namespace App\SharedKernel\Application\Response;
 
 use App\Dictionary\Domain\Enum\HttpStatusCode;
 use App\Dictionary\Domain\Enum\ResponseStatus;

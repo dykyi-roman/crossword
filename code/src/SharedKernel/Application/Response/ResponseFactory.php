@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Application\Response;
+namespace App\SharedKernel\Application\Response;
 
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -6,25 +6,23 @@ namespace App\Dictionary\UI\Rest;
 
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\Shared\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\ResponseFactory;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @IgnoreAnnotation("OA\Info")
  * @IgnoreAnnotation("OA\SecurityScheme")
  * @IgnoreAnnotation("OA\Get")
  * @IgnoreAnnotation("OA\Response")
  * @IgnoreAnnotation("OA\Parameter")
  * @IgnoreAnnotation("OA\Schema")
- *
- * @OA\Info(title="Dictionary API", version="1.0.0")
  */
 final class WordAction extends AbstractController
 {
     /**
      * @OA\Get(
+     *     tags={"Dictionary"},
      *     path="/dictionary/words/{language}/word",
      *     description="Get word",
      *     @OA\Response(response="default", description="Get word by parameters"),
@@ -52,6 +50,7 @@ final class WordAction extends AbstractController
         $response = new ResponseFactory($request->format());
 
         $words = $wordsFinder->findByRequest($request);
+
         if ($words->count()) {
             return $response->success($words->jsonSerialize());
         }

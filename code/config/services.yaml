@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src'
+    DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/*/UI/'
     dictionary_storage:
         en: '%kernel.project_dir%/data/english.txt'
         ru: '%kernel.project_dir%/data/russian.txt'
@@ -29,8 +29,8 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Shared\UI\Web\:
-        resource: '../src/Shared/UI/Web'
+    App\SharedKernel\UI\Web\:
+        resource: '../src/SharedKernel/UI/Web'
         tags: ['controller.service_arguments']
 
     App\Dictionary\UI\Rest\:
@@ -42,13 +42,14 @@ services:
     #  ---------------- Shared -------------------
 
     GuzzleHttp\Client: ~
-    App\Shared\Infrastructure\HttpClient\GuzzleClient:
+    App\SharedKernel\Infrastructure\HttpClient\GuzzleClient:
         - '@GuzzleHttp\Client'
 
-    App\Shared\Infrastructure\HttpClient\ResponseDataExtractor: ~
+    App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
-    Psr\Http\Client\ClientInterface: '@App\Shared\Infrastructure\HttpClient\GuzzleClient'
-    App\Shared\Domain\Service\ResponseDataExtractorInterface: '@App\Shared\Infrastructure\HttpClient\ResponseDataExtractor'
+    Psr\Http\Client\ClientInterface: '@App\SharedKernel\Infrastructure\HttpClient\GuzzleClient'
+    App\SharedKernel\Domain\Service\ResponseDataExtractorInterface: '@App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor'
+
     #  ---------------- Dictionary ----------------
 
     App\Dictionary\Infrastructure\Elastic\ClientFactory:

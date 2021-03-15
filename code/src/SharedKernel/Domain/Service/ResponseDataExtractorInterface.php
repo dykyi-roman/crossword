@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Service;
+namespace App\SharedKernel\Domain\Service;
 
 use JsonException;
 use Psr\Http\Message\ResponseInterface;

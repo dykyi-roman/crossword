@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Gateway;
 
-use App\Shared\Domain\Service\ResponseDataExtractorInterface;
+use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
