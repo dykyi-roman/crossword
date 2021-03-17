@@ -1,5 +1,7 @@
 Crossword game
 =======
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
 # DDD
 
@@ -23,15 +25,28 @@ To make the code organised each context uses Layered Architecture and each funct
  * `Doman`
  * `Infrastructure`
  * `UI`
+ 
+# Swagger
+
+Swagger help to describe the structure of APIs for better understand how is it works.
+
+``URL: /swagger``
+
+___
 
 # Dictionary
 
 ### Rest Api
 
-| Path                                         | Method  | Scheme | Grant |
-| -------------------------------------------  | ------- | ------ | ----- |
-| /dictionary/languages                        | GET     | ANY    | ALL   |
-| /dictionary/words/{LANGUAGE}/word?mask={MASK}| GET     | ANY    | ALL   |
+| Path                                         | Method | Scheme | Grant |
+| -------------------------------------------  | -------| ------ | ----- |
+| /dictionary/languages                        | GET    | ANY    | ALL   |
+| /dictionary/words/{LANGUAGE}/word?mask={MASK}| GET    | ANY    | ALL   |
+
+#### Response formats
+
+ * `json`
+ * `xml`
 
 ### Commands
 
@@ -58,6 +73,7 @@ php bin/console crossword:dictionary:words-storage-populate {LANGUAGE-CODE}
 * phpunit test coverage
 * php-cs-fixer
 * psalm
+* newman
 * deptrac
 
 ## Author

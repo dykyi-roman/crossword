@@ -15,8 +15,8 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class SearchWordDefinitionMessageHandler implements MessageHandlerInterface
 {
     private LoggerInterface $logger;
-    private WordDefinitionApiGatewayInterface $wordsDefinitionApiGateway;
     private MessageBusInterface $messageBus;
+    private WordDefinitionApiGatewayInterface $wordsDefinitionApiGateway;
 
     public function __construct(
         LoggerInterface $logger,
@@ -24,8 +24,8 @@ final class SearchWordDefinitionMessageHandler implements MessageHandlerInterfac
         WordDefinitionApiGatewayInterface $wordsDefinitionApiGateway
     ) {
         $this->logger = $logger;
-        $this->wordsDefinitionApiGateway = $wordsDefinitionApiGateway;
         $this->messageBus = $messageBus;
+        $this->wordsDefinitionApiGateway = $wordsDefinitionApiGateway;
     }
 
     public function __invoke(SearchWordDefinitionMessage $message): void

@@ -4,32 +4,26 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Response;
 
+use App\Dictionary\Application\Enum\ErrorCode;
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ResponseFactory
 {
-    private string $format;
-
-    public function __construct(string $format)
+    public function success(array $payload, string $format): Response
     {
-        $this->format = $format;
+        return $this->create(new SuccessResponse($payload), $format);
     }
 
-    public function success(array $payload): Response
+    public function failed(ErrorCode $errorCode, string $format): Response
     {
-        return $this->create(new SuccessResponse($payload));
+        return $this->create(new FailedResponse($errorCode), $format);
     }
 
-    public function failed(string $message): Response
+    private function create(ResponseInterface $response, string $format): Response
     {
-        return $this->create(new FailedResponse($message));
-    }
-
-    private function create(ResponseInterface $response): Response
-    {
-        switch ($this->format) {
+        switch ($format) {
             case 'xml':
                 $data = $response->body();
                 $xml = new SimpleXMLElement('<root/>');

@@ -4,23 +4,30 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Response;
 
-use App\Dictionary\Domain\Enum\HttpStatusCode;
-use App\Dictionary\Domain\Enum\ResponseStatus;
+use App\Dictionary\Application\Enum\ErrorCode;
+use App\SharedKernel\Application\Enum\HttpStatusCode;
+use App\SharedKernel\Application\Enum\ResponseStatus;
 
 final class FailedResponse implements ResponseInterface
 {
     private int $status;
-    private string $message;
+    private ErrorCode $errorCode;
 
-    public function __construct(string $message, $status = HttpStatusCode::HTTP_ERROR)
+    public function __construct(ErrorCode $errorCode, $status = HttpStatusCode::HTTP_ERROR)
     {
-        $this->message = $message;
         $this->status = $status;
+        $this->errorCode = $errorCode;
     }
 
     public function body(): array
     {
-        return ['status' => ResponseStatus::FAILED, 'error' => $this->message];
+        return [
+            'status' => ResponseStatus::FAILED,
+            'error' => [
+                'code' => $this->errorCode->getKey(),
+                'message' => (string) $this->errorCode->getValue(),
+            ]
+        ];
     }
 
     public function status(): int

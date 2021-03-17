@@ -24,7 +24,7 @@ final class WordsFinder
     public function findByRequest(WordRequest $request): WordCollection
     {
         try {
-            $words = $this->wordsStorage->search($request->language(), $request->mask(), $request->length());
+            $words = $this->wordsStorage->search($request->language(), $request->mask(), $request->limit());
         } catch (WordNotFoundInStorageException $exception) {
             $this->logger->error($exception->getMessage());
 

@@ -61,6 +61,19 @@ services:
             - ./docker/rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins"
         networks:
             - game
+    newman:
+        build: docker/newman
+        container_name: game_newman
+        command:
+            run postman_collection.json --insecure
+            -e postman_environment.json
+            -r cli
+        links:
+            - web
+        volumes:
+            - ./postman:/etc/newman
+        networks:
+            - game
 networks:
     game:
         external: true

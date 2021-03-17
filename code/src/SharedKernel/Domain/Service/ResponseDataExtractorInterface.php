@@ -9,8 +9,5 @@ use Psr\Http\Message\ResponseInterface;
 
 interface ResponseDataExtractorInterface
 {
-    /**
-     * @throws JsonException
-     */
     public function extract(ResponseInterface $response): array;
 }

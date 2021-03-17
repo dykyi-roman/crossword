@@ -1,4 +1,22 @@
 {
+    "amphp/amp": {
+        "version": "v2.5.2"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.8.0"
+    },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.1"
+    },
+    "composer/semver": {
+        "version": "3.2.4"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.5"
+    },
+    "dnoegel/php-xdg-base-dir": {
+        "version": "v0.1.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -23,6 +41,15 @@
     "ezimuel/ringphp": {
         "version": "1.1.2"
     },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.2.0"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "1.5.1"
+    },
+    "fzaninotto/faker": {
+        "version": "v1.5.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "7.2.0"
     },
@@ -35,8 +62,29 @@
     "monolog/monolog": {
         "version": "2.2.0"
     },
+    "myclabs/php-enum": {
+        "version": "1.8.0"
+    },
+    "netresearch/jsonmapper": {
+        "version": "v2.1.0"
+    },
+    "nikic/php-parser": {
+        "version": "v4.10.4"
+    },
+    "openlss/lib-array2xml": {
+        "version": "1.0.0"
+    },
     "php": {
         "version": "7.3"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.2.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.4.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -64,6 +112,21 @@
     },
     "roave/security-advisories": {
         "version": "dev-master"
+    },
+    "sebastian/diff": {
+        "version": "4.0.4"
+    },
+    "squizlabs/php_codesniffer": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
+        },
+        "files": [
+            "phpcs.xml.dist"
+        ]
     },
     "symfony/amqp-messenger": {
         "version": "v5.2.4"
@@ -187,6 +250,21 @@
             "config/packages/test/monolog.yaml"
         ]
     },
+    "symfony/phpunit-bridge": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "bf16921ef8309a81d9f046e9b6369c46bcbd031f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.22.1"
     },
@@ -257,8 +335,14 @@
     "twig/twig": {
         "version": "v3.3.0"
     },
+    "vimeo/psalm": {
+        "version": "4.6.3"
+    },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "zircote/swagger-php": {
         "version": "3.1.0"

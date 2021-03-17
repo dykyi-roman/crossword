@@ -9,7 +9,7 @@ use App\SharedKernel\Application\Request\AbstractRequest;
 
 final class WordRequest extends AbstractRequest
 {
-    private const LENGTH = '50';
+    private const LIMIT = '50';
 
     public function mask(): string
     {
@@ -25,10 +25,10 @@ final class WordRequest extends AbstractRequest
         return $request->get('language');
     }
 
-    public function length(): int
+    public function limit(): int
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (int) $request->headers->get('X-LENGTH', self::LENGTH);
+        return (int) $request->headers->get('X-LIMIT', self::LIMIT);
     }
 }

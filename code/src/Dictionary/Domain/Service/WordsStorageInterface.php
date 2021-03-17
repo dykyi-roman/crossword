@@ -19,7 +19,7 @@ interface WordsStorageInterface
     /**
      * @throws WordNotFoundInStorageException
      */
-    public function search(string $language, string $mask, int $length): WordCollection;
+    public function search(string $language, string $mask, int $limit): WordCollection;
 
     public function language(): array;
 }

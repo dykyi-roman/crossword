@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Domain\Enum;
+namespace App\SharedKernel\Application\Enum;
 
 /**
  * @todo https://wiki.php.net/rfc/enumerations
@@ -10,5 +10,6 @@ namespace App\Dictionary\Domain\Enum;
 final class ResponseStatus
 {
     public const FAILED = 'failed';
+
     public const SUCCESS = 'success';
 }

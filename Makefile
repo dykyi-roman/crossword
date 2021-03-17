@@ -9,6 +9,7 @@ placeholder:
 	@echo "| ------------------ | --------------------------------- |"
 	@echo "| cache              | Clear cache                       |"
 	@echo "| ------------------ | --------------------------------- |"
+	@echo "| postman-test       | Run postman tests                 |"
 	@echo "| phpcs              | Run phpcs                         |"
 	@echo "| psalm              | Run psalm                         |"
 	@echo "| php-test           | Run phpunit tests                 |"
@@ -41,3 +42,6 @@ psalm:
 
 php-tests:
 	docker-compose exec php sh -c "vendor/bin/phpunit tests/"
+
+postman-test:
+	docker-compose run newman

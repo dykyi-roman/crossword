@@ -14,14 +14,14 @@ final class WordDefinitionWikipediaApiGateway extends AbstractWordDefinition
 {
     private string $host;
     private ClientInterface $client;
-    private ResponseDataExtractorInterface $responseDataExtractor;
     private LoggerInterface $logger;
+    private ResponseDataExtractorInterface $responseDataExtractor;
 
     public function __construct(
         ClientInterface $client,
+        LoggerInterface $logger,
         ResponseDataExtractorInterface $responseDataExtractor,
-        string $host,
-        LoggerInterface $logger
+        string $host
     ) {
         $this->host = $host;
         $this->client = $client;

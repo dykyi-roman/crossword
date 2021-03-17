@@ -23,7 +23,7 @@ final class WordsStorage implements WordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function search(string $language, string $mask, int $length): WordCollection
+    public function search(string $language, string $mask, int $limit): WordCollection
     {
         $params = [
             'index' => $language,
@@ -44,7 +44,7 @@ final class WordsStorage implements WordsStorageInterface
                 fn (StorageWord $word) => $collection->add(
                     new Word($word->language(), $word->word(), $word->definition())
                 ),
-                (new StorageWordCollection(array_slice($response['hits']['hits'], 0, $length)))->words()
+                (new StorageWordCollection(array_slice($response['hits']['hits'], 0, $limit)))->words()
             );
 
             return $collection;

@@ -8,14 +8,14 @@ use JsonSerializable;
 
 final class Word implements JsonSerializable
 {
-    private string $language;
     private string $word;
+    private string $language;
     private string $definition;
 
     public function __construct(string $language, string $word, string $definition)
     {
-        $this->language = $language;
         $this->word = $word;
+        $this->language = $language;
         $this->definition = $definition;
     }
 

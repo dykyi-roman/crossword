@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Response;
 
-use App\Dictionary\Domain\Enum\HttpStatusCode;
-use App\Dictionary\Domain\Enum\ResponseStatus;
+use App\SharedKernel\Application\Enum\HttpStatusCode;
+use App\SharedKernel\Application\Enum\ResponseStatus;
 
 final class SuccessResponse implements ResponseInterface
 {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\UI\Rest;
 
+use App\Dictionary\Application\Enum\ErrorCode;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\WordsFinder;
 use App\SharedKernel\Application\Response\ResponseFactory;
@@ -45,15 +46,13 @@ final class WordAction extends AbstractController
      *     )
      * )
      */
-    public function __invoke(WordRequest $request, WordsFinder $wordsFinder): Response
+    public function __invoke(WordRequest $request, ResponseFactory $response, WordsFinder $wordsFinder): Response
     {
-        $response = new ResponseFactory($request->format());
-
         $words = $wordsFinder->findByRequest($request);
         if ($words->count()) {
-            return $response->success($words->jsonSerialize());
+            return $response->success($words->jsonSerialize(), $request->format());
         }
 
-        return $response->failed('Word is not found in the dictionary.');
+        return $response->failed(ErrorCode::from(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
     }
 }
