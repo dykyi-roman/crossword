@@ -70,8 +70,8 @@ php bin/console crossword:dictionary:words-storage-populate {LANGUAGE-CODE}
 * SQLite
  
 ## Clean code
-* phpunit test coverage
-* php-cs-fixer
+* phpunit
+* phpcs
 * psalm
 * newman
 * deptrac

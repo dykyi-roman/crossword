@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Dictionary\Domain\Messages\Handler;
 
-use App\Dictionary\Domain\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;

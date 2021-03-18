@@ -9,10 +9,11 @@ placeholder:
 	@echo "| ------------------ | --------------------------------- |"
 	@echo "| cache              | Clear cache                       |"
 	@echo "| ------------------ | --------------------------------- |"
-	@echo "| postman-test       | Run postman tests                 |"
+	@echo "| deptrac            | Run deptrac                       |"
 	@echo "| phpcs              | Run phpcs                         |"
 	@echo "| psalm              | Run psalm                         |"
 	@echo "| php-test           | Run phpunit tests                 |"
+	@echo "| postman-test       | Run postman tests                 |"
 	@echo "| pre-commit         | phpcs psalm test-run postman-test |"
 
 init:
@@ -32,6 +33,10 @@ restart: stop start
 cache:
 	rm -rf code/var/cache/*
 	@echo "Cache is clean"
+
+deptrac:
+	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile_dictionary.yaml --no-cache"
+	@echo "deptrac done"
 
 phpcs:
 	docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR2 src/"
