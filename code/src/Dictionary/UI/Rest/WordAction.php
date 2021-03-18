@@ -37,7 +37,9 @@ final class WordAction extends AbstractController
      *     @OA\Parameter(
      *         name="mask",
      *         in="query",
-     *         description="Search words where second symbol is 'e' => `.e.*`. Search words where start from `t` symbol and size 4 letters => `t...`. Search any words that containt with 4 letters => `....`",
+     *         description="Search words where second symbol is 'e' => `.e.*`.
+     *     Search words where start from `t` symbol and size 4 letters => `t...`.
+     *     Search any words that containt with 4 letters => `....`",
      *         required=false,
      *         @OA\Schema(
      *             type="string",
@@ -53,6 +55,6 @@ final class WordAction extends AbstractController
             return $response->success($words->jsonSerialize(), $request->format());
         }
 
-        return $response->failed(ErrorCode::from(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
+        return $response->failed(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
     }
 }

@@ -9,7 +9,7 @@ use Throwable;
 
 final class WordNotFoundInStorageException extends DomainException
 {
-    public function __construct(string $mask, string $language, $code = 0, Throwable $previous = null)
+    public function __construct(string $mask, string $language, int $code = 0, Throwable $previous = null)
     {
         $message = sprintf('The word is not found by mask "%s" in the "%s" dictionary', $mask, $language);
 

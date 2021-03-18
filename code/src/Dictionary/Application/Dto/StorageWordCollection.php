@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Dto;
 
+/**
+ * @psalm-immutable
+ */
 final class StorageWordCollection
 {
     /**
+     * @psalm-readonly
+     *
      * @var StorageWord[]
      */
     private array $words;

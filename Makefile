@@ -13,6 +13,7 @@ placeholder:
 	@echo "| phpcs              | Run phpcs                         |"
 	@echo "| psalm              | Run psalm                         |"
 	@echo "| php-test           | Run phpunit tests                 |"
+	@echo "| pre-commit         | phpcs psalm test-run postman-test |"
 
 init:
 	docker-compose down -v --remove-orphans
@@ -40,8 +41,11 @@ psalm:
 	docker-compose exec php sh -c "vendor/bin/psalm"
 	@echo "psalm done"
 
-php-tests:
+php-test:
 	docker-compose exec php sh -c "vendor/bin/phpunit tests/"
 
 postman-test:
 	docker-compose run newman
+
+pre-commit: phpcs psalm php-test postman-test
+	@:

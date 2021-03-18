@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Dictionary\Domain\Messages\Message;
 
 /**
+ * @psalm-immutable
+ *
  * @see SearchWordDefinitionMessageHandler
  */
 final class SearchWordDefinitionMessage

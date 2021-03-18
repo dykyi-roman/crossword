@@ -10,6 +10,9 @@ use JsonSerializable;
 final class WordCollection implements JsonSerializable, Countable
 {
     /**
+     * @readonly
+     * @psalm-allow-private-mutation
+     *
      * @var Word[]
      */
     private array $words;

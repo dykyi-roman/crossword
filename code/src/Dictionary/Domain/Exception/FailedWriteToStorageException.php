@@ -9,7 +9,7 @@ use Throwable;
 
 final class FailedWriteToStorageException extends DomainException
 {
-    public function __construct(string $word, string $language, $code = 0, Throwable $previous = null)
+    public function __construct(string $word, string $language, int $code = 0, Throwable $previous = null)
     {
         $message = sprintf('The word "%s" is not write in the "%s" dictionary', $word, $language);
 

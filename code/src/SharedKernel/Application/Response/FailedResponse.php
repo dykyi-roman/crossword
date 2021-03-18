@@ -8,12 +8,15 @@ use App\Dictionary\Application\Enum\ErrorCode;
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Enum\ResponseStatus;
 
+/**
+ * @psalm-immutable
+ */
 final class FailedResponse implements ResponseInterface
 {
     private int $status;
     private ErrorCode $errorCode;
 
-    public function __construct(ErrorCode $errorCode, $status = HttpStatusCode::HTTP_ERROR)
+    public function __construct(ErrorCode $errorCode, int $status = HttpStatusCode::HTTP_ERROR)
     {
         $this->status = $status;
         $this->errorCode = $errorCode;

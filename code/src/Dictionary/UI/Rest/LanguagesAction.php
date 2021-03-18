@@ -37,6 +37,6 @@ final class LanguagesAction
             return $response->success($languages, $request->format());
         }
 
-        return $response->failed(ErrorCode::from(ErrorCode::DICTIONARY_IS_EMPTY), $request->format());
+        return $response->failed(new ErrorCode(ErrorCode::DICTIONARY_IS_EMPTY), $request->format());
     }
 }

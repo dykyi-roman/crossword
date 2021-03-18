@@ -45,7 +45,7 @@ final class WordDefinitionWikipediaApiGateway extends AbstractWordDefinition
             $pages = array_values($payload['query']['pages']);
             $text = $pages[0]['extract'];
             if ($text && ((false === stripos($text, 'refer to')) || (false === stripos($text, 'refers to')))) {
-                return str_replace($word, '___', (string) explode('.', $text)[0]);
+                return str_replace($word, '___', explode('.', $text)[0]);
             }
 
             return parent::search($word, $language);

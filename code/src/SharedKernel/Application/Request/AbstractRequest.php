@@ -16,6 +16,10 @@ abstract class AbstractRequest
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * @psalm-suppress PossiblyNullPropertyFetch
+     * @psalm-suppress PossiblyNullReference
+     */
     public function format(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());

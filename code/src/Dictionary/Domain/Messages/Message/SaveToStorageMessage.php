@@ -7,6 +7,8 @@ namespace App\Dictionary\Domain\Messages\Message;
 use App\Dictionary\Domain\Model\Word;
 
 /**
+ * @psalm-immutable
+ *
  * @see SaveToStorageMessageHandler
  */
 final class SaveToStorageMessage

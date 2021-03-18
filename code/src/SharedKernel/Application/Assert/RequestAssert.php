@@ -10,6 +10,9 @@ use Webmozart\Assert\Assert;
 
 final class RequestAssert extends Assert
 {
+    /**
+     * @throws RequestException
+     */
     public static function missingRequest(?Request $request): void
     {
         if (null === $request) {

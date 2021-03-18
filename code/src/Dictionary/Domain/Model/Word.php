@@ -6,6 +6,9 @@ namespace App\Dictionary\Domain\Model;
 
 use JsonSerializable;
 
+/**
+ * @psalm-immutable
+ */
 final class Word implements JsonSerializable
 {
     private string $word;

@@ -29,7 +29,7 @@ final class ResponseFactory
                 $xml = new SimpleXMLElement('<root/>');
                 array_walk_recursive($data, [$xml, 'addChild']);
 
-                return new XmlResponse($xml->asXML(), $response->status());
+                return new XmlResponse((string) $xml->asXML(), $response->status());
             default:
                 return new JsonResponse($response->body(), $response->status());
         }

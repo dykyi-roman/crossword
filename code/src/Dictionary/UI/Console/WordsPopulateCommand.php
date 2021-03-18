@@ -26,6 +26,7 @@ final class WordsPopulateCommand extends AbstractCommand
     {
         parent::__construct();
 
+        $this->filePath = '';
         $this->wordsStoragePopulate = $wordsStoragePopulate;
         $this->dictionaryList = $dictionaryList;
     }
@@ -53,18 +54,21 @@ HELP
         $io->info(sprintf('Populate %s words', $count));
     }
 
+    /**
+     * @psalm-suppress PossiblyInvalidCast
+     */
     protected function validateInput(InputInterface $input): void
     {
         if ($this->filePath = (string) $input->getOption('file-path')) {
-            FileAssert::assertTxtFile($input->getOption('file-path'));
+            FileAssert::assertTxtFile((string) $input->getOption('file-path'));
 
             return;
         }
 
-        if (!array_key_exists($input->getArgument('language'), $this->dictionaryList)) {
+        if (!array_key_exists((string) $input->getArgument('language'), $this->dictionaryList)) {
             throw new RuntimeException('Dictionary is not found for words populate.');
         }
 
-        $this->filePath = $this->dictionaryList[$input->getArgument('language')];
+        $this->filePath = $this->dictionaryList[(string) $input->getArgument('language')];
     }
 }

@@ -10,5 +10,5 @@ interface FileReaderInterface
 {
     public function open(string $filePath): void;
 
-    public function rows(): ?Generator;
+    public function rows(): Generator;
 }

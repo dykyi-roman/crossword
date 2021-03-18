@@ -7,6 +7,8 @@ namespace App\SharedKernel\Application\Enum;
 use MyCLabs\Enum\Enum;
 
 /**
+ * @psalm-immutable
+ *
  * @todo https://wiki.php.net/rfc/enumerations
  */
 final class HttpStatusCode extends Enum
