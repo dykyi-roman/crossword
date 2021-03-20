@@ -63,7 +63,7 @@
 					"response": []
 				},
 				{
-					"name": "search",
+					"name": "success search",
 					"event": [
 						{
 							"listen": "test",
@@ -120,6 +120,70 @@
 								{
 									"key": "mask",
 									"value": "...*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "failed search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be failed\", function () {",
+									"    pm.response.to.be.error;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 500\", function(){",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().error).to.be.a('object');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-LIMIT",
+								"type": "text",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "{{dictionary_host}}/dictionary/words/en/word?mask=11.*",
+							"host": [
+								"{{dictionary_host}}"
+							],
+							"path": [
+								"dictionary",
+								"words",
+								"en",
+								"word"
+							],
+							"query": [
+								{
+									"key": "mask",
+									"value": "11.*"
 								}
 							]
 						}

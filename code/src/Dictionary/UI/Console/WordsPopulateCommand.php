@@ -46,12 +46,12 @@ HELP
             );
     }
 
-    protected function doExecute(InputInterface $input, SymfonyStyle $io): void
+    protected function doExecute(InputInterface $input, SymfonyStyle $symfonyStyle): void
     {
         $criteria = new WordsStoragePopulateCriteria((string) $input->getArgument('language'), $this->filePath);
         $count = $this->wordsStoragePopulate->execute($criteria);
 
-        $io->info(sprintf('Populate %s words', $count));
+        $symfonyStyle->info(sprintf('Populate %s words', $count));
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Request;
 
 use App\SharedKernel\Application\Assert\RequestAssert;
+use App\SharedKernel\Application\Enum\ResponseFormat;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 abstract class AbstractRequest
@@ -24,6 +25,6 @@ abstract class AbstractRequest
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (string) $request->headers->get('X-FORMAT', 'json');
+        return (string) $request->headers->get('X-FORMAT', ResponseFormat::JSON);
     }
 }

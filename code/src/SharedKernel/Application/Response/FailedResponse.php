@@ -29,7 +29,7 @@ final class FailedResponse implements ResponseInterface
             'error' => [
                 'code' => $this->errorCode->getKey(),
                 'message' => (string) $this->errorCode->getValue(),
-            ]
+            ],
         ];
     }
 

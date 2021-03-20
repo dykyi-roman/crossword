@@ -52,7 +52,7 @@ services:
 
     #  ---------------- Dictionary ----------------
 
-    App\Dictionary\Infrastructure\Elastic\ClientFactory:
+    App\Dictionary\Infrastructure\Repository\Elastic\ClientFactory:
         arguments:
             - ['%env(resolve:ELASTIC_HOST_1)%']
 
@@ -71,10 +71,12 @@ services:
             $host: '%env(resolve:WIKIPEDIA_DICTIONARY_API)%'
 
     App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
-    App\Dictionary\Infrastructure\Elastic\WordsStorage: ~
+    App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage: ~
+    App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
 
     App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway'
-    App\Dictionary\Domain\Service\WordsStorageInterface: '@App\Dictionary\Infrastructure\Elastic\WordsStorage'
+    App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
+    App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
     App\Dictionary\Domain\Service\FileReaderInterface: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
 
     #  ---------------- Crossword ----------------

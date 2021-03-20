@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Service;
 
-use App\Dictionary\Domain\Exception\DefinitionNotFoundInApiGateway;
+use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 
 interface WordDefinitionApiGatewayInterface
 {

@@ -31,17 +31,24 @@ final class WordsStoragePopulate
 
     public function execute(WordsStoragePopulateCriteria $criteria): int
     {
-        $count = 0;
         try {
-            $this->fileReader->open($criteria->filePath());
-            foreach ($this->fileReader->rows() as $row) {
-                if (null !== $word = $this->wordProcessing($row)) {
-                    $this->messageBus->dispatch(new SearchWordDefinitionMessage($word, $criteria->language()));
-                    $count++;
-                }
-            }
+            return $this->doExecute($criteria);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage());
+        }
+
+        return 0;
+    }
+
+    public function doExecute(WordsStoragePopulateCriteria $criteria): int
+    {
+        $count = 0;
+        $this->fileReader->open($criteria->filePath());
+        foreach ($this->fileReader->rows() as $row) {
+            if (null !== $word = $this->wordProcessing((string) $row)) {
+                $this->messageBus->dispatch(new SearchWordDefinitionMessage($word, $criteria->language()));
+                $count++;
+            }
         }
 
         return $count;
@@ -49,8 +56,8 @@ final class WordsStoragePopulate
 
     private function wordProcessing(string $word): ?string
     {
-        $word = mb_strtolower(str_replace("\r\n", "", trim($word)));
-        if (self::MIN_WORD_LENGTH > strlen($word)) {
+        $word = mb_strtolower(str_replace('\r\n', '', trim($word)));
+        if (strlen($word) < self::MIN_WORD_LENGTH) {
             return null;
         }
 

@@ -12,17 +12,21 @@ use Throwable;
 
 abstract class AbstractCommand extends Command
 {
+    abstract protected function doExecute(InputInterface $input, SymfonyStyle $symfonyStyle): void;
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->validateInput($input);
-        $io = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
         try {
             $memory = memory_get_usage();
             $start = microtime(true);
-            $this->doExecute($input, $io);
+            $this->doExecute($input, $symfonyStyle);
             $stop = number_format(microtime(true) - $start, 2);
 
-            $io->success(sprintf('Process took %f seconds. Memory used %f bytes', $stop, memory_get_usage() - $memory));
+            $symfonyStyle->success(
+                sprintf('Process took %f seconds. Memory used %f bytes', $stop, memory_get_usage() - $memory)
+            );
 
             return Command::SUCCESS;
         } catch (Throwable $exception) {
@@ -30,9 +34,8 @@ abstract class AbstractCommand extends Command
         }
     }
 
-    abstract protected function doExecute(InputInterface $input, SymfonyStyle $io): void;
-
     protected function validateInput(InputInterface $input): void
     {
+        //todo:: Don`t remove this method, it uses in the child classes.
     }
 }

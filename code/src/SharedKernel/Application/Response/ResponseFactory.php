@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Response;
 
 use App\Dictionary\Application\Enum\ErrorCode;
+use App\SharedKernel\Application\Enum\ResponseFormat;
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ final class ResponseFactory
     private function create(ResponseInterface $response, string $format): Response
     {
         switch ($format) {
-            case 'xml':
+            case ResponseFormat::XML:
                 $data = $response->body();
                 $xml = new SimpleXMLElement('<root/>');
                 array_walk_recursive($data, [$xml, 'addChild']);

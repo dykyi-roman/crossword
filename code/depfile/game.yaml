@@ -1,0 +1,42 @@
+paths:
+  - ../src/Game
+exclude_files: ~
+layers:
+  - name: Application
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\Game\\Application\\.*
+        must_not:
+          - type: className
+            regex: App\\Game\\Application\\Dto
+
+  - name: Domain
+    collectors:
+      - type: className
+        regex: App\\Game\\Domain\\.*
+
+  - name: Infrastructure
+    collectors:
+      - type: className
+        regex: App\\Game\\Infrastructure\\.*
+
+  - name: UI
+    collectors:
+      - type: className
+        regex: App\\Game\\UI\\.*
+
+ruleset:
+  UI:
+    - Application
+
+  Application:
+    - Domain
+    - Infrastructure
+
+  Domain:
+    - Infrastructure
+
+  Infrastructure:
+    - Domain

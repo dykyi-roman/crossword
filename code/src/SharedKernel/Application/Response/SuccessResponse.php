@@ -23,7 +23,10 @@ final class SuccessResponse implements ResponseInterface
 
     public function body(): array
     {
-        return ['status' => ResponseStatus::SUCCESS, 'data' => $this->data];
+        return [
+            'status' => ResponseStatus::SUCCESS,
+            'data' => $this->data,
+        ];
     }
 
     public function status(): int

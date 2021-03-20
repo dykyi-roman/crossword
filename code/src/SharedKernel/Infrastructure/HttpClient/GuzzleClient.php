@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Infrastructure\HttpClient;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Client;
 
 final class GuzzleClient implements ClientInterface
 {
@@ -28,16 +28,21 @@ final class GuzzleClient implements ClientInterface
 
     private function defaultOptions(array $headers): array
     {
-        $stack = HandlerStack::create();
+        $handlerStack = HandlerStack::create();
         foreach ($this->middleware as $middleware) {
-            $stack->push($middleware);
+            $handlerStack->push($middleware);
         }
 
         return [
             'verify' => false,
             'http_errors' => false,
-            'handler' => $stack,
-            'headers' => array_merge(['Content-Type' => 'application/json'], $headers),
+            'handler' => $handlerStack,
+            'headers' => array_merge(
+                [
+                    'Content-Type' => 'application/json',
+                ],
+                $headers
+            ),
         ];
     }
 }

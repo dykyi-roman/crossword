@@ -1,0 +1,46 @@
+paths:
+  - ../src/SharedKernel
+exclude_files: ~
+layers:
+  - name: Application
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\SharedKernel\\Application\\.*
+        must_not:
+          - type: className
+            regex: App\\SharedKernel\\Application\\Dto
+
+  - name: Domain
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\SharedKernel\\Domain\\.*
+        must_not:
+          - type: className
+            regex: App\\SharedKernel\\Domain\\Service\\.*Interface.*
+
+  - name: Infrastructure
+    collectors:
+      - type: className
+        regex: App\\SharedKernel\\Infrastructure\\.*
+
+  - name: UI
+    collectors:
+      - type: className
+        regex: App\\SharedKernel\\UI\\.*
+
+ruleset:
+  UI:
+    - Application
+
+  Application:
+    - Domain
+    - Infrastructure
+
+  Domain:
+    - Infrastructure
+
+  Infrastructure: ~

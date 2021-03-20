@@ -4,28 +4,28 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Messages\Handler;
 
-use App\Dictionary\Domain\Exception\FailedWriteToStorageException;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
-use App\Dictionary\Domain\Service\WordsStorageInterface;
+use App\Dictionary\Domain\Repository\WriteWordsStorageInterface;
+use App\Dictionary\Infrastructure\Repository\Elastic\Exception\FailedSaveToStorageException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SaveToStorageMessageHandler implements MessageHandlerInterface
 {
     private LoggerInterface $logger;
-    private WordsStorageInterface $wordsStorage;
+    private WriteWordsStorageInterface $writeWordsStorage;
 
-    public function __construct(WordsStorageInterface $wordsStorage, LoggerInterface $logger)
+    public function __construct(WriteWordsStorageInterface $writeWordsStorage, LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->wordsStorage = $wordsStorage;
+        $this->writeWordsStorage = $writeWordsStorage;
     }
 
     public function __invoke(SaveToStorageMessage $message)
     {
         try {
-            $this->wordsStorage->add($message->word());
-        } catch (FailedWriteToStorageException $exception) {
+            $this->writeWordsStorage->save($message->word());
+        } catch (FailedSaveToStorageException $exception) {
             $this->logger->error($exception->getMessage());
         }
     }

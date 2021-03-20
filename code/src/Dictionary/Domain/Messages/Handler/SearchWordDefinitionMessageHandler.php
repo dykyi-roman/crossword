@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Messages\Handler;
 
-use App\Dictionary\Domain\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
 use App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface;
+use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

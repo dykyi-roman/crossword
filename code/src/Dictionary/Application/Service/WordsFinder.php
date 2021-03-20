@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace App\Dictionary\Application\Service;
 
 use App\Dictionary\Application\Request\WordRequest;
-use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
 use App\Dictionary\Domain\Model\WordCollection;
-use App\Dictionary\Domain\Service\WordsStorageInterface;
+use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
+use App\Dictionary\Infrastructure\Repository\Elastic\Exception\WordNotFoundInStorageException;
 use Psr\Log\LoggerInterface;
 
 final class WordsFinder
 {
     private LoggerInterface $logger;
-    private WordsStorageInterface $wordsStorage;
+    private ReadWordsStorageInterface $wordsStorage;
 
-    public function __construct(WordsStorageInterface $wordsStorage, LoggerInterface $logger)
+    public function __construct(ReadWordsStorageInterface $readWordsStorage, LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->wordsStorage = $wordsStorage;
+        $this->wordsStorage = $readWordsStorage;
     }
 
-    public function findByRequest(WordRequest $request): WordCollection
+    public function findByRequest(WordRequest $wordRequest): WordCollection
     {
         try {
-            $words = $this->wordsStorage->search($request->language(), $request->mask(), $request->limit());
+            $words = $this->wordsStorage->search($wordRequest->language(), $wordRequest->mask(), $wordRequest->limit());
         } catch (WordNotFoundInStorageException $exception) {
             $this->logger->error($exception->getMessage());
 

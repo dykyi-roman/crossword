@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Service;
 
-use App\Dictionary\Domain\Service\WordsStorageInterface;
+use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
 
 final class SupportedLanguages
 {
-    private WordsStorageInterface $wordsStorage;
+    private ReadWordsStorageInterface $wordsStorage;
 
-    public function __construct(WordsStorageInterface $wordsStorage)
+    public function __construct(ReadWordsStorageInterface $readWordsStorage)
     {
-        $this->wordsStorage = $wordsStorage;
+        $this->wordsStorage = $readWordsStorage;
     }
 
     public function list(): array

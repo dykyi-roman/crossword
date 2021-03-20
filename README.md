@@ -26,13 +26,31 @@ To make the code organised each context uses Layered Architecture and each funct
  * `Infrastructure`
  * `UI`
  
+![image](docs/ddd_la.jpeg)
+
+:+1: Checked by [Deptrac](https://github.com/qossmic/deptrac)
+ 
+# Docker
+
+The docker-compose up command aggregates and run each container.
+
+``
+ docker network create game
+ make start
+`` 
+
 # Swagger
 
 Swagger help to describe the structure of APIs for better understand how is it works.
 
 ``URL: /swagger``
-
 ___
+
+# Postman
+
+Сollections with queries can be found: ``cd /postman``
+
+:+1: Checked by [Newman](https://github.com/postmanlabs/newman)
 
 # Dictionary
 
@@ -56,6 +74,8 @@ Used to fill a dictionary:
 php bin/console crossword:dictionary:words-storage-populate {LANGUAGE-CODE}
 ```
 
+Collections with words for populate can be found: ``cd /data``
+
 # Crossword
 
 # Game
@@ -69,10 +89,12 @@ php bin/console crossword:dictionary:words-storage-populate {LANGUAGE-CODE}
 * Redis
 * SQLite
  
-## Clean code
+## Clean code support packages
 * phpunit
 * phpcs
 * psalm
+* rector
+* phpcs-calisthenics-rules
 * newman
 * deptrac
 
