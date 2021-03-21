@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\SharedKernel\Application\Assert;
 
-use App\Dictionary\Application\Exception\RequestException;
 use App\SharedKernel\Application\Assert\RequestAssert;
+use App\SharedKernel\Application\Exception\RequestException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 

@@ -7,18 +7,18 @@ namespace App\Dictionary\Application\Dto;
 /**
  * @psalm-immutable
  */
-final class StorageWordCollection
+final class StorageWordCollectionDto
 {
     /**
      * @psalm-readonly
      *
-     * @var StorageWord[]
+     * @var StorageWordDto[]
      */
     private array $words;
 
     public function __construct(array $words)
     {
-        $this->words = array_map(fn (array $attributes) => new StorageWord($attributes), $words);
+        $this->words = array_map(static fn (array $attributes) => new StorageWordDto($attributes), $words);
     }
 
     public function words(): array

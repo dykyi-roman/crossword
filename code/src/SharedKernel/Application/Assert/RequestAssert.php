@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Assert;
 
-use App\Dictionary\Application\Exception\RequestException;
+use App\SharedKernel\Application\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 

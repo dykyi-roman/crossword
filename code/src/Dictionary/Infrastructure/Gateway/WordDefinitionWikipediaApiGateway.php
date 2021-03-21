@@ -4,52 +4,42 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Gateway;
 
+use App\Dictionary\Domain\Dto\WikipediaWordDefinitionDto;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
-use Psr\Log\LoggerInterface;
 use Throwable;
 
 final class WordDefinitionWikipediaApiGateway extends AbstractWordDefinition
 {
-    private string $host;
+    private const URI = 'https://%s.%s?action=query&format=json&titles=%s&prop=extracts&exintro&explaintext';
+
+    private string $wikipediaApiHost;
     private ClientInterface $client;
-    private LoggerInterface $logger;
     private ResponseDataExtractorInterface $responseDataExtractor;
 
     public function __construct(
         ClientInterface $client,
-        LoggerInterface $logger,
         ResponseDataExtractorInterface $responseDataExtractor,
-        string $host
+        string $wikipediaApiHost
     ) {
-        $this->host = $host;
+        $this->wikipediaApiHost = $wikipediaApiHost;
         $this->client = $client;
         $this->responseDataExtractor = $responseDataExtractor;
-        $this->logger = $logger;
     }
 
     public function search(string $word, string $language): string
     {
-        $uri = sprintf(
-            'https://%s.%s?action=query&format=json&titles=%s&prop=extracts&exintro&explaintext',
-            $language,
-            $this->host,
-            $word
-        );
-
+        $uri = sprintf(self::URI, $language, $this->wikipediaApiHost, $word);
         try {
-            $this->logger->error('send = ' . $word);
             $response = $this->client->sendRequest(new Request('GET', $uri));
             $payload = $this->responseDataExtractor->extract($response);
-            $pages = array_values($payload['query']['pages']);
-            $text = $pages[0]['extract'];
-            if ($text && ((false === stripos($text, 'refer to')) || (false === stripos($text, 'refers to')))) {
-                return str_replace($word, '___', explode('.', $text)[0]);
-            }
+            $wikipediaWordDefinitionDto = new WikipediaWordDefinitionDto($payload);
 
-            return parent::search($word, $language);
-        } catch (Throwable $exception) {
+            return null === $wikipediaWordDefinitionDto->word() ?
+                parent::search($word, $language) :
+                str_replace($word, '___', $wikipediaWordDefinitionDto->word());
+        } catch (Throwable) {
             return parent::search($word, $language);
         }
     }

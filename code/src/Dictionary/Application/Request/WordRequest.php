@@ -15,20 +15,24 @@ final class WordRequest extends AbstractRequest
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (string) $request->query->get('mask', '');
+        $query = $request->query;
+
+        return (string) $query->get('mask', '');
     }
 
     public function language(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (string) $request->get('language');
+        return (string) $request->get('language', 'en');
     }
 
     public function limit(): int
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (int) $request->headers->get('X-LIMIT', self::LIMIT);
+        $headers = $request->headers;
+
+        return (int) $headers->get('X-LIMIT', self::LIMIT);
     }
 }

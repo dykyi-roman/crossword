@@ -24,7 +24,7 @@ final class WordAction extends AbstractController
     /**
      * @OA\Get(
      *     tags={"Dictionary"},
-     *     path="/dictionary/words/{language}/word",
+     *     path="/api/dictionary/words/{language}",
      *     description="Get word",
      *     @OA\Response(response="default", description="Get word by parameters"),
      *     @OA\Parameter(

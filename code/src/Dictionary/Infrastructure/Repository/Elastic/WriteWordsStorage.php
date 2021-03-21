@@ -32,7 +32,7 @@ final class WriteWordsStorage implements WriteWordsStorageInterface
                     ],
                 ]
             );
-        } catch (Throwable $exception) {
+        } catch (Throwable) {
             throw new FailedSaveToStorageException($word->word(), $word->language());
         }
     }

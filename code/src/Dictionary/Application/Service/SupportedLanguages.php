@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Service;
 
+use App\Dictionary\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
 
 final class SupportedLanguages
@@ -15,8 +16,13 @@ final class SupportedLanguages
         $this->wordsStorage = $readWordsStorage;
     }
 
-    public function list(): array
+    /**
+     * @throws NotFoundSupportedLanguagesException
+     */
+    public function receive(): array
     {
-        return $this->wordsStorage->language();
+        $languages = $this->wordsStorage->language();
+
+        return count($languages) ? $languages : throw new NotFoundSupportedLanguagesException();
     }
 }

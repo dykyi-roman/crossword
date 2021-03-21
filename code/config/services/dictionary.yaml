@@ -1,0 +1,19 @@
+parameters:
+  DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/*/UI/'
+  dictionary_storage:
+    en: '%kernel.project_dir%/data/english.txt'
+    ru: '%kernel.project_dir%/data/russian.txt'
+
+services:
+  App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway:
+    calls:
+      - setNext: ['@App\Dictionary\Infrastructure\Gateway\WordDefinitionWikipediaApiGateway']
+
+  App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
+  App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage: ~
+  App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
+
+  App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway'
+  App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
+  App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
+  App\Dictionary\Domain\Service\FileReaderInterface: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'

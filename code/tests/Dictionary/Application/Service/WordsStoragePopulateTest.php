@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Dictionary\Application\Service;
 
-use App\Dictionary\Application\Dto\WordsStoragePopulateCriteria;
+use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
 use App\Dictionary\Infrastructure\FileReader\TextFileReader;
 use App\Tests\CrosswordAbstractTestCase;

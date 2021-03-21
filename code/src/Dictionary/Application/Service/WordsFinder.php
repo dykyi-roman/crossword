@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Service;
 
+use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Domain\Model\WordCollection;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
@@ -24,15 +25,11 @@ final class WordsFinder
     public function findByRequest(WordRequest $wordRequest): WordCollection
     {
         try {
-            $words = $this->wordsStorage->search($wordRequest->language(), $wordRequest->mask(), $wordRequest->limit());
+            return $this->wordsStorage->search($wordRequest->language(), $wordRequest->mask(), $wordRequest->limit());
         } catch (WordNotFoundInStorageException $exception) {
             $this->logger->error($exception->getMessage());
 
-            //TODO: Continue to search use foreign API.
-
-            $words = new WordCollection();
+            throw new NotFoundWordException();
         }
-
-        return $words;
     }
 }

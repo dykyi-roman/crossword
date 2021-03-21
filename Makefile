@@ -38,6 +38,7 @@ cache:
 
 deptrac:
 	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
+	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
 	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
 	@echo "deptrac done"
 

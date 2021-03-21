@@ -9,15 +9,15 @@ use Elasticsearch\ClientBuilder;
 
 final class ClientFactory
 {
-    private array $hosts;
+    private array $elasticHosts;
 
-    public function __construct(array $hosts)
+    public function __construct(array $elasticHosts)
     {
-        $this->hosts = $hosts;
+        $this->elasticHosts = $elasticHosts;
     }
 
     public function create(): Client
     {
-        return ClientBuilder::create()->setHosts($this->hosts)->build();
+        return ClientBuilder::create()->setHosts($this->elasticHosts)->build();
     }
 }

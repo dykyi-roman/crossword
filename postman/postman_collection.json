@@ -7,13 +7,183 @@
 	"item": [
 		{
 			"name": "Crossword",
-			"item": []
-		},
-		{
-			"name": "Dictionary",
 			"item": [
 				{
-					"name": "language",
+					"name": "build",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be valid and have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 200\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().data).to.be.a('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-LIMIT",
+								"type": "text",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/crossword/build/en/simple/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"crossword",
+								"build",
+								"en",
+								"simple",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "levels",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be valid and have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 200\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().data).to.be.a('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-LIMIT",
+								"type": "text",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/crossword/levels",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"crossword",
+								"levels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be valid and have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 200\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().data).to.be.a('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-LIMIT",
+								"type": "text",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/crossword/types",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"crossword",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "languages",
 					"event": [
 						{
 							"listen": "test",
@@ -50,11 +220,68 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{dictionary_host}}/dictionary/languages",
+							"raw": "{{host}}/api/crossword/languages",
 							"host": [
-								"{{dictionary_host}}"
+								"{{host}}"
 							],
 							"path": [
+								"api",
+								"crossword",
+								"languages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dictionary",
+			"item": [
+				{
+					"name": "languages",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be valid and have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 200\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().data).to.be.a('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/dictionary/languages",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
 								"dictionary",
 								"languages"
 							]
@@ -106,15 +333,16 @@
 							}
 						],
 						"url": {
-							"raw": "{{dictionary_host}}/dictionary/words/en/word?mask=...*",
+							"raw": "{{host}}/api/dictionary/words/en/?mask=...*",
 							"host": [
-								"{{dictionary_host}}"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"dictionary",
 								"words",
 								"en",
-								"word"
+								""
 							],
 							"query": [
 								{
@@ -170,15 +398,16 @@
 							}
 						],
 						"url": {
-							"raw": "{{dictionary_host}}/dictionary/words/en/word?mask=11.*",
+							"raw": "{{host}}/api/dictionary/words/en/?mask=11.*",
 							"host": [
-								"{{dictionary_host}}"
+								"{{host}}"
 							],
 							"path": [
+								"api",
 								"dictionary",
 								"words",
 								"en",
-								"word"
+								""
 							],
 							"query": [
 								{

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Response;
 
-use App\Dictionary\Application\Enum\ErrorCode;
 use App\SharedKernel\Application\Enum\ResponseFormat;
+use MyCLabs\Enum\Enum;
 use SimpleXMLElement;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ final class ResponseFactory
         return $this->create(new SuccessResponse($payload), $format);
     }
 
-    public function failed(ErrorCode $errorCode, string $format): Response
+    public function failed(Enum $errorCode, string $format): Response
     {
         return $this->create(new FailedResponse($errorCode), $format);
     }

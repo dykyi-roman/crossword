@@ -46,6 +46,8 @@ Swagger help to describe the structure of APIs for better understand how is it w
 ``URL: /swagger``
 ___
 
+![image](docs/swagger.png)
+
 # Postman
 
 Сollections with queries can be found: ``cd /postman``

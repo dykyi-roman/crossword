@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Application\Response;
 
-use App\Dictionary\Application\Enum\ErrorCode;
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Enum\ResponseStatus;
+use MyCLabs\Enum\Enum;
 
 /**
  * @psalm-immutable
@@ -14,9 +14,9 @@ use App\SharedKernel\Application\Enum\ResponseStatus;
 final class FailedResponse implements ResponseInterface
 {
     private int $status;
-    private ErrorCode $errorCode;
+    private Enum $errorCode;
 
-    public function __construct(ErrorCode $errorCode, int $status = HttpStatusCode::HTTP_ERROR)
+    public function __construct(Enum $errorCode, int $status = HttpStatusCode::HTTP_ERROR)
     {
         $this->status = $status;
         $this->errorCode = $errorCode;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Dictionary\UI\Console;
 
 use App\Dictionary\Application\Assert\FileAssert;
-use App\Dictionary\Application\Dto\WordsStoragePopulateCriteria;
+use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use RuntimeException;
@@ -33,17 +33,16 @@ final class WordsPopulateCommand extends AbstractCommand
 
     protected function configure(): void
     {
-        $this
-            ->setDescription('Populate a new words to the storage')
-            ->addArgument('language', InputArgument::REQUIRED, 'Language code')
-            ->addOption('file-path', null, InputOption::VALUE_OPTIONAL, 'File path')
-            ->setHelp(
-                <<<HELP
+        $this->setDescription('Populate a new words to the storage');
+        $this->addArgument('language', InputArgument::REQUIRED, 'Language code');
+        $this->addOption('file-path', null, InputOption::VALUE_OPTIONAL, 'File path');
+        $this->setHelp(
+            <<<HELP
 The command populate a new words to the storage 
     <info>php %command.full_name% ua</info>
     <info>php %command.full_name% ua --file-path=file.txt</info>
 HELP
-            );
+        );
     }
 
     protected function doExecute(InputInterface $input, SymfonyStyle $symfonyStyle): void

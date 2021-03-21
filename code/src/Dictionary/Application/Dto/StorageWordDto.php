@@ -7,7 +7,7 @@ namespace App\Dictionary\Application\Dto;
 /**
  * @psalm-immutable
  */
-final class StorageWord
+final class StorageWordDto
 {
     private array $attributes;
 

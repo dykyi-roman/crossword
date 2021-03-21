@@ -7,7 +7,6 @@ namespace App\Tests\SharedKernel\Application\Response;
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Response\SuccessResponse;
 use Faker\Factory;
-use Faker\Generator;
 use PHPUnit\Framework\TestCase;
 
 /**

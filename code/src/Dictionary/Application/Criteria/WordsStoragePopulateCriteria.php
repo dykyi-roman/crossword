@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Application\Dto;
+namespace App\Dictionary\Application\Criteria;
 
 /**
  * @psalm-immutable

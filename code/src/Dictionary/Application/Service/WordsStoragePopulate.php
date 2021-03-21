@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Service;
 
-use App\Dictionary\Application\Dto\WordsStoragePopulateCriteria;
+use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
 use App\Dictionary\Domain\Service\FileReaderInterface;
 use Psr\Log\LoggerInterface;

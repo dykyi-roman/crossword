@@ -12,16 +12,16 @@ final class FileAssert extends Assert
     public static function assertFile(string $filePath): void
     {
         if (!is_file($filePath)) {
-            throw new RuntimeException(sprintf('File "%s" is not found.', $filePath));
+            throw new RuntimeException(sprintf('The file "%s" is not found.', $filePath));
         }
     }
 
     public static function assertTxtFile(string $filePath): void
     {
-        static::assertFile($filePath);
+        self::assertFile($filePath);
 
         if ('txt' !== pathinfo($filePath, PATHINFO_EXTENSION)) {
-            throw new RuntimeException(sprintf('File "%s" is not supported. Use a *.txt files.', $filePath));
+            throw new RuntimeException(sprintf('The file "%s" is not supported. Use a *.txt files.', $filePath));
         }
     }
 }
