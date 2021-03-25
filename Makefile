@@ -43,7 +43,7 @@ deptrac:
 	@echo "deptrac done"
 
 phpcs:
-	docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR2 src/"
+	docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR12 src/"
 	@echo "phpcs done"
 
 psalm:

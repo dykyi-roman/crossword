@@ -25,6 +25,8 @@ abstract class AbstractRequest
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        return (string) $request->headers->get('X-FORMAT', ResponseFormat::JSON);
+        $headers = $request->headers;
+
+        return (string) $headers->get('X-FORMAT', ResponseFormat::JSON);
     }
 }

@@ -24,4 +24,13 @@ final class FileAssert extends Assert
             throw new RuntimeException(sprintf('The file "%s" is not supported. Use a *.txt files.', $filePath));
         }
     }
+
+    public static function assertCsvFile(string $filePath): void
+    {
+        self::assertFile($filePath);
+
+        if ('csv' !== pathinfo($filePath, PATHINFO_EXTENSION)) {
+            throw new RuntimeException(sprintf('The file "%s" is not supported. Use a *.csv files.', $filePath));
+        }
+    }
 }

@@ -25,11 +25,11 @@ abstract class AbstractCommand extends Command
             $stop = number_format(microtime(true) - $start, 2);
 
             $symfonyStyle->success(
-                sprintf('Process took %f seconds. Memory used %f bytes', $stop, memory_get_usage() - $memory)
+                sprintf('Process took %f seconds. Memory used %f bytes.', $stop, memory_get_usage() - $memory)
             );
 
             return Command::SUCCESS;
-        } catch (Throwable $exception) {
+        } catch (Throwable) {
             return Command::FAILURE;
         }
     }

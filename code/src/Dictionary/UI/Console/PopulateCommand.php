@@ -14,9 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class WordsPopulateCommand extends AbstractCommand
+final class PopulateCommand extends AbstractCommand
 {
-    protected static $defaultName = 'crossword:dictionary:words-storage-populate';
+    protected static $defaultName = 'dictionary:populate';
 
     private string $filePath;
     private array $dictionaryList;
@@ -33,7 +33,7 @@ final class WordsPopulateCommand extends AbstractCommand
 
     protected function configure(): void
     {
-        $this->setDescription('Populate a new words to the storage');
+        $this->setDescription('Populate a new words to the storage.');
         $this->addArgument('language', InputArgument::REQUIRED, 'Language code');
         $this->addOption('file-path', null, InputOption::VALUE_OPTIONAL, 'File path');
         $this->setHelp(
@@ -50,7 +50,7 @@ HELP
         $criteria = new WordsStoragePopulateCriteria((string) $input->getArgument('language'), $this->filePath);
         $count = $this->wordsStoragePopulate->execute($criteria);
 
-        $symfonyStyle->info(sprintf('Populate %s words', $count));
+        $symfonyStyle->info(sprintf('Populate %s words.', $count));
     }
 
     /**

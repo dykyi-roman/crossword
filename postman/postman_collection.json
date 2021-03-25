@@ -9,7 +9,7 @@
 			"name": "Crossword",
 			"item": [
 				{
-					"name": "build",
+					"name": "construct",
 					"event": [
 						{
 							"listen": "test",
@@ -52,74 +52,17 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/crossword/build/en/simple/1",
+							"raw": "{{host}}/api/crossword/construct/en/normal/3",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"crossword",
-								"build",
+								"construct",
 								"en",
-								"simple",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "levels",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Log response errors\", function () {",
-									"    if (pm.response.json().datap && pm.response.json().data.error){",
-									"       console.log(pm.response.json());   ",
-									"    }",
-									"});",
-									"",
-									"pm.test(\"Response must be valid and have a body\", function () {",
-									"    pm.response.to.be.ok;",
-									"    pm.response.to.be.json;",
-									"});",
-									"",
-									"pm.test(\"Response status is 200\", function(){",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Response has a status\", function(){",
-									"    pm.expect(pm.response.json().status).to.be.a('string');",
-									"});",
-									"",
-									"pm.test(\"Response has a data\", function(){",
-									"    pm.expect(pm.response.json().data).to.be.a('array');",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "X-LIMIT",
-								"type": "text",
-								"value": "1"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/crossword/levels",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"crossword",
-								"levels"
+								"normal",
+								"3"
 							]
 						}
 					},
@@ -329,7 +272,7 @@
 							{
 								"key": "X-LIMIT",
 								"type": "text",
-								"value": "1"
+								"value": "10"
 							}
 						],
 						"url": {

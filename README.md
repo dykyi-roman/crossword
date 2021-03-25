@@ -58,10 +58,10 @@ ___
 
 ### Rest Api
 
-| Path                                         | Method | Scheme | Grant |
-| -------------------------------------------  | -------| ------ | ----- |
-| /dictionary/languages                        | GET    | ANY    | ALL   |
-| /dictionary/words/{LANGUAGE}/word?mask={MASK}| GET    | ANY    | ALL   |
+| Path                                             | Method | Scheme | Grant |
+| ------------------------------------------------ | -------| ------ | ----- |
+| /api/dictionary/languages                        | GET    | ANY    | ALL   |
+| /api/dictionary/words/{LANGUAGE}/?mask={MASK}| GET    | ANY    | ALL   |
 
 #### Response formats
 
@@ -70,15 +70,42 @@ ___
 
 ### Commands
 
-Used to fill a dictionary:
+Used to fill a dictionary with the help of a third party API providers:
 
 ```
-php bin/console crossword:dictionary:words-storage-populate {LANGUAGE-CODE}
+php bin/console dictionary:populate {LANGUAGE-CODE} --{FILE-PATH}
+```
+
+Used to fill a dictionary from file:
+```
+php bin/console dictionary:upload {FILE-PATH} 
 ```
 
 Collections with words for populate can be found: ``cd /data``
 
 # Crossword
+
+### Rest Api
+
+| Path                                                    | Method | Scheme | Grant |
+| ------------------------------------------------------- | -------| ------ | ----- |
+| /api/crossword/construct/{LANGUAGE}/{TYPE}/{WORD-COUNT} | GET    | ANY    | ALL   |
+| /api/crossword/languages                                | GET    | ANY    | ALL   |
+| /api/crossword/levels                                   | GET    | ANY    | ALL   |
+| /api/crossword/types                                    | GET    | ANY    | ALL   |
+
+#### Response formats
+
+* `json`
+* `xml`
+
+### Commands
+
+Used to generate a new crossword:
+
+```
+php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
+```
 
 # Game
 

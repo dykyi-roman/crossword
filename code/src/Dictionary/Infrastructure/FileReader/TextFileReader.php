@@ -5,27 +5,24 @@ declare(strict_types=1);
 namespace App\Dictionary\Infrastructure\FileReader;
 
 use App\Dictionary\Domain\Service\FileReaderInterface;
+use App\Dictionary\Infrastructure\FileReader\Exception\FileOpenException;
 use Generator;
 
-/**
- * @psalm-suppress MissingConstructor
- */
 final class TextFileReader implements FileReaderInterface
 {
-    /**
-     * @var resource
-     */
-    protected $file;
-
-    public function open(string $filePath): void
+    public function read(string $filePath): Generator
     {
-        $this->file = fopen($filePath, 'rb');
-    }
+        try {
+            $file = fopen($filePath, 'rb');
+            if (!$file) {
+                throw new FileOpenException($filePath);
+            }
 
-    public function rows(): Generator
-    {
-        while (!feof($this->file)) {
-            yield fgets($this->file);
+            while (!feof($file)) {
+                yield fgets($file);
+            }
+        } finally {
+            $file && fclose($file);
         }
     }
 }

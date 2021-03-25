@@ -11,6 +11,8 @@ final class ResponseDataExtractor implements ResponseDataExtractorInterface
 {
     public function extract(ResponseInterface $response): array
     {
-        return (array) json_decode($response->getBody()->getContents(), true);
+        $body = $response->getBody();
+
+        return (array) json_decode($body->getContents(), true);
     }
 }

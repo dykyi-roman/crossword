@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\Rest;
 
-use App\Crossword\Application\Request\BuildRequest;
+use App\Crossword\Application\Request\ConstructRequest;
+use App\Crossword\Application\Service\ConstructorFactory;
 use App\SharedKernel\Application\Response\ResponseFactory;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IgnoreAnnotation("OA\SecurityScheme")
@@ -16,12 +18,12 @@ use Symfony\Component\HttpFoundation\Response;
  * @IgnoreAnnotation("OA\Parameter")
  * @IgnoreAnnotation("OA\Schema")
  */
-final class BuildAction
+final class ConstructAction
 {
     /**
      * @OA\Get(
      *     tags={"Crossword"},
-     *     path="/api/crossword/build/{language}/{type}/{level}",
+     *     path="/api/crossword/construct/{language}/{type}/{words}",
      *     description="Create a new crossword",
      *     @OA\Response(response="default", description="Build a new crossword"),
      *     @OA\Parameter(
@@ -39,7 +41,7 @@ final class BuildAction
      *          )
      *     ),
      *     @OA\Parameter(
-     *          name="level",
+     *          name="words",
      *          in="path",
      *          @OA\Schema(
      *              type="integer",
@@ -47,13 +49,15 @@ final class BuildAction
      *     )
      * )
      */
-    public function __invoke(BuildRequest $request, ResponseFactory $responseFactory): Response
-    {
-        return $responseFactory->success(
-            [
-                'test' => ['test'],
-            ],
-            $request->format()
-        );
+    #[Route('/api/crossword/construct/{language}/{type}/{words}', name: 'crossword.api.construct', methods: ['GET'])]
+    public function __invoke(
+        ConstructRequest $request,
+        ResponseFactory $response,
+        ConstructorFactory $constructorFactory
+    ): Response {
+        $constructor = $constructorFactory->create($request->type());
+        $crossword = $constructor->build($request->language(), $request->wordCount());
+
+        return $response->success($crossword->jsonSerialize(), $request->format());
     }
 }

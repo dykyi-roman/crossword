@@ -26,13 +26,12 @@ final class SupportedLanguages
     public function receive(): array
     {
         try {
-            $supportedLanguages = $this->dictionaryProvider->supportedLanguages();
-            $languages = $supportedLanguages->languages();
+            $supportedLanguagesDto = $this->dictionaryProvider->supportedLanguages();
+            $languages = $supportedLanguagesDto->languages();
 
             return count($languages) ? $languages : throw new NotFoundSupportedLanguagesException();
         } catch (ApiClientException $exception) {
             $this->logger->error($exception->getMessage());
-            
             throw new NotFoundSupportedLanguagesException();
         }
     }

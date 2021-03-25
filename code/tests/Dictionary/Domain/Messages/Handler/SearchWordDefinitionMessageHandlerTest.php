@@ -7,8 +7,8 @@ namespace App\Tests\Dictionary\Domain\Messages\Handler;
 use App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
+use App\Dictionary\Infrastructure\Gateway\InMemory\WordDefinitionApiGatewayInMemory;
 use App\Tests\CrosswordAbstractTestCase;
-use App\Tests\Dictionary\InMemory\WordDefinitionApiGatewayInMemory;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 

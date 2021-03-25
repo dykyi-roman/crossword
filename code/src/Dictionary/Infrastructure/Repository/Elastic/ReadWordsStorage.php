@@ -36,7 +36,9 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
         ];
 
         try {
-            return $this->doSearch($params, $limit);
+            $collection = $this->doSearch($params, $limit);
+
+            return count($collection) ? $collection : throw new WordNotFoundInStorageException($mask, $language);
         } catch (Throwable) {
             throw new WordNotFoundInStorageException($mask, $language);
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Application\Enum;
+namespace App\Crossword\Domain\Enum;
 
 use MyCLabs\Enum\Enum;
 
@@ -13,7 +13,7 @@ use MyCLabs\Enum\Enum;
  */
 final class Type extends Enum
 {
-    public const SIMPLE = 'simple';
+    public const NORMAL = 'normal';
 
     public const FIGURED = 'figured';
 }

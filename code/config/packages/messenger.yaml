@@ -11,3 +11,4 @@ framework:
         routing:
              'App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage': sync
              'App\Dictionary\Domain\Messages\Message\SaveToStorageMessage': sync
+             'App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage': sync

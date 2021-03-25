@@ -9,11 +9,19 @@ services:
     calls:
       - setNext: ['@App\Dictionary\Infrastructure\Gateway\WordDefinitionWikipediaApiGateway']
 
+  App\Dictionary\Application\Service\WordsStoragePopulate:
+    arguments:
+      $fileReader: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
+
+  App\Dictionary\Application\Service\WordsStorageUpload:
+    arguments:
+      $fileReader: '@App\Dictionary\Infrastructure\FileReader\CsvFileReader'
+
   App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
+  App\Dictionary\Infrastructure\FileReader\CsvFileReader: ~
   App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage: ~
   App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
 
   App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway'
   App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
   App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
-  App\Dictionary\Domain\Service\FileReaderInterface: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'

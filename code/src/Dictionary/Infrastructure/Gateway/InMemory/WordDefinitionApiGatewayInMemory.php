@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Dictionary\InMemory;
+namespace App\Dictionary\Infrastructure\Gateway\InMemory;
 
 use App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface;
 use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;

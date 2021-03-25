@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Application\Enum;
+namespace App\Game\Domain\Enum;
 
 use MyCLabs\Enum\Enum;
 
@@ -17,4 +17,5 @@ final class Level extends Enum
     public const LEVEL_2 = 2;
     public const LEVEL_3 = 3;
     public const LEVEL_4 = 4;
+    public const LEVEL_5 = 5;
 }

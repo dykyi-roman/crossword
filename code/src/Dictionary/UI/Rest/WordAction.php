@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Dictionary\UI\Rest;
 
 use App\Dictionary\Application\Enum\ErrorCode;
+use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\WordsFinder;
 use App\SharedKernel\Application\Response\ResponseFactory;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IgnoreAnnotation("OA\SecurityScheme")
@@ -48,13 +50,15 @@ final class WordAction extends AbstractController
      *     )
      * )
      */
+    #[Route('/api/dictionary/words/{language}', name: 'dictionary.api.words.word', methods: ['GET'])]
     public function __invoke(WordRequest $request, ResponseFactory $response, WordsFinder $wordsFinder): Response
     {
-        $words = $wordsFinder->findByRequest($request);
-        if ($words->count()) {
-            return $response->success($words->jsonSerialize(), $request->format());
-        }
+        try {
+            $words = $wordsFinder->findByRequest($request);
 
-        return $response->failed(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
+            return $response->success($words->jsonSerialize(), $request->format());
+        } catch (NotFoundWordException) {
+            return $response->failed(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
+        }
     }
 }

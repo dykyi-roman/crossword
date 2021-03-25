@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Request;
 
-use App\Crossword\Application\Assert\LevelAssert;
 use App\Crossword\Application\Assert\TypeAssert;
-use App\Crossword\Application\Enum\Level;
-use App\Crossword\Application\Enum\Type;
+use App\Crossword\Domain\Enum\Type;
 use App\SharedKernel\Application\Assert\RequestAssert;
 use App\SharedKernel\Application\Request\AbstractRequest;
+use Webmozart\Assert\Assert;
 
-final class BuildRequest extends AbstractRequest
+final class ConstructRequest extends AbstractRequest
 {
+    private const LIMIT = 100;
+
     public function type(): Type
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        $type = (string) $request->get('type', Type::SIMPLE);
+        $type = (string) $request->get('type', Type::NORMAL);
 
         TypeAssert::assertSupportedType($type);
 
         return new Type($type);
     }
 
-    public function level(): int
+    public function wordCount(): int
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
-        $level = (int) $request->get('level', Level::LEVEL_1);
+        $wordCount = (int) $request->get('words', self::LIMIT);
 
-        LevelAssert::assertSupportedLevel($level);
+        Assert::lessThanEq($wordCount, self::LIMIT);
 
-        return $level;
+        return $wordCount;
     }
 
     public function language(): string

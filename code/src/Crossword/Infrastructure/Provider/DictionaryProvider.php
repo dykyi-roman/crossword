@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Crossword\Infrastructure\Provider;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
+use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Provider\DictionaryProviderInterface;
 use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
@@ -35,6 +36,20 @@ final class DictionaryProvider implements DictionaryProviderInterface
             $response = $this->client->sendRequest(new Request('GET', $uri));
 
             return new DictionaryLanguagesDto($this->responseDataExtractor->extract($response));
+        } catch (Throwable $exception) {
+            throw ApiClientException::badRequest($exception->getMessage());
+        }
+    }
+
+    public function searchWord(string $language, string $mask): DictionaryWordDto
+    {
+        $uri = sprintf('%s/words/%s/?mask=%s', $this->dictionaryApiHost, $language, $mask);
+        try {
+            $response = $this->client->sendRequest(new Request('GET', $uri, [
+                'X-LIMIT' => 1,
+            ]));
+
+            return new DictionaryWordDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
             throw ApiClientException::badRequest($exception->getMessage());
         }

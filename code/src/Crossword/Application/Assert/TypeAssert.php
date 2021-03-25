@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Assert;
 
-use App\Crossword\Application\Enum\Type;
+use App\Crossword\Domain\Enum\Type;
 use RuntimeException;
 use Webmozart\Assert\Assert;
 

@@ -11,6 +11,7 @@ use App\SharedKernel\Application\Request\Request;
 use App\SharedKernel\Application\Response\ResponseFactory;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @IgnoreAnnotation("OA\Get")
@@ -28,6 +29,7 @@ final class LanguagesAction
      *     @OA\Response(response="default", description="Supported languages list"),
      * )
      */
+    #[Route('/api/crossword/languages', name: 'crossword.api.languages', methods: ['GET'])]
     public function __invoke(
         Request $request,
         ResponseFactory $response,
