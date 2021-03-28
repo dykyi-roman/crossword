@@ -9,7 +9,7 @@ use App\SharedKernel\Application\Request\AbstractRequest;
 
 final class WordRequest extends AbstractRequest
 {
-    private const LIMIT = '50';
+    private const LIMIT = 50;
 
     public function mask(): string
     {
@@ -33,6 +33,6 @@ final class WordRequest extends AbstractRequest
 
         $headers = $request->headers;
 
-        return (int) $headers->get('X-LIMIT', self::LIMIT);
+        return (int) $headers->get('X-LIMIT', (string) self::LIMIT);
     }
 }

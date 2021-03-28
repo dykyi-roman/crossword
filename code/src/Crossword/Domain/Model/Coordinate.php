@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Model;
 
 use JsonSerializable;
+use Stringable;
 
-final class Coordinate implements JsonSerializable
+final class Coordinate implements JsonSerializable, Stringable
 {
     private int $coordinateX;
     private int $coordinateY;
@@ -27,6 +28,11 @@ final class Coordinate implements JsonSerializable
         return $this->coordinateY;
     }
 
+    public function equals(self $coordinate): bool
+    {
+        return $coordinate->coordinateX === $this->coordinateX && $coordinate->coordinateY === $this->coordinateY;
+    }
+
     public function jsonSerialize(): array
     {
         return [
@@ -35,8 +41,8 @@ final class Coordinate implements JsonSerializable
         ];
     }
 
-    public function equals(self $coordinate): bool
+    public function __toString(): string
     {
-        return $coordinate->coordinateX === $this->coordinateX && $coordinate->coordinateY === $this->coordinateY;
+        return sprintf('%d.%d', $this->coordinateX, $this->coordinateY);
     }
 }

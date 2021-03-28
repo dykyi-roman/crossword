@@ -29,7 +29,7 @@ final class WordCollection implements JsonSerializable, Countable
 
     public function jsonSerialize(): array
     {
-        return array_map(fn (Word $word) => $words[] = $word->jsonSerialize(), $this->words);
+        return array_map(static fn (Word $word) => $words[] = $word->jsonSerialize(), $this->words);
     }
 
     public function count(): int

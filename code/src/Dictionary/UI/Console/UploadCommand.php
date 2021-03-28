@@ -32,7 +32,7 @@ final class UploadCommand extends AbstractCommand
         $this->setHelp(
             <<<HELP
 The command upload a new words and his definition to the storage 
-    <info>php %command.full_name% path_to_file.csv</info>
+    <info>php %command.full_name% file.csv</info>
 HELP
         );
     }

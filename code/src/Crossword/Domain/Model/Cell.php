@@ -22,6 +22,31 @@ final class Cell implements JsonSerializable
         return $this->coordinate;
     }
 
+    public function left(): Coordinate
+    {
+        return new Coordinate($this->coordinate->coordinateX() - 1, $this->coordinate()->coordinateY());
+    }
+
+    public function right(): Coordinate
+    {
+        return new Coordinate($this->coordinate->coordinateX() + 1, $this->coordinate()->coordinateY());
+    }
+
+    public function top(): Coordinate
+    {
+        return new Coordinate($this->coordinate->coordinateX(), $this->coordinate()->coordinateY() + 1);
+    }
+
+    public function down(): Coordinate
+    {
+        return new Coordinate($this->coordinate->coordinateX(), $this->coordinate()->coordinateY() - 1);
+    }
+
+    public function isLetter(): bool
+    {
+        return !empty($this->letter);
+    }
+
     public function letter(): ?string
     {
         return $this->letter;

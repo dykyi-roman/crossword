@@ -27,9 +27,11 @@ final class LoggerMiddleware
 
                 return $promise->then(
                     function (ResponseInterface $response) use ($request, $logger) {
-                        $body = $request->getBody();
-                        $logger->info($body->getContents());
-                        $logger->info($body->getContents());
+                        $requestBody = $request->getBody();
+                        $logger->info($requestBody->getContents());
+
+                        $responseBody = $response->getBody();
+                        $logger->info($responseBody->getContents());
 
                         return $response;
                     }

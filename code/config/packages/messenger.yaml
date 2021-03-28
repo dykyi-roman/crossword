@@ -4,11 +4,13 @@ framework:
         # failure_transport: failed
 
         transports:
-             async: '%env(MESSENGER_TRANSPORT_DSN)%'
-             sync: 'sync://'
+#             messages: '%env(MESSENGER_TRANSPORT_DSN)%/messages'
+#             events: '%env(MESSENGER_TRANSPORT_DSN)%/events'
+             message: 'sync://'
+             events: 'sync://'
             # failed: 'doctrine://default?queue_name=failed'
 
         routing:
-             'App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage': sync
-             'App\Dictionary\Domain\Messages\Message\SaveToStorageMessage': sync
-             'App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage': sync
+             'App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage': messages
+             'App\Dictionary\Domain\Messages\Message\SaveToStorageMessage': messages
+             'App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage': messages

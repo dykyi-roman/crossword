@@ -52,15 +52,23 @@ final class NormalConstructor implements ConstructorInterface
             $word = $this->firstWordFinder->find($language, '..........');
 
             // think about move this code inside Filed object
-            $pivotX = intdiv($this->field->pivotX(), 2) - random_int(1, 5);
-            $pivotY = intdiv($this->field->pivotY(), 2) - random_int(1, 5);
+            $coordinateX = intdiv($this->field->coordinateX(), 2) - random_int(1, 5);
+            $coordinateY = intdiv($this->field->coordinateY(), 2) - random_int(1, 5);
 
-            $cells = $this->add($word->word(), new Coordinate($pivotX, $pivotY), new Axis(Axis::AXIS_X));
+            $cells = $this->add($word->word(), new Coordinate($coordinateX, $coordinateY), Axis::random());
             $crossword->addNewLine(new Line(1, $word, ...$cells));
 
             $this->field->draw(...$cells);
         }
 
         return $crossword;
+    }
+
+    /**
+     * @return Cell[]
+     */
+    public function grid(): array
+    {
+        return $this->field->grid();
     }
 }

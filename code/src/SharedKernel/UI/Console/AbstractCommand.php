@@ -34,8 +34,10 @@ abstract class AbstractCommand extends Command
         }
     }
 
+    /**
+     * @description Don`t remove this method, it uses in the child classes.
+     */
     protected function validateInput(InputInterface $input): void
     {
-        //todo:: Don`t remove this method, it uses in the child classes.
     }
 }
