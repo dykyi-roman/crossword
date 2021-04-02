@@ -33,6 +33,11 @@ final class Coordinate implements JsonSerializable, Stringable
         return $coordinate->coordinateX === $this->coordinateX && $coordinate->coordinateY === $this->coordinateY;
     }
 
+    public function inFrame(): bool
+    {
+        return 0 < $this->coordinateX() && 0 < $this->coordinateY();
+    }
+
     public function jsonSerialize(): array
     {
         return [

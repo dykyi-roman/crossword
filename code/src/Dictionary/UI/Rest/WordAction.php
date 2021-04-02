@@ -41,6 +41,7 @@ final class WordAction extends AbstractController
      *         in="query",
      *         description="Search words where second symbol is 'e' => `.e.*`.
      *     Search words where start from `t` symbol and size 4 letters => `t...`.
+     *     Search words where start from `na` symbol and size 4 letters => `na.*{0,4}`.
      *     Search any words that containt with 4 letters => `....`",
      *         required=false,
      *         @OA\Schema(

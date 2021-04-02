@@ -45,9 +45,7 @@ final class DictionaryProvider implements DictionaryProviderInterface
     {
         $uri = sprintf('%s/words/%s/?mask=%s', $this->dictionaryApiHost, $language, $mask);
         try {
-            $response = $this->client->sendRequest(new Request('GET', $uri, [
-                'X-LIMIT' => 1,
-            ]));
+            $response = $this->client->sendRequest(new Request('GET', $uri));
 
             return new DictionaryWordDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {

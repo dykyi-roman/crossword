@@ -6,18 +6,19 @@ namespace App\Dictionary\Application\Request;
 
 use App\SharedKernel\Application\Assert\RequestAssert;
 use App\SharedKernel\Application\Request\AbstractRequest;
+use App\SharedKernel\Domain\Model\Mask;
 
 final class WordRequest extends AbstractRequest
 {
-    private const LIMIT = 50;
+    private const LIMIT = 100;
 
-    public function mask(): string
+    public function mask(): Mask
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
         $query = $request->query;
 
-        return (string) $query->get('mask', '');
+        return new Mask((string) $query->get('mask', ''));
     }
 
     public function language(): string

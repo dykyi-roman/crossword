@@ -8,10 +8,10 @@ use JsonSerializable;
 
 final class Cell implements JsonSerializable
 {
-    private ?string $letter;
+    private null|string $letter;
     private Coordinate $coordinate;
 
-    public function __construct(Coordinate $coordinate, ?string $letter)
+    public function __construct(Coordinate $coordinate, null|string $letter)
     {
         $this->coordinate = $coordinate;
         $this->letter = $letter;
@@ -47,7 +47,17 @@ final class Cell implements JsonSerializable
         return !empty($this->letter);
     }
 
-    public function letter(): ?string
+    public function isForbidden(): bool
+    {
+        return '' === $this->letter;
+    }
+
+    public function isEmpty(): bool
+    {
+        return null === $this->letter;
+    }
+
+    public function letter(): null|string
     {
         return $this->letter;
     }

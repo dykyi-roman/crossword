@@ -54,7 +54,7 @@ final class WordsStoragePopulate
         return $count;
     }
 
-    private function wordProcessing(string $word): ?string
+    private function wordProcessing(string $word): null|string
     {
         $word = mb_strtolower(str_replace('\r\n', '', trim($word)));
         if (strlen($word) < self::MIN_WORD_LENGTH) {

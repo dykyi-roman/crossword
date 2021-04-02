@@ -18,6 +18,5 @@ final class GenerateCrosswordMessageHandler
 
     public function __invoke(GenerateCrosswordMessage $message)
     {
-        $word = $this->wordFinder->find($message->language(), '');
     }
 }

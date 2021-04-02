@@ -10,6 +10,7 @@ use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Model\WordCollection;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
 use App\Dictionary\Infrastructure\Repository\Elastic\Exception\WordNotFoundInStorageException;
+use App\SharedKernel\Domain\Model\Mask;
 use Elasticsearch\Client;
 use Throwable;
 
@@ -22,14 +23,26 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function search(string $language, string $mask, int $limit): WordCollection
+    public function search(string $language, Mask $mask, int $limit): WordCollection
     {
         $params = [
             'index' => $language,
             'body' => [
+                'size' => $limit,
                 'query' => [
-                    'regexp' => [
-                        'word' => $mask,
+                    'bool' => [
+                        'must' => [
+                            [
+                                'regexp' => [
+                                    'word' => $mask->query(),
+                                ],
+                            ],
+                            [
+                                'regexp' => [
+                                    'word' => '.' . $mask->limit(),
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -37,10 +50,13 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
 
         try {
             $collection = $this->doSearch($params, $limit);
+            if (count($collection)) {
+                return $collection;
+            }
 
-            return count($collection) ? $collection : throw new WordNotFoundInStorageException($mask, $language);
+            throw new WordNotFoundInStorageException((string) $mask, $language);
         } catch (Throwable) {
-            throw new WordNotFoundInStorageException($mask, $language);
+            throw new WordNotFoundInStorageException((string) $mask, $language);
         }
     }
 

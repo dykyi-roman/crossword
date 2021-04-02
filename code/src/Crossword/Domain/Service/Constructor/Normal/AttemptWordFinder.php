@@ -7,8 +7,9 @@ namespace App\Crossword\Domain\Service\Constructor\Normal;
 use App\Crossword\Domain\Exception\NotFoundWordException;
 use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\WordFinder;
+use App\SharedKernel\Domain\Model\Mask;
 
-final class FirstWordFinder
+final class AttemptWordFinder
 {
     private const ATTEMPT = 3;
 
@@ -19,21 +20,24 @@ final class FirstWordFinder
         $this->wordFinder = $wordFinder;
     }
 
-    public function find(string $language, string $mask): Word
+    /**
+     * @throws NotFoundWordException
+     */
+    public function find(string $language, Mask $mask, int $attempt = self::ATTEMPT): Word
     {
         $word = null;
         $counter = 1;
-        $template = $mask;
+        $template = clone $mask;
+
         do {
             try {
-                $word = $this->wordFinder->find($language, $template);
-                $counter = self::ATTEMPT + 1;
+                return $this->wordFinder->find($language, (string) $template);
             } catch (NotFoundWordException) {
                 $counter++;
-                $template = substr($template, 0, -1);
+                $template = $template->shiftLeft();
             }
-        } while ($counter <= self::ATTEMPT);
+        } while ($counter <= $attempt);
 
-        return $word ?? throw new NotFoundWordException();
+        throw new NotFoundWordException();
     }
 }

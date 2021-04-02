@@ -29,6 +29,7 @@ final class WriteWordsStorage implements WriteWordsStorageInterface
                     'body' => [
                         'word' => $word->word(),
                         'definition' => $word->definition(),
+                        'length' => strlen($word->word()),
                     ],
                 ]
             );

@@ -9,7 +9,7 @@ use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGatew
 
 abstract class AbstractWordDefinition implements WordDefinitionApiGatewayInterface
 {
-    private ?WordDefinitionApiGatewayInterface $next = null;
+    private null|WordDefinitionApiGatewayInterface $next = null;
 
     public function setNext(WordDefinitionApiGatewayInterface $next): WordDefinitionApiGatewayInterface
     {

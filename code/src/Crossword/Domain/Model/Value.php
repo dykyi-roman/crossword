@@ -6,8 +6,8 @@ namespace App\Crossword\Domain\Model;
 
 final class Value
 {
-    private ?int $value1;
-    private ?int $value2;
+    private null|int $value1;
+    private null|int $value2;
 
     public function __construct(int $value1 = null, int $value2 = null)
     {
@@ -20,12 +20,12 @@ final class Value
         return null === $this->getValue1() && null === $this->getValue2();
     }
 
-    public function getValue1(): ?int
+    public function getValue1(): null|int
     {
         return $this->value1;
     }
 
-    public function getValue2(): ?int
+    public function getValue2(): null|int
     {
         return $this->value2;
     }
