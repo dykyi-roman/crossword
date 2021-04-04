@@ -13,7 +13,7 @@ final class GoogleWordDefinitionDto
         $this->payload = $payload;
     }
 
-    public function word(): null|string
+    public function word(): ?string
     {
         if (array_key_exists('resolution', $this->payload) && array_key_exists('message', $this->payload)) {
             return null;

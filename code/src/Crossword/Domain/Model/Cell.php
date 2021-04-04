@@ -8,10 +8,10 @@ use JsonSerializable;
 
 final class Cell implements JsonSerializable
 {
-    private null|string $letter;
+    private ?string $letter;
     private Coordinate $coordinate;
 
-    public function __construct(Coordinate $coordinate, null|string $letter)
+    public function __construct(Coordinate $coordinate, ?string $letter)
     {
         $this->coordinate = $coordinate;
         $this->letter = $letter;
@@ -22,32 +22,12 @@ final class Cell implements JsonSerializable
         return $this->coordinate;
     }
 
-    public function left(): Coordinate
-    {
-        return new Coordinate($this->coordinate->coordinateX() - 1, $this->coordinate()->coordinateY());
-    }
-
-    public function right(): Coordinate
-    {
-        return new Coordinate($this->coordinate->coordinateX() + 1, $this->coordinate()->coordinateY());
-    }
-
-    public function top(): Coordinate
-    {
-        return new Coordinate($this->coordinate->coordinateX(), $this->coordinate()->coordinateY() + 1);
-    }
-
-    public function down(): Coordinate
-    {
-        return new Coordinate($this->coordinate->coordinateX(), $this->coordinate()->coordinateY() - 1);
-    }
-
     public function isLetter(): bool
     {
         return !empty($this->letter);
     }
 
-    public function isForbidden(): bool
+    public function isBlack(): bool
     {
         return '' === $this->letter;
     }
@@ -57,12 +37,12 @@ final class Cell implements JsonSerializable
         return null === $this->letter;
     }
 
-    public function letter(): null|string
+    public function letter(): ?string
     {
         return $this->letter;
     }
 
-    public function fill(string $letter): void
+    public function fillLetter(string $letter): void
     {
         $this->letter = $letter;
     }

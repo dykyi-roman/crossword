@@ -36,6 +36,11 @@ final class Mask implements Stringable
         return new self($query . sprintf('{%s,%s}', $limit[0], ((int) $limit[1]) - 1));
     }
 
+    public function __toString(): string
+    {
+        return $this->query() . $this->limit();
+    }
+
     private function stringBetween($string, $start, $end): string
     {
         $string = ' ' . $string;
@@ -47,10 +52,5 @@ final class Mask implements Stringable
         $len = strpos($string, $end, $ini) - $ini;
 
         return (string) substr($string, $ini, $len);
-    }
-
-    public function __toString(): string
-    {
-        return $this->query() . $this->limit();
     }
 }

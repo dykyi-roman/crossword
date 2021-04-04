@@ -13,7 +13,7 @@ final class WikipediaWordDefinitionDto
         $this->payload = $payload;
     }
 
-    public function word(): null|string
+    public function word(): ?string
     {
         $pages = array_values($this->payload['query']['pages']);
         $text = $pages[0]['extract'];

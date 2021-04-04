@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Crossword\Application\Service;
 
 use App\Crossword\Domain\Enum\Type;
-use App\Crossword\Domain\Model\Field;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Domain\Service\Constructor\FiguredConstructor;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;

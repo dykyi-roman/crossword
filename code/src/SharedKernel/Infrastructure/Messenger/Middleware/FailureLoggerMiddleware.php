@@ -21,8 +21,10 @@ final class FailureLoggerMiddleware implements MiddlewareInterface
 
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
+        $next = $stack->next();
+
         try {
-            return $stack->next()->handle($envelope, $stack);
+            return $next->handle($envelope, $stack);
         } catch (HandlerFailedException $exception) {
             $this->logger->error($exception->getMessage());
 

@@ -14,29 +14,28 @@ use Symfony\Component\Routing\Annotation\Route;
 final class GridController extends AbstractController
 {
     #[Route('/crossword/grid', name: 'web.crossword.grid', methods: ['GET'])]
-    public function __invoke(
-        ConstructorFactory $constructorFactory
-    ): Response {
+    public function __invoke(ConstructorFactory $constructorFactory): Response
+    {
         $constructor = $constructorFactory->create(new Type('normal'));
-        $crossword = $constructor->build('en', 5);
+        $constructor->build('en', 5);
 
         $grid = [];
-        for ($x = 0; $x <= 20; $x++) {
-            for ($y = 0; $y <= 20; $y++) {
-                $grid[$x][$y] = '_';
+        for ($xCounter = 0; $xCounter <= 20; $xCounter++) {
+            for ($yCounter = 0; $yCounter <= 20; $yCounter++) {
+                $grid[$xCounter][$yCounter] = '_';
             }
         }
         /** @var Cell $item */
         foreach ($constructor->grid() as $item) {
-            $grid[$item->coordinate()->coordinateX()][$item->coordinate()->coordinateY()] = $item->letter();
+            $coordinate = $item->coordinate();
+            $grid[$coordinate->coordinateX()][$coordinate->coordinateY()] = $item->letter();
         }
 
-       // dump($crossword->jsonSerialize());
-
         return $this->render(
-            'grid.html.twig', [
-            'grid' => $grid,
-        ]
+            'grid.html.twig',
+            [
+                'grid' => $grid,
+            ]
         );
     }
 }

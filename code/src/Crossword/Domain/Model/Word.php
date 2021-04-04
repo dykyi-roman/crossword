@@ -8,18 +8,18 @@ use JsonSerializable;
 
 final class Word implements JsonSerializable
 {
-    private string $word;
+    private string $value;
     private string $definition;
 
-    public function __construct(string $word, string $definition)
+    public function __construct(string $value, string $definition)
     {
-        $this->word = $word;
+        $this->value = $value;
         $this->definition = $definition;
     }
 
-    public function word(): string
+    public function value(): string
     {
-        return $this->word;
+        return $this->value;
     }
 
     public function definition(): string
@@ -30,7 +30,7 @@ final class Word implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'word' => $this->word,
+            'word' => $this->value,
             'definition' => $this->definition,
         ];
     }

@@ -25,7 +25,6 @@ final class AttemptWordFinder
      */
     public function find(string $language, Mask $mask, int $attempt = self::ATTEMPT): Word
     {
-        $word = null;
         $counter = 1;
         $template = clone $mask;
 

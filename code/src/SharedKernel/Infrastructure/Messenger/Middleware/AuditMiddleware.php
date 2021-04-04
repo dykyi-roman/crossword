@@ -30,11 +30,13 @@ final class AuditMiddleware implements MiddlewareInterface
 
         $this->logger->info(sprintf('Received & handling %s', $className), $body);
 
-        return $stack->next()->handle($envelope, $stack);
+        $next = $stack->next();
+
+        return $next->handle($envelope, $stack);
     }
 
     private function receivedVariableName(string $name, string $class): string
     {
-        return (string) preg_replace('/[\x00-\x1F\x7F]/', '', (string) str_replace($class, '', $name));
+        return (string) preg_replace('/[\x00-\x1F\x7F]/', '', str_replace($class, '', $name));
     }
 }

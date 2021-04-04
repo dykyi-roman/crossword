@@ -6,6 +6,11 @@ namespace App\Crossword\Domain\Enum;
 
 use MyCLabs\Enum\Enum;
 
+/**
+ * @psalm-immutable
+ *
+ * @todo https://wiki.php.net/rfc/enumerations
+ */
 final class Move extends Enum
 {
     public const LEFT = 'left';
