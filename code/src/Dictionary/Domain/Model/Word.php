@@ -37,12 +37,6 @@ final class Word implements JsonSerializable
         return $this->definition;
     }
 
-    public function length(): int
-    {
-        return strlen($this->word);
-    }
-
-
     public function isEmpty(): bool
     {
         return 0 === $this->length();
@@ -56,5 +50,10 @@ final class Word implements JsonSerializable
             'definition' => $this->definition,
             'length' => $this->length(),
         ];
+    }
+
+    private function length(): int
+    {
+        return strlen($this->word);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\Web;
 
-use App\Crossword\Application\Service\ConstructorFactory;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Model\Cell;
+use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,8 +27,8 @@ final class GridController extends AbstractController
         }
         /** @var Cell $item */
         foreach ($constructor->grid() as $item) {
-            $coordinate = $item->coordinate();
-            $grid[$coordinate->coordinateX()][$coordinate->coordinateY()] = $item->letter();
+            $coordinate = $item->coordinate()->jsonSerialize();
+            $grid[$coordinate['x']][$coordinate['y']] = $item->letter();
         }
 
         return $this->render(

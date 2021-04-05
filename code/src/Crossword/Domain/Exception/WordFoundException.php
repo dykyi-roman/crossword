@@ -6,6 +6,6 @@ namespace App\Crossword\Domain\Exception;
 
 use DomainException;
 
-final class NotFoundWordException extends DomainException
+final class WordFoundException extends DomainException
 {
 }

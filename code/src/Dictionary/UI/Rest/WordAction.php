@@ -55,9 +55,9 @@ final class WordAction extends AbstractController
     public function __invoke(WordRequest $request, ResponseFactory $response, WordsFinder $wordsFinder): Response
     {
         try {
-            $words = $wordsFinder->findByRequest($request);
+            $wordCollection = $wordsFinder->findByRequest($request);
 
-            return $response->success($words->jsonSerialize(), $request->format());
+            return $response->success($wordCollection->jsonSerialize(), $request->format());
         } catch (NotFoundWordException) {
             return $response->failed(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
         }

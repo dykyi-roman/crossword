@@ -18,22 +18,6 @@ final class Coordinate implements JsonSerializable, Stringable
         $this->coordinateY = $coordinateY;
     }
 
-    /**
-     * @todo REMOVE
-     */
-    public function coordinateX(): int
-    {
-        return $this->coordinateX;
-    }
-
-    /**
-     * @todo REMOVE
-     */
-    public function coordinateY(): int
-    {
-        return $this->coordinateY;
-    }
-
     public function inFrame(): bool
     {
         return 0 < $this->coordinateX && 0 < $this->coordinateY;

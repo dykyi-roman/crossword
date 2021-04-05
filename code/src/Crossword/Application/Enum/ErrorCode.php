@@ -14,4 +14,6 @@ use MyCLabs\Enum\Enum;
 final class ErrorCode extends Enum
 {
     public const LANGUAGES_NOT_FOUND = 'Not found any supported languages.';
+
+    public const CROSSWORD_NOT_RECEIVED = 'Crossword is not received.';
 }

@@ -4,68 +4,64 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service\Constructor;
 
-use App\Crossword\Domain\Exception\NotFoundWordException;
+use App\Crossword\Domain\Exception\NextLineFoundException;
+use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Model\Cell;
 use App\Crossword\Domain\Model\Crossword;
-use App\Crossword\Domain\Model\Grid;
 use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
+use App\Crossword\Domain\Service\GridScanner;
 
 final class NormalConstructor implements ConstructorInterface
 {
-    private Grid $grid;
     private AttemptWordFinder $attemptWordFinder;
+    private GridScanner $gridScanner;
 
-    public function __construct(AttemptWordFinder $attemptWordFinder)
+    public function __construct(AttemptWordFinder $attemptWordFinder, GridScanner $gridScanner)
     {
-        $this->grid = new Grid();
         $this->attemptWordFinder = $attemptWordFinder;
+        $this->gridScanner = $gridScanner;
     }
 
     public function build(string $language, int $wordCount): Crossword
     {
         $crossword = new Crossword();
-
-        if ($this->grid->isEmpty()) {
-            $this->grid->draw(Row::withRandomRow());
-            $this->nextWord(1, 8, $language, $crossword);
-        }
-
-        for ($counter = 2; $counter <= 37; $counter++) {
-            $this->nextWord($counter, 5, $language, $crossword);
+        $this->gridScanner->fill(Row::withRandomRow());
+        for ($counter = 1; $counter <= $wordCount; $counter++) {
+            $crossword = $crossword->withLine($this->nextLine($counter, $language));
         }
 
         return $crossword;
     }
 
-    private function nextWord(int $number, int $length, $language, Crossword $crossword): void
+    /**
+     * @throws NextLineFoundException
+     */
+    private function nextLine(int $number, $language): Line
     {
-        $rows = [...$this->grid->possibleXRows($length), ...$this->grid->possibleYRows($length)];
-        shuffle($rows);
-
-        /** @var Row $row */
+        $rows = $this->gridScanner->scan();
         foreach ($rows as $row) {
             try {
                 $word = $this->attemptWordFinder->find($language, $row->mask());
                 $fillRow = $row->withFillWord($word->value()); // remove empty lasts cells
-                dump($word->value(), $word);
-                $this->grid->draw($fillRow);
-                $crossword->addLine(new Line($number, $word, $fillRow));
+                dump($word);
+                $this->gridScanner->fill($fillRow);
 
-                break;
-            } catch (NotFoundWordException) {
+                return new Line($number, $word, $fillRow);
+            } catch (WordFoundException) {
                 continue;
             }
         }
+
+        throw new NextLineFoundException($number);
     }
 
     /**
      * @todo remove
-     * @return Cell[]
      */
-    public function grid(): array
+    public function grid(): \ArrayIterator
     {
-        return $this->grid->grid();
+        return $this->gridScanner->grid()->getIterator();
     }
 }

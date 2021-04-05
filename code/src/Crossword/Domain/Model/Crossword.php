@@ -18,9 +18,9 @@ final class Crossword implements JsonSerializable
         $this->lines = $lines;
     }
 
-    public function addLine(Line $line): void
+    public function withLine(Line $line): self
     {
-        $this->lines[] = $line;
+        return new self($line, ...$this->lines);
     }
 
     public function jsonSerialize(): array

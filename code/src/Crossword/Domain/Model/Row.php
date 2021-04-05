@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Model;
 
 use App\SharedKernel\Domain\Model\Mask;
+use ArrayIterator;
+use IteratorAggregate;
 use JsonSerializable;
 
-final class Row implements JsonSerializable
+final class Row implements JsonSerializable, IteratorAggregate
 {
     /**
      * @var Cell[]
@@ -29,14 +31,6 @@ final class Row implements JsonSerializable
         if (in_array($index, $this->cells, true)) {
             unset($this->cells[$index]);
         }
-    }
-
-    /**
-     * @return Cell[]
-     */
-    public function cells(): array
-    {
-        return $this->cells;
     }
 
     /**
@@ -65,7 +59,7 @@ final class Row implements JsonSerializable
 
         for ($counter = 0; $counter < 3; $counter++) {
             if ($row->suitablePosition($word)) {
-                return $row->doFillWord($word);
+                return $row->doFillRow($word);
             }
 
             $row->removeCell(0);
@@ -83,12 +77,10 @@ final class Row implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return [
-            'cells' => array_map(static fn (Cell $cell) => $result[] = $cell->jsonSerialize(), $this->cells()),
-        ];
+        return ['cells' => array_map(static fn (Cell $cell) => $result[] = $cell->jsonSerialize(), $this->cells)];
     }
 
-    private function doFillWord(string $word): self
+    private function doFillRow(string $word): self
     {
         $length = strlen($word);
         for ($counter = 0; $counter < $length; $counter++) {
@@ -100,12 +92,23 @@ final class Row implements JsonSerializable
 
     private function suitablePosition(string $word): bool
     {
-        foreach ($this->cells() as $index => $cell) {
-            if ($cell->isLetter() && $word[(int) $index] === $cell->letter()) {
-                return true;
+        foreach ($this->cells as $index => $cell) {
+            try {
+                // Warning: Uninitialized string offset 5  //word = foster
+                if ($cell->isLetter() && $word[(int) $index] === $cell->letter()) {
+                    return true;
+                }
+            } catch (\Throwable $exception) {
+                dump($this->cells, $word, $index, $exception->getMessage());
+                die();
             }
         }
 
         return false;
+    }
+
+    public function getIterator(): ArrayIterator
+    {
+        return new ArrayIterator($this->cells);
     }
 }

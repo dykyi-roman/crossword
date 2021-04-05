@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Domain\Model;
+namespace App\Dictionary\Domain\Dto;
 
+use App\Dictionary\Domain\Model\Word;
 use Countable;
 use JsonSerializable;
 
-final class WordCollection implements JsonSerializable, Countable
+/**
+ * @psalm-immutable
+ */
+final class WordCollectionDto implements JsonSerializable, Countable
 {
     /**
-     * @readonly
-     * @psalm-allow-private-mutation
-     *
      * @var Word[]
      */
     private array $words;
@@ -20,11 +21,6 @@ final class WordCollection implements JsonSerializable, Countable
     public function __construct(Word ...$words)
     {
         $this->words = $words;
-    }
-
-    public function add(Word $word): void
-    {
-        $this->words[] = $word;
     }
 
     public function count(): int

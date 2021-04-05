@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service;
 
-use App\Crossword\Domain\Exception\NotFoundWordException;
+use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Provider\DictionaryProviderInterface;
 use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
@@ -29,11 +29,11 @@ final class WordFinder
                 return new Word($searchWordDto->word(), $searchWordDto->definition());
             }
 
-            throw new NotFoundWordException();
+            throw new WordFoundException();
         } catch (ApiClientException $exception) {
             $this->logger->error($exception->getMessage());
 
-            throw new NotFoundWordException();
+            throw new WordFoundException();
         }
     }
 }

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\Rest;
 
+use App\Crossword\Application\Enum\ErrorCode;
+use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
-use App\Crossword\Application\Service\ConstructorFactory;
+use App\Crossword\Application\Service\CrosswordReceiver;
 use App\SharedKernel\Application\Response\ResponseFactory;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,11 +55,14 @@ final class ConstructAction
     public function __invoke(
         ConstructRequest $request,
         ResponseFactory $response,
-        ConstructorFactory $constructorFactory
+        CrosswordReceiver $constructor
     ): Response {
-        $constructor = $constructorFactory->create($request->type());
-        $crossword = $constructor->build($request->language(), $request->wordCount());
+        try {
+            $crossword = $constructor->receive($request->type(), $request->language(), $request->wordCount());
 
-        return $response->success($crossword->jsonSerialize(), $request->format());
+            return $response->success($crossword->jsonSerialize(), $request->format());
+        } catch (ReceiveCrosswordException) {
+            return $response->failed(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED), $request->format());
+        }
     }
 }

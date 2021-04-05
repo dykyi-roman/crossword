@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service\Constructor\Normal;
 
-use App\Crossword\Domain\Exception\NotFoundWordException;
+use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\WordFinder;
 use App\SharedKernel\Domain\Model\Mask;
@@ -21,7 +21,7 @@ final class AttemptWordFinder
     }
 
     /**
-     * @throws NotFoundWordException
+     * @throws WordFoundException
      */
     public function find(string $language, Mask $mask, int $attempt = self::ATTEMPT): Word
     {
@@ -31,12 +31,12 @@ final class AttemptWordFinder
         do {
             try {
                 return $this->wordFinder->find($language, (string) $template);
-            } catch (NotFoundWordException) {
+            } catch (WordFoundException) {
                 $counter++;
                 $template = $template->shiftLeft();
             }
         } while ($counter <= $attempt);
 
-        throw new NotFoundWordException();
+        throw new WordFoundException();
     }
 }
