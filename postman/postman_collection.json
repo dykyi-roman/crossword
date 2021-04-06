@@ -49,6 +49,11 @@
 								"key": "X-LIMIT",
 								"type": "text",
 								"value": "1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -109,6 +114,11 @@
 								"key": "X-LIMIT",
 								"type": "text",
 								"value": "1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -161,7 +171,13 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{host}}/api/crossword/languages",
 							"host": [
@@ -217,7 +233,19 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
 							"raw": "{{host}}/api/dictionary/languages",
 							"host": [
@@ -272,11 +300,16 @@
 							{
 								"key": "X-LIMIT",
 								"type": "text",
-								"value": "10"
+								"value": "100"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/dictionary/words/en/?mask=...*",
+							"raw": "{{host}}/api/dictionary/words/en?mask=....{0,4}",
 							"host": [
 								"{{host}}"
 							],
@@ -284,13 +317,12 @@
 								"api",
 								"dictionary",
 								"words",
-								"en",
-								""
+								"en"
 							],
 							"query": [
 								{
 									"key": "mask",
-									"value": "...*"
+									"value": "....{0,4}"
 								}
 							]
 						}
@@ -338,10 +370,15 @@
 								"key": "X-LIMIT",
 								"type": "text",
 								"value": "1"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/dictionary/words/en/?mask=11.*",
+							"raw": "{{host}}/api/dictionary/words/en?mask=11.*",
 							"host": [
 								"{{host}}"
 							],
@@ -349,8 +386,7 @@
 								"api",
 								"dictionary",
 								"words",
-								"en",
-								""
+								"en"
 							],
 							"query": [
 								{

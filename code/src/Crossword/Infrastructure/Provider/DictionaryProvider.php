@@ -6,7 +6,7 @@ namespace App\Crossword\Infrastructure\Provider;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Domain\Provider\DictionaryProviderInterface;
+use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
 use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;

@@ -127,5 +127,13 @@ php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
 * newman
 * deptrac
 
+## Resources
+
+* [SPL](https://www.php.net/manual/en/book.spl.php)
+* [Value objects](https://herbertograca.com/2020/07/07/value-objects/)
+* [Data transfer objects](https://herbertograca.com/2020/06/23/dto-data-transfer-objects/)
+* [Implementing Action-Domain-Responder Pattern With Symfony](https://medium.com/swlh/implementing-action-domain-responder-pattern-with-symfony-606539eea3a7)
+* [Package by Feature](https://phauer.com/2020/package-by-feature/)
+
 ## Author
 [Dykyi Roman](https://www.linkedin.com/in/roman-dykyi-43428543/), e-mail: [mr.dukuy@gmail.com](mailto:mr.dukuy@gmail.com)

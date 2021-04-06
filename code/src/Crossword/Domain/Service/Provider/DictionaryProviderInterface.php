@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Domain\Provider;
+namespace App\Crossword\Domain\Service\Provider;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;

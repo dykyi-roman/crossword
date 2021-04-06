@@ -39,7 +39,7 @@ final class WordsStorageUpload
         return 0;
     }
 
-    public function doExecute(WordsStorageUploadCriteria $criteria): int
+    private function doExecute(WordsStorageUploadCriteria $criteria): int
     {
         $count = 0;
         foreach ($this->fileReader->read($criteria->filePath()) as $row) {

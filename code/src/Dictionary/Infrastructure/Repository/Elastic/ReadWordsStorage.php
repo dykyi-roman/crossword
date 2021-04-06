@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Dictionary\Infrastructure\Repository\Elastic;
 
 use App\Dictionary\Application\Dto\StorageWordCollectionDto;
-use App\Dictionary\Application\Dto\StorageWordDto;
-use App\Dictionary\Domain\Dto\WordCollectionDto;
-use App\Dictionary\Domain\Model\Word;
+use App\Dictionary\Domain\Dto\WordDto;
+use App\Dictionary\Domain\Dto\WordsCollectionDto;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
 use App\Dictionary\Infrastructure\Repository\Elastic\Exception\WordNotFoundInStorageException;
 use App\SharedKernel\Domain\Model\Mask;
+use App\SharedKernel\Domain\Model\Word;
 use Elasticsearch\Client;
 use Throwable;
 
@@ -23,7 +23,7 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function search(string $language, Mask $mask, int $limit): WordCollectionDto
+    public function search(string $language, Mask $mask, int $limit): WordsCollectionDto
     {
         $params = [
             'index' => $language,
@@ -49,7 +49,7 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
         ];
 
         try {
-            $collection =  new WordCollectionDto(...$this->doSearch($params, $limit));
+            $collection = $this->doSearch($params, $limit);
             if ($collection->count()) {
                 return $collection;
             }
@@ -60,15 +60,18 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
         }
     }
 
-    public function doSearch(array $params, int $limit): array
+    private function doSearch(array $params, int $limit): WordsCollectionDto
     {
         $response = $this->client->search($params);
         shuffle($response['hits']['hits']);
 
-        return array_map(
-            static fn (StorageWordDto $word) => new Word($word->language(), $word->word(), $word->definition()),
-            (new StorageWordCollectionDto(array_slice($response['hits']['hits'], 0, $limit)))->words()
-        );
+        $words = [];
+        $wordCollectionDto = new StorageWordCollectionDto(array_slice($response['hits']['hits'], 0, $limit));
+        foreach ($wordCollectionDto as $word) {
+            $words[] = new WordDto($word->language(), new Word($word->word(), $word->definition()));
+        }
+
+        return new WordsCollectionDto(...$words);
     }
 
     public function language(): array

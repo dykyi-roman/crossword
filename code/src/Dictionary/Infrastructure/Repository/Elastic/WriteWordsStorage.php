@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Repository\Elastic;
 
-use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Repository\WriteWordsStorageInterface;
 use App\Dictionary\Infrastructure\Repository\Elastic\Exception\FailedSaveToStorageException;
+use App\SharedKernel\Domain\Model\Word;
 use Elasticsearch\Client;
 use Throwable;
 
@@ -19,22 +19,22 @@ final class WriteWordsStorage implements WriteWordsStorageInterface
         $this->client = $clientFactory->create();
     }
 
-    public function save(Word $word): void
+    public function save(string $language, Word $word): void
     {
         try {
             $this->client->index(
                 [
-                    'index' => $word->language(),
-                    'id' => base64_encode($word->word()),
+                    'index' => $language,
+                    'id' => base64_encode($word->value()),
                     'body' => [
-                        'word' => $word->word(),
+                        'word' => $word->value(),
                         'definition' => $word->definition(),
-                        'length' => strlen($word->word()),
+                        'length' => $word->length(),
                     ],
                 ]
             );
         } catch (Throwable) {
-            throw new FailedSaveToStorageException($word->word(), $word->language());
+            throw new FailedSaveToStorageException($word->value(), $language);
         }
     }
 }

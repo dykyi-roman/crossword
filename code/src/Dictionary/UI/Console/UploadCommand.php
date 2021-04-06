@@ -7,10 +7,10 @@ namespace App\Dictionary\UI\Console;
 use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Criteria\WordsStorageUploadCriteria;
 use App\Dictionary\Application\Service\WordsStorageUpload;
+use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class UploadCommand extends AbstractCommand
 {
@@ -37,12 +37,12 @@ HELP
         );
     }
 
-    protected function doExecute(InputInterface $input, SymfonyStyle $symfonyStyle): void
+    protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
     {
         $criteria = new WordsStorageUploadCriteria((string) $input->getArgument('file-path'));
         $count = $this->wordsStorageUpload->execute($criteria);
 
-        $symfonyStyle->info(sprintf('Upload %s words.', $count));
+        $consoleResponder(sprintf('Upload %s words.', $count));
     }
 
     /**

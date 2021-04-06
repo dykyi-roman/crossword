@@ -77,7 +77,9 @@ final class Row implements JsonSerializable, IteratorAggregate
 
     public function jsonSerialize(): array
     {
-        return ['cells' => array_map(static fn (Cell $cell) => $result[] = $cell->jsonSerialize(), $this->cells)];
+        return [
+            'cells' => array_map(static fn (Cell $cell) => $result[] = $cell->jsonSerialize(), $this->cells),
+        ];
     }
 
     private function doFillRow(string $word): self
@@ -98,6 +100,7 @@ final class Row implements JsonSerializable, IteratorAggregate
                 if ($cell->isLetter() && $word[(int) $index] === $cell->letter()) {
                     return true;
                 }
+                //@todo remove catch section
             } catch (\Throwable $exception) {
                 dump($this->cells, $word, $index, $exception->getMessage());
                 die();

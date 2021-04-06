@@ -7,10 +7,9 @@ namespace App\Tests\Dictionary\Domain\Messages\Handler;
 use App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
+use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Infrastructure\Gateway\InMemory\WordDefinitionApiGatewayInMemory;
 use App\Tests\CrosswordAbstractTestCase;
-use Psr\Log\LoggerInterface;
-use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler
@@ -23,7 +22,6 @@ final class SearchWordDefinitionMessageHandlerTest extends CrosswordAbstractTest
     public function testSuccessfullySearchWordDefinition(): void
     {
         $handler = new SearchWordDefinitionMessageHandler(
-            new NullLogger(),
             $this->messageBusMockWithConsecutive(
                 self::once(),
                 new SaveToStorageMessage('test', 'test definition', 'en')
@@ -39,11 +37,9 @@ final class SearchWordDefinitionMessageHandlerTest extends CrosswordAbstractTest
      */
     public function testDoesNotSaveWordToTheStorageWhenDefinitionIsNotFound(): void
     {
-        $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects(self::once())->method('error');
+        $this->expectException(DefinitionNotFoundInApiGateway::class);
 
         $handler = new SearchWordDefinitionMessageHandler(
-            $logger,
             $this->messageBusMockWithConsecutive(self::never()),
             new WordDefinitionApiGatewayInMemory(''),
         );

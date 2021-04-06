@@ -6,7 +6,9 @@ namespace App\Crossword\Domain\Service\Constructor;
 
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Model\Grid;
+use App\Crossword\Domain\Service\Constructor\Figured\FiguredConstructor;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
+use App\Crossword\Domain\Service\Constructor\Normal\NormalConstructor;
 use App\Crossword\Domain\Service\GridScanner;
 use App\Crossword\Domain\Service\WordFinder;
 

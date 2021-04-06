@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Criteria;
 
+/**
+ * @psalm-immutable
+ */
 final class GenerateCriteria
 {
     private int $limit;

@@ -11,6 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @todo remove
+ */
 final class GridController extends AbstractController
 {
     #[Route('/crossword/grid', name: 'web.crossword.grid', methods: ['GET'])]
@@ -27,8 +30,10 @@ final class GridController extends AbstractController
         }
         /** @var Cell $item */
         foreach ($constructor->grid() as $item) {
-            $coordinate = $item->coordinate()->jsonSerialize();
-            $grid[$coordinate['x']][$coordinate['y']] = $item->letter();
+            $coordinate = $item->coordinate();
+            $json = $coordinate->jsonSerialize();
+
+            $grid[$json['x']][$json['y']] = $item->letter();
         }
 
         return $this->render(

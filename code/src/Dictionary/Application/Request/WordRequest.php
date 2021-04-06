@@ -5,12 +5,19 @@ declare(strict_types=1);
 namespace App\Dictionary\Application\Request;
 
 use App\SharedKernel\Application\Assert\RequestAssert;
-use App\SharedKernel\Application\Request\AbstractRequest;
 use App\SharedKernel\Domain\Model\Mask;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-final class WordRequest extends AbstractRequest
+final class WordRequest
 {
     private const LIMIT = 100;
+
+    private RequestStack $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
 
     public function mask(): Mask
     {

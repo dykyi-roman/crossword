@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Criteria;
 
+/**
+ * @psalm-immutable
+ */
 final class WordsStorageUploadCriteria
 {
     private string $filePath;

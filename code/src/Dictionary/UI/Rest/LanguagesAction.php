@@ -7,10 +7,10 @@ namespace App\Dictionary\UI\Rest;
 use App\Dictionary\Application\Enum\ErrorCode;
 use App\Dictionary\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Dictionary\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Request\Request;
-use App\SharedKernel\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\FailedResponse;
+use App\SharedKernel\Application\Response\ResponseInterface;
+use App\SharedKernel\Application\Response\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,12 +30,12 @@ final class LanguagesAction
      * )
      */
     #[Route('/api/dictionary/languages', name: 'dictionary.api.languages', methods: ['GET'])]
-    public function __invoke(Request $request, ResponseFactory $response, SupportedLanguages $languages): Response
+    public function __invoke(SupportedLanguages $languages): ResponseInterface
     {
         try {
-            return $response->success($languages->receive(), $request->format());
+            return new SuccessResponse($languages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return $response->failed(new ErrorCode(ErrorCode::DICTIONARY_IS_EMPTY), $request->format());
+            return new FailedResponse(new ErrorCode(ErrorCode::DICTIONARY_IS_EMPTY));
         }
     }
 }

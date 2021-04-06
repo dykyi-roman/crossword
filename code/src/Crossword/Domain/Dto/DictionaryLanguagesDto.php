@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Dto;
 
-final class DictionaryLanguagesDto
+use Countable;
+
+/**
+ * @psalm-immutable
+ */
+final class DictionaryLanguagesDto implements Countable
 {
     private array $payload;
 
@@ -21,5 +26,10 @@ final class DictionaryLanguagesDto
     private function isSuccess(): bool
     {
         return 'success' === $this->payload['status'];
+    }
+
+    public function count(): int
+    {
+        return count($this->languages());
     }
 }

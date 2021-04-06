@@ -41,7 +41,7 @@ final class WordsStoragePopulate
         return 0;
     }
 
-    public function doExecute(WordsStoragePopulateCriteria $criteria): int
+    private function doExecute(WordsStoragePopulateCriteria $criteria): int
     {
         $count = 0;
         foreach ($this->fileReader->read($criteria->filePath()) as $row) {

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Crossword\UI\Rest;
 
 use App\Crossword\Application\Service\SupportedTypes;
-use App\SharedKernel\Application\Request\Request;
-use App\SharedKernel\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\ResponseInterface;
+use App\SharedKernel\Application\Response\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -27,8 +26,8 @@ final class TypesAction
      * )
      */
     #[Route('/api/crossword/types', name: 'crossword.api.types', methods: ['GET'])]
-    public function __invoke(Request $request, ResponseFactory $response, SupportedTypes $supportedTypes): Response
+    public function __invoke(SupportedTypes $supportedTypes): ResponseInterface
     {
-        return $response->success($supportedTypes->receive(), $request->format());
+        return new SuccessResponse($supportedTypes->receive());
     }
 }

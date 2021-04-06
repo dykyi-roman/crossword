@@ -7,12 +7,12 @@ namespace App\Dictionary\UI\Console;
 use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
+use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class PopulateCommand extends AbstractCommand
 {
@@ -45,12 +45,12 @@ HELP
         );
     }
 
-    protected function doExecute(InputInterface $input, SymfonyStyle $symfonyStyle): void
+    protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
     {
         $criteria = new WordsStoragePopulateCriteria((string) $input->getArgument('language'), $this->filePath);
         $count = $this->wordsStoragePopulate->execute($criteria);
 
-        $symfonyStyle->info(sprintf('Populate %s words.', $count));
+        $consoleResponder(sprintf('Populate %s words.', $count));
     }
 
     /**

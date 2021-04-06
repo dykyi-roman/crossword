@@ -18,10 +18,15 @@ final class Grid implements IteratorAggregate
     {
         $this->cells = [];
     }
-    
+
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->cells);
+    }
+
+    public function isEmpty(): bool
+    {
+        return 0 === count(array_filter($this->cells, static fn (Cell $cell) => null !== $cell->letter()));
     }
 
     public function shiftCell(Coordinate $coordinate): Cell
@@ -31,11 +36,6 @@ final class Grid implements IteratorAggregate
         }
 
         return new Cell($coordinate, null);
-    }
-
-    public function isEmpty(): bool
-    {
-        return 0 === count(array_filter($this->cells, static fn (Cell $cell) => null !== $cell->letter()));
     }
 
     public function fillRow(Row $row): void

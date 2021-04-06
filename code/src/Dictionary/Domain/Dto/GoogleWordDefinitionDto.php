@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Dto;
 
+/**
+ * @psalm-immutable
+ */
 final class GoogleWordDefinitionDto
 {
     private array $payload;

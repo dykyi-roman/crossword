@@ -1,4 +1,4 @@
 services:
   App\Crossword\Infrastructure\Provider\DictionaryProvider: ~
 
-  App\Crossword\Domain\Provider\DictionaryProviderInterface: '@App\Crossword\Infrastructure\Provider\DictionaryProvider'
+  App\Crossword\Domain\Service\Provider\DictionaryProviderInterface: '@App\Crossword\Infrastructure\Provider\DictionaryProvider'

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Service;
 
 use App\Crossword\Domain\Exception\WordFoundException;
-use App\Crossword\Domain\Model\Word;
-use App\Crossword\Domain\Provider\DictionaryProviderInterface;
+use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
 use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\SharedKernel\Domain\Model\Word;
 use Psr\Log\LoggerInterface;
 
 final class WordFinder

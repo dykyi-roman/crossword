@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Dto;
 
+/**
+ * @psalm-immutable
+ */
 final class DictionaryWordDto
 {
     private array $payload;

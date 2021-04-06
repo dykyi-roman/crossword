@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Dto;
 
-use App\Dictionary\Domain\Model\Word;
 use Countable;
 use JsonSerializable;
 
 /**
  * @psalm-immutable
  */
-final class WordCollectionDto implements JsonSerializable, Countable
+final class WordsCollectionDto implements JsonSerializable, Countable
 {
     /**
-     * @var Word[]
+     * @var WordDto[]
      */
     private array $words;
 
-    public function __construct(Word ...$words)
+    public function __construct(WordDto ...$words)
     {
         $this->words = $words;
     }
@@ -30,6 +29,6 @@ final class WordCollectionDto implements JsonSerializable, Countable
 
     public function jsonSerialize(): array
     {
-        return array_map(static fn (Word $word) => $words[] = $word->jsonSerialize(), $this->words);
+        return array_map(static fn (WordDto $word) => $words[] = $word->jsonSerialize(), $this->words);
     }
 }

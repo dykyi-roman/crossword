@@ -9,9 +9,9 @@ use Throwable;
 
 final class NextLineFoundException extends DomainException
 {
-    public function __construct(int $lines, Throwable $previous = null)
+    public function __construct(Throwable $previous = null)
     {
-        $message = sprintf('Could not to create crossword on the %s lines', $lines);
+        $message = sprintf('Could not to create generate a next line.');
 
         parent::__construct($message, 0, $previous);
     }

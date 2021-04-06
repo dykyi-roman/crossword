@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Service\Constructor\Normal;
 
 use App\Crossword\Domain\Exception\WordFoundException;
-use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\WordFinder;
 use App\SharedKernel\Domain\Model\Mask;
+use App\SharedKernel\Domain\Model\Word;
 
 final class AttemptWordFinder
 {

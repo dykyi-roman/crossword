@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Dto;
 
+use ArrayIterator;
+use IteratorAggregate;
+
 /**
  * @psalm-immutable
  */
-final class StorageWordCollectionDto
+final class StorageWordCollectionDto implements IteratorAggregate
 {
     /**
-     * @psalm-readonly
-     *
      * @var StorageWordDto[]
      */
     private array $words;
@@ -21,8 +22,8 @@ final class StorageWordCollectionDto
         $this->words = array_map(static fn (array $attributes) => new StorageWordDto($attributes), $words);
     }
 
-    public function words(): array
+    public function getIterator(): ArrayIterator
     {
-        return $this->words;
+        return new ArrayIterator($this->words);
     }
 }

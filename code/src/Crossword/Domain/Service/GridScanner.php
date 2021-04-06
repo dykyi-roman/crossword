@@ -21,7 +21,6 @@ final class GridScanner
     }
 
     /**
-     * @return Grid
      * @todo remove
      */
     public function grid(): Grid
@@ -91,9 +90,10 @@ final class GridScanner
 
     private function lineXScanner(Cell $cell, Move $move, int $length): array
     {
+        $coordinate = $cell->coordinate();
         $cell = match ((string) $move->getValue()) {
-            Move::TOP => $this->grid->shiftCell($cell->coordinate()->top()),
-            Move::DOWN => $this->grid->shiftCell($cell->coordinate()->down()),
+            Move::TOP => $this->grid->shiftCell($coordinate->top()),
+            Move::DOWN => $this->grid->shiftCell($coordinate->down()),
         };
 
         $line = [];
@@ -141,9 +141,10 @@ final class GridScanner
 
     private function lineYScanner(Cell $cell, Move $move, int $length): array
     {
+        $coordinate = $cell->coordinate();
         $cell = match ((string) $move->getValue()) {
-            Move::LEFT => $this->grid->shiftCell($cell->coordinate()->left()),
-            Move::RIGHT => $this->grid->shiftCell($cell->coordinate()->right()),
+            Move::LEFT => $this->grid->shiftCell($coordinate->left()),
+            Move::RIGHT => $this->grid->shiftCell($coordinate->right()),
         };
 
         $line = [];

@@ -8,10 +8,10 @@ use App\Dictionary\Application\Enum\ErrorCode;
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\SharedKernel\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\FailedResponse;
+use App\SharedKernel\Application\Response\ResponseInterface;
+use App\SharedKernel\Application\Response\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @IgnoreAnnotation("OA\Parameter")
  * @IgnoreAnnotation("OA\Schema")
  */
-final class WordAction extends AbstractController
+final class WordAction
 {
     /**
      * @OA\Get(
@@ -52,14 +52,14 @@ final class WordAction extends AbstractController
      * )
      */
     #[Route('/api/dictionary/words/{language}', name: 'dictionary.api.words.word', methods: ['GET'])]
-    public function __invoke(WordRequest $request, ResponseFactory $response, WordsFinder $wordsFinder): Response
+    public function __invoke(WordRequest $request, WordsFinder $wordsFinder): ResponseInterface
     {
         try {
-            $wordCollection = $wordsFinder->findByRequest($request);
+            $wordsCollection = $wordsFinder->findByRequest($request);
 
-            return $response->success($wordCollection->jsonSerialize(), $request->format());
+            return new SuccessResponse($wordsCollection->jsonSerialize());
         } catch (NotFoundWordException) {
-            return $response->failed(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND), $request->format());
+            return new FailedResponse(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND));
         }
     }
 }

@@ -2,34 +2,34 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Domain\Service\Constructor;
+namespace App\Crossword\Domain\Service\Constructor\Normal;
 
+use App\Crossword\Domain\Dto\CrosswordDto;
+use App\Crossword\Domain\Dto\LineDto;
 use App\Crossword\Domain\Exception\NextLineFoundException;
 use App\Crossword\Domain\Exception\WordFoundException;
-use App\Crossword\Domain\Model\Cell;
-use App\Crossword\Domain\Model\Crossword;
-use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
-use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
+use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Domain\Service\GridScanner;
+use ArrayIterator;
 
 final class NormalConstructor implements ConstructorInterface
 {
-    private AttemptWordFinder $attemptWordFinder;
     private GridScanner $gridScanner;
+    private AttemptWordFinder $attemptWordFinder;
 
     public function __construct(AttemptWordFinder $attemptWordFinder, GridScanner $gridScanner)
     {
-        $this->attemptWordFinder = $attemptWordFinder;
         $this->gridScanner = $gridScanner;
+        $this->attemptWordFinder = $attemptWordFinder;
     }
 
-    public function build(string $language, int $wordCount): Crossword
+    public function build(string $language, int $wordCount): CrosswordDto
     {
-        $crossword = new Crossword();
+        $crossword = new CrosswordDto();
         $this->gridScanner->fill(Row::withRandomRow());
         for ($counter = 1; $counter <= $wordCount; $counter++) {
-            $crossword = $crossword->withLine($this->nextLine($counter, $language));
+            $crossword = $crossword->withLine($this->nextLine($language));
         }
 
         return $crossword;
@@ -38,7 +38,7 @@ final class NormalConstructor implements ConstructorInterface
     /**
      * @throws NextLineFoundException
      */
-    private function nextLine(int $number, $language): Line
+    private function nextLine($language): LineDto
     {
         $rows = $this->gridScanner->scan();
         foreach ($rows as $row) {
@@ -48,20 +48,22 @@ final class NormalConstructor implements ConstructorInterface
                 dump($word);
                 $this->gridScanner->fill($fillRow);
 
-                return new Line($number, $word, $fillRow);
+                return new LineDto($word->jsonSerialize(), $fillRow->jsonSerialize());
             } catch (WordFoundException) {
                 continue;
             }
         }
 
-        throw new NextLineFoundException($number);
+        throw new NextLineFoundException();
     }
 
     /**
      * @todo remove
      */
-    public function grid(): \ArrayIterator
+    public function grid(): ArrayIterator
     {
-        return $this->gridScanner->grid()->getIterator();
+        $grid = $this->gridScanner->grid();
+
+        return $grid->getIterator();
     }
 }

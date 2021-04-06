@@ -6,7 +6,7 @@ namespace App\Crossword\Application\Service;
 
 use App\Crossword\Application\Criteria\GenerateCriteria;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
-use App\Crossword\Domain\Provider\DictionaryProviderInterface;
+use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CrosswordGenerator
@@ -28,7 +28,7 @@ final class CrosswordGenerator
         }
     }
 
-    public function doGenerate(string $language, GenerateCriteria $criteria): void
+    private function doGenerate(string $language, GenerateCriteria $criteria): void
     {
         $counter = 1;
         do {

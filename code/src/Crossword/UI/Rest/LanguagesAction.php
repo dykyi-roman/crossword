@@ -7,10 +7,10 @@ namespace App\Crossword\UI\Rest;
 use App\Crossword\Application\Enum\ErrorCode;
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Request\Request;
-use App\SharedKernel\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\FailedResponse;
+use App\SharedKernel\Application\Response\ResponseInterface;
+use App\SharedKernel\Application\Response\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,15 +30,12 @@ final class LanguagesAction
      * )
      */
     #[Route('/api/crossword/languages', name: 'crossword.api.languages', methods: ['GET'])]
-    public function __invoke(
-        Request $request,
-        ResponseFactory $response,
-        SupportedLanguages $supportedLanguages
-    ): Response {
+    public function __invoke(SupportedLanguages $supportedLanguages): ResponseInterface
+    {
         try {
-            return $response->success($supportedLanguages->receive(), $request->format());
+            return new SuccessResponse($supportedLanguages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return $response->failed(new ErrorCode(ErrorCode::LANGUAGES_NOT_FOUND), $request->format());
+            return new FailedResponse(new ErrorCode(ErrorCode::LANGUAGES_NOT_FOUND));
         }
     }
 }

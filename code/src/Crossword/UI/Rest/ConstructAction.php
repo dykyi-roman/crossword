@@ -8,9 +8,10 @@ use App\Crossword\Application\Enum\ErrorCode;
 use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
 use App\Crossword\Application\Service\CrosswordReceiver;
-use App\SharedKernel\Application\Response\ResponseFactory;
+use App\SharedKernel\Application\Response\FailedResponse;
+use App\SharedKernel\Application\Response\ResponseInterface;
+use App\SharedKernel\Application\Response\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -52,17 +53,14 @@ final class ConstructAction
      * )
      */
     #[Route('/api/crossword/construct/{language}/{type}/{words}', name: 'crossword.api.construct', methods: ['GET'])]
-    public function __invoke(
-        ConstructRequest $request,
-        ResponseFactory $response,
-        CrosswordReceiver $constructor
-    ): Response {
+    public function __invoke(ConstructRequest $request, CrosswordReceiver $constructor): ResponseInterface
+    {
         try {
             $crossword = $constructor->receive($request->type(), $request->language(), $request->wordCount());
 
-            return $response->success($crossword->jsonSerialize(), $request->format());
+            return new SuccessResponse($crossword->jsonSerialize());
         } catch (ReceiveCrosswordException) {
-            return $response->failed(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED), $request->format());
+            return new FailedResponse(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED));
         }
     }
 }
