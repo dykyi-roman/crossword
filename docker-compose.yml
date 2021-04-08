@@ -5,10 +5,10 @@ services:
             context: docker/nginx
         container_name: game_web
         ports:
-            - "1000:80"
-            - "1001:443"
+            - 1000:80
+            - 1001:443
         expose:
-            - "1001"
+            - 1001
         volumes:
             - ./code:/var/www/html/code
             - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
@@ -46,6 +46,16 @@ services:
             - 9300:9300
         networks:
             - game
+    redis:
+        image: redis
+        container_name: game_redis
+        command: [ "redis-server", "--appendonly", "yes" ]
+        ports:
+            - 6379:6379
+        networks:
+            - game
+        volumes:
+            - ./docker/data/redis:/data
     rabbit:
         image: "rabbitmq:3-management"
         container_name: game_rabbit

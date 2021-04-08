@@ -4,4 +4,5 @@
 /storage/*
 /vendor
 /.idea
-/docker/data
+/docker/data/elasticsearch/nodes/*
+/docker/data/redis/appendonly.aof

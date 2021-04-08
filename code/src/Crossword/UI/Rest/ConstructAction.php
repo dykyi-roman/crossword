@@ -58,7 +58,7 @@ final class ConstructAction
         try {
             $crossword = $constructor->receive($request->type(), $request->language(), $request->wordCount());
 
-            return new SuccessResponse($crossword->jsonSerialize());
+            return new SuccessResponse($crossword);
         } catch (ReceiveCrosswordException) {
             return new FailedResponse(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED));
         }

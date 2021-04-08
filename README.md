@@ -61,7 +61,7 @@ ___
 | Path                                             | Method | Scheme | Grant |
 | ------------------------------------------------ | -------| ------ | ----- |
 | /api/dictionary/languages                        | GET    | ANY    | ALL   |
-| /api/dictionary/words/{LANGUAGE}/?mask={MASK}| GET    | ANY    | ALL   |
+| /api/dictionary/words/{LANGUAGE}?mask={MASK}     | GET    | ANY    | ALL   |
 
 #### Response formats
 
@@ -91,7 +91,6 @@ Collections with words for populate can be found: ``cd /data``
 | ------------------------------------------------------- | -------| ------ | ----- |
 | /api/crossword/construct/{LANGUAGE}/{TYPE}/{WORD-COUNT} | GET    | ANY    | ALL   |
 | /api/crossword/languages                                | GET    | ANY    | ALL   |
-| /api/crossword/levels                                   | GET    | ANY    | ALL   |
 | /api/crossword/types                                    | GET    | ANY    | ALL   |
 
 #### Response formats

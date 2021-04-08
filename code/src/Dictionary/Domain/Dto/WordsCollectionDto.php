@@ -7,9 +7,6 @@ namespace App\Dictionary\Domain\Dto;
 use Countable;
 use JsonSerializable;
 
-/**
- * @psalm-immutable
- */
 final class WordsCollectionDto implements JsonSerializable, Countable
 {
     /**
@@ -29,6 +26,6 @@ final class WordsCollectionDto implements JsonSerializable, Countable
 
     public function jsonSerialize(): array
     {
-        return array_map(static fn (WordDto $word) => $words[] = $word->jsonSerialize(), $this->words);
+        return array_map(static fn (WordDto $word) => $word->jsonSerialize(), $this->words);
     }
 }

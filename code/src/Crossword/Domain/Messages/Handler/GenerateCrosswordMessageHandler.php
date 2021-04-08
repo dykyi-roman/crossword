@@ -6,21 +6,32 @@ namespace App\Crossword\Domain\Messages\Handler;
 
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
 use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
+use App\Crossword\Infrastructure\Cache\Redis\CacheItem;
+use JsonException;
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class GenerateCrosswordMessageHandler
+final class GenerateCrosswordMessageHandler implements MessageHandlerInterface
 {
     private ConstructorFactory $constructorFactory;
+    private CacheItemPoolInterface $cacheItemPool;
 
-    public function __construct(ConstructorFactory $constructorFactory)
+    public function __construct(CacheItemPoolInterface $cacheItemPool, ConstructorFactory $constructorFactory)
     {
         $this->constructorFactory = $constructorFactory;
+        $this->cacheItemPool = $cacheItemPool;
     }
 
-    public function __invoke(GenerateCrosswordMessage $message)
+    /**
+     * @throws JsonException
+     */
+    public function __invoke(GenerateCrosswordMessage $message): void
     {
-        $factory = $this->constructorFactory->create($message->type());
-        $crossword = $factory->build($message->language(), $message->wordCount());
+        $type = $message->type();
+        $factory = $this->constructorFactory->create($type);
+        $crosswordDto = $factory->build($message->language(), $message->wordCount());
 
-        //@todo Save $crossword to the storage
+        $key = sprintf('%s-%s-%d', $message->language(), (string) $type->getValue(), $message->wordCount());
+        $this->cacheItemPool->save(new CacheItem($key, json_encode($crosswordDto, JSON_THROW_ON_ERROR)));
     }
 }

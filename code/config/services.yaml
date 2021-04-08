@@ -9,6 +9,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+            $redisHost: '%env(resolve:REDIS_HOST)%'
+            $redisPort: '%env(resolve:REDIS_PORT)%'
             $elasticHosts: ['%env(resolve:ELASTIC_HOST_1)%']
             $dictionaryList: '%dictionary_storage%'
             $googleApiHost: '%env(resolve:GOOGLE_DICTIONARY_API)%'

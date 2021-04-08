@@ -13,6 +13,7 @@
         "elasticsearch/elasticsearch": "^7.11",
         "guzzlehttp/guzzle": "^7.2",
         "myclabs/php-enum": "^1.8",
+        "predis/predis": "^1.1",
         "psr/http-message": "^1.0",
         "symfony/amqp-messenger": "5.2.*",
         "symfony/console": "5.2.*",

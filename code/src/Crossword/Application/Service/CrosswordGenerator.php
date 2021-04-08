@@ -32,10 +32,11 @@ final class CrosswordGenerator
     {
         $counter = 1;
         do {
+            $type = $criteria->type();
             $this->messageBus->dispatch(
                 new GenerateCrosswordMessage(
                     $language,
-                    $criteria->type(),
+                    (string) $type->getValue(),
                     $criteria->wordCount()
                 )
             );

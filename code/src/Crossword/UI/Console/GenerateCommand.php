@@ -52,7 +52,7 @@ HELP
             )
         );
 
-        $consoleResponder->__invoke(sprintf('Try to generate %d new crosswords.', (int) $input->getOption('limit')));
+        $consoleResponder(sprintf('Try to generate %d new crosswords.', (int) $input->getOption('limit')));
     }
 
     /**

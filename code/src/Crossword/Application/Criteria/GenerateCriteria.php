@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Criteria;
 
+use App\Crossword\Domain\Enum\Type;
+
 /**
  * @psalm-immutable
+ *
+ * @see CrosswordGenerator
  */
 final class GenerateCriteria
 {
@@ -20,9 +24,9 @@ final class GenerateCriteria
         $this->limit = $limit;
     }
 
-    public function type(): string
+    public function type(): Type
     {
-        return $this->type;
+        return new Type($this->type);
     }
 
     public function wordCount(): int
