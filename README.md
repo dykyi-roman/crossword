@@ -3,7 +3,11 @@ Crossword game
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
-# DDD
+# ADR + DDD
+
+Action Domain Responder organizes a single user interface interaction between an HTTP client and a HTTP server-side application into three distinct roles.
+
+![image](docs/adr.png)
 
 Domain-driven design is not a technology or a methodology. 
 It is a way of thinking and a set of priorities, aimed at accelerating software projects that have to deal with complicated domains.

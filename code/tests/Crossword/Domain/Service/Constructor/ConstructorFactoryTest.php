@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Crossword\Domain\Service\Constructor;
 
+use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
+use App\Crossword\Domain\Service\Constructor\Figured\FiguredConstructor;
+use App\Crossword\Domain\Service\Constructor\Normal\NormalConstructor;
+use App\Crossword\Domain\Service\WordFinder;
+use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
 use App\Tests\CrosswordAbstractTestCase;
+use Generator;
+use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Crossword\Domain\Service\Constructor\ConstructorFactory
@@ -14,9 +21,21 @@ final class ConstructorFactoryTest extends CrosswordAbstractTestCase
 {
     /**
      * @covers ::create
+     *
+     * @dataProvider typesDataProvider
      */
-    public function testSuccessfullyCreateConstructor(): void
+    public function testSuccessfullyCreateConstructor(Type $type, string $result): void
     {
-        self::assertSame(1,1);
+        $wordFinder = new WordFinder(new InMemoryDictionaryProvider(null, null), new NullLogger());
+        $factory = new ConstructorFactory($wordFinder);
+        $class = $factory->create($type);
+
+        self::assertInstanceOf($result, $class);
+    }
+
+    public function typesDataProvider(): Generator
+    {
+        yield 'Create normal constructor' => [Type::normal(), NormalConstructor::class];
+        yield 'Create figure constructor' => [Type::figure(), FiguredConstructor::class];
     }
 }

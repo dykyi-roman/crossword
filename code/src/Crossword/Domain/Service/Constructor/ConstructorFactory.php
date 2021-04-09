@@ -12,7 +12,7 @@ use App\Crossword\Domain\Service\Constructor\Normal\NormalConstructor;
 use App\Crossword\Domain\Service\GridScanner;
 use App\Crossword\Domain\Service\WordFinder;
 
-final class ConstructorFactory
+class ConstructorFactory
 {
     private WordFinder $wordFinder;
 

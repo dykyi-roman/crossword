@@ -7,6 +7,9 @@ namespace App\Crossword\Domain\Model;
 use JsonSerializable;
 use Stringable;
 
+/**
+ * @psalm-immutable
+ */
 final class Coordinate implements JsonSerializable, Stringable
 {
     private int $coordinateX;

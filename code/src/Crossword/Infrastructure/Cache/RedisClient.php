@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Infrastructure\Cache\Redis;
+namespace App\Crossword\Infrastructure\Cache;
 
 use Predis\Client;
 use Psr\Cache\CacheItemInterface;

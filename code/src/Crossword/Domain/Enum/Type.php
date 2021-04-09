@@ -14,6 +14,15 @@ use MyCLabs\Enum\Enum;
 final class Type extends Enum
 {
     public const NORMAL = 'normal';
-
     public const FIGURED = 'figured';
+
+    public static function normal(): self
+    {
+        return new self(self::NORMAL);
+    }
+
+    public static function figure(): self
+    {
+        return new self(self::FIGURED);
+    }
 }

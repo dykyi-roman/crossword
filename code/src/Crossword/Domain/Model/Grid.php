@@ -38,10 +38,13 @@ final class Grid implements IteratorAggregate
         return new Cell($coordinate, null);
     }
 
-    public function fillRow(Row $row): void
+    public function fillLine(Line $line): void
     {
-        foreach ($row as $cell) {
-            $this->cells[(string) $cell->coordinate()] = $cell;
+        /** @var Cell $cell */
+        foreach ($line as $cell) {
+            if ($cell->isLetter()) {
+                $this->cells[(string) $cell->coordinate()] = $cell;
+            }
         }
 
         $this->fillBlackSquare();
@@ -52,15 +55,29 @@ final class Grid implements IteratorAggregate
         foreach ($this->cells as $cell) {
             if ($cell->isLetter()) {
                 $coordinate = $cell->coordinate();
+                $leftCoordinate = $coordinate->left();
+                $topCoordinate = $coordinate->top();
+
                 $leftCell = $this->shiftCell($coordinate->left());
                 $rightCell = $this->shiftCell($coordinate->right());
                 $topCell = $this->shiftCell($coordinate->top());
                 $downCell = $this->shiftCell($coordinate->down());
 
-                !$leftCell->letter() && $rightCell->letter() && $this->fillCellBlack($coordinate->left());
-                $leftCell->letter() && !$rightCell->letter() && $this->fillCellBlack($coordinate->right());
-                !$topCell->letter() && $downCell->letter() && $this->fillCellBlack($coordinate->top());
-                $topCell->letter() && !$downCell->letter() && $this->fillCellBlack($coordinate->down());
+                if ($leftCoordinate->inFrame() && !$leftCell->letter() && $rightCell->letter()) {
+                    $this->fillCellBlack($coordinate->left());
+                }
+
+                if ($topCoordinate->inFrame() && !$topCell->letter() && $downCell->letter()) {
+                    $this->fillCellBlack($coordinate->top());
+                }
+
+                if ($leftCell->letter() && !$rightCell->letter()) {
+                    $this->fillCellBlack($coordinate->right());
+                }
+
+                if ($topCell->letter() && !$downCell->letter()) {
+                    $this->fillCellBlack($coordinate->down());
+                }
             }
         }
     }

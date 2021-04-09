@@ -26,6 +26,9 @@ final class CrosswordDto implements JsonSerializable
         return new self($line, ...$this->lines);
     }
 
+    /**
+     * @psalm-suppress ImpureFunctionCall
+     */
     public function jsonSerialize(): array
     {
         return array_map(static fn (LineDto $line) => $line->jsonSerialize(), $this->lines);

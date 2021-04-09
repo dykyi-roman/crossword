@@ -6,3 +6,4 @@
 /.idea
 /docker/data/elasticsearch/nodes/*
 /docker/data/redis/appendonly.aof
+/docker/data/redis/dump.rdb

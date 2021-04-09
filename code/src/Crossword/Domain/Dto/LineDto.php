@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Dto;
 
+use App\Crossword\Domain\Model\Line;
+use App\SharedKernel\Domain\Model\Word;
 use JsonSerializable;
 
 /**
@@ -11,20 +13,23 @@ use JsonSerializable;
  */
 final class LineDto implements JsonSerializable
 {
-    private array $row;
-    private array $word;
+    private Line $line;
+    private Word $word;
 
-    public function __construct(array $word, array $row)
+    public function __construct(Line $line, Word $word)
     {
-        $this->row = $row;
+        $this->line = $line;
         $this->word = $word;
     }
 
+    /**
+     * @psalm-suppress ImpureMethodCall
+     */
     public function jsonSerialize(): array
     {
         return [
-            'row' => $this->row,
-            'word' => $this->word,
+            'line' => $this->line->jsonSerialize(),
+            'word' => $this->word->jsonSerialize(),
         ];
     }
 }

@@ -6,6 +6,9 @@ namespace App\SharedKernel\Domain\Model;
 
 use Stringable;
 
+/**
+ * @psalm-immutable
+ */
 final class Mask implements Stringable
 {
     private string $query;

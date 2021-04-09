@@ -6,7 +6,7 @@ namespace App\Crossword\Domain\Messages\Handler;
 
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
 use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
-use App\Crossword\Infrastructure\Cache\Redis\CacheItem;
+use App\Crossword\Infrastructure\Cache\CacheItem;
 use JsonException;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

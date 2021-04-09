@@ -7,6 +7,7 @@ namespace App\Crossword\Domain\Service;
 use App\Crossword\Domain\Enum\Move;
 use App\Crossword\Domain\Model\Cell;
 use App\Crossword\Domain\Model\Grid;
+use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 
 final class GridScanner
@@ -39,9 +40,9 @@ final class GridScanner
         return $rows;
     }
 
-    public function fill(Row $row): void
+    public function fill(Line $line): void
     {
-        $this->grid->fillRow($row);
+        $this->grid->fillLine($line);
     }
 
     /**
@@ -121,6 +122,8 @@ final class GridScanner
             }
 
             if (!($leftCell->isEmpty() && $rightCell->isEmpty())) {
+                array_pop($line);
+
                 return $line;
             }
 
@@ -172,6 +175,8 @@ final class GridScanner
             }
 
             if (!($topCell->isEmpty() && $downCell->isEmpty())) {
+                array_pop($line);
+
                 return $line;
             }
 
