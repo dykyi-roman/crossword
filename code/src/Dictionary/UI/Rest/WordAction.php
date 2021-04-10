@@ -55,9 +55,9 @@ final class WordAction
     public function __invoke(WordRequest $request, WordsFinder $wordsFinder): ResponseInterface
     {
         try {
-            $wordsCollection = $wordsFinder->findByRequest($request);
+            $wordDtoCollection = $wordsFinder->findByRequest($request);
 
-            return new SuccessResponse($wordsCollection->jsonSerialize());
+            return new SuccessResponse($wordDtoCollection->jsonSerialize());
         } catch (NotFoundWordException) {
             return new FailedResponse(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND));
         }

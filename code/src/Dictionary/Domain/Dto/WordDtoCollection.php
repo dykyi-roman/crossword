@@ -7,7 +7,7 @@ namespace App\Dictionary\Domain\Dto;
 use Countable;
 use JsonSerializable;
 
-final class WordsCollectionDto implements JsonSerializable, Countable
+final class WordDtoCollection implements JsonSerializable, Countable
 {
     /**
      * @var WordDto[]

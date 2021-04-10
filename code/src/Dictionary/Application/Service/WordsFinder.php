@@ -6,7 +6,7 @@ namespace App\Dictionary\Application\Service;
 
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
-use App\Dictionary\Domain\Dto\WordsCollectionDto;
+use App\Dictionary\Domain\Dto\WordDtoCollection;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
 use App\Dictionary\Infrastructure\Repository\Elastic\Exception\WordNotFoundInStorageException;
 use Psr\Log\LoggerInterface;
@@ -22,7 +22,7 @@ final class WordsFinder
         $this->wordsStorage = $readWordsStorage;
     }
 
-    public function findByRequest(WordRequest $wordRequest): WordsCollectionDto
+    public function findByRequest(WordRequest $wordRequest): WordDtoCollection
     {
         try {
             return $this->wordsStorage->search($wordRequest->language(), $wordRequest->mask(), $wordRequest->limit());

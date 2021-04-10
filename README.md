@@ -3,60 +3,46 @@ Crossword game
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
-# ADR + DDD
+# Example
+
+...
+
+# Architecture
+
+![image](docs/model.png)
+
+### Layered Architecture
+
+To make the code organised each context uses Layered Architecture and each functional area is divided on four layers:
+
+* `Application`
+* `Doman`
+* `Infrastructure`
+* `UI`
+
+![image](docs/lad.jpeg)
+
+:+1: Checked by [Deptrac](https://github.com/qossmic/deptrac)
+
+### ADR
 
 Action Domain Responder organizes a single user interface interaction between an HTTP client and a HTTP server-side application into three distinct roles.
 
 ![image](docs/adr.png)
 
-Domain-driven design is not a technology or a methodology. 
+### DDD
+
+Domain-driven design is not a technology or a methodology.
 It is a way of thinking and a set of priorities, aimed at accelerating software projects that have to deal with complicated domains.
 
 On a macro level using DDD concepts like Ubiquitous Language and Bounded Contexts can solve complex perspectives on data in to smaller models and clear data ownership.
 Follow practices splitting the source code based on bounded contexts we define a next context:
 
- * `Crossword`
- * `Dictionary`
- * `Game`
+* `Crossword`
+* `Dictionary`
+* `Game`
 
-For reducing duplication of code we use a `SharedKernel`, it helps share a common code between context.  
- 
-# Layered Architecture
-
-To make the code organised each context uses Layered Architecture and each functional area is divided on four layers:
-
- * `Application`
- * `Doman`
- * `Infrastructure`
- * `UI`
- 
-![image](docs/ddd_la.jpeg)
-
-:+1: Checked by [Deptrac](https://github.com/qossmic/deptrac)
- 
-# Docker
-
-The docker-compose up command aggregates and run each container.
-
-``
- docker network create game
- make start
-`` 
-
-# Swagger
-
-Swagger help to describe the structure of APIs for better understand how is it works.
-
-``URL: /swagger``
-___
-
-![image](docs/swagger.png)
-
-# Postman
-
-Сollections with queries can be found: ``cd /postman``
-
-:+1: Checked by [Newman](https://github.com/postmanlabs/newman)
+For reducing duplication of code we use a `SharedKernel`, it helps share a common code between context.
 
 # Dictionary
 
@@ -69,8 +55,8 @@ ___
 
 #### Response formats
 
- * `json`
- * `xml`
+* `json`
+* `xml`
 
 ### Commands
 
@@ -111,6 +97,32 @@ php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
 ```
 
 # Game
+
+...
+
+# Docker
+
+The docker-compose up command aggregates and run each container.
+
+``
+docker network create game
+make start
+``
+
+# Swagger
+
+Swagger help to describe the structure of APIs for better understand how is it works.
+
+``URL: /swagger``
+___
+
+![image](docs/swagger.png)
+
+# Postman
+
+Сollections with queries can be found: ``cd /postman``
+
+:+1: Checked by [Newman](https://github.com/postmanlabs/newman)
 
 ## Stack
 

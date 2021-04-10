@@ -10,7 +10,7 @@ use IteratorAggregate;
 /**
  * @psalm-immutable
  */
-final class StorageWordCollectionDto implements IteratorAggregate
+final class StorageWordDtoCollection implements IteratorAggregate
 {
     /**
      * @var StorageWordDto[]
