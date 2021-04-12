@@ -1,9 +1,7 @@
 /logs
-/database
-/storage/*.key
-/storage/*
 /vendor
 /.idea
 /docker/data/elasticsearch/nodes/*
 /docker/data/redis/appendonly.aof
 /docker/data/redis/dump.rdb
+.DS_Store

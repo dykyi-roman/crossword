@@ -18,4 +18,9 @@ final class Level extends Enum
     public const LEVEL_3 = 3;
     public const LEVEL_4 = 4;
     public const LEVEL_5 = 5;
+
+    public static function startLevel(): self
+    {
+        return new self(self::LEVEL_1);
+    }
 }

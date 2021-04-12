@@ -6,6 +6,8 @@ namespace App\Dictionary\Application\Criteria;
 
 /**
  * @psalm-immutable
+ *
+ * @see PopulateCommand
  */
 final class WordsStoragePopulateCriteria
 {

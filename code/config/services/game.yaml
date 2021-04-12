@@ -1,0 +1,4 @@
+services:
+  App\Game\Domain\Repository\PersistPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\PersistPlayerRepository'
+  App\Game\Domain\Repository\ReadPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\ReadPlayerRepository'
+  App\Game\Domain\Service\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'

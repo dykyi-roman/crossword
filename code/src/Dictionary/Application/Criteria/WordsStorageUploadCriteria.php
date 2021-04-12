@@ -6,6 +6,8 @@ namespace App\Dictionary\Application\Criteria;
 
 /**
  * @psalm-immutable
+ *
+ * @see UploadCommand
  */
 final class WordsStorageUploadCriteria
 {

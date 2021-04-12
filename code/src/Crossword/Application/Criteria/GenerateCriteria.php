@@ -9,7 +9,7 @@ use App\Crossword\Domain\Enum\Type;
 /**
  * @psalm-immutable
  *
- * @see CrosswordGenerator
+ * @see GenerateCommand
  */
 final class GenerateCriteria
 {
