@@ -12,5 +12,5 @@ interface ReadPlayerRepositoryInterface
     /**
      * @throws PlayerNotFoundException
      */
-    public function login(string $nickname, string $password): PlayerLoginDto;
+    public function findPlayerByNicknameAndPassword(string $nickname, string $password): PlayerLoginDto;
 }

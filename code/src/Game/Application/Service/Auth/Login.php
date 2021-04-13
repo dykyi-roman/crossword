@@ -29,7 +29,7 @@ final class Login
     public function execute(string $nickname, string $password): bool
     {
         try {
-            $playerDto = $this->readPlayerRepository->login($nickname, $password);
+            $playerDto = $this->readPlayerRepository->findPlayerByNicknameAndPassword($nickname, $password);
 
             $this->session->set('player', $playerDto->jsonSerialize());
             $this->session->save();

@@ -6,24 +6,24 @@ namespace App\Game\UI\Console;
 
 use App\Game\Application\Assert\PasswordAssert;
 use App\Game\Application\Assert\RoleAssert;
-use App\Game\Application\Criteria\RegistrationCriteria;
-use App\Game\Application\Service\Auth\Registration;
+use App\Game\Application\Criteria\PlayerRegisterCriteria;
+use App\Game\Application\Service\Auth\PlayerRegister;
 use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 
-final class RegistrationCommand extends AbstractCommand
+final class CreatePlayerCommand extends AbstractCommand
 {
-    protected static $defaultName = 'game:registration';
+    protected static $defaultName = 'game:create-player';
 
-    private Registration $registration;
+    private PlayerRegister $playerRegister;
 
-    public function __construct(Registration $registration)
+    public function __construct(PlayerRegister $playerRegister)
     {
         parent::__construct();
-        $this->registration = $registration;
+        $this->playerRegister = $playerRegister;
     }
 
     protected function configure(): void
@@ -43,7 +43,7 @@ HELP
 
     protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
     {
-        $this->registration->execute(new RegistrationCriteria(
+        $this->playerRegister->execute(new PlayerRegisterCriteria(
             (string) $input->getArgument('nickname'),
             (string) $input->getArgument('password'),
             (string) $input->getOption('role'),

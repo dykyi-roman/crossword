@@ -9,5 +9,5 @@ use Ramsey\Uuid\UuidInterface;
 
 interface PersistPlayerRepositoryInterface //rename to PLAYER domain name
 {
-    public function registration(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void;
+    public function createPlayer(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void;
 }

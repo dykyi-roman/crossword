@@ -20,15 +20,11 @@ To make the code organised each context uses Layered Architecture and each funct
 * `Infrastructure`
 * `UI`
 
-![image](docs/lad.jpeg)
-
 :+1: Checked by [Deptrac](https://github.com/qossmic/deptrac)
 
 ### ADR
 
 Action Domain Responder organizes a single user interface interaction between an HTTP client and a HTTP server-side application into three distinct roles.
-
-![image](docs/adr.png)
 
 ### DDD
 

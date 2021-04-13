@@ -22,7 +22,7 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
         $this->encoder = $encoder;
     }
 
-    public function login(string $nickname, string $password): PlayerLoginDto
+    public function findPlayerByNicknameAndPassword(string $nickname, string $password): PlayerLoginDto
     {
         $player = $this->createQueryBuilder('u')
             ->andWhere('u.nickname = :nickname')
@@ -38,6 +38,6 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
             throw new PlayerNotFoundException();
         }
 
-        return new PlayerLoginDto($player->nickname(), $player->level(), $player->role());
+        return new PlayerLoginDto($player->id(), $player->nickname(), $player->level(), $player->role());
     }
 }

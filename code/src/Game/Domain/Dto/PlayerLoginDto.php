@@ -7,18 +7,26 @@ namespace App\Game\Domain\Dto;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use JsonSerializable;
+use Ramsey\Uuid\UuidInterface;
 
-class PlayerLoginDto implements JsonSerializable
+final class PlayerLoginDto implements JsonSerializable
 {
-    protected string $nickname;
     protected Level $level;
     protected Role $role;
+    protected UuidInterface $id;
+    protected string $nickname;
 
-    public function __construct(string $nickname, Level $level, Role $role)
+    public function __construct(UuidInterface $id, string $nickname, Level $level, Role $role)
     {
-        $this->nickname = $nickname;
-        $this->level = $level;
+        $this->id = $id;
         $this->role = $role;
+        $this->level = $level;
+        $this->nickname = $nickname;
+    }
+
+    public function id(): UuidInterface
+    {
+        return $this->id;
     }
 
     public function level(): Level
@@ -39,6 +47,7 @@ class PlayerLoginDto implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'id' => $this->id->toString(),
             'nickname' => $this->nickname,
             'level' => (int) $this->level->getValue(),
             'role' => (string) $this->role->getValue(),

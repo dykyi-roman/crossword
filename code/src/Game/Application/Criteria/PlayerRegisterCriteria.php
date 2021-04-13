@@ -9,19 +9,19 @@ use App\Game\Domain\Enum\Role;
 /**
  * @psalm-immutable
  *
- * @see RegistrationCommand
+ * @see CreatePlayerCommand
  */
-final class RegistrationCriteria
+final class PlayerRegisterCriteria
 {
     private Role $role;
     private string $nickname;
     private string $password;
 
-    public function __construct(string $nickname, string $password, string $role)
+    public function __construct(string $nickname, string $password, ?string $role)
     {
         $this->nickname = $nickname;
         $this->password = $password;
-        $this->role = new Role($role);
+        $this->role = new Role($role ?? Role::SIMPLE_PLAYER);
     }
 
     public function role(): Role

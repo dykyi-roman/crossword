@@ -22,7 +22,7 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
         $this->encoder = $encoder;
     }
 
-    public function registration(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void
+    public function createPlayer(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void
     {
         $player = new Player($uuid);
         $player->changeNickname($playerDto->nickname());
