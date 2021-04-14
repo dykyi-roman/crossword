@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Crossword\Application\Service;
 
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
-use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
-use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\Crossword\Domain\Port\DictionaryInterface;
+use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use Psr\Log\LoggerInterface;
 
 final class SupportedLanguages
 {
     private LoggerInterface $logger;
-    private DictionaryProviderInterface $dictionaryProvider;
+    private DictionaryInterface $dictionaryProvider;
 
-    public function __construct(DictionaryProviderInterface $dictionaryProvider, LoggerInterface $logger)
+    public function __construct(DictionaryInterface $dictionaryProvider, LoggerInterface $logger)
     {
         $this->logger = $logger;
         $this->dictionaryProvider = $dictionaryProvider;
@@ -31,7 +31,8 @@ final class SupportedLanguages
             return $languages->count() ? $languages->languages() : throw new NotFoundSupportedLanguagesException();
         } catch (ApiClientException $exception) {
             $this->logger->error($exception->getMessage());
-            throw new NotFoundSupportedLanguagesException();
         }
+
+        throw new NotFoundSupportedLanguagesException();
     }
 }

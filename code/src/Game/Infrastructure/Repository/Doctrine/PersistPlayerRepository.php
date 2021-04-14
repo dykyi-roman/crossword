@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\Doctrine;
 
-use App\Game\Domain\Dto\PlayerRegistrationDto;
+use App\Game\Domain\Dto\NewPlayerDto;
 use App\Game\Domain\Model\Player;
 use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
 use App\Game\Domain\Service\PasswordEncoderInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
 
 final class PersistPlayerRepository extends ServiceEntityRepository implements PersistPlayerRepositoryInterface
 {
@@ -22,9 +21,9 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
         $this->encoder = $encoder;
     }
 
-    public function createPlayer(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void
+    public function createPlayer(NewPlayerDto $playerDto): void
     {
-        $player = new Player($uuid);
+        $player = new Player($playerDto->id());
         $player->changeNickname($playerDto->nickname());
         $player->changeLevel($playerDto->level());
         $player->changeRole($playerDto->role());
@@ -35,8 +34,8 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
 
     private function store(Player $player): void
     {
-        $em = $this->getEntityManager();
-        $em->persist($player);
-        $em->flush();
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($player);
+        $entityManager->flush();
     }
 }

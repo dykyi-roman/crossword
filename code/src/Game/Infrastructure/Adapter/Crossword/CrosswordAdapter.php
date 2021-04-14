@@ -2,52 +2,52 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Infrastructure\Provider;
+namespace App\Game\Infrastructure\Adapter\Crossword;
 
-use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
-use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
-use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\Game\Domain\Dto\CrosswordDto;
+use App\Game\Domain\Dto\LanguagesDto;
+use App\Game\Domain\Port\CrosswordInterface;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
+use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
 
-final class DictionaryProvider implements DictionaryProviderInterface
+final class CrosswordAdapter implements CrosswordInterface
 {
-    private string $dictionaryApiHost;
+    private string $crosswordApiHost;
     private ClientInterface $client;
     private ResponseDataExtractorInterface $responseDataExtractor;
 
     public function __construct(
         ClientInterface $client,
         ResponseDataExtractorInterface $responseDataExtractor,
-        string $dictionaryApiHost
+        string $crosswordApiHost
     ) {
         $this->client = $client;
-        $this->dictionaryApiHost = $dictionaryApiHost;
+        $this->crosswordApiHost = $crosswordApiHost;
         $this->responseDataExtractor = $responseDataExtractor;
     }
 
-    public function supportedLanguages(): DictionaryLanguagesDto
+    public function construct(string $language, string $type, int $wordCount): CrosswordDto
     {
-        $uri = sprintf('%s/languages', $this->dictionaryApiHost);
+        $uri = sprintf('%s/construct/%s/%s/%d', $this->crosswordApiHost, $language, $type, $wordCount);
         try {
             $response = $this->client->sendRequest(new Request('GET', $uri));
 
-            return new DictionaryLanguagesDto($this->responseDataExtractor->extract($response));
+            return new CrosswordDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
             throw ApiClientException::badRequest($exception->getMessage());
         }
     }
 
-    public function searchWord(string $language, string $mask): DictionaryWordDto
+    public function supportedLanguages(): LanguagesDto
     {
-        $uri = sprintf('%s/words/%s/?mask=%s', $this->dictionaryApiHost, $language, $mask);
+        $uri = sprintf('%s/languages', $this->crosswordApiHost);
         try {
             $response = $this->client->sendRequest(new Request('GET', $uri));
 
-            return new DictionaryWordDto($this->responseDataExtractor->extract($response));
+            return new LanguagesDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
             throw ApiClientException::badRequest($exception->getMessage());
         }

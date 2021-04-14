@@ -17,7 +17,7 @@ final class SaveToStorageMessageHandler implements MessageHandlerInterface
         $this->writeWordsStorage = $writeWordsStorage;
     }
 
-    public function __invoke(SaveToStorageMessage $message)
+    public function __invoke(SaveToStorageMessage $message): void
     {
         $this->writeWordsStorage->save($message->language(), $message->word());
     }

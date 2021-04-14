@@ -5,9 +5,11 @@ parameters:
     ru: '%kernel.project_dir%/data/russian.txt'
 
 services:
-  App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway:
+  App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionWikipediaApiGateway: ~
+
+  App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway:
     calls:
-      - setNext: ['@App\Dictionary\Infrastructure\Gateway\WordDefinitionWikipediaApiGateway']
+      - setNext: ['@App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionWikipediaApiGateway']
 
   App\Dictionary\Application\Service\WordsStoragePopulate:
     arguments:
@@ -22,6 +24,6 @@ services:
   App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage: ~
   App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
 
-  App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\WordDefinitionGoogleApiGateway'
+  App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway'
   App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
   App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'

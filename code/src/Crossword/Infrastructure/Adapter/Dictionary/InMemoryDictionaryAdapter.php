@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Infrastructure\Provider;
+namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
-use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\Crossword\Domain\Port\DictionaryInterface;
+use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 
-final class InMemoryDictionaryProvider implements DictionaryProviderInterface
+final class InMemoryDictionaryAdapter implements DictionaryInterface
 {
     private null | DictionaryLanguagesDto $languagesDto;
     private null | DictionaryWordDto $wordDto;

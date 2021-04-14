@@ -7,7 +7,7 @@ namespace App\Tests\Crossword\Application\Service;
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\SupportedLanguages;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
-use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
+use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\SuccessResponse;
 use App\Tests\CrosswordAbstractTestCase;
 use Psr\Log\NullLogger;
@@ -24,7 +24,7 @@ final class SupportedLanguagesTest extends CrosswordAbstractTestCase
     {
         $response = new SuccessResponse(['en', 'ua']);
         $dictionaryLanguagesDto = new DictionaryLanguagesDto($response->body());
-        $inMemoryDictionaryProvider = new InMemoryDictionaryProvider($dictionaryLanguagesDto, null);
+        $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter($dictionaryLanguagesDto, null);
 
         $supportedLanguages = new SupportedLanguages($inMemoryDictionaryProvider, new NullLogger());
 
@@ -40,7 +40,7 @@ final class SupportedLanguagesTest extends CrosswordAbstractTestCase
 
         $response = new SuccessResponse([]);
         $dictionaryLanguagesDto = new DictionaryLanguagesDto($response->body());
-        $inMemoryDictionaryProvider = new InMemoryDictionaryProvider($dictionaryLanguagesDto, null);
+        $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter($dictionaryLanguagesDto, null);
 
         $supportedLanguages = new SupportedLanguages($inMemoryDictionaryProvider, new NullLogger());
         $supportedLanguages->receive();

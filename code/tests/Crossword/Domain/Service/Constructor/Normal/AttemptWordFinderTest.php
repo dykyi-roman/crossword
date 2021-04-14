@@ -7,7 +7,7 @@ namespace App\Tests\Crossword\Domain\Service\Constructor\Normal;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
 use App\Crossword\Domain\Service\WordFinder;
-use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
+use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\SuccessResponse;
 use App\SharedKernel\Domain\Model\Mask;
 use App\SharedKernel\Domain\Model\Word;
@@ -26,7 +26,7 @@ final class AttemptWordFinderTest extends CrosswordAbstractTestCase
     {
         $response = new SuccessResponse([['word' => 'test', 'definition' => 'test test']]);
         $wordDto = new DictionaryWordDto($response->body());
-        $wordFinder = new WordFinder(new InMemoryDictionaryProvider(null, $wordDto), new NullLogger());
+        $wordFinder = new WordFinder(new InMemoryDictionaryAdapter(null, $wordDto), new NullLogger());
         $attemptWordFinder = new AttemptWordFinder($wordFinder);
 
         $word = $attemptWordFinder->find('en', new Mask('..s.*'));

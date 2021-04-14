@@ -6,15 +6,15 @@ namespace App\Crossword\Application\Service;
 
 use App\Crossword\Application\Criteria\GenerateCriteria;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
-use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
+use App\Crossword\Domain\Port\DictionaryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class CrosswordGenerator
 {
     private MessageBusInterface $messageBus;
-    private DictionaryProviderInterface $dictionaryProvider;
+    private DictionaryInterface $dictionaryProvider;
 
-    public function __construct(DictionaryProviderInterface $dictionaryProvider, MessageBusInterface $messageBus)
+    public function __construct(DictionaryInterface $dictionaryProvider, MessageBusInterface $messageBus)
     {
         $this->messageBus = $messageBus;
         $this->dictionaryProvider = $dictionaryProvider;

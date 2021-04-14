@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Domain\Service;
+namespace App\Dictionary\Domain\Port;
 
 use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 

@@ -9,7 +9,7 @@ use App\Crossword\Application\Service\CrosswordGenerator;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
-use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
+use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\SuccessResponse;
 use App\Tests\CrosswordAbstractTestCase;
 
@@ -26,7 +26,7 @@ final class CrosswordGeneratorTest extends CrosswordAbstractTestCase
         $response = new SuccessResponse(['en']);
 
         $crosswordGenerator = new CrosswordGenerator(
-            new InMemoryDictionaryProvider(
+            new InMemoryDictionaryAdapter(
                 new DictionaryLanguagesDto($response->body()),
                 null
             ),

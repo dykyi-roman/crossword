@@ -36,12 +36,17 @@ final class Row implements IteratorAggregate
         throw new CellNotFoundException();
     }
 
-    public function remove(int $index): void
+    public function remove(int $index): self
     {
         if (array_key_exists($index, $this->cells)) {
-            unset($this->cells[$index]);
-            $this->cells = array_values($this->cells);
+            $row = new self(...$this->cells);
+            unset($row->cells[$index]);
+            $row->cells = array_values($row->cells);
+
+            return $row;
         }
+
+        return $this;
     }
 
     /**

@@ -39,7 +39,7 @@ final class RowTest extends TestCase
 
         self::assertInstanceOf(Cell::class, $cell);
 
-        $row->remove(0);
+        $row = $row->remove(0);
         $row->cell(0);
     }
 

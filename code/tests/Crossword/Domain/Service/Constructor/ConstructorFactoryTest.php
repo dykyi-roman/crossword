@@ -9,7 +9,7 @@ use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
 use App\Crossword\Domain\Service\Constructor\Figured\FiguredConstructor;
 use App\Crossword\Domain\Service\Constructor\Normal\NormalConstructor;
 use App\Crossword\Domain\Service\WordFinder;
-use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
+use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\Tests\CrosswordAbstractTestCase;
 use Generator;
 use Psr\Log\NullLogger;
@@ -26,7 +26,7 @@ final class ConstructorFactoryTest extends CrosswordAbstractTestCase
      */
     public function testSuccessfullyCreateConstructor(Type $type, string $result): void
     {
-        $wordFinder = new WordFinder(new InMemoryDictionaryProvider(null, null), new NullLogger());
+        $wordFinder = new WordFinder(new InMemoryDictionaryAdapter(null, null), new NullLogger());
         $factory = new ConstructorFactory($wordFinder);
         $class = $factory->create($type);
 

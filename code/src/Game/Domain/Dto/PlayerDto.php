@@ -9,12 +9,15 @@ use App\Game\Domain\Enum\Role;
 use JsonSerializable;
 use Ramsey\Uuid\UuidInterface;
 
-final class PlayerLoginDto implements JsonSerializable
+/**
+ * @psalm-immutable
+ */
+final class PlayerDto implements JsonSerializable
 {
-    protected Level $level;
-    protected Role $role;
-    protected UuidInterface $id;
-    protected string $nickname;
+    private Role $role;
+    private Level $level;
+    private UuidInterface $id;
+    private string $nickname;
 
     public function __construct(UuidInterface $id, string $nickname, Level $level, Role $role)
     {

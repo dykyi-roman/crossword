@@ -548,6 +548,12 @@
     "symfony/process": {
         "version": "v5.2.4"
     },
+    "symfony/property-access": {
+        "version": "v5.2.4"
+    },
+    "symfony/property-info": {
+        "version": "v5.2.4"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "v5.2.4"
     },
@@ -568,7 +574,28 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "0a4bae19389d3b9cba1ca0102e3b2bccea724603"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
     "symfony/security-core": {
+        "version": "v5.2.6"
+    },
+    "symfony/security-csrf": {
+        "version": "v5.2.4"
+    },
+    "symfony/security-guard": {
+        "version": "v5.2.4"
+    },
+    "symfony/security-http": {
         "version": "v5.2.6"
     },
     "symfony/service-contracts": {

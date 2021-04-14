@@ -8,7 +8,7 @@ use App\Crossword\Application\Enum\ErrorCode;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Service\WordFinder;
-use App\Crossword\Infrastructure\Provider\InMemoryDictionaryProvider;
+use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\FailedResponse;
 use App\SharedKernel\Application\Response\SuccessResponse;
 use App\SharedKernel\Domain\Model\Word;
@@ -27,7 +27,7 @@ final class WordFinderTest extends CrosswordAbstractTestCase
     {
         $response = new SuccessResponse([['word' => 'test', 'definition' => 'test test']]);
         $dictionaryWordDto = new DictionaryWordDto($response->body());
-        $inMemoryDictionaryProvider = new InMemoryDictionaryProvider(null, $dictionaryWordDto);
+        $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, $dictionaryWordDto);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
         $word = $wordFinder->find('en', '.*');
@@ -46,7 +46,7 @@ final class WordFinderTest extends CrosswordAbstractTestCase
 
         $response = new FailedResponse(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED));
         $dictionaryWordDto = new DictionaryWordDto($response->body());
-        $inMemoryDictionaryProvider = new InMemoryDictionaryProvider(null, $dictionaryWordDto);
+        $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, $dictionaryWordDto);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
         $wordFinder->find('en', '.*');
@@ -59,7 +59,7 @@ final class WordFinderTest extends CrosswordAbstractTestCase
     {
         $this->expectException(WordFoundException::class);
 
-        $inMemoryDictionaryProvider = new InMemoryDictionaryProvider(null, null);
+        $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, null);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
         $wordFinder->find('en', '.*');

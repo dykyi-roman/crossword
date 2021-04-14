@@ -6,7 +6,7 @@ namespace App\Dictionary\Domain\Messages\Handler;
 
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
-use App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface;
+use App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 

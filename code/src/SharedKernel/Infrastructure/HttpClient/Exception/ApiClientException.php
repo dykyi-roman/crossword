@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Infrastructure\Provider\Exception;
+namespace App\SharedKernel\Infrastructure\HttpClient\Exception;
 
 use DomainException;
 

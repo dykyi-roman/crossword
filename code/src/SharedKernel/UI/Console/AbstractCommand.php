@@ -30,7 +30,9 @@ abstract class AbstractCommand extends Command
             );
 
             return Command::SUCCESS;
-        } catch (Throwable) {
+        } catch (Throwable $exception) {
+            $symfonyStyle->error($exception->getMessage());
+
             return Command::FAILURE;
         }
     }

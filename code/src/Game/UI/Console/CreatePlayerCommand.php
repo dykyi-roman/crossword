@@ -46,7 +46,7 @@ HELP
         $this->playerRegister->execute(new PlayerRegisterCriteria(
             (string) $input->getArgument('nickname'),
             (string) $input->getArgument('password'),
-            (string) $input->getOption('role'),
+            $input->getOption('role'),
         ));
 
         $consoleResponder('Player successfully created');

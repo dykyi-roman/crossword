@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Gateway\InMemory;
 
-use App\Dictionary\Domain\Service\WordDefinitionApiGatewayInterface;
+use App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface;
 use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 
 final class WordDefinitionApiGatewayInMemory implements WordDefinitionApiGatewayInterface

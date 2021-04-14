@@ -1,6 +1,6 @@
 services:
-  App\Crossword\Infrastructure\Provider\DictionaryProvider: ~
+  App\Crossword\Infrastructure\Adapter\Dictionary\DictionaryAdapter: ~
   App\Crossword\Infrastructure\Cache\RedisClient: ~
 
   Psr\Cache\CacheItemPoolInterface: '@App\Crossword\Infrastructure\Cache\RedisClient'
-  App\Crossword\Domain\Service\Provider\DictionaryProviderInterface: '@App\Crossword\Infrastructure\Provider\DictionaryProvider'
+  App\Crossword\Domain\Port\DictionaryInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DictionaryAdapter'

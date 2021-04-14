@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\Doctrine;
 
-use App\Game\Domain\Dto\PlayerLoginDto;
+use App\Game\Domain\Dto\PlayerDto;
 use App\Game\Domain\Model\Player;
 use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
 use App\Game\Domain\Service\PasswordEncoderInterface;
@@ -22,7 +22,7 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
         $this->encoder = $encoder;
     }
 
-    public function findPlayerByNicknameAndPassword(string $nickname, string $password): PlayerLoginDto
+    public function findPlayerByNicknameAndPassword(string $nickname, string $password): PlayerDto
     {
         $player = $this->createQueryBuilder('u')
             ->andWhere('u.nickname = :nickname')
@@ -38,6 +38,6 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
             throw new PlayerNotFoundException();
         }
 
-        return new PlayerLoginDto($player->id(), $player->nickname(), $player->level(), $player->role());
+        return new PlayerDto($player->id(), $player->nickname(), $player->level(), $player->role());
     }
 }

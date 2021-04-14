@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\Domain\Service\Provider;
+namespace App\Crossword\Domain\Port;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 
-interface DictionaryProviderInterface
+interface DictionaryInterface
 {
     /**
      * @throws ApiClientException

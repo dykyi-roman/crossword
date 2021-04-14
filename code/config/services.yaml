@@ -16,16 +16,19 @@ services:
             $googleApiHost: '%env(resolve:GOOGLE_DICTIONARY_API)%'
             $wikipediaApiHost: '%env(resolve:WIKIPEDIA_DICTIONARY_API)%'
             $dictionaryApiHost: '%env(resolve:DICTIONARY_API)%'
+            $crosswordApiHost: '%env(resolve:CROSSWORD_API)%'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
         exclude:
             - '../src/Game/Domain/Model/'
+            - '../src/Game/Domain/Dto/'
+            - '../src/Game/Infrastructure/Repository/DoctrineMigrations/'
             - '../src/Crossword/Domain/Model/'
+            - '../src/Crossword/Domain/Dto/'
             - '../src/Dictionary/Domain/Model/'
             - '../src/Dictionary/Domain/Dto/'
-            - '../src/Crossword/Domain/Dto/'
             - '../src/Kernel.php'
 
     App\Crossword\UI\Rest\:
@@ -38,4 +41,8 @@ services:
 
     App\SharedKernel\UI\Web\:
         resource: '../src/SharedKernel/UI/Web'
+        tags: [ 'controller.service_arguments' ]
+
+    App\Game\UI\Web\:
+        resource: '../src/Game/UI/Web'
         tags: [ 'controller.service_arguments' ]

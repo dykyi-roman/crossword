@@ -5,26 +5,26 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Service;
 
 use App\Crossword\Domain\Exception\WordFoundException;
-use App\Crossword\Domain\Service\Provider\DictionaryProviderInterface;
-use App\Crossword\Infrastructure\Provider\Exception\ApiClientException;
+use App\Crossword\Domain\Port\DictionaryInterface;
 use App\SharedKernel\Domain\Model\Word;
+use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use Psr\Log\LoggerInterface;
 
 final class WordFinder
 {
     private LoggerInterface $logger;
-    private DictionaryProviderInterface $dictionaryProvider;
+    private DictionaryInterface $dictionary;
 
-    public function __construct(DictionaryProviderInterface $dictionaryProvider, LoggerInterface $logger)
+    public function __construct(DictionaryInterface $dictionary, LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->dictionaryProvider = $dictionaryProvider;
+        $this->dictionary = $dictionary;
     }
 
     public function find(string $language, string $mask): Word
     {
         try {
-            $searchWordDto = $this->dictionaryProvider->searchWord($language, $mask);
+            $searchWordDto = $this->dictionary->searchWord($language, $mask);
             if ($searchWordDto->isSuccess()) {
                 return new Word($searchWordDto->word(), $searchWordDto->definition());
             }

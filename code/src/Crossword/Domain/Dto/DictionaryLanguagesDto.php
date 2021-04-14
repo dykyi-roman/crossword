@@ -18,6 +18,11 @@ final class DictionaryLanguagesDto implements Countable
         $this->payload = $payload;
     }
 
+    public function count(): int
+    {
+        return count($this->languages());
+    }
+
     public function languages(): array
     {
         return $this->isSuccess() ? $this->payload['data'] : [];
@@ -26,10 +31,5 @@ final class DictionaryLanguagesDto implements Countable
     private function isSuccess(): bool
     {
         return 'success' === $this->payload['status'];
-    }
-
-    public function count(): int
-    {
-        return count($this->languages());
     }
 }

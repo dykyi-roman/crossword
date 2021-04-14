@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace App\Game\Infrastructure\Repository\DoctrineMigrations;
 
-use DateTimeImmutable;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Types;
@@ -79,12 +78,7 @@ final class Version20210411114720 extends AbstractMigration
 
     private function createAndUpdateDate(Table $table): void
     {
-        $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE)
-            ->setNotnull(true)
-            ->setDefault(new DateTimeImmutable());
-
-        $table->addColumn('updatedAt', Types::DATETIME_IMMUTABLE)
-            ->setNotnull(true)
-            ->setDefault(new DateTimeImmutable());
+        $table->addColumn('createdAt', Types::DATETIME_IMMUTABLE)->setNotnull(true);
+        $table->addColumn('updatedAt', Types::DATETIME_IMMUTABLE)->setNotnull(true);
     }
 }

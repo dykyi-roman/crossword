@@ -53,7 +53,7 @@ final class Line implements IteratorAggregate, JsonSerializable
             }
 
             $cell = $row->cell(0);
-            $cell->isEmpty() && $row->remove(0);
+            $cell->isEmpty() && $row = $row->remove(0);
         }
 
         throw new WordNotFitException();

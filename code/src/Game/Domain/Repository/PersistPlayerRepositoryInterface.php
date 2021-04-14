@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Game\Domain\Repository;
 
-use App\Game\Domain\Dto\PlayerRegistrationDto;
-use Ramsey\Uuid\UuidInterface;
+use App\Game\Domain\Dto\NewPlayerDto;
 
-interface PersistPlayerRepositoryInterface //rename to PLAYER domain name
+interface PersistPlayerRepositoryInterface
 {
-    public function createPlayer(UuidInterface $uuid, PlayerRegistrationDto $playerDto): void;
+    public function createPlayer(NewPlayerDto $playerDto): void;
 }

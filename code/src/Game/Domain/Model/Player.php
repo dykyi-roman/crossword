@@ -78,11 +78,6 @@ final class Player
         return $this->password;
     }
 
-    public function salt(): ?string
-    {
-        return null;
-    }
-
     public function nickname(): string
     {
         return $this->nickname;
