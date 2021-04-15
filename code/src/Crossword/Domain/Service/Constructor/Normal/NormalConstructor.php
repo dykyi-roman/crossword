@@ -13,7 +13,6 @@ use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Domain\Service\GridScanner;
-use ArrayIterator;
 
 final class NormalConstructor implements ConstructorInterface
 {
@@ -57,15 +56,5 @@ final class NormalConstructor implements ConstructorInterface
         }
 
         throw new NextLineFoundException();
-    }
-
-    /**
-     * @todo remove
-     */
-    public function grid(): ArrayIterator
-    {
-        $grid = $this->gridScanner->grid();
-
-        return $grid->getIterator();
     }
 }

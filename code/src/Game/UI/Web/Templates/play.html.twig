@@ -1,9 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login page</title>
+    <style>
+        table {
+            text-align: center;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+        }
+
+        .letterData {
+            border: 2px solid #000;
+        }
+
+        input {
+            width: 30px;
+            font-size: 28px;
+        }
+    </style>
+    <title>Play page</title>
 </head>
 <body>
-    test
+<table>
+    {% for cell in grid %}
+        {% if cell['coordinate']['y'] == 1 %}
+            <tr>
+        {% endif %}
+
+        {% if cell['letter'] == '' %}
+            <td></td>
+        {% else %}
+            <td class="letterData"><input size="1" maxlength="1" value="{{ cell['letter'] }}"></td>
+        {% endif %}
+
+        {% if cell['coordinate']['y'] == gridSize %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
 </body>
 </html>

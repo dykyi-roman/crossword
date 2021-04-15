@@ -37,7 +37,7 @@ final class CrosswordReceiver
     }
 
     /**
-     * @throws JsonException
+     * @throws JsonException|ReceiveCrosswordException
      */
     private function doReceive(Type $type, string $language, int $wordCount): array
     {

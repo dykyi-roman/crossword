@@ -22,14 +22,6 @@ final class GridScanner
     }
 
     /**
-     * @todo remove
-     */
-    public function grid(): Grid
-    {
-        return $this->grid;
-    }
-
-    /**
      * @return Row[]
      */
     public function scan(): array
