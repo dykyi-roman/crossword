@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\Rest;
 
-use App\Crossword\Application\Enum\ErrorCode;
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
+use App\Crossword\Application\Service\ErrorFactory;
 use App\Crossword\Application\Service\SupportedLanguages;
 use App\SharedKernel\Application\Response\FailedResponse;
 use App\SharedKernel\Application\Response\ResponseInterface;
@@ -35,7 +35,7 @@ final class LanguagesAction
         try {
             return new SuccessResponse($supportedLanguages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return new FailedResponse(new ErrorCode(ErrorCode::LANGUAGES_NOT_FOUND));
+            return new FailedResponse(ErrorFactory::languageIsNotFound());
         }
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Dictionary\UI\Rest;
 
-use App\Dictionary\Application\Enum\ErrorCode;
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
+use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\WordsFinder;
 use App\SharedKernel\Application\Response\FailedResponse;
 use App\SharedKernel\Application\Response\ResponseInterface;
@@ -59,7 +59,7 @@ final class WordAction
 
             return new SuccessResponse($wordDtoCollection->jsonSerialize());
         } catch (NotFoundWordException) {
-            return new FailedResponse(new ErrorCode(ErrorCode::WORD_IS_NOT_FOUND));
+            return new FailedResponse(ErrorFactory::wordIsNotFound());
         }
     }
 }

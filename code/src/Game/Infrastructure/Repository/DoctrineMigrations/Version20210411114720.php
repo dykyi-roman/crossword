@@ -13,7 +13,6 @@ final class Version20210411114720 extends AbstractMigration
 {
     private const PLAYER_TABLE = 'player';
     private const HISTORY_TABLE = 'history';
-    private const GAME_TABLE = 'game';
 
     public function getDescription(): string
     {
@@ -24,14 +23,12 @@ final class Version20210411114720 extends AbstractMigration
     {
         $this->createPlayerTable($schema);
         $this->createHistoryTable($schema);
-        $this->createGameTable($schema);
     }
 
     public function down(Schema $schema): void
     {
         $schema->dropTable(self::PLAYER_TABLE);
         $schema->dropTable(self::HISTORY_TABLE);
-        $schema->dropTable(self::GAME_TABLE);
     }
 
     private function createPlayerTable(Schema $schema): void
@@ -55,20 +52,6 @@ final class Version20210411114720 extends AbstractMigration
         $table->addColumn('id', Types::GUID)->setUnsigned(true)->setAutoincrement(true);
         $table->addColumn('player', Types::GUID);
         $table->addColumn('level', Types::GUID);
-
-        $this->createAndUpdateDate($table);
-
-        $table->setPrimaryKey(['id']);
-        $table->addForeignKeyConstraint(self::PLAYER_TABLE, ['player'], ['id']);
-    }
-
-    private function createGameTable(Schema $schema): void
-    {
-        $table = $schema->createTable(self::GAME_TABLE);
-        $table->addColumn('id', Types::GUID)->setUnsigned(true)->setAutoincrement(true);
-        $table->addColumn('player', Types::GUID);
-        $table->addColumn('crossword', Types::ARRAY);
-        $table->addColumn('answer', Types::ARRAY);
 
         $this->createAndUpdateDate($table);
 

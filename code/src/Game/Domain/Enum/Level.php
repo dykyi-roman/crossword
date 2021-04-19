@@ -23,4 +23,9 @@ final class Level extends Enum
     {
         return new self(self::LEVEL_1);
     }
+
+    public static function levelUp(Level $level): self
+    {
+        return new Level((int) $level->getValue() + 1);
+    }
 }

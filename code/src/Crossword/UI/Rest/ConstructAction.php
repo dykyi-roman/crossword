@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\Rest;
 
-use App\Crossword\Application\Enum\ErrorCode;
 use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
 use App\Crossword\Application\Service\CrosswordReceiver;
+use App\Crossword\Application\Service\ErrorFactory;
 use App\SharedKernel\Application\Response\FailedResponse;
 use App\SharedKernel\Application\Response\ResponseInterface;
 use App\SharedKernel\Application\Response\SuccessResponse;
@@ -60,7 +60,7 @@ final class ConstructAction
 
             return new SuccessResponse($crossword);
         } catch (ReceiveCrosswordException) {
-            return new FailedResponse(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED));
+            return new FailedResponse(ErrorFactory::crosswordIsNotReceived());
         }
     }
 }

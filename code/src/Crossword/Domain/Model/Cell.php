@@ -51,7 +51,7 @@ final class Cell implements JsonSerializable
     {
         return [
             'letter' => $this->letter,
-            'coordinate' => $this->coordinate->jsonSerialize(),
+            'coordinate' => (string) $this->coordinate,
         ];
     }
 }

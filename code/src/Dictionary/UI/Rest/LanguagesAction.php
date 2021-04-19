@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\UI\Rest;
 
-use App\Dictionary\Application\Enum\ErrorCode;
 use App\Dictionary\Application\Exception\NotFoundSupportedLanguagesException;
+use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\SupportedLanguages;
 use App\SharedKernel\Application\Response\FailedResponse;
 use App\SharedKernel\Application\Response\ResponseInterface;
@@ -35,7 +35,7 @@ final class LanguagesAction
         try {
             return new SuccessResponse($languages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return new FailedResponse(new ErrorCode(ErrorCode::DICTIONARY_IS_EMPTY));
+            return new FailedResponse(ErrorFactory::emptyDictionary());
         }
     }
 }

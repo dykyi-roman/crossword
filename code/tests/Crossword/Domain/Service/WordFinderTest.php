@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Crossword\Domain\Service;
 
-use App\Crossword\Application\Enum\ErrorCode;
+use App\Crossword\Application\Service\ErrorFactory;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Service\WordFinder;
@@ -44,7 +44,7 @@ final class WordFinderTest extends CrosswordAbstractTestCase
     {
         $this->expectException(WordFoundException::class);
 
-        $response = new FailedResponse(new ErrorCode(ErrorCode::CROSSWORD_NOT_RECEIVED));
+        $response = new FailedResponse(ErrorFactory::crosswordIsNotReceived());
         $dictionaryWordDto = new DictionaryWordDto($response->body());
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, $dictionaryWordDto);
 

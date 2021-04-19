@@ -4,31 +4,39 @@ declare(strict_types=1);
 
 namespace App\Game\UI\Web;
 
+use App\Game\Application\Enum\Type;
+use App\Game\Application\Enum\WordCount;
 use App\Game\Application\Exception\PlayerNotFoundInTokenStorageException;
-use App\Game\Application\Service\PlayerFromTokenExtractor;
 use App\Game\Application\Service\Game;
+use App\Game\Application\Service\PlayerFromTokenExtractor;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class PlayInGameAction extends AbstractController
+final class NewGameAction extends AbstractController
 {
-    #[Route('/game/play', name: 'web.game.play.view', methods: ['GET'])]
-    public function __invoke(PlayerFromTokenExtractor $extractor, Game $game): Response | RedirectResponse
+    private PlayerFromTokenExtractor $extractor;
+
+    public function __construct(PlayerFromTokenExtractor $extractor)
     {
-        //@todo move to auth layer
+        $this->extractor = $extractor;
+    }
+
+    #[Route('/game/play', name: 'web.game.play.view', methods: ['GET'])]
+    public function __invoke(Game $game): Response | RedirectResponse
+    {
         try {
-            $player = $extractor->player();
+            $playerDto = $this->extractor->player();
         } catch (PlayerNotFoundInTokenStorageException) {
             return $this->redirectToRoute('web.game.login.view');
         }
 
-        $game->new();
+        $gameDto = $game->new('en', Type::byRole($playerDto->role()), WordCount::byLevel($playerDto->level()));
 
         return $this->render('@game/play.html.twig', [
-            'grid' => $game->grid(),
-            'gridSize' => $game->size(),
+            'player' => $playerDto,
+            'game' => $gameDto,
         ]);
     }
 }

@@ -6,7 +6,7 @@ namespace App\SharedKernel\Application\Response;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Enum\ResponseStatus;
-use MyCLabs\Enum\Enum;
+use App\SharedKernel\Domain\Model\Error;
 
 /**
  * @psalm-immutable
@@ -14,22 +14,22 @@ use MyCLabs\Enum\Enum;
 final class FailedResponse implements ResponseInterface
 {
     private int $status;
-    private Enum $errorCode;
+    private Error $error;
 
-    public function __construct(Enum $errorCode, int $status = HttpStatusCode::HTTP_ERROR)
+    public function __construct(Error $error, int $status = HttpStatusCode::HTTP_ERROR)
     {
         $this->status = $status;
-        $this->errorCode = $errorCode;
+        $this->error = $error;
     }
 
+    /**
+     * @psalm-suppress ImpureMethodCall
+     */
     public function body(): array
     {
         return [
             'status' => ResponseStatus::FAILED,
-            'error' => [
-                'code' => $this->errorCode->getKey(),
-                'message' => (string) $this->errorCode->getValue(),
-            ],
+            'error' => $this->error->jsonSerialize(),
         ];
     }
 
