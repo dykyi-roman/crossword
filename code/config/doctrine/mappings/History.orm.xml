@@ -1,5 +1,5 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <entity table="player"
+    <entity table="history"
             name="App\Game\Domain\Model\History"
             repository-class="App\Game\Infrastructure\Repository\Doctrine\ReadHistoryRepository"
             change-tracking-policy="DEFERRED_EXPLICIT">

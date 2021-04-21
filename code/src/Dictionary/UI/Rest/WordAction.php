@@ -8,9 +8,9 @@ use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\SharedKernel\Application\Response\FailedResponse;
-use App\SharedKernel\Application\Response\ResponseInterface;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\FailedResponse;
+use App\SharedKernel\Application\Response\Rest\ResponseInterface;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

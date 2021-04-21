@@ -8,6 +8,7 @@ use App\Game\Application\Service\PlayerFromTokenExtractor;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
 use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
+use Ramsey\Uuid\Uuid;
 
 final class Answers
 {
@@ -35,7 +36,7 @@ final class Answers
         $this->persistPlayerRepository->levelUp($playerDto->id());
 
         $this->persistHistoryRepository->createHistory(
-            $playerDto->id(),
+            Uuid::uuid4(),
             $playerDto->id(),
             Level::levelUp($playerDto->level())
         );

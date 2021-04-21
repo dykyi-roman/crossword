@@ -18,7 +18,7 @@ use App\Tests\CrosswordAbstractTestCase;
 final class GridScannerTest extends CrosswordAbstractTestCase
 {
     /**
-     * @covers ::fill
+     * @covers ::fillLine
      */
     public function testSuccessfullyFillGrid(): void
     {
@@ -28,19 +28,19 @@ final class GridScannerTest extends CrosswordAbstractTestCase
         self::assertTrue($grid->isEmpty());
 
         $row = new Row(new Cell(new Coordinate(1, 2), 'a'));
-        $gridScanner->fill(new Line($row));
+        $gridScanner->fillLine(new Line($row));
 
         self::assertFalse($grid->isEmpty());
     }
 
     /**
-     * @covers ::scan
+     * @covers ::scanRows
      */
     public function testSuccessfullyScanGrid(): void
     {
         $grid = new Grid();
         $gridScanner = new GridScanner($grid);
-        $rows = $gridScanner->scan();
+        $rows = $gridScanner->scanRows();
 
         self::assertCount(0, $rows);
 
@@ -48,8 +48,8 @@ final class GridScannerTest extends CrosswordAbstractTestCase
             new Cell(new Coordinate(7, 7), 's'),
             new Cell(new Coordinate(10, 7), 't'),
         );
-        $gridScanner->fill(new Line($row));
-        $rows = $gridScanner->scan();
+        $gridScanner->fillLine(new Line($row));
+        $rows = $gridScanner->scanRows();
 
         self::assertGreaterThan(1, $rows);
     }

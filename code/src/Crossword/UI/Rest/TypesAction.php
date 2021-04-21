@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Crossword\UI\Rest;
 
 use App\Crossword\Application\Service\SupportedTypes;
-use App\SharedKernel\Application\Response\ResponseInterface;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\ResponseInterface;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

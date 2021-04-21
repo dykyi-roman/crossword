@@ -47,9 +47,7 @@ final class Line implements IteratorAggregate, JsonSerializable
 
         for ($counter = 0; $counter < 3; $counter++) {
             if ($this->suitablePosition($row, $word)) {
-                $this->fill($row, $word);
-
-                return new Line($row);
+                return new Line($this->fillRow($row, $word));
             }
 
             $cell = $row->cell(0);
@@ -70,12 +68,16 @@ final class Line implements IteratorAggregate, JsonSerializable
         return false;
     }
 
-    private function fill(Row $row, string $word): void
+    private function fillRow(Row $row, string $word): Row
     {
+        $withWord = [];
         $length = strlen($word);
         for ($counter = 0; $counter < $length; $counter++) {
             $cell = $row->cell($counter);
             $cell->fillLetter($word[$counter]);
+            $withWord[] = $cell;
         }
+
+        return new Row(...$withWord);
     }
 }

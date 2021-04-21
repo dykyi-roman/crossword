@@ -29,9 +29,9 @@ final class NormalConstructor implements ConstructorInterface
     {
         $crossword = new CrosswordDto();
         $line = new Line(Row::withRandomRow());
-        $this->gridScanner->fill($line->fillLetter(chr(random_int(97, 122))));
+        $this->gridScanner->fillLine($line->fillLetter(chr(random_int(97, 122))));
         for ($counter = 1; $counter <= $wordCount; $counter++) {
-            $crossword = $crossword->withLine($this->nextLine($language));
+            $crossword = $crossword->withLine($this->newLine($language));
         }
 
         return $crossword;
@@ -40,14 +40,14 @@ final class NormalConstructor implements ConstructorInterface
     /**
      * @throws NextLineFoundException
      */
-    private function nextLine($language): LineDto
+    private function newLine($language): LineDto
     {
-        $rows = $this->gridScanner->scan();
+        $rows = $this->gridScanner->scanRows();
         foreach ($rows as $row) {
             try {
-                $line = new Line($row);
                 $word = $this->attemptWordFinder->find($language, $row->mask());
-                $this->gridScanner->fill($line->fillWord($word->value()));
+                $line = (new Line($row))->fillWord($word->value());
+                $this->gridScanner->fillLine($line);
 
                 return new LineDto($line, $word);
             } catch (WordFoundException | WordNotFitException) {

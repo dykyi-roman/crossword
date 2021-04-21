@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Application\Service\Answer;
 
+use App\Game\Application\Assert\CorrectAnswersAssert;
 use App\Game\Application\Exception\WrongAnswerException;
 
 final class AnswersValidator
@@ -22,19 +23,6 @@ final class AnswersValidator
             }
         }
 
-        $correct = array_map(static fn (array $item) => strtolower(implode('', $item['l'])), $result);
-        array_filter($result, static fn (array $item) => $this->compareAnswers($item['l'], $item['v']));
-
-        count($result) && throw new WrongAnswerException($correct);
-    }
-
-    private function compareAnswers(array $right, array $answer): bool
-    {
-        return $this->splitToLine($right) !== $this->splitToLine($answer);
-    }
-
-    private function splitToLine(array $data): string
-    {
-        return strtolower(implode('', $data));
+        CorrectAnswersAssert::assertCorrectAnswers($result);
     }
 }

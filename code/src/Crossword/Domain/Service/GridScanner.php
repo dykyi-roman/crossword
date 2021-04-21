@@ -24,7 +24,7 @@ final class GridScanner
     /**
      * @return Row[]
      */
-    public function scan(): array
+    public function scanRows(): array
     {
         $rows = [...$this->possibleXRows(), ...$this->possibleYRows()];
         shuffle($rows);
@@ -32,7 +32,7 @@ final class GridScanner
         return $rows;
     }
 
-    public function fill(Line $line): void
+    public function fillLine(Line $line): void
     {
         $this->grid->fillLine($line);
     }

@@ -39,10 +39,16 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ]);
 
     $parameters->set(Option::SETS, [
-         SetList::ARRAY,
-         SetList::DOCBLOCK,
-         SetList::NAMESPACES,
-         SetList::CLEAN_CODE,
-         SetList::PSR_12,
+        SetList::ARRAY,
+        SetList::DOCBLOCK,
+        SetList::NAMESPACES,
+        SetList::CLEAN_CODE,
+        SetList::PSR_12,
+    ]);
+
+    $parameters->set(Option::SKIP, [
+        __DIR__ . '/src/Game/Infrastructure/Repository',
+        __DIR__ . '/src/Dictionary/Infrastructure/Repository',
+        __DIR__ . '/src/Crossword/Infrastructure/Repository',
     ]);
 };

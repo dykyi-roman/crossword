@@ -7,9 +7,9 @@ namespace App\Crossword\UI\Rest;
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\ErrorFactory;
 use App\Crossword\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Response\FailedResponse;
-use App\SharedKernel\Application\Response\ResponseInterface;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\FailedResponse;
+use App\SharedKernel\Application\Response\Rest\ResponseInterface;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

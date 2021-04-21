@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\Application\Response;
+namespace App\SharedKernel\Application\Response\Rest;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Enum\ResponseStatus;

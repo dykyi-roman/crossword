@@ -52,7 +52,7 @@
         input {
             width: 30px;
             height: 30px;
-            font-size: 20px;
+            font-size: 14px;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -71,6 +71,9 @@
                 contentType: "application/json",
                 success: function (data) {
                     console.info(data);
+                },
+                error: (error) => {
+                    console.log(error.responseJSON.error);
                 }
             });
         });

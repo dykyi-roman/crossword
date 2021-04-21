@@ -8,9 +8,9 @@ use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
 use App\Crossword\Application\Service\CrosswordReceiver;
 use App\Crossword\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\FailedResponse;
-use App\SharedKernel\Application\Response\ResponseInterface;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\FailedResponse;
+use App\SharedKernel\Application\Response\Rest\ResponseInterface;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

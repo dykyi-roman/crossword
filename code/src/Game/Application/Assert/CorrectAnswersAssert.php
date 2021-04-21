@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Game\Application\Assert;
+
+use App\Game\Application\Exception\WrongAnswerException;
+use Webmozart\Assert\Assert;
+
+final class CorrectAnswersAssert extends Assert
+{
+    public static function assertCorrectAnswers(array $answers): void
+    {
+        foreach ($answers as $item) {
+            if (self::compareAnswers($item['l'], $item['v'])) {
+                $correct = array_map(static fn (array $item) => strtolower(implode('', $item['l'])), $answers);
+
+                throw new WrongAnswerException($correct);
+            }
+        }
+    }
+
+    private static function compareAnswers(array $right, array $answer): bool
+    {
+        return self::splitToLine($right) !== self::splitToLine($answer);
+    }
+
+    private static function splitToLine(array $data): string
+    {
+        return strtolower(implode('', $data));
+    }
+}
