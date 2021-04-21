@@ -7,12 +7,12 @@ namespace App\Game\Infrastructure\Repository\Doctrine;
 use App\Game\Domain\Assembler\PlayerAssembler;
 use App\Game\Domain\Dto\PlayerDto;
 use App\Game\Domain\Model\Player;
+use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
 use App\Game\Domain\Service\PasswordEncoderInterface;
 use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
 
 final class ReadPlayerRepository extends ServiceEntityRepository implements ReadPlayerRepositoryInterface
 {
@@ -30,11 +30,11 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
         parent::__construct($registry, Player::class);
     }
 
-    public function findPlayerById(UuidInterface $uuid): PlayerDto
+    public function findPlayerById(PlayerId $playerId): PlayerDto
     {
         $player = $this->createQueryBuilder('u')
             ->andWhere('u.id = :id')
-            ->setParameter('id', $uuid)
+            ->setParameter('id', $playerId->id())
             ->getQuery()
             ->getOneOrNullResult();
 

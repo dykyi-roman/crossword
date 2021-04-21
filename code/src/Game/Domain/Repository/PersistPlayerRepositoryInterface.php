@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Game\Domain\Repository;
 
 use App\Game\Domain\Dto\NewPlayerDto;
+use App\Game\Domain\Model\PlayerId;
 use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
-use Ramsey\Uuid\UuidInterface;
 
 interface PersistPlayerRepositoryInterface
 {
@@ -15,5 +15,5 @@ interface PersistPlayerRepositoryInterface
     /**
      * @throws PlayerNotFoundException
      */
-    public function levelUp(UuidInterface $uuid): void;
+    public function levelUp(PlayerId $playerId): void;
 }

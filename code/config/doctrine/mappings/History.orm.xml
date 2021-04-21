@@ -4,11 +4,11 @@
             repository-class="App\Game\Infrastructure\Repository\Doctrine\ReadHistoryRepository"
             change-tracking-policy="DEFERRED_EXPLICIT">
 
-        <id name="id" type="uuid">
+        <id name="historyId" column="id" type="historyId">
             <generator strategy="NONE"/>
         </id>
 
-        <field name="player" column="player" type="uuid"/>
+        <field name="player" column="player" type="playerId"/>
         <field name="level" type="smallint"/>
         <field name="createdAt" column="createdAt" type="datetime_immutable" column-definition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"/>
         <field name="updatedAt" column="updatedAt" type="datetime_immutable" column-definition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"/>

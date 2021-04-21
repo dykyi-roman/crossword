@@ -10,15 +10,15 @@ use Ramsey\Uuid\UuidInterface;
 
 final class History
 {
-    private UuidInterface $id;
-    private UuidInterface $player;
+    private HistoryId $historyId;
+    private UuidInterface $playerId;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
     private int $level;
 
-    public function __construct(UuidInterface $id)
+    public function __construct(HistoryId $historyId)
     {
-        $this->id = $id;
+        $this->historyId = $historyId;
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }
@@ -30,21 +30,16 @@ final class History
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function changePlayer(UuidInterface $uuid): void
+    public function changePlayer(PlayerId $playerId): void
     {
-        $this->player = $uuid;
+        $this->playerId = $playerId->id();
 
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function id(): UuidInterface
+    public function historyId(): HistoryId
     {
-        return $this->id;
-    }
-
-    public function player(): UuidInterface
-    {
-        return $this->player;
+        return $this->historyId;
     }
 
     public function level(): Level

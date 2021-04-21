@@ -8,7 +8,7 @@ use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\SupportedLanguages;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use App\Tests\CrosswordAbstractTestCase;
 use Psr\Log\NullLogger;
 

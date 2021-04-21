@@ -6,7 +6,7 @@ namespace App\Game\Domain\Dto;
 
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
-use Ramsey\Uuid\UuidInterface;
+use App\Game\Domain\Model\PlayerId;
 
 /**
  * @psalm-immutable
@@ -22,9 +22,9 @@ final class NewPlayerDto
         $this->playerDto = $playerDto;
     }
 
-    public function id(): UuidInterface
+    public function playerId(): PlayerId
     {
-        return $this->playerDto->id();
+        return $this->playerDto->playerId();
     }
 
     public function level(): Level

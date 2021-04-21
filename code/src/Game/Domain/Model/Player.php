@@ -7,11 +7,10 @@ namespace App\Game\Domain\Model;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use DateTimeImmutable;
-use Ramsey\Uuid\UuidInterface;
 
 final class Player
 {
-    private UuidInterface $id;
+    private PlayerId $playerId;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
     private string $password;
@@ -19,9 +18,9 @@ final class Player
     private string $role;
     private int $level;
 
-    public function __construct(UuidInterface $id)
+    public function __construct(PlayerId $playerId)
     {
-        $this->id = $id;
+        $this->playerId = $playerId;
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
     }
@@ -48,9 +47,9 @@ final class Player
         $this->updatedAt = new DateTimeImmutable();
     }
 
-    public function id(): UuidInterface
+    public function playerId(): PlayerId
     {
-        return $this->id;
+        return $this->playerId;
     }
 
     public function level(): Level

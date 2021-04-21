@@ -6,9 +6,9 @@ namespace App\Game\Application\Service\Answer;
 
 use App\Game\Application\Service\PlayerFromTokenExtractor;
 use App\Game\Domain\Enum\Level;
+use App\Game\Domain\Model\HistoryId;
 use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
 use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
-use Ramsey\Uuid\Uuid;
 
 final class Answers
 {
@@ -33,11 +33,11 @@ final class Answers
     {
         $playerDto = $this->playerFromTokenExtractor->player();
         $this->answersValidator->validate($payload);
-        $this->persistPlayerRepository->levelUp($playerDto->id());
+        $this->persistPlayerRepository->levelUp($playerDto->playerId());
 
         $this->persistHistoryRepository->createHistory(
-            Uuid::uuid4(),
-            $playerDto->id(),
+            new HistoryId(),
+            $playerDto->playerId(),
             Level::levelUp($playerDto->level())
         );
     }

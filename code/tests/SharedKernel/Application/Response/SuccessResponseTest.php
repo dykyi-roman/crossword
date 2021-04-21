@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\SharedKernel\Application\Response;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \App\SharedKernel\Application\Response\SuccessResponse
+ * @coversDefaultClass \App\SharedKernel\Application\Response\Rest\SuccessResponse
  */
 final class SuccessResponseTest extends TestCase
 {

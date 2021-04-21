@@ -8,7 +8,7 @@ use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
 use App\Crossword\Domain\Service\WordFinder;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use App\SharedKernel\Domain\Model\Mask;
 use App\SharedKernel\Domain\Model\Word;
 use App\Tests\CrosswordAbstractTestCase;

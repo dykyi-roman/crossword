@@ -11,6 +11,6 @@ final class PlayerAssembler
 {
     public function toPlayerDto(Player $player): PlayerDto
     {
-        return new PlayerDto($player->id(), $player->nickname(), $player->level(), $player->role());
+        return new PlayerDto($player->playerId(), $player->nickname(), $player->level(), $player->role());
     }
 }

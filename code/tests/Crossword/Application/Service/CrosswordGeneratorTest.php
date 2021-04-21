@@ -10,7 +10,7 @@ use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\SuccessResponse;
+use App\SharedKernel\Application\Response\Rest\SuccessResponse;
 use App\Tests\CrosswordAbstractTestCase;
 
 /**

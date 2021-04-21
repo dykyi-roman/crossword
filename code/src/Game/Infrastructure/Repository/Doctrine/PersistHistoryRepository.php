@@ -6,10 +6,11 @@ namespace App\Game\Infrastructure\Repository\Doctrine;
 
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Model\History;
+use App\Game\Domain\Model\HistoryId;
+use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Ramsey\Uuid\UuidInterface;
 
 final class PersistHistoryRepository extends ServiceEntityRepository implements PersistHistoryRepositoryInterface
 {
@@ -18,10 +19,10 @@ final class PersistHistoryRepository extends ServiceEntityRepository implements 
         parent::__construct($registry, History::class);
     }
 
-    public function createHistory(UuidInterface $uuid, UuidInterface $player, Level $level): void
+    public function createHistory(HistoryId $historyId, PlayerId $playerId, Level $level): void
     {
-        $history = new History($uuid);
-        $history->changePlayer($player);
+        $history = new History($historyId);
+        $history->changePlayer($playerId);
         $history->changeLevel($level);
 
         $this->store($history);
