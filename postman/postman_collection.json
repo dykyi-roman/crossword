@@ -176,6 +176,11 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -393,6 +398,67 @@
 									"key": "mask",
 									"value": "11.*"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Game",
+			"item": [
+				{
+					"name": "player-history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Log response errors\", function () {",
+									"    if (pm.response.json().datap && pm.response.json().data.error){",
+									"       console.log(pm.response.json());   ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Response must be valid and have a body\", function () {",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response status is 200\", function(){",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has a status\", function(){",
+									"    pm.expect(pm.response.json().status).to.be.a('string');",
+									"});",
+									"",
+									"pm.test(\"Response has a data\", function(){",
+									"    pm.expect(pm.response.json().data).to.be.a('array');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/game/player-rating",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"game",
+								"player-rating"
 							]
 						}
 					},

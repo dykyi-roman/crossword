@@ -1,6 +1,11 @@
 services:
   App\Game\Infrastructure\Adapter\Crossword\CrosswordAdapter: ~
 
+  App\Game\Infrastructure\Dao\Doctrine\HistoryDao:
+    arguments:
+      - doctrine.dbal.default_connection
+
+  App\Game\Domain\Dao\HistoryDaoInterface: '@App\Game\Infrastructure\Dao\Doctrine\HistoryDao'
   App\Game\Domain\Repository\PersistPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\PersistPlayerRepository'
   App\Game\Domain\Repository\ReadPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\ReadPlayerRepository'
   App\Game\Domain\Service\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'

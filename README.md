@@ -3,7 +3,7 @@ Crossword game
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
-# Example
+# Examples
 
 ![image](docs/example.gif)
 
@@ -128,6 +128,14 @@ The docker-compose up command aggregates and run each container.
 docker network create game
 make start
 ``
+
+Open in browser
+
+``
+https://app.test:1001/game/play
+``
+
+![image](docs/view.png)
 
 # Swagger
 

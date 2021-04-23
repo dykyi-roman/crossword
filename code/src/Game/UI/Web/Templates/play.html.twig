@@ -62,8 +62,9 @@
 <div class="topnav">
     <a class="label-player">Player: {{ player.nickname }}</a>
     <a class="label-level">Level: {{ player.level }}</a>
-    <a href="{{ path('web.game.play.view') }}">New</a>
+    <a href="#" id="history">History</a>
     <a href="#" id="check">Check</a>
+    <a href="{{ path('web.game.play.view') }}">New</a>
 </div>
 <table class="crossword">
     {% for cell in game.grid %}
@@ -114,11 +115,26 @@
             data:  JSON.stringify(answer),
             dataType: "json",
             contentType: "application/json",
-            success: function (data) {
-                console.info(data);
+            success: function () {
+                alert('Success! You go to the next level.');
             },
             error: (error) => {
-                console.log(error.responseJSON.error);
+                alert(JSON.stringify(error.responseJSON.error.data));
+            }
+        });
+    });
+
+    $(document).on("click", "#history", function () {
+        $.ajax({
+            url: "{{ path('web.game.player-rating') }}",
+            type: 'GET',
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                alert(JSON.stringify(data.data));
+            },
+            error: (error) => {
+                console.log(JSON.stringify(error.responseJSON.error));
             }
         });
     });
