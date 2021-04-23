@@ -56,28 +56,6 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).on("click", "#check", function () {
-            let answer = [];
-            $("input").each(function () {
-                answer.push({'index': $(this).data('index'), 'letter': $(this).data('letter'), 'value': $(this).val()});
-            });
-
-            $.ajax({
-                url: "{{ path('web.game.check.post') }}",
-                type: 'POST',
-                data:  JSON.stringify(answer),
-                dataType: "json",
-                contentType: "application/json",
-                success: function (data) {
-                    console.info(data);
-                },
-                error: (error) => {
-                    console.log(error.responseJSON.error);
-                }
-            });
-        });
-    </script>
     <title>Play page</title>
 </head>
 <body>
@@ -122,5 +100,28 @@
         </tr>
     {% endfor %}
 </table>
+
+<script>
+    $(document).on("click", "#check", function () {
+        let answer = [];
+        $("input").each(function () {
+            answer.push({'index': $(this).data('index'), 'letter': $(this).data('letter'), 'value': $(this).val()});
+        });
+
+        $.ajax({
+            url: "{{ path('web.game.check.post') }}",
+            type: 'POST',
+            data:  JSON.stringify(answer),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.info(data);
+            },
+            error: (error) => {
+                console.log(error.responseJSON.error);
+            }
+        });
+    });
+</script>
 </body>
 </html>

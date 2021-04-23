@@ -6,8 +6,6 @@ namespace App\Game\Application\Service\Answer;
 
 use App\Game\Application\Service\PlayerFromTokenExtractor;
 use App\Game\Domain\Enum\Level;
-use App\Game\Domain\Model\HistoryId;
-use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
 use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
 
 final class Answers
@@ -15,30 +13,24 @@ final class Answers
     private AnswersValidator $answersValidator;
     private PlayerFromTokenExtractor $playerFromTokenExtractor;
     private PersistPlayerRepositoryInterface $persistPlayerRepository;
-    private PersistHistoryRepositoryInterface $persistHistoryRepository;
 
     public function __construct(
         AnswersValidator $answersValidator,
         PlayerFromTokenExtractor $playerFromTokenExtractor,
         PersistPlayerRepositoryInterface $persistPlayerRepository,
-        PersistHistoryRepositoryInterface $persistHistoryRepository
     ) {
         $this->answersValidator = $answersValidator;
         $this->persistPlayerRepository = $persistPlayerRepository;
         $this->playerFromTokenExtractor = $playerFromTokenExtractor;
-        $this->persistHistoryRepository = $persistHistoryRepository;
     }
 
     public function __invoke(array $payload)
     {
         $playerDto = $this->playerFromTokenExtractor->player();
         $this->answersValidator->validate($payload);
-        $this->persistPlayerRepository->levelUp($playerDto->playerId());
 
-        $this->persistHistoryRepository->createHistory(
-            new HistoryId(),
-            $playerDto->playerId(),
-            Level::levelUp($playerDto->level())
-        );
+        if (!$playerDto->level()->equals(Level::finishLevel())) {
+            $this->persistPlayerRepository->levelUp($playerDto->playerId());
+        }
     }
 }

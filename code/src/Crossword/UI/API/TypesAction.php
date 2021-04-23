@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Crossword\UI\Rest;
+namespace App\Crossword\UI\API;
 
 use App\Crossword\Application\Service\SupportedTypes;
-use App\SharedKernel\Application\Response\Rest\ResponseInterface;
-use App\SharedKernel\Application\Response\Rest\SuccessResponse;
+use App\SharedKernel\Application\Response\API\ResponseInterface;
+use App\SharedKernel\Application\Response\API\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

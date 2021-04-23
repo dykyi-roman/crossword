@@ -16,7 +16,7 @@ use Webmozart\Assert\Assert;
 
 final class GenerateCommand extends AbstractCommand
 {
-    private const LIMIT = 100;
+    private const LIMIT = '100';
 
     protected static $defaultName = 'crossword:generate';
 

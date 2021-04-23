@@ -8,9 +8,9 @@ use App\Game\Application\Exception\WrongAnswerException;
 use App\Game\Application\Request\AnswersRequest;
 use App\Game\Application\Service\Answer\Answers;
 use App\Game\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\Rest\FailedResponse;
-use App\SharedKernel\Application\Response\Rest\ResponseInterface;
-use App\SharedKernel\Application\Response\Rest\SuccessResponse;
+use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\ResponseInterface;
+use App\SharedKernel\Application\Response\API\SuccessResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 

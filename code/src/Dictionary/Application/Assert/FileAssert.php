@@ -9,6 +9,9 @@ use Webmozart\Assert\Assert;
 
 final class FileAssert extends Assert
 {
+    /**
+     * @throws RuntimeException
+     */
     public static function assertFile(string $filePath): void
     {
         if (!is_file($filePath)) {
@@ -16,6 +19,9 @@ final class FileAssert extends Assert
         }
     }
 
+    /**
+     * @throws RuntimeException
+     */
     public static function assertTxtFile(string $filePath): void
     {
         self::assertFile($filePath);
@@ -25,6 +31,9 @@ final class FileAssert extends Assert
         }
     }
 
+    /**
+     * @throws RuntimeException
+     */
     public static function assertCsvFile(string $filePath): void
     {
         self::assertFile($filePath);

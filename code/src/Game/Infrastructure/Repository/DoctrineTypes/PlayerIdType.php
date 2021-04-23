@@ -7,6 +7,7 @@ namespace App\Game\Infrastructure\Repository\DoctrineTypes;
 use App\Game\Domain\Model\PlayerId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Ramsey\Uuid\Uuid;
 
 final class PlayerIdType extends Type
 {
@@ -17,7 +18,7 @@ final class PlayerIdType extends Type
 
     public function convertToPHPValue($value, AbstractPlatform $platform): PlayerId
     {
-        return new PlayerId($value);
+        return new PlayerId(Uuid::fromString($value));
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): string

@@ -54,6 +54,6 @@ final class Mask implements Stringable
         $ini += strlen($start);
         $len = strpos($string, $end, $ini) - $ini;
 
-        return (string) substr($string, $ini, $len);
+        return substr($string, $ini, $len);
     }
 }

@@ -8,7 +8,7 @@
             <generator strategy="NONE"/>
         </id>
 
-        <field name="player" column="player" type="playerId"/>
+        <field name="playerId" column="player" type="playerId"/>
         <field name="level" type="smallint"/>
         <field name="createdAt" column="createdAt" type="datetime_immutable" column-definition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"/>
         <field name="updatedAt" column="updatedAt" type="datetime_immutable" column-definition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"/>

@@ -32,6 +32,6 @@ final class PersistHistoryRepository extends ServiceEntityRepository implements 
     {
         $entityManager = $this->getEntityManager();
         $entityManager->persist($history);
-        $entityManager->flush();
+        $entityManager->flush($history);
     }
 }

@@ -2,7 +2,7 @@ services:
   GuzzleHttp\Client: ~
   App\SharedKernel\Infrastructure\HttpClient\GuzzleClient:
     - '@GuzzleHttp\Client'
-    - ['@App\SharedKernel\Infrastructure\HttpClient\Middleware\LoggerMiddleware']
+    - [ '@App\SharedKernel\Infrastructure\HttpClient\Middleware\LoggerMiddleware' ]
 
   App\SharedKernel\Infrastructure\HttpClient\Middleware\LoggerMiddleware: ~
   App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor: ~

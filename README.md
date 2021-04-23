@@ -5,7 +5,7 @@ Crossword game
 
 # Example
 
-...
+![image](docs/example.gif)
 
 # Architecture
 
@@ -94,7 +94,31 @@ php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
 
 # Game
 
-...
+| Game              | Info                 | 
+| ----------------- | -------------------- |
+|  Levels           | 5                    | 
+|  Types            | NORMAL / FIGURED     | 
+|  Roles            | SIMPLE / PREMIUM     | 
+
+### Commands
+
+Used to create a new player with SIMPLE role:
+
+```
+php bin/console game:create-player test 1q2w3e4r
+```
+Used to create a new player with PREMIUM role:
+
+```
+php bin/console game:create-player test 1q2w3e4r --role=ROLE_PREMIUM
+```
+
+### Web Url
+
+| Path         | Method | Scheme | Grant |
+| ------------ | -------| ------ | ----- |
+| /game/play   | GET    | ANY    | ALL   |
+| /game/login  | GET    | ANY    | ALL   |
 
 # Docker
 
@@ -145,6 +169,7 @@ ___
 * [Data transfer objects](https://herbertograca.com/2020/06/23/dto-data-transfer-objects/)
 * [Implementing Action-Domain-Responder Pattern With Symfony](https://medium.com/swlh/implementing-action-domain-responder-pattern-with-symfony-606539eea3a7)
 * [Package by Feature](https://phauer.com/2020/package-by-feature/)
+* [Domain events](https://romaricdrigon.github.io/2019/08/09/domain-events)
 
 ## Author
 [Dykyi Roman](https://www.linkedin.com/in/roman-dykyi-43428543/), e-mail: [mr.dukuy@gmail.com](mailto:mr.dukuy@gmail.com)

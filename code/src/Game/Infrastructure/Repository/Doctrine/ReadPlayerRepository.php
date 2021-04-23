@@ -32,9 +32,10 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
 
     public function findPlayerById(PlayerId $playerId): PlayerDto
     {
+        $id = $playerId->id();
         $player = $this->createQueryBuilder('u')
-            ->andWhere('u.id = :id')
-            ->setParameter('id', $playerId->id())
+            ->andWhere('u.playerId = :id')
+            ->setParameter('id', $id->toString())
             ->getQuery()
             ->getOneOrNullResult();
 

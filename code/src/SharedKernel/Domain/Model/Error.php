@@ -6,6 +6,9 @@ namespace App\SharedKernel\Domain\Model;
 
 use JsonSerializable;
 
+/**
+ * @psalm-immutable
+ */
 final class Error implements JsonSerializable
 {
     private string $code;

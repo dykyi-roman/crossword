@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\UI\Rest;
+namespace App\Dictionary\UI\API;
 
 use App\Dictionary\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Response\Rest\FailedResponse;
-use App\SharedKernel\Application\Response\Rest\ResponseInterface;
-use App\SharedKernel\Application\Response\Rest\SuccessResponse;
+use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\ResponseInterface;
+use App\SharedKernel\Application\Response\API\SuccessResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

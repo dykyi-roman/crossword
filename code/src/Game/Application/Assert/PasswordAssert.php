@@ -9,6 +9,9 @@ use Webmozart\Assert\Assert;
 
 final class PasswordAssert extends Assert
 {
+    /**
+     * @throws RuntimeException
+     */
     public static function assertValidPassword(string $password): void
     {
         self::lessThan($password, 6);

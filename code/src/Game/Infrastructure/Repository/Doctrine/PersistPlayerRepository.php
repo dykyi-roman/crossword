@@ -39,7 +39,7 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
     {
         $id = $playerId->id();
         $player = $this->createQueryBuilder('u')
-            ->andWhere('u.id = :id')
+            ->andWhere('u.playerId = :id')
             ->setParameter('id', $id->toString())
             ->getQuery()
             ->getOneOrNullResult();
@@ -57,6 +57,6 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
     {
         $entityManager = $this->getEntityManager();
         $entityManager->persist($player);
-        $entityManager->flush();
+        $entityManager->flush($player);
     }
 }

@@ -9,6 +9,9 @@ use Webmozart\Assert\Assert;
 
 final class CorrectAnswersAssert extends Assert
 {
+    /**
+     * @throws WrongAnswerException
+     */
     public static function assertCorrectAnswers(array $answers): void
     {
         foreach ($answers as $item) {

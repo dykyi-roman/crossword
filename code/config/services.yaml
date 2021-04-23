@@ -31,12 +31,12 @@ services:
             - '../src/Dictionary/Domain/Dto/'
             - '../src/Kernel.php'
 
-    App\Crossword\UI\Rest\:
-        resource: '../src/Crossword/UI/Rest'
+    App\Crossword\UI\API\:
+        resource: '../src/Crossword/UI/API'
         tags: ['controller.service_arguments']
 
-    App\Dictionary\UI\Rest\:
-        resource: '../src/Dictionary/UI/Rest'
+    App\Dictionary\UI\API\:
+        resource: '../src/Dictionary/UI/API'
         tags: [ 'controller.service_arguments' ]
 
     App\SharedKernel\UI\Web\:
@@ -46,3 +46,9 @@ services:
     App\Game\UI\Web\:
         resource: '../src/Game/UI/Web'
         tags: [ 'controller.service_arguments' ]
+
+    App\SharedKernel\Domain\Events\DomainEventsSubscriber:
+        arguments:
+          [ '@command.bus' ]
+        tags:
+            - { name: 'doctrine.event_subscriber' }

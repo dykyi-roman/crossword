@@ -10,6 +10,9 @@ use Webmozart\Assert\Assert;
 
 final class RoleAssert extends Assert
 {
+    /**
+     * @throws RuntimeException
+     */
     public static function assertSupportedRole(string $role): void
     {
         if (!Role::isValid($role)) {

@@ -6,12 +6,11 @@ namespace App\Game\Domain\Model;
 
 use App\Game\Domain\Enum\Level;
 use DateTimeImmutable;
-use Ramsey\Uuid\UuidInterface;
 
 final class History
 {
     private HistoryId $historyId;
-    private UuidInterface $playerId;
+    private PlayerId $playerId;
     private DateTimeImmutable $createdAt;
     private DateTimeImmutable $updatedAt;
     private int $level;
@@ -32,7 +31,7 @@ final class History
 
     public function changePlayer(PlayerId $playerId): void
     {
-        $this->playerId = $playerId->id();
+        $this->playerId = $playerId;
 
         $this->updatedAt = new DateTimeImmutable();
     }
