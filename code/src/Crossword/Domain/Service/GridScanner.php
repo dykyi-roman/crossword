@@ -26,7 +26,7 @@ final class GridScanner
      */
     public function scanRows(): array
     {
-        $rows = [...$this->possibleXRows(), ...$this->possibleYRows()];
+        $rows = array_merge($this->possibleXRows(), $this->possibleYRows());
         shuffle($rows);
 
         return $rows;

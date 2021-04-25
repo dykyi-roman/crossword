@@ -49,10 +49,8 @@ final class PlayerDto implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        $playerId = $this->playerId->id();
-
         return [
-            'id' => $playerId->toString(),
+            'id' => (string) $this->playerId,
             'nickname' => $this->nickname,
             'level' => (int) $this->level->getValue(),
             'role' => (string) $this->role->getValue(),

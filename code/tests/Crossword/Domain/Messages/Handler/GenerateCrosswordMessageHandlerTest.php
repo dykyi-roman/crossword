@@ -17,12 +17,12 @@ use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Infrastructure\Cache\InMemoryClient;
 use App\SharedKernel\Domain\Model\Word;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 
 /**
  * @coversDefaultClass \App\Crossword\Domain\Messages\Handler\GenerateCrosswordMessageHandler
  */
-final class GenerateCrosswordMessageHandlerTest extends CrosswordAbstractTestCase
+final class GenerateCrosswordMessageHandlerTest extends CrosswordTestCase
 {
     /**
      * @covers ::__invoke

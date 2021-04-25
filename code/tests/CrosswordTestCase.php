@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-abstract class CrosswordAbstractTestCase extends TestCase
+abstract class CrosswordTestCase extends TestCase
 {
     protected function messageBusMock(): MessageBusInterface
     {

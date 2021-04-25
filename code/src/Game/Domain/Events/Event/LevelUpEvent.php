@@ -15,8 +15,7 @@ final class LevelUpEvent implements DomainEventInterface
 
     public function __construct(PlayerId $playerId, Level $level)
     {
-        $id = $playerId->id();
-        $this->playerId = $id->toString();
+        $this->playerId = (string) $playerId;
         $this->level = (int) $level->getValue();
     }
 

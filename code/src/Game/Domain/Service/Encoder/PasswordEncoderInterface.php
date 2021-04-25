@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Game\Domain\Service;
+namespace App\Game\Domain\Service\Encoder;
 
 interface PasswordEncoderInterface
 {

@@ -27,14 +27,16 @@ final class NormalConstructor implements ConstructorInterface
 
     public function build(string $language, int $wordCount): CrosswordDto
     {
-        $crossword = new CrosswordDto();
-        $line = new Line(Row::withRandomRow());
-        $this->gridScanner->fillLine($line->fillLetter(chr(random_int(97, 122))));
+        $line = (new Line(Row::withRandomRow()))->fillLetter(chr(random_int(97, 122)));
+        $this->gridScanner->fillLine($line);
+
+        $crosswordDto = new CrosswordDto();
         for ($counter = 1; $counter <= $wordCount; $counter++) {
-            $crossword = $crossword->withLine($this->newLine($language));
+            $lineDto = $this->newLine($language);
+            $crosswordDto = $crosswordDto->withLine($lineDto);
         }
 
-        return $crossword;
+        return $crosswordDto;
     }
 
     /**

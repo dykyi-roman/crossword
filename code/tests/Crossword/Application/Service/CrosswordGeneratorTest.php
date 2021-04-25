@@ -11,12 +11,12 @@ use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\API\SuccessResponse;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 
 /**
  * @coversDefaultClass \App\Crossword\Application\Service\CrosswordGenerator
  */
-final class CrosswordGeneratorTest extends CrosswordAbstractTestCase
+final class CrosswordGeneratorTest extends CrosswordTestCase
 {
     /**
      * @covers ::generate

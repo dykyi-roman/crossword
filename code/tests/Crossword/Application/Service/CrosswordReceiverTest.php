@@ -9,13 +9,13 @@ use App\Crossword\Application\Service\CrosswordReceiver;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Infrastructure\Cache\CacheItem;
 use App\Crossword\Infrastructure\Cache\InMemoryClient;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Crossword\Application\Service\CrosswordReceiver
  */
-final class CrosswordReceiverTest extends CrosswordAbstractTestCase
+final class CrosswordReceiverTest extends CrosswordTestCase
 {
     /**
      * @covers ::receive

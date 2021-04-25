@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class PlayerRatingAction
 {
-    #[Route('/game/player-rating', name: 'web.game.player-rating', methods: ['GET'])]
+    #[Route('/game/players-rating', name: 'web.game.player-rating', methods: ['GET'])]
     public function __invoke(PlayerHistory $playerHistory): ResponseInterface
     {
         return new SuccessResponse($playerHistory());

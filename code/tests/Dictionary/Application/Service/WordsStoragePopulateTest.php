@@ -7,13 +7,13 @@ namespace App\Tests\Dictionary\Application\Service;
 use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
 use App\Dictionary\Infrastructure\FileReader\TextFileReader;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Dictionary\Application\Service\WordsStoragePopulate
  */
-final class WordsStoragePopulateTest extends CrosswordAbstractTestCase
+final class WordsStoragePopulateTest extends CrosswordTestCase
 {
     private const WORD_LIST = ['test', 'search', 'date'];
 

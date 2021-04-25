@@ -11,13 +11,13 @@ use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\API\SuccessResponse;
 use App\SharedKernel\Domain\Model\Mask;
 use App\SharedKernel\Domain\Model\Word;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder
  */
-final class AttemptWordFinderTest extends CrosswordAbstractTestCase
+final class AttemptWordFinderTest extends CrosswordTestCase
 {
     /**
      * @covers ::find

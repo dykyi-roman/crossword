@@ -9,7 +9,7 @@ use App\Game\Domain\Dto\PlayerDto;
 use App\Game\Domain\Model\Player;
 use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
-use App\Game\Domain\Service\PasswordEncoderInterface;
+use App\Game\Domain\Service\Encoder\PasswordEncoderInterface;
 use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,10 +32,9 @@ final class ReadPlayerRepository extends ServiceEntityRepository implements Read
 
     public function findPlayerById(PlayerId $playerId): PlayerDto
     {
-        $id = $playerId->id();
         $player = $this->createQueryBuilder('u')
             ->andWhere('u.playerId = :id')
-            ->setParameter('id', $id->toString())
+            ->setParameter('id', (string) $playerId)
             ->getQuery()
             ->getOneOrNullResult();
 

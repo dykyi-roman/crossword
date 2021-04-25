@@ -49,7 +49,7 @@ HELP
             $input->getOption('role'),
         ));
 
-        $consoleResponder('Player successfully created');
+        $consoleResponder('Player successfully created.');
     }
 
     protected function validateInput(InputInterface $input): void

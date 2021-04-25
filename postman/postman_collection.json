@@ -452,13 +452,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/game/player-rating",
+							"raw": "{{host}}/game/players-rating",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"game",
-								"player-rating"
+								"players-rating"
 							]
 						}
 					},

@@ -4,11 +4,19 @@ declare(strict_types=1);
 
 namespace App\Game\Application\Twig;
 
+use App\Game\Domain\Service\Encoder\LetterEncoderInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 final class EncodeExtension extends AbstractExtension
 {
+    private LetterEncoderInterface $encoder;
+
+    public function __construct(LetterEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function getFilters(): array
     {
         return [
@@ -16,8 +24,8 @@ final class EncodeExtension extends AbstractExtension
         ];
     }
 
-    public function encode(string $string): string
+    public function encode(string $value): string
     {
-        return base64_encode($string);
+        return $this->encoder->encode($value);
     }
 }

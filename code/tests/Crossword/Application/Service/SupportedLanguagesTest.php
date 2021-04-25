@@ -9,13 +9,13 @@ use App\Crossword\Application\Service\SupportedLanguages;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
 use App\SharedKernel\Application\Response\API\SuccessResponse;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
 /**
  * @coversDefaultClass \App\Crossword\Application\Service\SupportedLanguages;
  */
-final class SupportedLanguagesTest extends CrosswordAbstractTestCase
+final class SupportedLanguagesTest extends CrosswordTestCase
 {
     /**
      * @covers ::receive

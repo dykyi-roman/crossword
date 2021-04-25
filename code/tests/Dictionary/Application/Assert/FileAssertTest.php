@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Tests\Dictionary\Application\Assert;
 
 use App\Dictionary\Application\Assert\FileAssert;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 use RuntimeException;
 
 /**
  * @coversDefaultClass \App\Dictionary\Application\Assert\FileAssert
  */
-final class FileAssertTest extends CrosswordAbstractTestCase
+final class FileAssertTest extends CrosswordTestCase
 {
     /**
      * @covers ::assertFile

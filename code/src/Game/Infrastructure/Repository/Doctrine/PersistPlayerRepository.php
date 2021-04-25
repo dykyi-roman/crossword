@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\Doctrine;
 
-use App\Game\Domain\Dto\NewPlayerDto;
+use App\Game\Domain\Dto\RegisteredPlayerDto;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Model\Player;
 use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
-use App\Game\Domain\Service\PasswordEncoderInterface;
+use App\Game\Domain\Service\Encoder\PasswordEncoderInterface;
 use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,7 +24,7 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
         $this->encoder = $encoder;
     }
 
-    public function createPlayer(NewPlayerDto $playerDto): void
+    public function createPlayer(RegisteredPlayerDto $playerDto): void
     {
         $player = new Player($playerDto->playerId());
         $player->changeNickname($playerDto->nickname());
@@ -37,10 +37,9 @@ final class PersistPlayerRepository extends ServiceEntityRepository implements P
 
     public function levelUp(PlayerId $playerId): void
     {
-        $id = $playerId->id();
         $player = $this->createQueryBuilder('u')
             ->andWhere('u.playerId = :id')
-            ->setParameter('id', $id->toString())
+            ->setParameter('id', (string) $playerId)
             ->getQuery()
             ->getOneOrNullResult();
 

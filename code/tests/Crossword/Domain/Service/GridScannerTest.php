@@ -10,12 +10,12 @@ use App\Crossword\Domain\Model\Grid;
 use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 use App\Crossword\Domain\Service\GridScanner;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 
 /**
  * @coversDefaultClass \App\Crossword\Domain\Service\GridScanner
  */
-final class GridScannerTest extends CrosswordAbstractTestCase
+final class GridScannerTest extends CrosswordTestCase
 {
     /**
      * @covers ::fillLine

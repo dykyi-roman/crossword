@@ -18,6 +18,9 @@ final class PlayerHistory
 
     public function __invoke(): array
     {
-        return array_map(static fn (HistoryRatingDto $dto) => $dto->jsonSerialize(), $this->historyDao->ratingHistory());
+        return array_map(
+            static fn (HistoryRatingDto $dto) => $dto->jsonSerialize(),
+            $this->historyDao->ratingHistory()
+        );
     }
 }

@@ -11,7 +11,7 @@ use App\Game\Domain\Model\PlayerId;
 /**
  * @psalm-immutable
  */
-final class NewPlayerDto
+final class RegisteredPlayerDto
 {
     private string $password;
     private PlayerDto $playerDto;

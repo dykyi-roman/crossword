@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Game\Application\Service\Answer;
+namespace App\Game\Application\Service\Answers;
 
 use App\Game\Application\Service\PlayerFromTokenExtractor;
 use App\Game\Domain\Enum\Level;
@@ -29,7 +29,8 @@ final class Answers
         $playerDto = $this->playerFromTokenExtractor->player();
         $this->answersValidator->validate($payload);
 
-        if (!$playerDto->level()->equals(Level::finishLevel())) {
+        $level = $playerDto->level();
+        if (!$level->equals(Level::finishLevel())) {
             $this->persistPlayerRepository->levelUp($playerDto->playerId());
         }
     }

@@ -16,13 +16,6 @@ final class LoginRequest
         $this->requestStack = $requestStack;
     }
 
-    public function view(): bool
-    {
-        RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
-
-        return 'GET' === $request->getMethod();
-    }
-
     public function nickname(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());

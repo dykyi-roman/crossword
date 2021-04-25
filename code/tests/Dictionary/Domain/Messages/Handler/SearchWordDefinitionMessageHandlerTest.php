@@ -9,12 +9,12 @@ use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
 use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Infrastructure\Gateway\InMemory\WordDefinitionApiGatewayInMemory;
-use App\Tests\CrosswordAbstractTestCase;
+use App\Tests\CrosswordTestCase;
 
 /**
  * @coversDefaultClass \App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler
  */
-final class SearchWordDefinitionMessageHandlerTest extends CrosswordAbstractTestCase
+final class SearchWordDefinitionMessageHandlerTest extends CrosswordTestCase
 {
     /**
      * @covers ::search
