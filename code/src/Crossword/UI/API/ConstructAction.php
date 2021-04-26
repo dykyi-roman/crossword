@@ -8,9 +8,9 @@ use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
 use App\Crossword\Application\Service\CrosswordReceiver;
 use App\Crossword\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\FailedApiResponse;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -58,9 +58,9 @@ final class ConstructAction
         try {
             $crossword = $constructor->receive($request->type(), $request->language(), $request->wordCount());
 
-            return new SuccessResponse($crossword);
+            return new SuccessApiResponse($crossword);
         } catch (ReceiveCrosswordException) {
-            return new FailedResponse(ErrorFactory::crosswordIsNotReceived());
+            return new FailedApiResponse(ErrorFactory::crosswordIsNotReceived());
         }
     }
 }

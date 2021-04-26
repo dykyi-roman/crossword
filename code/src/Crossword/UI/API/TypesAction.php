@@ -6,7 +6,7 @@ namespace App\Crossword\UI\API;
 
 use App\Crossword\Application\Service\SupportedTypes;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,6 +28,6 @@ final class TypesAction
     #[Route('/api/crossword/types', name: 'crossword.api.types', methods: ['GET'])]
     public function __invoke(SupportedTypes $supportedTypes): ResponseInterface
     {
-        return new SuccessResponse($supportedTypes->receive());
+        return new SuccessApiResponse($supportedTypes->receive());
     }
 }

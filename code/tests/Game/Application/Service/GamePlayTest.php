@@ -13,7 +13,7 @@ use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use App\Game\Domain\Port\CrosswordInterface;
 use App\Game\Domain\Service\CrosswordConstructor;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -27,7 +27,7 @@ final class GamePlayTest extends TestCase
      */
     public function testCreateNewGame(): void
     {
-        $response = new SuccessResponse([
+        $response = new SuccessApiResponse([
                 [
                     'line' => [
                         ['coordinate' => '1.1', 'letter' => 't'],

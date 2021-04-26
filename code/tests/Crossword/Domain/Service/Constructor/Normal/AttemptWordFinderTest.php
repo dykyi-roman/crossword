@@ -8,7 +8,7 @@ use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
 use App\Crossword\Domain\Service\WordFinder;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use App\SharedKernel\Domain\Model\Mask;
 use App\SharedKernel\Domain\Model\Word;
 use App\Tests\CrosswordTestCase;
@@ -24,7 +24,7 @@ final class AttemptWordFinderTest extends CrosswordTestCase
      */
     public function testSuccessfullyFindWord(): void
     {
-        $response = new SuccessResponse([['word' => 'test', 'definition' => 'test test']]);
+        $response = new SuccessApiResponse([['word' => 'test', 'definition' => 'test test']]);
         $wordDto = new DictionaryWordDto($response->body());
         $wordFinder = new WordFinder(new InMemoryDictionaryAdapter(null, $wordDto), new NullLogger());
         $attemptWordFinder = new AttemptWordFinder($wordFinder);

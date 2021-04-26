@@ -7,9 +7,9 @@ namespace App\Dictionary\UI\API;
 use App\Dictionary\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\FailedApiResponse;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,9 +33,9 @@ final class LanguagesAction
     public function __invoke(SupportedLanguages $languages): ResponseInterface
     {
         try {
-            return new SuccessResponse($languages->receive());
+            return new SuccessApiResponse($languages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return new FailedResponse(ErrorFactory::emptyDictionary());
+            return new FailedApiResponse(ErrorFactory::emptyDictionary());
         }
     }
 }

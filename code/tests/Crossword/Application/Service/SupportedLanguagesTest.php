@@ -8,7 +8,7 @@ use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\SupportedLanguages;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
@@ -22,7 +22,7 @@ final class SupportedLanguagesTest extends CrosswordTestCase
      */
     public function testSuccessfullyReceivedLanguages(): void
     {
-        $response = new SuccessResponse(['en', 'ua']);
+        $response = new SuccessApiResponse(['en', 'ua']);
         $dictionaryLanguagesDto = new DictionaryLanguagesDto($response->body());
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter($dictionaryLanguagesDto, null);
 
@@ -38,7 +38,7 @@ final class SupportedLanguagesTest extends CrosswordTestCase
     {
         $this->expectException(NotFoundSupportedLanguagesException::class);
 
-        $response = new SuccessResponse([]);
+        $response = new SuccessApiResponse([]);
         $dictionaryLanguagesDto = new DictionaryLanguagesDto($response->body());
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter($dictionaryLanguagesDto, null);
 

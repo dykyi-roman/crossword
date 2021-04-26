@@ -10,7 +10,7 @@ use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use App\Tests\CrosswordTestCase;
 
 /**
@@ -23,7 +23,7 @@ final class CrosswordGeneratorTest extends CrosswordTestCase
      */
     public function testSuccessfullyGenerateCrossword(): void
     {
-        $response = new SuccessResponse(['en']);
+        $response = new SuccessApiResponse(['en']);
 
         $crosswordGenerator = new CrosswordGenerator(
             new InMemoryDictionaryAdapter(

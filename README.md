@@ -34,91 +34,11 @@ It is a way of thinking and a set of priorities, aimed at accelerating software 
 On a macro level using DDD concepts like Ubiquitous Language and Bounded Contexts can solve complex perspectives on data in to smaller models and clear data ownership.
 Follow practices splitting the source code based on bounded contexts we define a next context:
 
-* `Crossword`
-* `Dictionary`
-* `Game`
+* [Crossword](docs/Crossword.md)
+* [Dictionary](docs/Dictionary.md)
+* [Game](docs/Game.md)
 
 For reducing duplication of code we use a `SharedKernel`, it helps share a common code between context.
-
-# Dictionary
-
-### Rest Api
-
-| Path                                             | Method | Scheme | Grant |
-| ------------------------------------------------ | -------| ------ | ----- |
-| /api/dictionary/languages                        | GET    | ANY    | ALL   |
-| /api/dictionary/words/{LANGUAGE}?mask={MASK}     | GET    | ANY    | ALL   |
-
-#### Response formats
-
-* `json`
-* `xml`
-
-### Commands
-
-Used to fill a dictionary with the help of a third party API providers:
-
-```
-php bin/console dictionary:populate {LANGUAGE-CODE} --{FILE-PATH}
-```
-
-Used to fill a dictionary from file:
-```
-php bin/console dictionary:upload {FILE-PATH} 
-```
-
-Collections with words for populate can be found: ``cd /data``
-
-# Crossword
-
-### Rest Api
-
-| Path                                                    | Method | Scheme | Grant |
-| ------------------------------------------------------- | -------| ------ | ----- |
-| /api/crossword/construct/{LANGUAGE}/{TYPE}/{WORD-COUNT} | GET    | ANY    | ALL   |
-| /api/crossword/languages                                | GET    | ANY    | ALL   |
-| /api/crossword/types                                    | GET    | ANY    | ALL   |
-
-#### Response formats
-
-* `json`
-* `xml`
-
-### Commands
-
-Used to generate a new crossword:
-
-```
-php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
-```
-
-# Game
-
-| Game              | Info                 | 
-| ----------------- | -------------------- |
-|  Levels           | 5                    | 
-|  Types            | NORMAL / FIGURED     | 
-|  Roles            | SIMPLE / PREMIUM     | 
-
-### Commands
-
-Used to create a new player with SIMPLE role:
-
-```
-php bin/console game:create-player test 1q2w3e4r
-```
-Used to create a new player with PREMIUM role:
-
-```
-php bin/console game:create-player test 1q2w3e4r --role=ROLE_PREMIUM
-```
-
-### Web Url
-
-| Path         | Method | Scheme | Grant |
-| ------------ | -------| ------ | ----- |
-| /game/play   | GET    | ANY    | ALL   |
-| /game/login  | GET    | ANY    | ALL   |
 
 # Docker
 
@@ -141,10 +61,7 @@ https://app.test:1001/game/play
 
 Swagger help to describe the structure of APIs for better understand how is it works.
 
-``URL: /swagger``
-___
-
-![image](docs/swagger.png)
+:+1:  ``URL: /swagger``
 
 # Postman
 

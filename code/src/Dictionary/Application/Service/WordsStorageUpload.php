@@ -43,7 +43,7 @@ final class WordsStorageUpload
     {
         $count = 0;
         foreach ($this->fileReader->read($criteria->filePath()) as $row) {
-            if ($count > 0) {
+            if ($count) {
                 $this->messageBus->dispatch(new SaveToStorageMessage($row[1], $row[2], $row[0]));
             }
             $count++;

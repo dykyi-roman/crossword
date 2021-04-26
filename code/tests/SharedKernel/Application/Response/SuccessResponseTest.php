@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\SharedKernel\Application\Response;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Faker\Factory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \App\SharedKernel\Application\Response\API\SuccessResponse
+ * @coversDefaultClass \App\SharedKernel\Application\Response\API\SuccessApiResponse
  */
 final class SuccessResponseTest extends TestCase
 {
@@ -19,7 +19,7 @@ final class SuccessResponseTest extends TestCase
      */
     public function testSuccessResponseStatus(): void
     {
-        $response = new SuccessResponse();
+        $response = new SuccessApiResponse();
 
         self::assertSame($response->status(), HttpStatusCode::HTTP_OK);
     }
@@ -31,7 +31,7 @@ final class SuccessResponseTest extends TestCase
     {
         $data = ['test' => Factory::create()->word];
 
-        $response = new SuccessResponse($data);
+        $response = new SuccessApiResponse($data);
 
         self::assertSame($response->body()['data'], $data);
     }

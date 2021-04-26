@@ -7,9 +7,9 @@ namespace App\Crossword\UI\API;
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
 use App\Crossword\Application\Service\ErrorFactory;
 use App\Crossword\Application\Service\SupportedLanguages;
-use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\FailedApiResponse;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -33,9 +33,9 @@ final class LanguagesAction
     public function __invoke(SupportedLanguages $supportedLanguages): ResponseInterface
     {
         try {
-            return new SuccessResponse($supportedLanguages->receive());
+            return new SuccessApiResponse($supportedLanguages->receive());
         } catch (NotFoundSupportedLanguagesException) {
-            return new FailedResponse(ErrorFactory::languageIsNotFound());
+            return new FailedApiResponse(ErrorFactory::languageIsNotFound());
         }
     }
 }

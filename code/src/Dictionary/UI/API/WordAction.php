@@ -8,9 +8,9 @@ use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\FailedApiResponse;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -57,9 +57,9 @@ final class WordAction
         try {
             $wordDtoCollection = $wordsFinder->findByRequest($request);
 
-            return new SuccessResponse($wordDtoCollection->jsonSerialize());
+            return new SuccessApiResponse($wordDtoCollection->jsonSerialize());
         } catch (NotFoundWordException) {
-            return new FailedResponse(ErrorFactory::wordIsNotFound());
+            return new FailedApiResponse(ErrorFactory::wordIsNotFound());
         }
     }
 }

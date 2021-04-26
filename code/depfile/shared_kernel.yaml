@@ -11,7 +11,10 @@ layers:
         must_not:
           - type: className
             regex: App\\SharedKernel\\Application\\Dto
-
+          - type: className
+            regex: App\\SharedKernel\\Application\\Response\\Web\\HtmlResponse
+          - type: className
+            regex: App\\SharedKernel\\Application\\Response\\Web\\TwigResponse
   - name: Domain
     collectors:
       - type: bool

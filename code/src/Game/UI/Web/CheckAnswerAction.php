@@ -8,13 +8,12 @@ use App\Game\Application\Exception\WrongAnswerException;
 use App\Game\Application\Request\AnswersRequest;
 use App\Game\Application\Service\Answers\Answers;
 use App\Game\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\API\FailedResponse;
+use App\SharedKernel\Application\Response\API\FailedApiResponse;
 use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class CheckAnswerAction extends AbstractController
+final class CheckAnswerAction
 {
     #[Route('/game/check', name: 'web.game.check.post', methods: ['POST'])]
     public function __invoke(AnswersRequest $request, Answers $answers): ResponseInterface
@@ -22,9 +21,9 @@ final class CheckAnswerAction extends AbstractController
         try {
             $answers($request->answers());
 
-            return new SuccessResponse();
+            return new SuccessApiResponse();
         } catch (WrongAnswerException $exception) {
-            return new FailedResponse(ErrorFactory::wrongAnswers($exception->rightAnswers()));
+            return new FailedApiResponse(ErrorFactory::wrongAnswers($exception->rightAnswers()));
         }
     }
 }

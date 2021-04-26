@@ -6,26 +6,30 @@ namespace App\SharedKernel\Application\Response\API;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
 use App\SharedKernel\Application\Enum\ResponseStatus;
+use App\SharedKernel\Domain\Model\Error;
 
 /**
  * @psalm-immutable
  */
-final class SuccessResponse implements ResponseInterface
+final class FailedApiResponse implements ResponseInterface
 {
     private int $status;
-    private array $data;
+    private Error $error;
 
-    public function __construct(array $data = [], int $status = HttpStatusCode::HTTP_OK)
+    public function __construct(Error $error, int $status = HttpStatusCode::HTTP_ERROR)
     {
-        $this->data = $data;
         $this->status = $status;
+        $this->error = $error;
     }
 
+    /**
+     * @psalm-suppress ImpureMethodCall
+     */
     public function body(): array
     {
         return [
-            'status' => ResponseStatus::SUCCESS,
-            'data' => $this->data,
+            'status' => ResponseStatus::FAILED,
+            'error' => $this->error->jsonSerialize(),
         ];
     }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Game\Domain\Service;
 
 use App\Game\Domain\Dto\PlayerDto;
+use JsonException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -21,7 +22,7 @@ final class PlayerTokenHack
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function refresh(PlayerDto $playerDto): void
     {
