@@ -27,7 +27,7 @@ final class Answers
     public function __invoke(array $payload)
     {
         $playerDto = $this->playerFromTokenExtractor->player();
-//        $this->answersValidator->validate($payload);
+        $this->answersValidator->validate($payload);
 
         $level = $playerDto->level();
         if (!$level->equals(Level::finishLevel())) {
