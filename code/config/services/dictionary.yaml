@@ -13,11 +13,15 @@ services:
 
   App\Dictionary\Application\Service\WordsStoragePopulate:
     arguments:
-      $fileReader: '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
+      - '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
+      - '@command.bus'
+      - '@monolog.logger'
 
   App\Dictionary\Application\Service\WordsStorageUpload:
     arguments:
-      $fileReader: '@App\Dictionary\Infrastructure\FileReader\CsvFileReader'
+        - '@App\Dictionary\Infrastructure\FileReader\CsvFileReader'
+        - '@command.bus'
+        - '@monolog.logger'
 
   App\Dictionary\Infrastructure\FileReader\TextFileReader: ~
   App\Dictionary\Infrastructure\FileReader\CsvFileReader: ~

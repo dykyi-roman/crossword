@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service;
 
+use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Port\DictionaryInterface;
 use App\SharedKernel\Domain\Model\Word;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use Psr\Log\LoggerInterface;
 
 final class WordFinder

@@ -7,7 +7,6 @@ namespace App\Dictionary\Application\Service;
 use App\Dictionary\Application\Criteria\WordsStorageUploadCriteria;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Service\FileReaderInterface;
-use App\Dictionary\Infrastructure\FileReader\CsvFileReader;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
@@ -19,7 +18,7 @@ final class WordsStorageUpload
     private MessageBusInterface $messageBus;
 
     public function __construct(
-        CsvFileReader $fileReader,
+        FileReaderInterface $fileReader,
         MessageBusInterface $messageBus,
         LoggerInterface $logger
     ) {

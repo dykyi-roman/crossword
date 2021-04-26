@@ -7,8 +7,8 @@ namespace App\Dictionary\Application\Service;
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
 use App\Dictionary\Domain\Dto\WordDtoCollection;
+use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
-use App\Dictionary\Infrastructure\Repository\Elastic\Exception\WordNotFoundInStorageException;
 use Psr\Log\LoggerInterface;
 
 final class WordsFinder

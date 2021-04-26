@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Dictionary\Domain\Messages\Handler;
 
+use App\Dictionary\Domain\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Domain\Messages\Handler\SearchWordDefinitionMessageHandler;
 use App\Dictionary\Domain\Messages\Message\SaveToStorageMessage;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
-use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Infrastructure\Gateway\InMemory\WordDefinitionApiGatewayInMemory;
 use App\Tests\CrosswordTestCase;
 

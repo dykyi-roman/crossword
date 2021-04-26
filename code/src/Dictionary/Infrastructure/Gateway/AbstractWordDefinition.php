@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Gateway;
 
+use App\Dictionary\Domain\Exception\DefinitionNotFoundInApiGateway;
 use App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface;
-use App\Dictionary\Infrastructure\Gateway\Exception\DefinitionNotFoundInApiGateway;
 
 abstract class AbstractWordDefinition implements WordDefinitionApiGatewayInterface
 {

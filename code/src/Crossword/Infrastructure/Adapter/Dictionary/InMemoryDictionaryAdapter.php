@@ -6,8 +6,8 @@ namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
+use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Port\DictionaryInterface;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 
 final class InMemoryDictionaryAdapter implements DictionaryInterface
 {

@@ -9,6 +9,7 @@ use App\Crossword\Application\Service\CrosswordReceiver;
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Infrastructure\Cache\CacheItem;
 use App\Crossword\Infrastructure\Cache\InMemoryClient;
+use App\Crossword\Infrastructure\Repository\Redis\ReadCrosswordRepository;
 use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
@@ -26,7 +27,7 @@ final class CrosswordReceiverTest extends CrosswordTestCase
         $cache = new InMemoryClient();
         $cache->save(new CacheItem('ua-normal-3', [time() => json_encode(['data' => 'value'], JSON_THROW_ON_ERROR)]));
 
-        $crosswordReceiver = new CrosswordReceiver($cache, new NullLogger());
+        $crosswordReceiver = new CrosswordReceiver(new ReadCrosswordRepository($cache), new NullLogger());
         $crossword = $crosswordReceiver->receive(Type::normal(), 'ua', 3);
 
         self::assertSame($crossword, $data);
@@ -39,7 +40,7 @@ final class CrosswordReceiverTest extends CrosswordTestCase
     {
         $this->expectException(ReceiveCrosswordException::class);
 
-        $crosswordReceiver = new CrosswordReceiver(new InMemoryClient(), new NullLogger());
+        $crosswordReceiver = new CrosswordReceiver(new ReadCrosswordRepository(new InMemoryClient()), new NullLogger());
         $crosswordReceiver->receive(Type::normal(), 'ua', 3);
     }
 }

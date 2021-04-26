@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Game\Domain\Repository;
 
 use App\Game\Domain\Dto\RegisteredPlayerDto;
+use App\Game\Domain\Exception\PlayerNotFoundException;
 use App\Game\Domain\Model\PlayerId;
-use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
 
 interface PersistPlayerRepositoryInterface
 {

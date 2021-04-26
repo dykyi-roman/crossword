@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\FileReader;
 
+use App\Dictionary\Domain\Exception\FileOpenException;
 use App\Dictionary\Domain\Service\FileReaderInterface;
-use App\Dictionary\Infrastructure\FileReader\Exception\FileOpenException;
 use Generator;
 
 final class TextFileReader implements FileReaderInterface

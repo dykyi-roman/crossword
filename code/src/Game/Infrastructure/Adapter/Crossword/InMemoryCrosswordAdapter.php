@@ -6,8 +6,8 @@ namespace App\Game\Infrastructure\Adapter\Crossword;
 
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
+use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Port\CrosswordInterface;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 
 final class InMemoryCrosswordAdapter implements CrosswordInterface
 {

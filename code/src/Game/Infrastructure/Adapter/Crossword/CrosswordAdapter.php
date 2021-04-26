@@ -6,9 +6,9 @@ namespace App\Game\Infrastructure\Adapter\Crossword;
 
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
+use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Port\CrosswordInterface;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;

@@ -7,7 +7,6 @@ namespace App\Dictionary\Application\Service;
 use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage;
 use App\Dictionary\Domain\Service\FileReaderInterface;
-use App\Dictionary\Infrastructure\FileReader\TextFileReader;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Throwable;
@@ -21,7 +20,7 @@ final class WordsStoragePopulate
     private MessageBusInterface $messageBus;
 
     public function __construct(
-        TextFileReader $fileReader,
+        FileReaderInterface $fileReader,
         MessageBusInterface $messageBus,
         LoggerInterface $logger
     ) {

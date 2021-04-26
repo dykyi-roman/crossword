@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Service;
 
-use App\Dictionary\Infrastructure\FileReader\Exception\FileOpenException;
+use App\Dictionary\Domain\Exception\FileOpenException;
 use Generator;
 
 interface FileReaderInterface

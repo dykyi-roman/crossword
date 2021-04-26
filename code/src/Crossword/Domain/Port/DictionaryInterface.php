@@ -6,7 +6,7 @@ namespace App\Crossword\Domain\Port;
 
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
+use App\Crossword\Domain\Exception\ApiClientException;
 
 interface DictionaryInterface
 {

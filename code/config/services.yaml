@@ -29,6 +29,8 @@ services:
             - '../src/Crossword/Domain/Dto/'
             - '../src/Dictionary/Domain/Model/'
             - '../src/Dictionary/Domain/Dto/'
+            - '../src/Dictionary/Application/Service/WordsStoragePopulate.php'
+            - '../src/Dictionary/Application/Service/WordsStorageUpload.php'
             - '../src/Kernel.php'
 
     App\Crossword\UI\API\:

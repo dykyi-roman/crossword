@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Repository\Elastic;
 
+use App\Dictionary\Domain\Exception\FailedSaveToStorageException;
 use App\Dictionary\Domain\Repository\WriteWordsStorageInterface;
-use App\Dictionary\Infrastructure\Repository\Elastic\Exception\FailedSaveToStorageException;
 use App\SharedKernel\Domain\Model\Word;
 use Elasticsearch\Client;
 use Throwable;

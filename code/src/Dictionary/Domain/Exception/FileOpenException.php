@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Infrastructure\FileReader\Exception;
+namespace App\Dictionary\Domain\Exception;
 
-use RuntimeException;
+use DomainException;
 
-final class FileOpenException extends RuntimeException
+final class FileOpenException extends DomainException
 {
     public function __construct(string $filePath)
     {

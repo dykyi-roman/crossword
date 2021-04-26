@@ -6,11 +6,11 @@ namespace App\Game\Infrastructure\Repository\Doctrine;
 
 use App\Game\Domain\Assembler\PlayerAssembler;
 use App\Game\Domain\Dto\PlayerDto;
+use App\Game\Domain\Exception\PlayerNotFoundException;
 use App\Game\Domain\Model\Player;
 use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
 use App\Game\Domain\Service\Encoder\PasswordEncoderInterface;
-use App\Game\Infrastructure\Repository\Exception\PlayerNotFoundException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

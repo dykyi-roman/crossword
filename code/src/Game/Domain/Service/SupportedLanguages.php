@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Game\Domain\Service;
 
+use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Exception\NotFoundSupportedLanguagesException;
 use App\Game\Domain\Port\CrosswordInterface;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use Psr\Log\LoggerInterface;
 
 final class SupportedLanguages

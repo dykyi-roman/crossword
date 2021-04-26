@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Infrastructure\Repository\Elastic\Exception;
+namespace App\Dictionary\Domain\Exception;
 
 use DomainException;
 

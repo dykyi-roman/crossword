@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Crossword\Application\Service;
 
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
+use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Port\DictionaryInterface;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
 use Psr\Log\LoggerInterface;
 
 final class SupportedLanguages

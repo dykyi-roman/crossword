@@ -1,6 +1,8 @@
 services:
   App\Crossword\Infrastructure\Adapter\Dictionary\DictionaryAdapter: ~
   App\Crossword\Infrastructure\Cache\RedisClient: ~
+  App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository: ~
 
   Psr\Cache\CacheItemPoolInterface: '@App\Crossword\Infrastructure\Cache\RedisClient'
   App\Crossword\Domain\Port\DictionaryInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DictionaryAdapter'
+  App\Crossword\Domain\Repository\PersistCrosswordRepositoryInterface: '@App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository'

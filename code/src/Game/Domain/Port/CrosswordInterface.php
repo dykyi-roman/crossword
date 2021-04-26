@@ -6,7 +6,7 @@ namespace App\Game\Domain\Port;
 
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
-use App\SharedKernel\Infrastructure\HttpClient\Exception\ApiClientException;
+use App\Game\Domain\Exception\ApiClientException;
 
 interface CrosswordInterface
 {

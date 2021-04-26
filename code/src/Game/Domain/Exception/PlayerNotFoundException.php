@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Game\Infrastructure\Repository\Exception;
+namespace App\Game\Domain\Exception;
 
 use RuntimeException;
 
