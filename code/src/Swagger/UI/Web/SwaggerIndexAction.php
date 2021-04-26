@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\UI\Web;
+namespace App\Swagger\UI\Web;
 
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

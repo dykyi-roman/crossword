@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\Domain\Model;
+namespace App\Game\Domain\Model;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

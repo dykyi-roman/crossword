@@ -7,7 +7,6 @@ namespace App\Game\Domain\Model;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use App\Game\Domain\Events\Event\LevelUpEvent;
-use App\SharedKernel\Domain\Model\AggregateRoot;
 use DateTimeImmutable;
 
 final class Player extends AggregateRoot

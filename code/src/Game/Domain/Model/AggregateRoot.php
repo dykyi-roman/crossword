@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\Domain\Model;
+namespace App\Game\Domain\Model;
 
-use App\SharedKernel\Domain\Events\DomainEventInterface;
-use App\SharedKernel\Domain\Events\RaiseEventsInterface;
+use App\Game\Domain\Events\DomainEventInterface;
+use App\Game\Domain\Events\RaiseEventsInterface;
 
 abstract class AggregateRoot implements RaiseEventsInterface
 {

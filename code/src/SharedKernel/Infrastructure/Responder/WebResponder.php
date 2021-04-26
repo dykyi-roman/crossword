@@ -14,7 +14,7 @@ use Twig\Environment;
 
 final class WebResponder implements EventSubscriberInterface
 {
-    private const SUPPORTED_CONTENT_TYPE = null;
+    private const SUPPORTED_CONTENT_TYPE = [null, 'form'];
 
     private Environment $twig;
 
@@ -29,7 +29,7 @@ final class WebResponder implements EventSubscriberInterface
     public function __invoke(ViewEvent $viewEvent): void
     {
         $request = $viewEvent->getRequest();
-        if (self::SUPPORTED_CONTENT_TYPE !== $request->getContentType()) {
+        if (!in_array($request->getContentType(), self::SUPPORTED_CONTENT_TYPE, true)) {
             return;
         }
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Game\Domain\Events\Event;
 
 use App\Game\Domain\Enum\Level;
+use App\Game\Domain\Events\DomainEventInterface;
 use App\Game\Domain\Model\PlayerId;
-use App\SharedKernel\Domain\Events\DomainEventInterface;
 
 final class LevelUpEvent implements DomainEventInterface
 {

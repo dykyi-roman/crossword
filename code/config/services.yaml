@@ -41,15 +41,15 @@ services:
         resource: '../src/Dictionary/UI/API'
         tags: [ 'controller.service_arguments' ]
 
-    App\SharedKernel\UI\Web\:
-        resource: '../src/SharedKernel/UI/Web'
+    App\Swagger\UI\Web\:
+        resource: '../src/Swagger/UI/Web'
         tags: [ 'controller.service_arguments' ]
 
     App\Game\UI\Web\:
         resource: '../src/Game/UI/Web'
         tags: [ 'controller.service_arguments' ]
 
-    App\SharedKernel\Domain\Events\DomainEventsSubscriber:
+    App\Game\Domain\Events\DomainEventsSubscriber:
         arguments:
           [ '@command.bus' ]
         tags:

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\Domain\Events;
+namespace App\Game\Domain\Events;
 
 use Countable;
 use Doctrine\Common\EventSubscriber;
