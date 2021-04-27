@@ -34,7 +34,7 @@ final class DirectDictionaryAdapter implements DictionaryInterface
 
     public function searchWord(string $language, string $mask): DictionaryWordDto
     {
-        $words =  $this->wordsFinder->find($language, new Mask($mask), self::LIMIT);
+        $words = $this->wordsFinder->find($language, new Mask($mask), self::LIMIT);
         $data = new SuccessApiResponse($words->jsonSerialize());
 
         return new DictionaryWordDto($data->body());

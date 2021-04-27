@@ -46,22 +46,31 @@ final class NormalConstructor implements ConstructorInterface
     {
         $rows = $this->gridScanner->scanRows();
         foreach ($rows as $row) {
-            try {
-                $mask = $row->mask();
-                if ($mask->size() <= 3) {
-                    continue;
-                }
-
-                $word = $this->attemptWordFinder->find($language, $mask);
-                $line = (new Line($row))->fillWord($word->value());
-                $this->gridScanner->fillLine($line);
-
-                return new LineDto($line, $word);
-            } catch (WordFoundException | WordNotFitException) {
+            if (null === $line = $this->rowToLine($row, $language)) {
                 continue;
             }
+
+            return $line;
         }
 
         throw new NextLineFoundException();
+    }
+
+    private function rowToLine(Row $row, string $language): null | LineDto
+    {
+        try {
+            $mask = $row->mask();
+            if ($mask->size() <= 3) {
+                return null;
+            }
+
+            $word = $this->attemptWordFinder->find($language, $mask);
+            $line = (new Line($row))->fillWord($word->value());
+            $this->gridScanner->fillLine($line);
+
+            return new LineDto($line, $word);
+        } catch (WordFoundException | WordNotFitException) {
+            return null;
+        }
     }
 }

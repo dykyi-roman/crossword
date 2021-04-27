@@ -35,6 +35,5 @@ final class DirectCrosswordAdapter implements CrosswordInterface
         $response = new SuccessApiResponse($this->supportedLanguages->receive());
 
         return new LanguagesDto($response->body());
-
     }
 }

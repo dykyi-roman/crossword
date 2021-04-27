@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Crossword\Application\Service;
 
 use App\Crossword\Application\Exception\ReceiveCrosswordException;
-use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Repository\ReadCrosswordRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
