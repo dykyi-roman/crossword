@@ -28,7 +28,7 @@ final class CrosswordReceiverTest extends CrosswordTestCase
         $cache->save(new CacheItem('ua-normal-3', [time() => json_encode(['data' => 'value'], JSON_THROW_ON_ERROR)]));
 
         $crosswordReceiver = new CrosswordReceiver(new ReadCrosswordRepository($cache), new NullLogger());
-        $crossword = $crosswordReceiver->receive(Type::normal(), 'ua', 3);
+        $crossword = $crosswordReceiver->receive(Type::NORMAL, 'ua', 3);
 
         self::assertSame($crossword, $data);
     }
@@ -41,6 +41,6 @@ final class CrosswordReceiverTest extends CrosswordTestCase
         $this->expectException(ReceiveCrosswordException::class);
 
         $crosswordReceiver = new CrosswordReceiver(new ReadCrosswordRepository(new InMemoryClient()), new NullLogger());
-        $crosswordReceiver->receive(Type::normal(), 'ua', 3);
+        $crosswordReceiver->receive(Type::NORMAL, 'ua', 3);
     }
 }

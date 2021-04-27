@@ -1,0 +1,39 @@
+paths:
+  - ../src
+exclude_files: ~
+layers:
+  - name: Dictionary
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\Dictionary\\.*
+        must_not:
+          - type: className
+            regex: App\\Dictionary\\Application\\Service
+  - name: Crossword
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\Crossword\\.*
+        must_not:
+          - type: className
+            regex: App\\Crossword\\Application\\Service
+
+  - name: Game
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\Game\\.*
+        must_not:
+          - type: className
+            regex: App\\Game\\Application\\Service
+ruleset:
+  Dictionary: ~
+
+  Crossword: ~
+
+  Game: ~
+

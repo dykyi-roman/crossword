@@ -7,7 +7,7 @@ namespace App\Dictionary\UI\Console;
 use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
-use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
+use App\SharedKernel\Application\Response\Console\ResponseInterface;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
@@ -45,12 +45,12 @@ HELP
         );
     }
 
-    protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
+    protected function doExecute(InputInterface $input, ResponseInterface $response): void
     {
         $criteria = new WordsStoragePopulateCriteria((string) $input->getArgument('language'), $this->filePath);
         $count = $this->wordsStoragePopulate->execute($criteria);
 
-        $consoleResponder(sprintf('Populate %s words.', $count));
+        $response(sprintf('Populate %s words.', $count));
     }
 
     /**

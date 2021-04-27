@@ -13,7 +13,7 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
 
-final class DictionaryAdapter implements DictionaryInterface
+final class ApiDictionaryAdapter implements DictionaryInterface
 {
     private string $dictionaryApiHost;
     private ClientInterface $client;

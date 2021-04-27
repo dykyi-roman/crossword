@@ -8,7 +8,7 @@ use App\Game\Application\Assert\PasswordAssert;
 use App\Game\Application\Assert\RoleAssert;
 use App\Game\Application\Criteria\PlayerRegisterCriteria;
 use App\Game\Application\Service\Auth\PlayerRegister;
-use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
+use App\SharedKernel\Application\Response\Console\ResponseInterface;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -41,7 +41,7 @@ HELP
         );
     }
 
-    protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
+    protected function doExecute(InputInterface $input, ResponseInterface $response): void
     {
         $this->playerRegister->execute(new PlayerRegisterCriteria(
             (string) $input->getArgument('nickname'),
@@ -49,7 +49,7 @@ HELP
             $input->getOption('role'),
         ));
 
-        $consoleResponder('Player successfully created.');
+        $response('Player successfully created.');
     }
 
     protected function validateInput(InputInterface $input): void

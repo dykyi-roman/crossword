@@ -47,7 +47,12 @@ final class NormalConstructor implements ConstructorInterface
         $rows = $this->gridScanner->scanRows();
         foreach ($rows as $row) {
             try {
-                $word = $this->attemptWordFinder->find($language, $row->mask());
+                $mask = $row->mask();
+                if ($mask->size() <= 3) {
+                    continue;
+                }
+
+                $word = $this->attemptWordFinder->find($language, $mask);
                 $line = (new Line($row))->fillWord($word->value());
                 $this->gridScanner->fillLine($line);
 

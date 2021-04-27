@@ -21,7 +21,7 @@ final class ConstructRequest
         $this->requestStack = $requestStack;
     }
 
-    public function type(): Type
+    public function type(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
@@ -29,7 +29,7 @@ final class ConstructRequest
 
         TypeAssert::assertSupportedType($type);
 
-        return new Type($type);
+        return $type;
     }
 
     public function wordCount(): int

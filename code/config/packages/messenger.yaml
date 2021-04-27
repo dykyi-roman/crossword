@@ -4,10 +4,10 @@ framework:
         # failure_transport: failed
 
         transports:
-             messages: '%env(MESSENGER_TRANSPORT_DSN)%/messages'
-             events: '%env(MESSENGER_TRANSPORT_DSN)%/events'
-#             messages: 'sync://'
-#             events: 'sync://'
+#             messages: '%env(MESSENGER_TRANSPORT_DSN)%/messages'
+#             events: '%env(MESSENGER_TRANSPORT_DSN)%/events'
+             messages: 'sync://'
+             events: 'sync://'
             # failed: 'doctrine://default?queue_name=failed'
 
         routing:

@@ -38,13 +38,10 @@ layers:
 ruleset:
   UI:
     - Application
-    - Infrastructure
 
   Application:
     - Domain
-    - Infrastructure
 
-  Domain:
-    - Infrastructure
+  Domain: ~
 
   Infrastructure: ~

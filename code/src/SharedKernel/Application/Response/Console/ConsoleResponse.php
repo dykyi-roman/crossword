@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\Infrastructure\Responder;
+namespace App\SharedKernel\Application\Response\Console;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class ConsoleResponder
+final class ConsoleResponse implements ResponseInterface
 {
     private SymfonyStyle $symfonyStyle;
 

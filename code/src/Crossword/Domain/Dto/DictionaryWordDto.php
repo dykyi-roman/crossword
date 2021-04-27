@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Dto;
 
+use Countable;
+
 /**
  * @psalm-immutable
  */
-final class DictionaryWordDto
+final class DictionaryWordDto implements Countable
 {
     private array $payload;
 
@@ -16,9 +18,9 @@ final class DictionaryWordDto
         $this->payload = $payload;
     }
 
-    public function isSuccess(): bool
+    public function count(): int
     {
-        return 'success' === $this->payload['status'];
+        return 'success' === $this->payload['status'] ? 1 : 0;
     }
 
     public function word(): string
@@ -29,5 +31,10 @@ final class DictionaryWordDto
     public function definition(): string
     {
         return $this->isSuccess() ? $this->payload['data'][0]['definition'] : '';
+    }
+
+    private function isSuccess(): bool
+    {
+        return 'success' === $this->payload['status'];
     }
 }

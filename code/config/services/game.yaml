@@ -1,5 +1,6 @@
 services:
-  App\Game\Infrastructure\Adapter\Crossword\CrosswordAdapter: ~
+  App\Game\Infrastructure\Adapter\Crossword\ApiCrosswordAdapter: ~
+  App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter: ~
 
   App\Game\Infrastructure\Dao\Doctrine\HistoryDao:
     arguments:
@@ -10,4 +11,4 @@ services:
   App\Game\Domain\Repository\ReadPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\ReadPlayerRepository'
   App\Game\Domain\Service\Encoder\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'
   App\Game\Domain\Service\Encoder\LetterEncoderInterface: '@App\Game\Infrastructure\Encoder\Base64Encoder'
-  App\Game\Domain\Port\CrosswordInterface: '@App\Game\Infrastructure\Adapter\Crossword\CrosswordAdapter'
+  App\Game\Domain\Port\CrosswordInterface: '@App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter'

@@ -14,7 +14,7 @@ final class GridScanner
 {
     private const SCAN_ROW_LENGTH = 5;
 
-    private Grid $grid;
+    public Grid $grid;
 
     public function __construct(Grid $grid)
     {

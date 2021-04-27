@@ -25,7 +25,7 @@ final class WordFinder
     {
         try {
             $searchWordDto = $this->dictionary->searchWord($language, $mask);
-            if ($searchWordDto->isSuccess()) {
+            if ($searchWordDto->count()) {
                 return new Word($searchWordDto->word(), $searchWordDto->definition());
             }
 

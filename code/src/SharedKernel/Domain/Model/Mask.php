@@ -30,6 +30,11 @@ final class Mask implements Stringable
         return sprintf('{%s}', $this->limit);
     }
 
+    public function size(): int
+    {
+        return (int) str_replace('0,', '', $this->limit);
+    }
+
     public function shiftLeft(): self
     {
         $query = $this->query[0] === '.' ? substr($this->query, 1) : $this->query;

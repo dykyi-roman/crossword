@@ -7,7 +7,7 @@ namespace App\Crossword\UI\Console;
 use App\Crossword\Application\Assert\TypeAssert;
 use App\Crossword\Application\Criteria\GenerateCriteria;
 use App\Crossword\Application\Service\CrosswordGenerator;
-use App\SharedKernel\Infrastructure\Responder\ConsoleResponder;
+use App\SharedKernel\Application\Response\Console\ResponseInterface;
 use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,7 +42,7 @@ HELP
         );
     }
 
-    protected function doExecute(InputInterface $input, ConsoleResponder $consoleResponder): void
+    protected function doExecute(InputInterface $input, ResponseInterface $response): void
     {
         $this->crosswordGenerator->generate(
             new GenerateCriteria(
@@ -52,7 +52,7 @@ HELP
             )
         );
 
-        $consoleResponder(sprintf('Try to generate %d new crosswords.', (int) $input->getOption('limit')));
+        $response(sprintf('Try to generate %d new crosswords.', (int) $input->getOption('limit')));
     }
 
     /**

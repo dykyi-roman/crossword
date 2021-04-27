@@ -13,7 +13,7 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
 
-final class CrosswordAdapter implements CrosswordInterface
+final class ApiCrosswordAdapter implements CrosswordInterface
 {
     private string $crosswordApiHost;
     private ClientInterface $client;
