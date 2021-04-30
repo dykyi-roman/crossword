@@ -3,17 +3,43 @@ Crossword game
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
+The game is implemented as an example of scalable and high load architecture combined with modern software development practices
+
 # Examples
 
 ![image](docs/example.gif)
 
 # Architecture
 
+**RabbitMQ** - need for handling commands and events asynchronous via the Symfony Messenger component.
+
+**Elasticsearch** - used as storage for dictionary with 10,000 english and 10,000 russian words from the box.
+
+**Redis** - used as a cache for generated crosswords.
+
+**SQLite** - used as the main storage for player data and his game history.
+
 ![image](docs/model.png)
 
-### Layered Architecture
+### Microservices
 
-To make the code organised each context uses Layered Architecture and each functional area is divided on four layers:
+To simplify the development and sharing of code, the Monorepository code storage approach was chosen.
+Each module of the system is independents, and they can be separated like an independent microservice and communicate by API.
+
+### Port and Adapters
+
+To integrate existing, or a new modules applied solutions like the Port and Adapters pattern.
+
+Ports are represented by Interfaces - `{modue}\Domain\Port`
+
+These implementations will be the adapter - `{modue}\Infrastructure\Adapter`:
+* `ApiAdapter` - used to API communicate with another module
+* `DirectAdapter` - used to direct communicate with another module
+* `InMemoryAdapter` - used to mock module in teh tests
+
+### Layered
+
+To make the code organised each module uses Layered Architecture and each functional area is divided on four layers:
 
 * `Application`
 * `Doman`
@@ -34,9 +60,9 @@ It is a way of thinking and a set of priorities, aimed at accelerating software 
 On a macro level using DDD concepts like Ubiquitous Language and Bounded Contexts can solve complex perspectives on data in to smaller models and clear data ownership.
 Follow practices splitting the source code based on bounded contexts we define a next context:
 
-* [Crossword](docs/Crossword.md)
-* [Dictionary](docs/Dictionary.md)
-* [Game](docs/Game.md)
+* [Crossword](docs/Crossword.md) - algorithm for building crosswords
+* [Dictionary](docs/Dictionary.md) - words storage 
+* [Game](docs/Game.md) - game functionality
 
 For reducing duplication of code we use a `SharedKernel`, it helps share a common code between context.
 
@@ -46,6 +72,9 @@ The docker-compose up command aggregates and run each container.
 
 ``
 docker network create game
+``
+
+``
 make start
 ``
 
@@ -77,7 +106,7 @@ Swagger help to describe the structure of APIs for better understand how is it w
 * RabbitMQ
 * Redis
 * SQLite
- 
+
 ## Clean code support packages
 * phpunit
 * phpcs

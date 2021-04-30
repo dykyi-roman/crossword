@@ -1,5 +1,8 @@
 # Dictionary
 
+It is used as the main storage for words and their definitions.
+Elasticsearch - used as storage, it allows store and  search word by differences masks.
+
 ### Rest Api
 
 | Path                                             | Method | Scheme | Grant |

@@ -1,5 +1,9 @@
 # Game
 
+It used for building a gameplay functionality. 
+Responsible for creating players and managing their levels and roles. 
+SQLite used as storage for players and his game history.
+
 | Game              | Info                 | 
 | ----------------- | -------------------- |
 |  Levels           | 5 - ...n             | 

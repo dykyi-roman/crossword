@@ -1,5 +1,7 @@
 # Crossword
 
+Used to build crosswords and store them in the cache. Redis - used as cache storage. 
+
 ### Rest Api
 
 | Path                                                    | Method | Scheme | Grant |
