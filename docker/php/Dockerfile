@@ -51,3 +51,5 @@ RUN docker-php-ext-install -j$(nproc) iconv \
         && docker-php-ext-enable pdo_mysql \
         && docker-php-ext-install amqp \
         && docker-php-ext-enable amqp
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
