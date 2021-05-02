@@ -1,8 +1,8 @@
 version: '3.7'
 services:
     tests:
-        build: docker/php
-        container_name: game_php
-        command: bash -c "php composer.phar install && php composer.phar test"
+        build: docker/php-test
+        container_name: game_php_test
+        command: bash -c "composer install && composer test"
         volumes:
             - ./code:/var/www/html/code
