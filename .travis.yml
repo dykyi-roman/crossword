@@ -22,7 +22,5 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-before_script:
-  - docker-compose exec php sh -c "php -d memory_limit=-1 composer install -n"
 script:
   - docker-compose -f docker-compose.test.yml run tests
