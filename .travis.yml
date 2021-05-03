@@ -22,5 +22,9 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-install:
+script:
   - docker-compose -f docker-compose.test.yml run tests
+  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
+  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
+  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
+  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
