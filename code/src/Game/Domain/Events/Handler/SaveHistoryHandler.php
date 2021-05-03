@@ -9,8 +9,8 @@ use App\Game\Domain\Events\Event\LevelUpEvent;
 use App\Game\Domain\Model\HistoryId;
 use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Uid\Uuid;
 
 final class SaveHistoryHandler implements MessageHandlerInterface
 {

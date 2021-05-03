@@ -9,8 +9,8 @@ use App\Game\Domain\Model\PlayerId;
 use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
 use App\Game\Domain\Service\PlayerTokenHack;
 use JsonException;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Uid\Uuid;
 
 final class RefreshPlayerInTokenHandler implements MessageHandlerInterface
 {

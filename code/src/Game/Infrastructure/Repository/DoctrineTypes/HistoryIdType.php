@@ -24,7 +24,7 @@ final class HistoryIdType extends Type
     {
         $id = $value->id();
 
-        return $id->toString();
+        return $id->toRfc4122();
     }
 
     public function getName(): string

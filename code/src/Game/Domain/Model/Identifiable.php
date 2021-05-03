@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace App\Game\Domain\Model;
 
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Stringable;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @psalm-immutable
  */
 abstract class Identifiable implements Stringable
 {
-    private UuidInterface $id;
+    private Uuid $id;
 
-    public function __construct(UuidInterface $id = null)
+    public function __construct(Uuid $id = null)
     {
-        $this->id = $id ?? Uuid::uuid4();
+        $this->id = $id ?? Uuid::v4();
     }
 
-    public function id(): UuidInterface
+    public function id(): Uuid
     {
         return $this->id;
     }
@@ -32,6 +31,6 @@ abstract class Identifiable implements Stringable
 
     public function __toString(): string
     {
-        return $this->id->toString();
+        return $this->id->toRfc4122();
     }
 }

@@ -7,7 +7,7 @@ namespace App\Game\Infrastructure\Repository\DoctrineTypes;
 use App\Game\Domain\Model\PlayerId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
-use Ramsey\Uuid\Uuid;
+use Symfony\Component\Uid\Uuid;
 
 final class PlayerIdType extends Type
 {
@@ -25,7 +25,7 @@ final class PlayerIdType extends Type
     {
         $id = $value->id();
 
-        return $id->toString();
+        return $id->toRfc4122();
     }
 
     public function getName(): string

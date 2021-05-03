@@ -10,8 +10,8 @@ use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use App\Game\Domain\Model\PlayerId;
 use JsonException;
-use Ramsey\Uuid\Uuid;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Uid\Uuid;
 
 final class PlayerFromTokenExtractor
 {
