@@ -87,11 +87,11 @@
             "deptrac analyze depfile/shared_kernel.yaml"
         ],
         "test": [
-            "@deptrac",
-            "@rector",
+            "@phpunit",
             "@phpcs",
             "@psalm",
-            "@phpunit"
+            "@rector",
+            "@deptrac"
         ],
         "post-install-cmd": [
             "@auto-scripts"

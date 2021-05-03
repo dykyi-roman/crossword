@@ -24,7 +24,3 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 script:
   - docker-compose -f docker-compose.test.yml run tests
-  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
-  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
-  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
-  - docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
