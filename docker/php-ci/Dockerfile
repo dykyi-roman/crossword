@@ -3,6 +3,7 @@ FROM php:8.0-fpm
 WORKDIR /var/www/html/code
 
 RUN apt-get update && apt-get install -y \
+        libzip-dev \
         libmcrypt-dev \
         libcurl4-openssl-dev \
 	    libonig-dev \
