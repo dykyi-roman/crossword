@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace App\Game\Domain\Model;
 
 use Stringable;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 /**
  * @psalm-immutable
  */
 abstract class Identifiable implements Stringable
 {
-    private Uuid $id;
+    private UuidV4 $id;
 
-    public function __construct(Uuid $id = null)
+    public function __construct(UuidV4 $id = null)
     {
-        $this->id = $id ?? Uuid::v4();
+        $this->id = $id ?? UuidV4::v4();
     }
 
-    public function id(): Uuid
+    public function id(): UuidV4
     {
         return $this->id;
     }
@@ -29,6 +29,9 @@ abstract class Identifiable implements Stringable
         return $this->id === $anId->id();
     }
 
+    /**
+     * @psalm-suppress ImpureMethodCall
+     */
     public function __toString(): string
     {
         return $this->id->toRfc4122();

@@ -10,7 +10,7 @@ use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
 use App\Game\Domain\Service\PlayerTokenHack;
 use JsonException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 final class RefreshPlayerInTokenHandler implements MessageHandlerInterface
 {
@@ -28,7 +28,7 @@ final class RefreshPlayerInTokenHandler implements MessageHandlerInterface
      */
     public function __invoke(LevelUpEvent $event): void
     {
-        $playerDto = $this->readPlayerRepository->findPlayerById(new PlayerId(Uuid::fromString($event->playerId())));
+        $playerDto = $this->readPlayerRepository->findPlayerById(new PlayerId(UuidV4::fromString($event->playerId())));
         $this->playerToken->refresh($playerDto);
     }
 }

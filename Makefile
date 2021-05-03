@@ -15,6 +15,7 @@ placeholder:
 	@echo "| ecs                | Object Calisthenics rules                 |"
 	@echo "| php-test           | Run phpunit tests                         |"
 	@echo "| postman-test       | Run postman tests                         |"
+	@echo "| ci-test            | Run ci tests                              |"
 	@echo "| pre-commit         | Run all check command before commit       |"
 
 init:
@@ -65,6 +66,9 @@ php-test:
 
 postman-test:
 	docker-compose run newman
+
+ci-test:
+	docker-compose -f docker-compose.test.yml run tests
 
 pre-commit: deptrac phpcs psalm ecs rector php-test postman-test
 	@:

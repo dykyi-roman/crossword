@@ -11,7 +11,7 @@ use App\Game\Domain\Enum\Role;
 use App\Game\Domain\Model\PlayerId;
 use JsonException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV4;
 
 final class PlayerFromTokenExtractor
 {
@@ -36,7 +36,7 @@ final class PlayerFromTokenExtractor
             $decoded = json_decode($token->getUser(), true, 512, JSON_THROW_ON_ERROR);
 
             return new PlayerDto(
-                new PlayerId(Uuid::fromString($decoded['id'])),
+                new PlayerId(UuidV4::fromString($decoded['id'])),
                 $decoded['nickname'],
                 new Level($decoded['level']),
                 new Role($decoded['role'])
