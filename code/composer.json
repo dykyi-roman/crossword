@@ -75,7 +75,11 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "test": "phpunit",
+        "phpunit": "phpunit",
+        "psalm": "/usr/local/bin/docker-compose exec -T fpm echo 'This is a test'",
+        "test": [
+            "@phpunit"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],

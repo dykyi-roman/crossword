@@ -1,5 +1,6 @@
 Crossword game
 =======
+![Build Status](https://travis-ci.org/dykyi-roman/crossword.svg?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square)](https://php.net/)
 
