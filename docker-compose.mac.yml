@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+    app:
+        volumes:
+            - "app-native-osx-sync:/var/www/html/code:nocopy"
+            - "../.git:/var/www/html/code/.git:cached"
+            - "../public:/var/www/html/code/public:delegated"
+            - "../vendor:/var/www/html/code/vendor:delegated"
+volumes:
+    app-native-osx-sync:
+        external: true
