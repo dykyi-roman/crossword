@@ -183,10 +183,11 @@ final class RetryMiddleware
         // Retry-After can be a delay in seconds or a date
         // (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
         if ($response && $response->hasHeader($options['retry_after_header'])) {
+            $retryAfterHeader = $response->getHeader($options['retry_after_header']);
             $timeout = $this->deriveTimeoutFromHeader(
-                    $response->getHeader($options['retry_after_header'])[0],
-                    $options['retry_after_date_format']
-                ) ?? $defaultDelayTimeout;
+                $retryAfterHeader[0],
+                $options['retry_after_date_format']
+            ) ?? $defaultDelayTimeout;
         } else {
             $timeout = abs($defaultDelayTimeout);
         }
