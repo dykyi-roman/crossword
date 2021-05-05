@@ -2,9 +2,11 @@ services:
   GuzzleHttp\Client: ~
   App\SharedKernel\Infrastructure\HttpClient\GuzzleClient:
     - '@GuzzleHttp\Client'
+    - [ '@App\SharedKernel\Infrastructure\HttpClient\Middleware\RetryMiddleware' ]
     - [ '@App\SharedKernel\Infrastructure\HttpClient\Middleware\LoggerMiddleware' ]
 
   App\SharedKernel\Infrastructure\HttpClient\Middleware\LoggerMiddleware: ~
+  App\SharedKernel\Infrastructure\HttpClient\Middleware\RetryMiddleware: ~
   App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   Psr\Http\Client\ClientInterface: '@App\SharedKernel\Infrastructure\HttpClient\GuzzleClient'
