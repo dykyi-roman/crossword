@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Game\Application\Dto;
 
+/**
+ * @psalm-immutable
+ */
 final class GameDto
 {
     private int $size;

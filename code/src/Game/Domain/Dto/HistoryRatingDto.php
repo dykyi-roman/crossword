@@ -6,6 +6,9 @@ namespace App\Game\Domain\Dto;
 
 use JsonSerializable;
 
+/**
+ * @psalm-immutable
+ */
 final class HistoryRatingDto implements JsonSerializable
 {
     private int $level;

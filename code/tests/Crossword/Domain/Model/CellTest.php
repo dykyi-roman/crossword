@@ -19,9 +19,9 @@ final class CellTest extends TestCase
     public function testCellFillLetter(): void
     {
         $cell = new Cell(new Coordinate(1, 1), null);
-
         self::assertNull($cell->letter());
-        $cell->fillLetter('a');
+
+        $cell = Cell::withLetter($cell, 'a');
         self::assertSame('a', $cell->letter());
     }
 

@@ -24,6 +24,31 @@ final class Row implements IteratorAggregate
         $this->cells = $cells;
     }
 
+    public static function withRandomRow(): self
+    {
+        $coordinateX = intdiv(20, 2) - random_int(1, 5);
+        $coordinateY = intdiv(20, 2) - random_int(1, 5);
+        $coordinate = new Coordinate($coordinateX, $coordinateY);
+
+        return new self(new Cell($coordinate, null));
+    }
+
+    public static function withCell(Row $row, int $position, Cell $cell): self
+    {
+        $row = clone $row;
+        $cells = $row->cells();
+        if (array_key_exists($position, $row->cells())) {
+            $cells[$position] = $cell;
+        }
+
+        return new self(...$cells);
+    }
+
+    public function cells(): array
+    {
+        return $this->cells;
+    }
+
     /**
      * @throws CellNotFoundException
      */
@@ -68,15 +93,6 @@ final class Row implements IteratorAggregate
         }
 
         return new Mask(sprintf('%s.*{0,%d}', $mask, count($this->cells)));
-    }
-
-    public static function withRandomRow(): self
-    {
-        $coordinateX = intdiv(20, 2) - random_int(1, 5);
-        $coordinateY = intdiv(20, 2) - random_int(1, 5);
-        $coordinate = new Coordinate($coordinateX, $coordinateY);
-
-        return new self(new Cell($coordinate, null));
     }
 
     public function getIterator(): ArrayIterator

@@ -62,7 +62,7 @@ rector:
 	@echo "rector done"
 
 php-test:
-	docker-compose exec php sh -c "php composer phpunit"
+	docker-compose exec php sh -c "vendor/bin/phpunit"
 
 postman-test:
 	docker-compose run newman

@@ -20,7 +20,7 @@ final class LineTest extends TestCase
     public function testFillLetter(): void
     {
         $row = new Row(new Cell(new Coordinate(1, 1), null));
-        $line = (new Line($row))->fillLetter('q');
+        $line = Line::withLetter($row, 'q');
         $cells = $line->jsonSerialize();
 
         self::assertSame($cells[0]['letter'], 'q');
@@ -44,7 +44,7 @@ final class LineTest extends TestCase
             new Cell(new Coordinate(1, 7), null),
         );
 
-        (new Line($row))->fillWord('rest');
+        Line::withWord($row, 'rest');
     }
 
     /**
@@ -54,7 +54,7 @@ final class LineTest extends TestCase
      */
     public function testFillWord(Row $row): void
     {
-        $line = (new Line($row))->fillWord('rest');
+        $line = Line::withWord($row, 'rest');
         $cells = $line->jsonSerialize();
 
         self::assertSame($cells[0]['letter'], 'r');

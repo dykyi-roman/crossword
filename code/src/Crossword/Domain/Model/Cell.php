@@ -6,6 +6,9 @@ namespace App\Crossword\Domain\Model;
 
 use JsonSerializable;
 
+/**
+ * @psalm-immutable
+ */
 final class Cell implements JsonSerializable
 {
     private null | string $letter;
@@ -15,6 +18,11 @@ final class Cell implements JsonSerializable
     {
         $this->coordinate = $coordinate;
         $this->letter = $letter;
+    }
+
+    public static function withLetter(self $cell, string $letter): self
+    {
+        return new Cell($cell->coordinate(), $letter);
     }
 
     public function coordinate(): Coordinate
@@ -40,11 +48,6 @@ final class Cell implements JsonSerializable
     public function letter(): ?string
     {
         return $this->letter;
-    }
-
-    public function fillLetter(string $letter): void
-    {
-        $this->letter = $letter;
     }
 
     public function jsonSerialize(): array

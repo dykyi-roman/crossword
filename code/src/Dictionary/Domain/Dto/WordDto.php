@@ -7,6 +7,9 @@ namespace App\Dictionary\Domain\Dto;
 use App\SharedKernel\Domain\Model\Word;
 use JsonSerializable;
 
+/**
+ * @psalm-immutable
+ */
 final class WordDto implements JsonSerializable
 {
     private Word $word;
@@ -28,6 +31,9 @@ final class WordDto implements JsonSerializable
         return $this->word;
     }
 
+    /**
+     * @psalm-suppress ImpureFunctionCall
+     */
     public function jsonSerialize(): array
     {
         return array_merge(

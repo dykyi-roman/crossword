@@ -8,6 +8,7 @@ use App\SharedKernel\Domain\Model\Word;
 
 /**
  * @psalm-immutable
+ *
  * @see SaveToStorageMessageHandler
  */
 final class SaveToStorageMessage

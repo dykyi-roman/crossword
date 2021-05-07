@@ -6,6 +6,9 @@ namespace App\Game\Domain\Dto;
 
 use Countable;
 
+/**
+ * @psalm-immutable
+ */
 final class CrosswordDto implements Countable
 {
     private array $payload;

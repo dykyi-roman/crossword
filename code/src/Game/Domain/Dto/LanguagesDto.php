@@ -6,6 +6,9 @@ namespace App\Game\Domain\Dto;
 
 use Countable;
 
+/**
+ * @psalm-immutable
+ */
 final class LanguagesDto implements Countable
 {
     private array $payload;
