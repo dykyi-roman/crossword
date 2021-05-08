@@ -20,55 +20,55 @@ placeholder:
 
 init:
 	docker network create game
-	docker-compose down -v --remove-orphans
-	docker-compose pull
-	docker-compose build
-	docker-compose up -d
+	cd ./docker && docker-compose down -v --remove-orphans
+	cd ./docker && docker-compose pull
+	cd ./docker && docker-compose build
+	cd ./docker && docker-compose up -d
 
 start:
-	docker-compose up -d
+	cd ./docker && docker-compose up -d
 
 stop:
-	docker-compose down
+	cd ./docker && docker-compose down
 
 restart: stop start
 
 cache:
-	rm -rf code/var/cache/*
+	rm -rf ../code/var/cache/*
 	@echo "Cache is clean"
 
 deptrac:
-	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/modules.yaml --no-cache"
-	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
-	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
-	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
-	docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/modules.yaml --no-cache"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
 	@echo "deptrac done"
 
 phpcs:
-	docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR12 src/"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR12 src/"
 	@echo "phpcs done"
 
 psalm:
-	docker-compose exec php sh -c "vendor/bin/psalm"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/psalm"
 	@echo "psalm done"
 
 ecs:
-	docker-compose exec php sh -c "vendor/bin/ecs check src"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/ecs check src"
 	@echo "ecs done"
 
 rector:
-	docker-compose exec php sh -c "vendor/bin/rector process"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/rector process"
 	@echo "rector done"
 
 php-test:
-	docker-compose exec php sh -c "vendor/bin/phpunit"
+	cd ./docker && docker-compose exec php sh -c "vendor/bin/phpunit"
 
 postman-test:
-	docker-compose run newman
+	cd ./docker && docker-compose run newman
 
 ci-test:
-	docker-compose -f docker-compose.test.yml run tests
+	cd ./docker && docker-compose -f docker-compose.test.yml run tests
 
 pre-commit: deptrac phpcs psalm ecs rector php-test postman-test
 	@:

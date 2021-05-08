@@ -1,8 +1,8 @@
 version: '3.7'
 services:
     tests:
-        build: docker/php-ci
+        build: php-ci
         container_name: game_ci
         command: bash -c "composer install && composer test"
         volumes:
-            - ./code:/var/www/html/code
+            - ../code:/var/www/html/code
