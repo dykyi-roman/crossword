@@ -77,7 +77,7 @@ final class RetryMiddleware
             );
     }
 
-    protected function onFulfilled(RequestInterface $request, array $options): callable
+    private function onFulfilled(RequestInterface $request, array $options): callable
     {
         return function (ResponseInterface $response) use ($request, $options) {
             return $this->shouldRetryHttpResponse($options, $response)
@@ -86,7 +86,7 @@ final class RetryMiddleware
         };
     }
 
-    protected function onRejected(RequestInterface $request, array $options): callable
+    private function onRejected(RequestInterface $request, array $options): callable
     {
         return function ($reason) use ($request, $options): PromiseInterface {
             if ($reason instanceof BadResponseException) {
@@ -103,14 +103,14 @@ final class RetryMiddleware
         };
     }
 
-    protected function shouldRetryConnectException(array $options): bool
+    private function shouldRetryConnectException(array $options): bool
     {
         return $options['retry_enabled']
             && ($options['retry_on_timeout'] ?? false)
             && $this->countRemainingRetries($options) > 0;
     }
 
-    protected function shouldRetryHttpResponse(array $options, ?ResponseInterface $response = null): bool
+    private function shouldRetryHttpResponse(array $options, ?ResponseInterface $response = null): bool
     {
         $statuses = array_map('\intval', (array) $options['retry_on_status']);
         $hasRetryAfterHeader = $response && $response->hasHeader('Retry-After');
@@ -126,7 +126,7 @@ final class RetryMiddleware
         }
     }
 
-    protected function countRemainingRetries(array $options): int
+    private function countRemainingRetries(array $options): int
     {
         $retryCount = isset($options['retry_count']) ? (int) $options['retry_count'] : 0;
         $numAllowed = isset($options['max_retry_attempts'])
@@ -136,7 +136,7 @@ final class RetryMiddleware
         return (int) max([$numAllowed - $retryCount, 0]);
     }
 
-    protected function doRetry(RequestInterface $request, array $options, ResponseInterface $response = null): Promise
+    private function doRetry(RequestInterface $request, array $options, ResponseInterface $response = null): Promise
     {
         ++$options['retry_count'];
         $delayTimeout = $this->determineDelayTimeout($options, $response);
@@ -159,7 +159,7 @@ final class RetryMiddleware
         return $this($request, $options);
     }
 
-    protected function returnResponse(array $options, ResponseInterface $response): ResponseInterface
+    private function returnResponse(array $options, ResponseInterface $response): ResponseInterface
     {
         if ($options['expose_retry_header'] === false || $options['retry_count'] === 0) {
             return $response;
@@ -168,28 +168,26 @@ final class RetryMiddleware
         return $response->withHeader($options['retry_header'], $options['retry_count']);
     }
 
-    protected function determineDelayTimeout(array $options, ?ResponseInterface $response = null): float
+    private function determineDelayTimeout(array $options, ?ResponseInterface $response = null): float
     {
+        $defaultDelayTimeout = (float) $options['default_retry_multiplier'] * $options['retry_count'];
         if (is_callable($options['default_retry_multiplier'])) {
             $defaultDelayTimeout = (float) call_user_func(
                 $options['default_retry_multiplier'],
                 $options['retry_count'],
                 $response
             );
-        } else {
-            $defaultDelayTimeout = (float) $options['default_retry_multiplier'] * $options['retry_count'];
         }
 
         // Retry-After can be a delay in seconds or a date
         // (see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
+        $timeout = abs($defaultDelayTimeout);
         if ($response && $response->hasHeader($options['retry_after_header'])) {
             $retryAfterHeader = $response->getHeader($options['retry_after_header']);
             $timeout = $this->deriveTimeoutFromHeader(
                 $retryAfterHeader[0],
                 $options['retry_after_date_format']
             ) ?? $defaultDelayTimeout;
-        } else {
-            $timeout = abs($defaultDelayTimeout);
         }
 
         if (!is_null($options['max_allowable_timeout_secs']) && abs($options['max_allowable_timeout_secs']) > 0) {
@@ -199,7 +197,7 @@ final class RetryMiddleware
         return abs($timeout);
     }
 
-    protected function deriveTimeoutFromHeader(string $headerValue, string $dateFormat = self::DATE_FORMAT): ?float
+    private function deriveTimeoutFromHeader(string $headerValue, string $dateFormat = self::DATE_FORMAT): ?float
     {
         if (is_numeric($headerValue)) {
             return (float) trim($headerValue);

@@ -53,5 +53,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/src/Game/Infrastructure/Dao',
         __DIR__ . '/src/Crossword/Infrastructure/Dao',
         __DIR__ . '/src/Dictionary/Infrastructure/Dao',
+        __DIR__ . '/src/SharedKernel/Infrastructure/HttpClient',
     ]);
 };
