@@ -23,4 +23,4 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 script:
-  - docker-compose -f docker-compose.test.yml run tests
+  - cd docker && docker-compose -f docker-compose.test.yml run tests
