@@ -34,35 +34,35 @@ stop:
 restart: stop start
 
 cache:
-	rm -rf ../code/var/cache/*
+	docker/scripts/console cache:clear
 	@echo "Cache is clean"
 
 deptrac:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/modules.yaml --no-cache"
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile/modules.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
 	@echo "deptrac done"
 
 phpcs:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/phpcs --standard=PSR12 src/"
+	docker/scripts/php "vendor/bin/phpcs --standard=PSR12 src/"
 	@echo "phpcs done"
 
 psalm:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/psalm"
+	docker/scripts/php "vendor/bin/psalm"
 	@echo "psalm done"
 
 ecs:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/ecs check src"
+	docker/scripts/php "vendor/bin/ecs check src"
 	@echo "ecs done"
 
 rector:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/rector process"
+	docker/scripts/php "vendor/bin/rector process"
 	@echo "rector done"
 
 php-test:
-	cd ./docker && docker-compose exec php sh -c "vendor/bin/phpunit"
+	docker/scripts/php "vendor/bin/phpunit"
 
 postman-test:
 	cd ./docker && docker-compose run newman
