@@ -59,9 +59,10 @@ final class RowTest extends TestCase
     public function maskDataProvider(): Generator
     {
         yield '..s' => [
-            '..s.*',
-            '{0,3}',
+            '...s.*',
+            '{0,4}',
             [
+                new Cell(new Coordinate(1, 2), ''),
                 new Cell(new Coordinate(1, 2), ''),
                 new Cell(new Coordinate(1, 3), ''),
                 new Cell(new Coordinate(1, 4), 's'),
@@ -69,9 +70,10 @@ final class RowTest extends TestCase
         ];
 
         yield '.s.' => [
-            '.s.*',
-            '{0,3}',
+            '..s.*',
+            '{0,4}',
             [
+                new Cell(new Coordinate(1, 2), ''),
                 new Cell(new Coordinate(1, 2), ''),
                 new Cell(new Coordinate(1, 3), 's'),
                 new Cell(new Coordinate(1, 4), ''),

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Service\Constructor;
 
 use App\Crossword\Domain\Enum\Type;
-use App\Crossword\Domain\Model\Grid;
 use App\Crossword\Domain\Service\Constructor\Figured\FiguredConstructor;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
 use App\Crossword\Domain\Service\Constructor\Normal\NormalConstructor;
-use App\Crossword\Domain\Service\GridScanner;
+use App\Crossword\Domain\Service\Scanner\GridScanner;
+use App\Crossword\Domain\Service\Scanner\RowXScanner;
+use App\Crossword\Domain\Service\Scanner\RowYScanner;
 use App\Crossword\Domain\Service\WordFinder;
 
 class ConstructorFactory
@@ -26,7 +27,7 @@ class ConstructorFactory
         return match ((string) $type->getValue()) {
             Type::NORMAL => new NormalConstructor(
                 new AttemptWordFinder($this->wordFinder),
-                new GridScanner(new Grid())
+                new GridScanner(new RowXScanner(), new RowYScanner())
             ),
             Type::FIGURED => new FiguredConstructor(),
         };

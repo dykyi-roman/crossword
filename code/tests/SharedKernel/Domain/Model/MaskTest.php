@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\SharedKernel\Domain\Model;
 
+use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
 use App\SharedKernel\Domain\Model\Mask;
 use Generator;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +35,17 @@ final class MaskTest extends TestCase
     /**
      * @covers ::query
      * @covers ::limit
+     */
+    public function testThrowExceptionWhenMaskLimitIsShort(): void
+    {
+        $this->expectException(SearchMaskIsShortException::class);
+
+        new Mask('a.*{3,5}');
+    }
+
+    /**
+     * @covers ::query
+     * @covers ::limit
      *
      * @dataProvider maskDataProvider
      */
@@ -51,7 +63,7 @@ final class MaskTest extends TestCase
         yield 'with first letter' => ['a.*', 'a.*', '{0,100}'];
         yield 'with random letter' => ['t.a.', 't.a.', '{0,100}'];
         yield 'all symbols with limit' => ['.*{0,10}', '.*', '{0,10}'];
-        yield 'with first letter with limit' => ['a.*{2,3}', 'a.*', '{2,3}'];
+        yield 'with first letter with limit' => ['a.*{4,5}', 'a.*', '{4,5}'];
         yield 'with random letter with limit' => ['t.a.{10,20}', 't.a.', '{10,20}'];
     }
 }

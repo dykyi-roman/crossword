@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Model;
 
 use App\Crossword\Domain\Exception\CellNotFoundException;
+use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
 use App\SharedKernel\Domain\Model\Mask;
 use ArrayIterator;
 use IteratorAggregate;
@@ -75,6 +76,8 @@ final class Row implements IteratorAggregate
     }
 
     /**
+     * @throws SearchMaskIsShortException
+     *
      * @example
      *  _ _ _ _ _ a  ===>  _ _ _ _ _ a.*{0,6}
      *  _ _ _ _ a _  ===>  _ _ _ _ a .*{0,6}

@@ -22,6 +22,11 @@ final class LineDto implements JsonSerializable
         $this->word = $word;
     }
 
+    public function line(): Line
+    {
+        return $this->line;
+    }
+
     /**
      * @psalm-suppress ImpureMethodCall
      */

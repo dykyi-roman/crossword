@@ -9,10 +9,12 @@ use App\Crossword\Domain\Dto\LineDto;
 use App\Crossword\Domain\Exception\NextLineFoundException;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Exception\WordNotFitException;
+use App\Crossword\Domain\Model\Grid;
 use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
-use App\Crossword\Domain\Service\GridScanner;
+use App\Crossword\Domain\Service\Scanner\GridScanner;
+use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
 
 final class NormalConstructor implements ConstructorInterface
 {
@@ -21,17 +23,18 @@ final class NormalConstructor implements ConstructorInterface
 
     public function __construct(AttemptWordFinder $attemptWordFinder, GridScanner $gridScanner)
     {
-        $this->gridScanner = $gridScanner;
         $this->attemptWordFinder = $attemptWordFinder;
+        $this->gridScanner = $gridScanner;
     }
 
     public function build(string $language, int $wordCount): CrosswordDto
     {
-        $this->gridScanner->fillLine(Line::withLetter(Row::withRandomRow(), chr(random_int(97, 122))));
-
         $crosswordDto = new CrosswordDto();
+        $grid = new Grid(Line::withLetter(Row::withRandomRow(), chr(random_int(97, 122))));
         for ($counter = 1; $counter <= $wordCount; $counter++) {
-            $lineDto = $this->newLine($language);
+            $rows = $this->gridScanner->scan($grid);
+            $lineDto = $this->newLine($rows, $language);
+            $grid->fillLine($lineDto->line());
             $crosswordDto = $crosswordDto->withLine($lineDto);
         }
 
@@ -41,35 +44,19 @@ final class NormalConstructor implements ConstructorInterface
     /**
      * @throws NextLineFoundException
      */
-    private function newLine($language): LineDto
+    private function newLine(array $rows, string $language): LineDto
     {
-        $rows = $this->gridScanner->scanRows();
         foreach ($rows as $row) {
-            if (null === $line = $this->rowToLine($row, $language)) {
+            try {
+                $word = $this->attemptWordFinder->find($language, $row->mask());
+                $line = Line::withWord($row, $word->value());
+
+                return new LineDto($line, $word);
+            } catch (WordFoundException | WordNotFitException | SearchMaskIsShortException) {
                 continue;
             }
-
-            return $line;
         }
 
         throw new NextLineFoundException();
-    }
-
-    private function rowToLine(Row $row, string $language): null | LineDto
-    {
-        try {
-            $mask = $row->mask();
-            if ($mask->size() <= 3) {
-                return null;
-            }
-
-            $word = $this->attemptWordFinder->find($language, $mask);
-            $line = Line::withWord($row, $word->value());
-            $this->gridScanner->fillLine($line);
-
-            return new LineDto($line, $word);
-        } catch (WordFoundException | WordNotFitException) {
-            return null;
-        }
     }
 }

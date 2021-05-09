@@ -60,16 +60,6 @@ final class Player extends AggregateRoot
         return new Level($this->level);
     }
 
-    public function createdAt(): DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function updatedAt(): DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
     public function role(): Role
     {
         return new Role($this->role);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\SharedKernel\Domain\Model;
 
+use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
 use Stringable;
 
 /**
@@ -11,13 +12,22 @@ use Stringable;
  */
 final class Mask implements Stringable
 {
+    private const LIMIT = 3;
+
     private string $query;
     private string $limit;
 
-    public function __construct(string $mask)
+    /**
+     * @throws SearchMaskIsShortException
+     */
+    public function __construct(string $mask, int $limit = self::LIMIT)
     {
         $this->limit = $this->stringBetween($mask, '{', '}');
         $this->query = $this->limit ? str_replace($this->limit(), '', $mask) : $mask;
+
+        if ((int) str_replace('0,', '', $this->limit) <= $limit) {
+            throw new SearchMaskIsShortException();
+        }
     }
 
     public function query(): string
@@ -28,11 +38,6 @@ final class Mask implements Stringable
     public function limit(): string
     {
         return sprintf('{%s}', $this->limit);
-    }
-
-    public function size(): int
-    {
-        return (int) str_replace('0,', '', $this->limit);
     }
 
     public function shiftLeft(): self
