@@ -54,5 +54,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/src/Crossword/Infrastructure/Dao',
         __DIR__ . '/src/Dictionary/Infrastructure/Dao',
         __DIR__ . '/src/SharedKernel/Infrastructure/HttpClient',
+        __DIR__ . '/src/Crossword/Domain/Service/Scanner/RowYScanner.php',
+        __DIR__ . '/src/Crossword/Domain/Service/Scanner/RowXScanner.php',
     ]);
 };

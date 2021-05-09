@@ -76,6 +76,7 @@
         },
         "phpunit": "phpunit",
         "psalm": "psalm",
+        "ecs": "ecs check src",
         "phpcs": "phpcs --standard=PSR12 src/",
         "rector": "rector process",
         "deptrac": [
@@ -89,6 +90,7 @@
             "@phpunit",
             "@phpcs",
             "@psalm",
+            "@ecs",
             "@rector",
             "@deptrac"
         ],
