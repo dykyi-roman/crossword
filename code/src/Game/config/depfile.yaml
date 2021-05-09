@@ -1,5 +1,5 @@
 paths:
-  - ../src/Dictionary
+  - ../
 exclude_files: ~
 layers:
   - name: Application
@@ -7,25 +7,25 @@ layers:
       - type: bool
         must:
           - type: className
-            regex: App\\Dictionary\\Application\\.*
+            regex: App\\Game\\Application\\.*
         must_not:
           - type: className
-            regex: App\\Dictionary\\Application\\Dto
+            regex: App\\Game\\Application\\Dto
 
   - name: Domain
     collectors:
       - type: className
-        regex: App\\Dictionary\\Domain\\.*
+        regex: App\\Game\\Domain\\.*
 
   - name: Infrastructure
     collectors:
       - type: className
-        regex: App\\Dictionary\\Infrastructure\\.*
+        regex: App\\Game\\Infrastructure\\.*
 
   - name: UI
     collectors:
       - type: className
-        regex: App\\Dictionary\\UI\\.*
+        regex: App\\Game\\UI\\.*
 
 ruleset:
   UI:

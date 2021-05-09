@@ -1,5 +1,5 @@
 paths:
-  - ../src/SharedKernel
+  - ../
 exclude_files: ~
 layers:
   - name: Application

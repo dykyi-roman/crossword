@@ -1,4 +1,9 @@
 services:
+  App\Crossword\UI\API\:
+    resource: '../UI/API'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Crossword\Application\Request\ConstructRequest: ~
   App\Crossword\Infrastructure\Adapter\Dictionary\ApiDictionaryAdapter: ~
   App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter: ~
   App\Crossword\Infrastructure\Cache\RedisClient: ~

@@ -80,11 +80,11 @@
         "phpcs": "phpcs --standard=PSR12 src/",
         "rector": "rector process",
         "deptrac": [
-            "deptrac analyze depfile/modules.yaml",
-            "deptrac analyze depfile/game.yaml",
-            "deptrac analyze depfile/dictionary.yaml",
-            "deptrac analyze depfile/crossword.yaml",
-            "deptrac analyze depfile/shared_kernel.yaml"
+            "deptrac analyze depfile.yaml",
+            "deptrac analyze src/Crossword/config/depfile.yaml",
+            "deptrac analyze src/Dictionary/config/depfile.yaml",
+            "deptrac analyze src/Game/config/depfile.yaml",
+            "deptrac analyze src/SharedKernel/config/depfile.yaml"
         ],
         "analyzer": [
             "@phpcs",

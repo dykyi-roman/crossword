@@ -18,5 +18,5 @@ doctrine:
             App\Game:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/config/doctrine/mappings'
+                dir: '%kernel.project_dir%/src/Game/config/doctrine/mappings'
                 prefix: 'App\Game\Domain\Model'

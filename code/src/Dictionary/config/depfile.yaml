@@ -1,5 +1,5 @@
 paths:
-  - ../src/Crossword
+  - ../
 exclude_files: ~
 layers:
   - name: Application
@@ -7,25 +7,25 @@ layers:
       - type: bool
         must:
           - type: className
-            regex: App\\Crossword\\Application\\.*
+            regex: App\\Dictionary\\Application\\.*
         must_not:
           - type: className
-            regex: App\\Crossword\\Application\\Dto
+            regex: App\\Dictionary\\Application\\Dto
 
   - name: Domain
     collectors:
       - type: className
-        regex: App\\Crossword\\Domain\\.*
+        regex: App\\Dictionary\\Domain\\.*
 
   - name: Infrastructure
     collectors:
       - type: className
-        regex: App\\Crossword\\Infrastructure\\.*
+        regex: App\\Dictionary\\Infrastructure\\.*
 
   - name: UI
     collectors:
       - type: className
-        regex: App\\Crossword\\UI\\.*
+        regex: App\\Dictionary\\UI\\.*
 
 ruleset:
   UI:

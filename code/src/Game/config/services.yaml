@@ -1,4 +1,24 @@
 services:
+  App\Game\UI\Web\:
+    resource: '../UI/Web'
+    tags: [ 'controller.service_arguments' ]
+
+  App\Game\Domain\Events\DomainEventsSubscriber:
+    arguments:
+      [ '@command.bus' ]
+    tags:
+      - { name: 'doctrine.event_subscriber' }
+
+  App\Game\UI\Web\NewGameAction:
+    tags: [ 'controller.service_arguments' ]
+    arguments:
+      - '@App\Game\Application\Service\PlayerFromTokenExtractor'
+
+  App\Game\Application\Service\PlayerFromTokenExtractor: ~
+  App\Game\Domain\Service\PlayerTokenHack: ~
+  App\Game\Application\Request\LoginRequest: ~
+  App\Game\Application\Request\AnswersRequest: ~
+  App\Game\Application\Service\Auth\PlayerLogin: ~
   App\Game\Infrastructure\Adapter\Crossword\ApiCrosswordAdapter: ~
   App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter: ~
 

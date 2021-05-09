@@ -15,6 +15,11 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symplify\EasyCodingStandard\ValueObject\Option;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
+include 'src/Crossword/config/ecs.php';
+include 'src/Dictionary/config/ecs.php';
+include 'src/Game/config/ecs.php';
+include 'src/SharedKernel/config/ecs.php';
+
 return static function (ContainerConfigurator $containerConfigurator): void {
     $services = $containerConfigurator->services();
     $services->set(ArraySyntaxFixer::class)
@@ -46,15 +51,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         SetList::PSR_12,
     ]);
 
-    $parameters->set(Option::SKIP, [
-        __DIR__ . '/src/Game/Infrastructure/Repository',
-        __DIR__ . '/src/Dictionary/Infrastructure/Repository',
-        __DIR__ . '/src/Crossword/Infrastructure/Repository',
-        __DIR__ . '/src/Game/Infrastructure/Dao',
-        __DIR__ . '/src/Crossword/Infrastructure/Dao',
-        __DIR__ . '/src/Dictionary/Infrastructure/Dao',
-        __DIR__ . '/src/SharedKernel/Infrastructure/HttpClient',
-        __DIR__ . '/src/Crossword/Domain/Service/Scanner/RowYScanner.php',
-        __DIR__ . '/src/Crossword/Domain/Service/Scanner/RowXScanner.php',
-    ]);
+    $parameters->set(
+        Option::SKIP,
+        array_merge(
+            array_map(static fn (string $path) => __DIR__ . $path, CROSSWORD_SKIP_PATH),
+            array_map(static fn (string $path) => __DIR__ . $path, DICTIONARY_SKIP_PATH),
+            array_map(static fn (string $path) => __DIR__ . $path, GAME_SKIP_PATH),
+            array_map(static fn (string $path) => __DIR__ . $path, SHARED_KERNEL_SKIP_PATH),
+        )
+    );
 };

@@ -1,0 +1,4 @@
+services:
+  App\Swagger\UI\Web\:
+    resource: '../UI/Web'
+    tags: [ 'controller.service_arguments' ]
