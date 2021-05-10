@@ -1,4 +1,4 @@
-Crossword game
+Crossword game test
 =======
 ![Build Status](https://travis-ci.com/dykyi-roman/crossword.svg?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dykyi-roman/crossword/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dykyi-roman/crossword/?branch=master)
