@@ -2,8 +2,8 @@ Crossword game
 =======
 ![Build Status](https://travis-ci.com/dykyi-roman/crossword.svg?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dykyi-roman/crossword/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dykyi-roman/crossword/?branch=master)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/dykyi-roman/crossword/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://github.com/dykyi-roman/crossword/blob/master/LICENSE)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.0-8892BF.svg?style=flat-square)](https://php.net/)
 
 The game is implemented as an example of scalable and high load architecture combined with modern software development practices
