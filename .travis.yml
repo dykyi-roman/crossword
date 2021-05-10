@@ -24,3 +24,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 script:
   - cd docker && docker-compose -f docker-compose.test.yml run tests
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover tests/coverage.clover

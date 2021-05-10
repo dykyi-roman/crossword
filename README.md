@@ -101,6 +101,10 @@ Swagger help to describe the structure of APIs for better understand how is it w
 
 :+1: Checked by [Newman](https://github.com/postmanlabs/newman)
 
+## CI
+* [Travis](https://travis-ci.com/github/dykyi-roman/crossword)
+* [Scrutinizer](https://scrutinizer-ci.com/g/dykyi-roman/crossword/)
+
 ## Stack
 
 * PHP 8.0

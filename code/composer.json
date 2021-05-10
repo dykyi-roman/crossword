@@ -74,7 +74,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "phpunit": "phpunit",
+        "phpunit": "phpunit --coverage-clover=tests/coverage.clover",
         "psalm": "psalm",
         "ecs": "ecs check src",
         "phpcs": "phpcs --standard=PSR12 src/",

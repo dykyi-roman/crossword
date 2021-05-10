@@ -28,10 +28,7 @@ RUN apt-get install -y -f librabbitmq-dev \
 
 RUN apt-get install -y $PHPIZE_DEPS
 
-RUN pecl install xdebug
-
 RUN docker-php-ext-install -j$(nproc) iconv \
-        && docker-php-ext-enable xdebug \
         && docker-php-ext-install pcntl \
         && docker-php-ext-configure intl \
         && docker-php-ext-install intl \

@@ -6,3 +6,5 @@ services:
         command: bash -c "composer install && composer test"
         volumes:
             - ../code:/var/www/html/code
+        environment:
+            XDEBUG_MODE: coverage
