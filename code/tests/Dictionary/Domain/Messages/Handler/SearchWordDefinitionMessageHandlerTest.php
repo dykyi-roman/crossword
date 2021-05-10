@@ -17,7 +17,7 @@ use App\Tests\CrosswordTestCase;
 final class SearchWordDefinitionMessageHandlerTest extends CrosswordTestCase
 {
     /**
-     * @covers ::search
+     * @covers ::__invoke
      */
     public function testSuccessfullySearchWordDefinition(): void
     {
@@ -33,7 +33,7 @@ final class SearchWordDefinitionMessageHandlerTest extends CrosswordTestCase
     }
 
     /**
-     * @covers ::search
+     * @covers ::__invoke
      */
     public function testDoesNotSaveWordToTheStorageWhenDefinitionIsNotFound(): void
     {

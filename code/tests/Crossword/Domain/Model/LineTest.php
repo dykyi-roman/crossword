@@ -17,6 +17,9 @@ use PHPUnit\Framework\TestCase;
  */
 final class LineTest extends TestCase
 {
+    /**
+     * @covers ::withLetter
+     */
     public function testFillLetter(): void
     {
         $row = new Row(new Cell(new Coordinate(1, 1), null));
@@ -28,7 +31,7 @@ final class LineTest extends TestCase
     }
 
     /**
-     * @covers ::fillWord
+     * @covers ::withWord
      */
     public function testThrowException(): void
     {
@@ -48,7 +51,7 @@ final class LineTest extends TestCase
     }
 
     /**
-     * @covers ::fillWord
+     * @covers ::withWord
      *
      * @dataProvider rowDataProvider
      */

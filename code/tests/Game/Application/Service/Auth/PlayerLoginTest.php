@@ -41,7 +41,7 @@ final class PlayerLoginTest extends GameTestCase
     }
 
     /**
-     * @covers ::__invokex
+     * @covers ::__invoke
      */
     public function testPlayerNotFoundInTheStorage(): void
     {

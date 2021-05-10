@@ -2,6 +2,8 @@ FROM php:8.0-fpm
 
 WORKDIR /var/www/html/code
 
+RUN pecl install xdebug
+
 RUN apt-get update && apt-get install -y \
         libzip-dev \
         libmcrypt-dev \
@@ -12,6 +14,7 @@ RUN apt-get update && apt-get install -y \
         && rm -rf /var/lib/apt/lists/*
 
 RUN docker-php-ext-install -j$(nproc) iconv \
+        && docker-php-ext-enable xdebug \
         && docker-php-ext-install pcntl \
         && docker-php-ext-install intl \
         && docker-php-ext-install zip \

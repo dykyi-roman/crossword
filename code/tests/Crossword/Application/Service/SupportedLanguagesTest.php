@@ -13,7 +13,7 @@ use App\Tests\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \App\Crossword\Application\Service\SupportedLanguages;
+ * @coversDefaultClass \App\Crossword\Application\Service\SupportedLanguages
  */
 final class SupportedLanguagesTest extends CrosswordTestCase
 {
