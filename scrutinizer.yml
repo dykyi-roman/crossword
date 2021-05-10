@@ -1,0 +1,8 @@
+build:
+  nodes:
+    coverage:
+      tests:
+        override:
+          - coverage:
+              file: code/tests/code-coverage-file
+              format: clover
