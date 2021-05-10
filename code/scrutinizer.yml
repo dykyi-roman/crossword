@@ -1,8 +1,9 @@
 build:
-tests:
-  override:
-    -
-      command: 'docker/scripts/php "-dxdebug.mode=coverage vendor/bin/phpunit --coverage-clover=tests/code-coverage-file"'
-      coverage:
-        file: 'tests/code-coverage-file'
-        format: 'clover'
+  nodes:
+    coverage:
+      tests:
+        override:
+          - command: docker/scripts/php "-dxdebug.mode=coverage vendor/bin/phpunit --coverage-clover=tests/code-coverage-file"
+            coverage:
+              file: tests/code-coverage-file
+              format: clover
