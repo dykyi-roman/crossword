@@ -2,9 +2,15 @@ version: '2.2'
 services:
     tests:
         build: php-ci
-        container_name: game_ci
-        command: bash -c "composer install && composer test"
+        container_name: test_ci
+        command: bash -c "composer install --dev && composer test"
         volumes:
             - ../code:/var/www/html/code
         environment:
             XDEBUG_MODE: coverage
+    analyzer:
+        build: php-ci
+        container_name: php-analyzer_ci
+        command: bash -c "composer install --dev && composer analyzer"
+        volumes:
+            - ../code:/var/www/html/code

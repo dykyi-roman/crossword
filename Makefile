@@ -69,6 +69,7 @@ postman-test:
 
 ci-test:
 	cd ./docker && docker-compose -f docker-compose.test.yml run tests
+	cd ./docker && docker-compose -f docker-compose.test.yml run analyzer
 
 pre-commit: deptrac phpcs psalm ecs rector php-test postman-test
 	@:

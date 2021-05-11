@@ -86,13 +86,15 @@
             "deptrac analyze depfile/crossword.yaml",
             "deptrac analyze depfile/shared_kernel.yaml"
         ],
-        "test": [
-            "@phpunit",
+        "analyzer": [
             "@phpcs",
             "@psalm",
             "@ecs",
             "@rector",
             "@deptrac"
+        ],
+        "test": [
+            "@phpunit"
         ],
         "post-install-cmd": [
             "@auto-scripts"
