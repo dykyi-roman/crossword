@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\ApiClientException;
@@ -41,9 +42,15 @@ final class ApiDictionaryAdapter implements DictionaryInterface
         }
     }
 
-    public function searchWord(string $language, string $mask): DictionaryWordDto
+    public function searchWord(WordSearchCriteria $criteria): DictionaryWordDto
     {
-        $uri = sprintf('%s/words/%s/?mask=%s', $this->dictionaryApiHost, $language, $mask);
+        $uri = sprintf(
+            '%s/words/%s/?mask=%s',
+            $this->dictionaryApiHost,
+            $criteria->language(),
+            $criteria->mask()
+        );
+
         try {
             $response = $this->client->sendRequest(new Request('GET', $uri));
 

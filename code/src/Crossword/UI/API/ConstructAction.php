@@ -53,10 +53,11 @@ final class ConstructAction
      * )
      */
     #[Route('/api/crossword/construct/{language}/{type}/{words}', name: 'crossword.api.construct', methods: ['GET'])]
-    public function __invoke(ConstructRequest $request, CrosswordReceiver $constructor): ResponseInterface
+    public function __invoke(ConstructRequest $request, CrosswordReceiver $crosswordReceiver): ResponseInterface
     {
         try {
-            $crossword = $constructor->receive($request->type(), $request->language(), $request->wordCount());
+            $key = sprintf('%s-%s-%d', $request->language(), $request->type(), $request->wordCount());
+            $crossword = $crosswordReceiver->receive($key);
 
             return new SuccessApiResponse($crossword);
         } catch (ReceiveCrosswordException) {

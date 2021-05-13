@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Domain\Service;
 
+use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Exception\CrosswordNotConstructedException;
 use App\Game\Domain\Port\CrosswordInterface;
@@ -23,10 +24,10 @@ final class CrosswordConstructor
     /**
      * @throws CrosswordNotConstructedException
      */
-    public function construct(string $language, string $type, int $wordCount): array
+    public function construct(CrosswordCriteria $criteria): array
     {
         try {
-            $crosswordDto = $this->crossword->construct($language, $type, $wordCount);
+            $crosswordDto = $this->crossword->construct($criteria);
 
             return $crosswordDto->count() ? $crosswordDto->crossword() : [];
         } catch (ApiClientException $exception) {

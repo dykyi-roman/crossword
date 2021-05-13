@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Crossword\Domain\Service;
 
 use App\Crossword\Application\Service\ErrorFactory;
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Service\WordFinder;
@@ -21,7 +22,7 @@ use Psr\Log\NullLogger;
 final class WordFinderTest extends CrosswordTestCase
 {
     /**
-     * @covers ::find
+     * @covers ::search
      */
     public function testSuccessfullyFindWord(): void
     {
@@ -30,7 +31,7 @@ final class WordFinderTest extends CrosswordTestCase
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, $dictionaryWordDto);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
-        $word = $wordFinder->find('en', '.*');
+        $word = $wordFinder->search(new WordSearchCriteria('en', '.*'));
 
         self::assertInstanceOf(Word::class, $word);
         self::assertSame($word->value(), 'test');
@@ -38,7 +39,7 @@ final class WordFinderTest extends CrosswordTestCase
     }
 
     /**
-     * @covers ::find
+     * @covers ::search
      */
     public function testThrowExceptionWhenWordIsNotFound(): void
     {
@@ -49,11 +50,11 @@ final class WordFinderTest extends CrosswordTestCase
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, $dictionaryWordDto);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
-        $wordFinder->find('en', '.*');
+        $wordFinder->search(new WordSearchCriteria('en', '.*'));
     }
 
     /**
-     * @covers ::find
+     * @covers ::search
      */
     public function testThrowExceptionWhenApiIsThrowException(): void
     {
@@ -62,6 +63,6 @@ final class WordFinderTest extends CrosswordTestCase
         $inMemoryDictionaryProvider = new InMemoryDictionaryAdapter(null, null);
 
         $wordFinder = new WordFinder($inMemoryDictionaryProvider, new NullLogger());
-        $wordFinder->find('en', '.*');
+        $wordFinder->search(new WordSearchCriteria('en', '.*'));
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\ApiClientException;
@@ -29,7 +30,7 @@ final class InMemoryDictionaryAdapter implements DictionaryInterface
         return $this->languagesDto;
     }
 
-    public function searchWord(string $language, string $mask): DictionaryWordDto
+    public function searchWord(WordSearchCriteria $criteria): DictionaryWordDto
     {
         if (null === $this->wordDto) {
             throw ApiClientException::badRequest('test error message');

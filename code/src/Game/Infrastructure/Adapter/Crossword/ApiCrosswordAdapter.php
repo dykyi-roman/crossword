@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Adapter\Crossword;
 
+use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
 use App\Game\Domain\Exception\ApiClientException;
@@ -29,9 +30,16 @@ final class ApiCrosswordAdapter implements CrosswordInterface
         $this->responseDataExtractor = $responseDataExtractor;
     }
 
-    public function construct(string $language, string $type, int $wordCount): CrosswordDto
+    public function construct(CrosswordCriteria $criteria): CrosswordDto
     {
-        $uri = sprintf('%s/construct/%s/%s/%d', $this->crosswordApiHost, $language, $type, $wordCount);
+        $uri = sprintf(
+            '%s/construct/%s/%s/%d',
+            $this->crosswordApiHost,
+            $criteria->language(),
+            $criteria->type(),
+            $criteria->wordCount()
+        );
+
         try {
             $response = $this->client->sendRequest(new Request('GET', $uri));
 

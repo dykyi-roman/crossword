@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Port\DictionaryInterface;
@@ -32,9 +33,14 @@ final class DirectDictionaryAdapter implements DictionaryInterface
         return new DictionaryLanguagesDto($data->body());
     }
 
-    public function searchWord(string $language, string $mask): DictionaryWordDto
+    public function searchWord(WordSearchCriteria $criteria): DictionaryWordDto
     {
-        $words = $this->wordsFinder->find($language, new Mask($mask), self::LIMIT);
+        $words = $this->wordsFinder->find(
+            $criteria->language(),
+            new Mask($criteria->mask()),
+            self::LIMIT
+        );
+
         $data = new SuccessApiResponse($words->jsonSerialize());
 
         return new DictionaryWordDto($data->body());

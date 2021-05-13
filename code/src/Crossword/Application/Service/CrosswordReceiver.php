@@ -23,11 +23,9 @@ final class CrosswordReceiver
     /**
      * @throws ReceiveCrosswordException
      */
-    public function receive(string $type, string $language, int $wordCount): array
+    public function receive(string $key): array
     {
         try {
-            $key = sprintf('%s-%s-%d', $language, $type, $wordCount);
-
             return $this->readCrosswordRepository->get($key);
         } catch (Throwable $exception) {
             $this->logger->error($exception->getMessage());

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service;
 
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Port\DictionaryInterface;
@@ -21,10 +22,10 @@ final class WordFinder
         $this->dictionary = $dictionary;
     }
 
-    public function find(string $language, string $mask): Word
+    public function search(WordSearchCriteria $criteria): Word
     {
         try {
-            $searchWordDto = $this->dictionary->searchWord($language, $mask);
+            $searchWordDto = $this->dictionary->searchWord($criteria);
             if ($searchWordDto->count()) {
                 return new Word($searchWordDto->word(), $searchWordDto->definition());
             }

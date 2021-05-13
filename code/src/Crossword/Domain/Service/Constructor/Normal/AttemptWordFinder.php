@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Crossword\Domain\Service\Constructor\Normal;
 
+use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Service\WordFinder;
 use App\SharedKernel\Domain\Model\Mask;
@@ -30,7 +31,7 @@ final class AttemptWordFinder
 
         do {
             try {
-                return $this->wordFinder->find($language, (string) $template);
+                return $this->wordFinder->search(new WordSearchCriteria($language, (string) $template));
             } catch (WordFoundException) {
                 $counter++;
                 $template = $template->shiftLeft();
