@@ -10,6 +10,10 @@
         <directory name="src" />
         <ignoreFiles>
             <directory name="vendor" />
+            <file name="src/Crossword/tests/bootstrap.php" />
+            <file name="src/Dictionary/tests/bootstrap.php" />
+            <file name="src/Game/tests/bootstrap.php" />
+            <file name="src/SharedKernel/tests/bootstrap.php" />
         </ignoreFiles>
     </projectFiles>
 </psalm>

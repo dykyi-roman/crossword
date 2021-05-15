@@ -1,5 +1,17 @@
-controllers:
-    resource: ../../src/
+controllers_game:
+    resource: ../../src/Game/UI
+    type: annotation
+
+controllers_crossword:
+    resource: ../../src/Crossword/UI
+    type: annotation
+
+controllers_dictionary:
+    resource: ../../src/Dictionary/UI
+    type: annotation
+
+controllers_swagger:
+    resource: ../../src/Swagger/UI
     type: annotation
 
 kernel:

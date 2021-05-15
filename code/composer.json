@@ -61,7 +61,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\Crossword\\": "src/Crossword/tests/",
+            "App\\Tests\\Dictionary\\": "src/Dictionary/tests/",
+            "App\\Tests\\Game\\": "src/Game/tests/",
+            "App\\Tests\\SharedKernel\\": "src/SharedKernel/tests/"
         }
     },
     "replace": {
@@ -74,7 +77,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
-        "phpunit": "phpunit --coverage-clover=tests/coverage.clover",
+        "phpunit": "phpunit --coverage-clover=coverage.clover",
         "psalm": "psalm",
         "ecs": "ecs check src",
         "phpcs": "phpcs --standard=PSR12 src/",
