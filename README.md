@@ -64,9 +64,9 @@ It is a way of thinking and a set of priorities, aimed at accelerating software 
 On a macro level using DDD concepts like Ubiquitous Language and Bounded Contexts can solve complex perspectives on data in to smaller models and clear data ownership.
 Follow practices splitting the source code based on bounded contexts we define a next context:
 
-* [Crossword](docs/Crossword.md) - algorithm for building crosswords
-* [Dictionary](docs/Dictionary.md) - words storage 
-* [Game](docs/Game.md) - game functionality
+* [Crossword](code/src/Crossword/README.md) - algorithm for building crosswords
+* [Dictionary](code/src/Dictionary/README.md) - words storage 
+* [Game](code/src/Game/README.md) - game functionality
 
 For reducing duplication of code we use a `SharedKernel`, it helps share a common code between context.
 
