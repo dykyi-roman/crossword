@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Crossword\Application\Service;
 
 use App\Crossword\Application\Exception\NotFoundSupportedLanguagesException;
+use App\Crossword\Application\Response\API\SuccessApiResponse;
 use App\Crossword\Application\Service\SupportedLanguages;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Psr\Log\NullLogger;
 use App\Tests\Crossword\CrosswordTestCase;
 

@@ -6,11 +6,11 @@ namespace App\Crossword\UI\API;
 
 use App\Crossword\Application\Exception\ReceiveCrosswordException;
 use App\Crossword\Application\Request\ConstructRequest;
+use App\Crossword\Application\Response\API\FailedApiResponse;
+use App\Crossword\Application\Response\API\ResponseInterface;
+use App\Crossword\Application\Response\API\SuccessApiResponse;
 use App\Crossword\Application\Service\CrosswordReceiver;
 use App\Crossword\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\API\FailedApiResponse;
-use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

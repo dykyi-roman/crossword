@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Dictionary\Domain\Repository;
 
 use App\Dictionary\Domain\Exception\FailedSaveToStorageException;
-use App\SharedKernel\Domain\Model\Word;
+use App\Dictionary\Domain\Model\Word;
 
 interface WriteWordsStorageInterface
 {

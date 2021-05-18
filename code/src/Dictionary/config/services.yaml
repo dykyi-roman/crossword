@@ -11,6 +11,7 @@ services:
 
   App\Dictionary\Application\Request\WordRequest: ~
   App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionWikipediaApiGateway: ~
+  App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway:
     calls:
@@ -36,3 +37,4 @@ services:
   App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway'
   App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
   App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
+  App\Dictionary\Domain\Service\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'

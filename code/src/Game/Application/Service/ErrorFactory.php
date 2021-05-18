@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Game\Application\Service;
 
-use App\SharedKernel\Domain\Model\Error;
+use App\Game\Application\Dto\ErrorDto;
 
 final class ErrorFactory
 {
-    public static function wrongAnswers(array $rightAnswers): Error
+    public static function wrongAnswers(array $rightAnswers): ErrorDto
     {
-        return new Error('WRONG_ANSWERS', 'Wrong answers.', $rightAnswers);
+        return new ErrorDto('WRONG_ANSWERS', 'Wrong answers.', $rightAnswers);
     }
 }

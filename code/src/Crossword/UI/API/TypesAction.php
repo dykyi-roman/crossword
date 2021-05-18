@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Crossword\UI\API;
 
+use App\Crossword\Application\Response\API\ResponseInterface;
+use App\Crossword\Application\Response\API\SuccessApiResponse;
 use App\Crossword\Application\Service\SupportedTypes;
-use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

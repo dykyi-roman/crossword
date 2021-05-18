@@ -7,8 +7,8 @@ namespace App\Crossword\Domain\Service;
 use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Exception\WordFoundException;
+use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Port\DictionaryInterface;
-use App\SharedKernel\Domain\Model\Word;
 use Psr\Log\LoggerInterface;
 
 final class WordFinder

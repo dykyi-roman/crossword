@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Application\Request;
 
-use App\SharedKernel\Application\Assert\RequestAssert;
+use App\Game\Application\Assert\RequestAssert;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class LoginRequest

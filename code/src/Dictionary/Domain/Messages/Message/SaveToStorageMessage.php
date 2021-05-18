@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Domain\Messages\Message;
 
-use App\SharedKernel\Domain\Model\Word;
+use App\Dictionary\Domain\Model\Word;
 
 /**
  * @psalm-immutable

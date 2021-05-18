@@ -8,7 +8,9 @@ services:
   App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter: ~
   App\Crossword\Infrastructure\Cache\RedisClient: ~
   App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository: ~
+  App\Crossword\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   Psr\Cache\CacheItemPoolInterface: '@App\Crossword\Infrastructure\Cache\RedisClient'
   App\Crossword\Domain\Port\DictionaryInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter'
   App\Crossword\Domain\Repository\PersistCrosswordRepositoryInterface: '@App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository'
+  App\Crossword\Domain\Service\ResponseDataExtractorInterface: '@App\Crossword\Infrastructure\HttpClient\ResponseDataExtractor'

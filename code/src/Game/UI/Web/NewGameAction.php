@@ -9,10 +9,8 @@ use App\Game\Application\Enum\WordCount;
 use App\Game\Application\Exception\PlayerNotFoundInTokenStorageException;
 use App\Game\Application\Service\GamePlay;
 use App\Game\Application\Service\PlayerFromTokenExtractor;
-use App\SharedKernel\Application\Response\Web\HtmlResponse;
-use App\SharedKernel\Application\Response\Web\ResponseInterface;
-use App\SharedKernel\Application\Response\Web\TwigResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 final class NewGameAction
 {
@@ -24,17 +22,17 @@ final class NewGameAction
     }
 
     #[Route('/game/play', name: 'web.game.play.view', methods: ['GET'])]
-    public function __invoke(GamePlay $game): ResponseInterface
+    public function __invoke(GamePlay $game, Environment $twig): string
     {
         try {
             $playerDto = $this->extractor->player();
         } catch (PlayerNotFoundInTokenStorageException) {
-            return new HtmlResponse('Login session is over.');
+            return 'Login session is over.';
         }
 
         $gameDto = $game->new('en', Type::byRole($playerDto->role()), WordCount::byLevel($playerDto->level()));
 
-        return new TwigResponse('@game/play.html.twig', [
+        return $twig->render('@game/play.html.twig', [
             'player' => $playerDto,
             'game' => $gameDto,
         ]);

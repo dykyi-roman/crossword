@@ -7,6 +7,7 @@ namespace App\Crossword\Domain\Service\Constructor\Normal;
 use App\Crossword\Domain\Dto\CrosswordDto;
 use App\Crossword\Domain\Dto\LineDto;
 use App\Crossword\Domain\Exception\NextLineFoundException;
+use App\Crossword\Domain\Exception\SearchMaskIsShortException;
 use App\Crossword\Domain\Exception\WordFoundException;
 use App\Crossword\Domain\Exception\WordNotFitException;
 use App\Crossword\Domain\Model\Grid;
@@ -14,7 +15,6 @@ use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Domain\Service\Scanner\GridScanner;
-use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
 
 final class NormalConstructor implements ConstructorInterface
 {

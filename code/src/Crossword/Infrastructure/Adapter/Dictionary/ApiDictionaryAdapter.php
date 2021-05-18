@@ -9,7 +9,7 @@ use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\ApiClientException;
 use App\Crossword\Domain\Port\DictionaryInterface;
-use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
+use App\Crossword\Domain\Service\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;

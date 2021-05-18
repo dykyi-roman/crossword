@@ -24,7 +24,6 @@
             <directory suffix=".php">src/Crossword/tests</directory>
             <directory suffix=".php">src/Dictionary/tests</directory>
             <directory suffix=".php">src/Game/tests</directory>
-            <directory suffix=".php">src/SharedKernel/tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

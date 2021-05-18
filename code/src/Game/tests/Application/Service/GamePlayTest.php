@@ -7,13 +7,13 @@ namespace App\Tests\Game\Application\Service;
 use App\Game\Application\Dto\GameDto;
 use App\Game\Application\Enum\Type;
 use App\Game\Application\Enum\WordCount;
+use App\Game\Application\Response\API\SuccessApiResponse;
 use App\Game\Application\Service\GamePlay;
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Enum\Level;
 use App\Game\Domain\Enum\Role;
 use App\Game\Domain\Port\CrosswordInterface;
 use App\Game\Domain\Service\CrosswordConstructor;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 

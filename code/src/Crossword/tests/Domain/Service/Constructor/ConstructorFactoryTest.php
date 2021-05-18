@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Crossword\Domain\Service\Constructor;
+namespace App\Tests\Crossword\Domain\Service\Constructor;
 
 use App\Crossword\Domain\Enum\Type;
 use App\Crossword\Domain\Service\Constructor\ConstructorFactory;

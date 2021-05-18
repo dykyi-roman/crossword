@@ -20,7 +20,7 @@ final class DictionaryWordDto implements Countable
 
     public function count(): int
     {
-        return 'success' === $this->payload['status'] ? 1 : 0;
+        return $this->payload['success'] ? 1 : 0;
     }
 
     public function word(): string
@@ -35,6 +35,6 @@ final class DictionaryWordDto implements Countable
 
     private function isSuccess(): bool
     {
-        return 'success' === $this->payload['status'];
+        return (bool) $this->payload['success'];
     }
 }

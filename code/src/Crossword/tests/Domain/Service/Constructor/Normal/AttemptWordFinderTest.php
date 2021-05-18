@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Crossword\Domain\Service\Constructor\Normal;
+namespace App\Tests\Crossword\Domain\Service\Constructor\Normal;
 
 use App\Crossword\Domain\Dto\DictionaryWordDto;
+use App\Crossword\Domain\Model\Mask;
+use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\Constructor\Normal\AttemptWordFinder;
 use App\Crossword\Domain\Service\WordFinder;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
-use App\SharedKernel\Domain\Model\Mask;
-use App\SharedKernel\Domain\Model\Word;
 use App\Tests\Crossword\CrosswordTestCase;
 use Psr\Log\NullLogger;
 
@@ -24,8 +23,10 @@ final class AttemptWordFinderTest extends CrosswordTestCase
      */
     public function testSuccessfullyFindWord(): void
     {
-        $response = new SuccessApiResponse([['word' => 'test', 'definition' => 'test test']]);
-        $wordDto = new DictionaryWordDto($response->body());
+        $wordDto = new DictionaryWordDto([
+            'success' => true,
+            'data' => [['word' => 'test', 'definition' => 'test test']],
+        ]);
         $wordFinder = new WordFinder(new InMemoryDictionaryAdapter(null, $wordDto), new NullLogger());
         $attemptWordFinder = new AttemptWordFinder($wordFinder);
 

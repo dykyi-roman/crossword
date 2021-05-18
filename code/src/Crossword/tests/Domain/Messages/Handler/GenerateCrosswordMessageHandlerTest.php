@@ -13,11 +13,11 @@ use App\Crossword\Domain\Model\Cell;
 use App\Crossword\Domain\Model\Coordinate;
 use App\Crossword\Domain\Model\Line;
 use App\Crossword\Domain\Model\Row;
+use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\Constructor\ConstructorFactory;
 use App\Crossword\Domain\Service\Constructor\ConstructorInterface;
 use App\Crossword\Infrastructure\Cache\InMemoryClient;
 use App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository;
-use App\SharedKernel\Domain\Model\Word;
 use App\Tests\Crossword\CrosswordTestCase;
 
 /**

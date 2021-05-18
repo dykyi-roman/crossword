@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Crossword\Domain\Service;
 
+use App\Crossword\Application\Response\API\FailedApiResponse;
+use App\Crossword\Application\Response\API\SuccessApiResponse;
 use App\Crossword\Application\Service\ErrorFactory;
 use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Exception\WordFoundException;
+use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\WordFinder;
 use App\Crossword\Infrastructure\Adapter\Dictionary\InMemoryDictionaryAdapter;
-use App\SharedKernel\Application\Response\API\FailedApiResponse;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
-use App\SharedKernel\Domain\Model\Word;
 use Psr\Log\NullLogger;
 use App\Tests\Crossword\CrosswordTestCase;
 

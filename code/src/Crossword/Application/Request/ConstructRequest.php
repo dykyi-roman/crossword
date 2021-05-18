@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Request;
 
+use App\Crossword\Application\Assert\RequestAssert;
 use App\Crossword\Application\Assert\TypeAssert;
 use App\Crossword\Domain\Enum\Type;
-use App\SharedKernel\Application\Assert\RequestAssert;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
 

@@ -8,9 +8,9 @@ use App\Dictionary\Application\Dto\StorageWordDtoCollection;
 use App\Dictionary\Domain\Dto\WordDto;
 use App\Dictionary\Domain\Dto\WordDtoCollection;
 use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
+use App\Dictionary\Domain\Model\Mask;
+use App\Dictionary\Domain\Model\Word;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
-use App\SharedKernel\Domain\Model\Mask;
-use App\SharedKernel\Domain\Model\Word;
 use Elasticsearch\Client;
 use Throwable;
 

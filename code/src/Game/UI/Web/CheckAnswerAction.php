@@ -6,11 +6,11 @@ namespace App\Game\UI\Web;
 
 use App\Game\Application\Exception\WrongAnswerException;
 use App\Game\Application\Request\AnswersRequest;
+use App\Game\Application\Response\API\FailedApiResponse;
+use App\Game\Application\Response\API\ResponseInterface;
+use App\Game\Application\Response\API\SuccessApiResponse;
 use App\Game\Application\Service\Answers\Answers;
 use App\Game\Application\Service\ErrorFactory;
-use App\SharedKernel\Application\Response\API\FailedApiResponse;
-use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 final class CheckAnswerAction

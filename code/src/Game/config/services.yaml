@@ -21,6 +21,7 @@ services:
   App\Game\Application\Service\Auth\PlayerLogin: ~
   App\Game\Infrastructure\Adapter\Crossword\ApiCrosswordAdapter: ~
   App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter: ~
+  App\Game\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   App\Game\Infrastructure\Dao\Doctrine\HistoryDao:
     arguments:
@@ -32,3 +33,4 @@ services:
   App\Game\Domain\Service\Encoder\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'
   App\Game\Domain\Service\Encoder\LetterEncoderInterface: '@App\Game\Infrastructure\Encoder\Base64Encoder'
   App\Game\Domain\Port\CrosswordInterface: '@App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter'
+  App\Game\Domain\Service\ResponseDataExtractorInterface: '@App\Game\Infrastructure\HttpClient\ResponseDataExtractor'

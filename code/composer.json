@@ -63,8 +63,7 @@
         "psr-4": {
             "App\\Tests\\Crossword\\": "src/Crossword/tests/",
             "App\\Tests\\Dictionary\\": "src/Dictionary/tests/",
-            "App\\Tests\\Game\\": "src/Game/tests/",
-            "App\\Tests\\SharedKernel\\": "src/SharedKernel/tests/"
+            "App\\Tests\\Game\\": "src/Game/tests/"
         }
     },
     "replace": {
@@ -86,8 +85,7 @@
             "deptrac analyze depfile.yaml",
             "deptrac analyze src/Crossword/config/depfile.yaml",
             "deptrac analyze src/Dictionary/config/depfile.yaml",
-            "deptrac analyze src/Game/config/depfile.yaml",
-            "deptrac analyze src/SharedKernel/config/depfile.yaml"
+            "deptrac analyze src/Game/config/depfile.yaml"
         ],
         "analyzer": [
             "@phpcs",

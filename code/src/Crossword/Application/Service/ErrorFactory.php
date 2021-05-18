@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Crossword\Application\Service;
 
-use App\SharedKernel\Domain\Model\Error;
+use App\Crossword\Application\Dto\ErrorDto;
 
 final class ErrorFactory
 {
-    public static function languageIsNotFound(): Error
+    public static function languageIsNotFound(): ErrorDto
     {
-        return new Error('LANGUAGES_NOT_FOUND', 'Not found any supported languages.');
+        return new ErrorDto('LANGUAGES_NOT_FOUND', 'Not found any supported languages.');
     }
 
-    public static function crosswordIsNotReceived(): Error
+    public static function crosswordIsNotReceived(): ErrorDto
     {
-        return new Error('CROSSWORD_NOT_RECEIVED', 'Crossword is not received from the storage.');
+        return new ErrorDto('CROSSWORD_NOT_RECEIVED', 'Crossword is not received from the storage.');
     }
 }

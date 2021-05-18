@@ -10,4 +10,3 @@ services:
   App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   Psr\Http\Client\ClientInterface: '@App\SharedKernel\Infrastructure\HttpClient\GuzzleClient'
-  App\SharedKernel\Domain\Service\ResponseDataExtractorInterface: '@App\SharedKernel\Infrastructure\HttpClient\ResponseDataExtractor'

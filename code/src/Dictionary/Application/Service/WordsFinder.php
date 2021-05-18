@@ -7,8 +7,8 @@ namespace App\Dictionary\Application\Service;
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Domain\Dto\WordDtoCollection;
 use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
+use App\Dictionary\Domain\Model\Mask;
 use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
-use App\SharedKernel\Domain\Model\Mask;
 use Psr\Log\LoggerInterface;
 
 final class WordsFinder
@@ -22,10 +22,10 @@ final class WordsFinder
         $this->wordsStorage = $readWordsStorage;
     }
 
-    public function find(string $language, Mask $mask, int $limit): WordDtoCollection
+    public function find(string $language, string $mask, int $limit): WordDtoCollection
     {
         try {
-            return $this->wordsStorage->search($language, $mask, $limit);
+            return $this->wordsStorage->search($language, new Mask($mask), $limit);
         } catch (WordNotFoundInStorageException $exception) {
             $this->logger->error($exception->getMessage());
 

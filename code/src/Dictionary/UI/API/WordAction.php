@@ -6,11 +6,11 @@ namespace App\Dictionary\UI\API;
 
 use App\Dictionary\Application\Exception\NotFoundWordException;
 use App\Dictionary\Application\Request\WordRequest;
+use App\Dictionary\Application\Response\API\FailedApiResponse;
+use App\Dictionary\Application\Response\API\ResponseInterface;
+use App\Dictionary\Application\Response\API\SuccessApiResponse;
 use App\Dictionary\Application\Service\ErrorFactory;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\SharedKernel\Application\Response\API\FailedApiResponse;
-use App\SharedKernel\Application\Response\API\ResponseInterface;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
 use Symfony\Component\Routing\Annotation\Route;
 

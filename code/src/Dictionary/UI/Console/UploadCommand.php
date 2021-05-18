@@ -6,9 +6,8 @@ namespace App\Dictionary\UI\Console;
 
 use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Criteria\WordsStorageUploadCriteria;
+use App\Dictionary\Application\Response\Console\ResponseInterface;
 use App\Dictionary\Application\Service\WordsStorageUpload;
-use App\SharedKernel\Application\Response\Console\ResponseInterface;
-use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 

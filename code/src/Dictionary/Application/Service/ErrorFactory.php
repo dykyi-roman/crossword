@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Service;
 
-use App\SharedKernel\Domain\Model\Error;
+use App\Dictionary\Application\Dto\ErrorDto;
 
 final class ErrorFactory
 {
-    public static function emptyDictionary(): Error
+    public static function emptyDictionary(): ErrorDto
     {
-        return new Error('DICTIONARY_IS_EMPTY', 'Dictionary is empty.');
+        return new ErrorDto('DICTIONARY_IS_EMPTY', 'Dictionary is empty.');
     }
 
-    public static function wordIsNotFound(): Error
+    public static function wordIsNotFound(): ErrorDto
     {
-        return new Error('WORD_IS_NOT_FOUND', 'Word is not found in the dictionary.');
+        return new ErrorDto('WORD_IS_NOT_FOUND', 'Word is not found in the dictionary.');
     }
 }

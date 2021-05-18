@@ -27,7 +27,6 @@ services:
         resource: '../src/*'
         exclude:
             - '../src/SharedKernel/config/'
-            - '../src/SharedKernel/tests/'
             - '../src/Swagger/config/'
             - '../src/Swagger/tests/'
             - '../src/Game/config/'

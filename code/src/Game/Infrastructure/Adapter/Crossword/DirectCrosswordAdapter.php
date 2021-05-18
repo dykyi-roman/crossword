@@ -10,7 +10,6 @@ use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
 use App\Game\Domain\Port\CrosswordInterface;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
 
 final class DirectCrosswordAdapter implements CrosswordInterface
 {
@@ -26,16 +25,18 @@ final class DirectCrosswordAdapter implements CrosswordInterface
     public function construct(CrosswordCriteria $criteria): CrosswordDto
     {
         $key = sprintf('%s-%s-%d', $criteria->language(), $criteria->type(), $criteria->wordCount());
-        $data = $this->crosswordReceiver->receive($key);
-        $response = new SuccessApiResponse($data);
 
-        return new CrosswordDto($response->body());
+        return new CrosswordDto([
+            'success' => true,
+            'data' => $this->crosswordReceiver->receive($key),
+        ]);
     }
 
     public function supportedLanguages(): LanguagesDto
     {
-        $response = new SuccessApiResponse($this->supportedLanguages->receive());
-
-        return new LanguagesDto($response->body());
+        return new LanguagesDto([
+            'success' => true,
+            'data' => $this->supportedLanguages->receive(),
+        ]);
     }
 }

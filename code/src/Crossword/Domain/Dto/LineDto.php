@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Dto;
 
 use App\Crossword\Domain\Model\Line;
-use App\SharedKernel\Domain\Model\Word;
+use App\Crossword\Domain\Model\Word;
 use JsonSerializable;
 
 /**

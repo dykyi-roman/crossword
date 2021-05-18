@@ -38,11 +38,10 @@ cache:
 	@echo "Cache is clean"
 
 deptrac:
-	docker/scripts/php "vendor/bin/deptrac analyze depfile/modules.yaml --no-cache"
-	docker/scripts/php "vendor/bin/deptrac analyze depfile/game.yaml --no-cache"
-	docker/scripts/php "vendor/bin/deptrac analyze depfile/dictionary.yaml --no-cache"
-	docker/scripts/php "vendor/bin/deptrac analyze depfile/crossword.yaml --no-cache"
-	docker/scripts/php "vendor/bin/deptrac analyze depfile/shared_kernel.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze depfile.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze src/Crossword/config/depfile.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze src/Dictionary/config/depfile.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze src/Game/config/depfile.yaml --no-cache"
 	@echo "deptrac done"
 
 phpcs:

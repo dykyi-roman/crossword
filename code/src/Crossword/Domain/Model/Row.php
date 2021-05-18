@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Crossword\Domain\Model;
 
 use App\Crossword\Domain\Exception\CellNotFoundException;
-use App\SharedKernel\Domain\Exception\SearchMaskIsShortException;
-use App\SharedKernel\Domain\Model\Mask;
+use App\Crossword\Domain\Exception\SearchMaskIsShortException;
 use ArrayIterator;
 use IteratorAggregate;
 

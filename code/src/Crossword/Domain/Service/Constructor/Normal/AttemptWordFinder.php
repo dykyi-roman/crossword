@@ -6,9 +6,9 @@ namespace App\Crossword\Domain\Service\Constructor\Normal;
 
 use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Exception\WordFoundException;
+use App\Crossword\Domain\Model\Mask;
+use App\Crossword\Domain\Model\Word;
 use App\Crossword\Domain\Service\WordFinder;
-use App\SharedKernel\Domain\Model\Mask;
-use App\SharedKernel\Domain\Model\Word;
 
 final class AttemptWordFinder
 {

@@ -10,8 +10,6 @@ use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Port\DictionaryInterface;
 use App\Dictionary\Application\Service\SupportedLanguages;
 use App\Dictionary\Application\Service\WordsFinder;
-use App\SharedKernel\Application\Response\API\SuccessApiResponse;
-use App\SharedKernel\Domain\Model\Mask;
 
 final class DirectDictionaryAdapter implements DictionaryInterface
 {
@@ -28,21 +26,23 @@ final class DirectDictionaryAdapter implements DictionaryInterface
 
     public function supportedLanguages(): DictionaryLanguagesDto
     {
-        $data = new SuccessApiResponse($this->supportedLanguages->receive());
-
-        return new DictionaryLanguagesDto($data->body());
+        return new DictionaryLanguagesDto([
+            'success' => true,
+            'data' => $this->supportedLanguages->receive(),
+        ]);
     }
 
     public function searchWord(WordSearchCriteria $criteria): DictionaryWordDto
     {
         $words = $this->wordsFinder->find(
             $criteria->language(),
-            new Mask($criteria->mask()),
+            $criteria->mask(),
             self::LIMIT
         );
 
-        $data = new SuccessApiResponse($words->jsonSerialize());
-
-        return new DictionaryWordDto($data->body());
+        return new DictionaryWordDto([
+            'success' => true,
+            'data' => $words->jsonSerialize(),
+        ]);
     }
 }

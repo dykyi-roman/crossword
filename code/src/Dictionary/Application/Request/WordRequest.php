@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Application\Request;
 
-use App\SharedKernel\Application\Assert\RequestAssert;
-use App\SharedKernel\Domain\Model\Mask;
+use App\Dictionary\Application\Assert\RequestAssert;
+use App\Dictionary\Domain\Model\Mask;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class WordRequest
@@ -19,13 +19,13 @@ final class WordRequest
         $this->requestStack = $requestStack;
     }
 
-    public function mask(): Mask
+    public function mask(): string
     {
         RequestAssert::missingRequest($request = $this->requestStack->getCurrentRequest());
 
         $query = $request->query;
 
-        return new Mask((string) $query->get('mask', ''));
+        return (string) $query->get('mask', '');
     }
 
     public function language(): string
