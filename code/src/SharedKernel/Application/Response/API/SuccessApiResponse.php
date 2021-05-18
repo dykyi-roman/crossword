@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Response\API;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
-use App\SharedKernel\Application\Enum\ResponseStatus;
 
 /**
  * @psalm-immutable
@@ -24,7 +23,7 @@ final class SuccessApiResponse implements ResponseInterface
     public function body(): array
     {
         return [
-            'status' => ResponseStatus::SUCCESS,
+            'success' => true,
             'data' => $this->data,
         ];
     }

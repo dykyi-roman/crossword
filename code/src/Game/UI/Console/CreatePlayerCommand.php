@@ -9,7 +9,6 @@ use App\Game\Application\Assert\RoleAssert;
 use App\Game\Application\Criteria\PlayerRegisterCriteria;
 use App\Game\Application\Service\Auth\PlayerRegister;
 use App\SharedKernel\Application\Response\Console\ResponseInterface;
-use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

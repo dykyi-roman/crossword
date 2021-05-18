@@ -30,6 +30,6 @@ final class CrosswordDto implements Countable
 
     private function isSuccess(): bool
     {
-        return 'success' === $this->payload['status'];
+        return (bool) $this->payload['success'];
     }
 }

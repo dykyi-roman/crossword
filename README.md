@@ -13,6 +13,13 @@ The game is implemented as an example of scalable and high load architecture com
 
 ![image](docs/example.gif)
 
+# Project structure
+
+| Packaging approach   | Branch                              | HEAD |
+| -------------------- | ----------------------------------- | ---- |
+| By features          | [feature/package-by-feature](https://github.com/dykyi-roman/crossword/tree/feature/package-by-feature) | master |
+| By layers            | [feature/package-by-layer](https://github.com/dykyi-roman/crossword/tree/feature/package-by-layer)     |        |
+
 # Architecture
 
 **RabbitMQ** - need for handling commands and events asynchronous via the Symfony Messenger component.
@@ -41,7 +48,7 @@ These implementations will be the adapter - `{modue}\Infrastructure\Adapter`:
 * `DirectAdapter` - used to direct communicate with another module
 * `InMemoryAdapter` - used to mock module in teh tests
 
-### Layered
+### Layered 
 
 To make the code organised each module uses Layered Architecture and each functional area is divided on four layers:
 
@@ -49,6 +56,8 @@ To make the code organised each module uses Layered Architecture and each functi
 * `Doman`
 * `Infrastructure`
 * `UI`
+
+Switch to check it [feature/package-by-layer](https://github.com/dykyi-roman/crossword/tree/feature/package-by-layer)
 
 :+1: Checked by [Deptrac](https://github.com/qossmic/deptrac)
 

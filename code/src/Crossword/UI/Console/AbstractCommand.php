@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\SharedKernel\UI\Console;
+namespace App\Crossword\UI\Console;
 
 use App\SharedKernel\Application\Response\Console\ConsoleResponse;
 use App\SharedKernel\Application\Response\Console\ResponseInterface;

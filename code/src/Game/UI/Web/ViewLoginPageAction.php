@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace App\Game\UI\Web;
 
 use App\Game\Application\Request\LoginRequest;
-use App\SharedKernel\Application\Response\Web\ResponseInterface;
-use App\SharedKernel\Application\Response\Web\TwigResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 final class ViewLoginPageAction
 {
     #[Route('/game/login', name: 'web.game.login.view', methods: ['GET'])]
-    public function __invoke(LoginRequest $request): ResponseInterface
+    public function __invoke(LoginRequest $request, Environment $twig): string
     {
-        return new TwigResponse('@game/login.html.twig');
+        return $twig->render('@game/login.html.twig');
     }
 }

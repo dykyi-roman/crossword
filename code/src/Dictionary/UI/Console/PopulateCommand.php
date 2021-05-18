@@ -8,7 +8,6 @@ use App\Dictionary\Application\Assert\FileAssert;
 use App\Dictionary\Application\Criteria\WordsStoragePopulateCriteria;
 use App\Dictionary\Application\Service\WordsStoragePopulate;
 use App\SharedKernel\Application\Response\Console\ResponseInterface;
-use App\SharedKernel\UI\Console\AbstractCommand;
 use RuntimeException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\SharedKernel\Application\Response\API;
 
 use App\SharedKernel\Application\Enum\HttpStatusCode;
-use App\SharedKernel\Application\Enum\ResponseStatus;
 use App\SharedKernel\Domain\Model\Error;
 
 /**
@@ -28,7 +27,7 @@ final class FailedApiResponse implements ResponseInterface
     public function body(): array
     {
         return [
-            'status' => ResponseStatus::FAILED,
+            'success' => false,
             'error' => $this->error->jsonSerialize(),
         ];
     }

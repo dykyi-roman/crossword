@@ -8,7 +8,6 @@ use App\Crossword\Application\Assert\TypeAssert;
 use App\Crossword\Application\Criteria\GenerateCriteria;
 use App\Crossword\Application\Service\CrosswordGenerator;
 use App\SharedKernel\Application\Response\Console\ResponseInterface;
-use App\SharedKernel\UI\Console\AbstractCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
