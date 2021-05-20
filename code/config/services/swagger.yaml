@@ -1,0 +1,2 @@
+parameters:
+  SCAN_DIR: '%kernel.project_dir%/src/*/UI/'

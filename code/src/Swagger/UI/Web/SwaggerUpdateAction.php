@@ -16,7 +16,7 @@ class SwaggerUpdateAction extends AbstractController
     #[Route('/swagger/update', name: 'web.swagger.update')]
     public function __invoke(ParameterBagInterface $parameterBag): Response
     {
-        echo scan($parameterBag->get('DICTIONARY_WEB_DIR'))->toYaml();
+        echo scan($parameterBag->get('SCAN_DIR'))->toYaml();
 
         return new Response();
     }

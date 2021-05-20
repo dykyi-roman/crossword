@@ -32,8 +32,6 @@ layers:
             regex: App\\Game\\Application\\Service
 ruleset:
   Dictionary: ~
-
   Crossword: ~
-
   Game: ~
 

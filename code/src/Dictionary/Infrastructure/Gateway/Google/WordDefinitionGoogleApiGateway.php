@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Dictionary\Infrastructure\Gateway\Adapter;
+namespace App\Dictionary\Infrastructure\Gateway\Google;
 
-use App\Dictionary\Domain\Dto\GoogleWordDefinitionDto;
 use App\Dictionary\Infrastructure\Gateway\AbstractWordDefinition;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
