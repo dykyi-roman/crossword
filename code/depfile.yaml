@@ -10,7 +10,9 @@ layers:
             regex: App\\Dictionary\\.*
         must_not:
           - type: className
-            regex: App\\Dictionary\\Application\\Service
+            regex: App\\Dictionary\\Features\\SupportedLanguages\\SupportedLanguages
+          - type: className
+            regex: App\\Dictionary\\Features\\WordsFinder\\WordsFinder
   - name: Crossword
     collectors:
       - type: bool
@@ -30,10 +32,17 @@ layers:
         must_not:
           - type: className
             regex: App\\Game\\Application\\Service
+
+  - name: SharedKernel
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\SharedKernel\\.*
 ruleset:
   Dictionary: ~
-
   Crossword: ~
-
   Game: ~
+  SharedKernel: ~
+
 

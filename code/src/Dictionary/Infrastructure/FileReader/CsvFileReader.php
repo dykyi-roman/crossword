@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\FileReader;
 
-use App\Dictionary\Domain\Exception\FileOpenException;
-use App\Dictionary\Domain\Service\FileReaderInterface;
+use App\Dictionary\Features\PopulateStorage\FileReader\FileReaderInterface;
+use App\Dictionary\Features\PopulateStorage\FileReader\OpenFileException;
 use Generator;
 
 final class CsvFileReader implements FileReaderInterface
@@ -15,7 +15,7 @@ final class CsvFileReader implements FileReaderInterface
         try {
             $file = fopen($filePath, 'rb');
             if (!$file) {
-                throw new FileOpenException($filePath);
+                throw new OpenFileException($filePath);
             }
 
             while (!feof($file)) {

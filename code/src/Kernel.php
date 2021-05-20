@@ -37,6 +37,12 @@ class Kernel extends BaseKernel
             $routes->import('../config/routes.yaml');
         }
 
+        $path = dirname(__DIR__) . '/src/Dictionary/config/routes.yaml';
+        is_file($path) && $routes->import($path);
+
+        $path = dirname(__DIR__) . '/src/Swagger/config/routes.yaml';
+        is_file($path) && $routes->import($path);
+
         if (is_file($path = dirname(__DIR__) . '/config/routes.php')) {
             (require $path)($routes->withPath($path), $this);
         }

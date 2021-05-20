@@ -1,29 +1,30 @@
 parameters:
-  DICTIONARY_WEB_DIR: '%kernel.project_dir%/src/*/UI/'
   dictionary_storage:
     en: '%kernel.project_dir%/data/english.txt'
     ru: '%kernel.project_dir%/data/russian.txt'
 
 services:
-  App\Dictionary\UI\API\:
-    resource: '../UI/API'
+  App\Dictionary\Features\SupportedLanguages\LanguagesAction:
     tags: [ 'controller.service_arguments' ]
 
-  App\Dictionary\Application\Request\WordRequest: ~
-  App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionWikipediaApiGateway: ~
+  App\Dictionary\Features\WordsFinder\WordAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Dictionary\Features\WordsFinder\Request\WordRequest: ~
+  App\Dictionary\Infrastructure\Gateway\Wikipedia\WordDefinitionWikipediaApiGateway: ~
   App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
-  App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway:
+  App\Dictionary\Infrastructure\Gateway\Google\WordDefinitionGoogleApiGateway:
     calls:
-      - setNext: ['@App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionWikipediaApiGateway']
+      - setNext: ['@App\Dictionary\Infrastructure\Gateway\Wikipedia\WordDefinitionWikipediaApiGateway']
 
-  App\Dictionary\Application\Service\WordsStoragePopulate:
+  App\Dictionary\Features\PopulateStorage\Populate\WordsStoragePopulate:
     arguments:
       - '@App\Dictionary\Infrastructure\FileReader\TextFileReader'
       - '@command.bus'
       - '@monolog.logger'
 
-  App\Dictionary\Application\Service\WordsStorageUpload:
+  App\Dictionary\Features\PopulateStorage\Upload\WordsStorageUpload:
     arguments:
         - '@App\Dictionary\Infrastructure\FileReader\CsvFileReader'
         - '@command.bus'
@@ -34,7 +35,8 @@ services:
   App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage: ~
   App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
 
-  App\Dictionary\Domain\Port\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\Adapter\WordDefinitionGoogleApiGateway'
-  App\Dictionary\Domain\Repository\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
-  App\Dictionary\Domain\Repository\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
-  App\Dictionary\Domain\Service\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'
+  App\Dictionary\Features\PopulateStorage\Populate\Port\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\Google\WordDefinitionGoogleApiGateway'
+  App\Dictionary\Features\SupportedLanguages\Storage\LanguageStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
+  App\Dictionary\Features\WordsFinder\Storage\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
+  App\Dictionary\Features\PopulateStorage\SaveStorage\Storage\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
+  App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'

@@ -1,4 +1,7 @@
+parameters:
+  SCAN_DIR: '%kernel.project_dir%/src/'
+
 services:
-  App\Swagger\UI\Web\:
-    resource: '../UI/Web'
+  App\Swagger\:
+    resource: '.'
     tags: [ 'controller.service_arguments' ]

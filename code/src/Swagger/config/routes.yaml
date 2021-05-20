@@ -1,0 +1,9 @@
+swagger_index:
+  path: /swagger
+  methods: GET
+  controller: App\Swagger\SwaggerIndexAction
+
+swagger_update:
+  path: /swagger/update
+  methods: GET
+  controller: App\Swagger\SwaggerUpdateAction

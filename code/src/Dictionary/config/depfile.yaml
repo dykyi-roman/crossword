@@ -1,40 +1,22 @@
 paths:
-  - ../
+  - ../Features/
 exclude_files: ~
 layers:
-  - name: Application
-    collectors:
-      - type: bool
-        must:
-          - type: className
-            regex: App\\Dictionary\\Application\\.*
-        must_not:
-          - type: className
-            regex: App\\Dictionary\\Application\\Dto
-
-  - name: Domain
+  - name: PopulateStorage
     collectors:
       - type: className
-        regex: App\\Dictionary\\Domain\\.*
-
-  - name: Infrastructure
+        regex: App\\Dictionary\\Features\\PopulateStorage\\.*
+  - name: SupportedLanguages
     collectors:
       - type: className
-        regex: App\\Dictionary\\Infrastructure\\.*
+        regex: App\\Dictionary\\Features\\SupportedLanguages\\.*
 
-  - name: UI
+  - name: WordsFinder
     collectors:
       - type: className
-        regex: App\\Dictionary\\UI\\.*
+        regex: App\\Dictionary\\Features\\WordsFinder\\.*
 
 ruleset:
-  UI:
-    - Application
-
-  Application:
-    - Domain
-
-  Domain: ~
-
-  Infrastructure:
-    - Domain
+  PopulateStorage: ~
+  SupportedLanguages: ~
+  WordsFinder: ~

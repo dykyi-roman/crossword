@@ -1,0 +1,10 @@
+dictionary_api_languages:
+  path: /api/dictionary/languages
+  methods: GET
+  controller: App\Dictionary\Features\SupportedLanguages\LanguagesAction
+
+dictionary_api_words_find:
+  path: /api/dictionary/words/{language}
+  methods: GET
+  controller: App\Dictionary\Features\WordsFinder\WordAction
+

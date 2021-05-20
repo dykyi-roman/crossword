@@ -8,8 +8,8 @@ use App\Crossword\Domain\Criteria\WordSearchCriteria;
 use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
 use App\Crossword\Domain\Dto\DictionaryWordDto;
 use App\Crossword\Domain\Port\DictionaryInterface;
-use App\Dictionary\Application\Service\SupportedLanguages;
-use App\Dictionary\Application\Service\WordsFinder;
+use App\Dictionary\Features\SupportedLanguages\SupportedLanguages;
+use App\Dictionary\Features\WordsFinder\WordsFinder;
 
 final class DirectDictionaryAdapter implements DictionaryInterface
 {
@@ -28,7 +28,7 @@ final class DirectDictionaryAdapter implements DictionaryInterface
     {
         return new DictionaryLanguagesDto([
             'success' => true,
-            'data' => $this->supportedLanguages->receive(),
+            'data' => $this->supportedLanguages->languages(),
         ]);
     }
 

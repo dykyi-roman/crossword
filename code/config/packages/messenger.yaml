@@ -11,7 +11,7 @@ framework:
             # failed: 'doctrine://default?queue_name=failed'
 
         routing:
-             'App\Dictionary\Domain\Messages\Message\SearchWordDefinitionMessage': messages
-             'App\Dictionary\Domain\Messages\Message\SaveToStorageMessage': messages
+             'App\Dictionary\Features\PopulateStorage\Populate\Message\SearchWordDefinitionMessage': messages
+             'App\Dictionary\Features\PopulateStorage\SaveStorage\Message\SaveToStorageMessage': messages
              'App\Crossword\Domain\Messages\Message\GenerateCrosswordMessage': messages
              'App\Game\Domain\Events\Event\LevelUpEvent': events

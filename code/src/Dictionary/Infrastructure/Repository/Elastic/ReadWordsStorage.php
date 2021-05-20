@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Repository\Elastic;
 
-use App\Dictionary\Application\Dto\StorageWordDtoCollection;
-use App\Dictionary\Domain\Dto\WordDto;
-use App\Dictionary\Domain\Dto\WordDtoCollection;
-use App\Dictionary\Domain\Exception\WordNotFoundInStorageException;
-use App\Dictionary\Domain\Model\Mask;
-use App\Dictionary\Domain\Model\Word;
-use App\Dictionary\Domain\Repository\ReadWordsStorageInterface;
+use App\Dictionary\Features\SupportedLanguages\Storage\LanguageStorageInterface;
+use App\Dictionary\Features\SupportedLanguages\Storage\NotFoundSupportedLanguagesException;
+use App\Dictionary\Features\WordsFinder\Mask\Mask;
+use App\Dictionary\Features\WordsFinder\Storage\ReadWordsStorageInterface;
+use App\Dictionary\Features\WordsFinder\Storage\WordNotFoundInStorageException;
+use App\Dictionary\Features\WordsFinder\Word\Word;
+use App\Dictionary\Features\WordsFinder\Word\WordDto;
+use App\Dictionary\Features\WordsFinder\Word\WordDtoCollection;
 use Elasticsearch\Client;
 use Throwable;
 
-final class ReadWordsStorage implements ReadWordsStorageInterface
+final class ReadWordsStorage implements ReadWordsStorageInterface, LanguageStorageInterface
 {
     private Client $client;
 
@@ -78,6 +79,8 @@ final class ReadWordsStorage implements ReadWordsStorageInterface
     {
         $indexes = $this->client->indices();
 
-        return array_keys($indexes->getSettings());
+        $languages = array_keys($indexes->getSettings());
+
+        return count($languages) ? $languages : throw new NotFoundSupportedLanguagesException();
     }
 }

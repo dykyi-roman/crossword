@@ -6,7 +6,7 @@ namespace App\Dictionary\Infrastructure\HttpClient;
 
 use Psr\Http\Message\ResponseInterface;
 
-final class ResponseDataExtractor
+final class ResponseDataExtractor implements ResponseDataExtractorInterface
 {
     public function extract(ResponseInterface $response): array
     {
