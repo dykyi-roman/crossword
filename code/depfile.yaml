@@ -8,9 +8,10 @@ layers:
         must:
           - type: className
             regex: App\\Dictionary\\.*
+        # Infrastructure\Adapter\Direct
         must_not:
           - type: className
-            regex: App\\Dictionary\\Features\\SupportedLanguages\\SupportedLanguages
+            regex: App\\Dictionary\\Features\\Languages\\SupportedLanguages
           - type: className
             regex: App\\Dictionary\\Features\\WordsFinder\\WordsFinder
   - name: Crossword
@@ -19,9 +20,12 @@ layers:
         must:
           - type: className
             regex: App\\Crossword\\.*
+        # Infrastructure\Adapter\Direct
         must_not:
           - type: className
-            regex: App\\Crossword\\Application\\Service
+            regex: App\\Crossword\\Features\\Receiver\\CrosswordReceiver
+          - type: className
+            regex: App\\Crossword\\Features\\Languages\\SupportedLanguages
 
   - name: Game
     collectors:
@@ -29,10 +33,12 @@ layers:
         must:
           - type: className
             regex: App\\Game\\.*
+        # Infrastructure\Adapter\Direct
         must_not:
           - type: className
-            regex: App\\Game\\Application\\Service
-
+            regex: App\\Crossword\\Features\\Receiver\\CrosswordReceiver
+          - type: className
+            regex: App\\Crossword\\Features\\Languages\\SupportedLanguages
   - name: SharedKernel
     collectors:
       - type: bool

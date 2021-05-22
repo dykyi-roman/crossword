@@ -20,7 +20,7 @@ Used to build crosswords and store them in the cache. Redis - used as cache stor
 Used to generate a new crossword:
 
 ```
-php bin/console crossword:generate {type} {WORD-COUNT} --{LIMIT}
+php bin/console crossword:generate {type} {language} {WORD-COUNT} --{LIMIT}
 ```
 
 ## Author

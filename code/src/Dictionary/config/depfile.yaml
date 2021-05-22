@@ -6,10 +6,10 @@ layers:
     collectors:
       - type: className
         regex: App\\Dictionary\\Features\\PopulateStorage\\.*
-  - name: SupportedLanguages
+  - name: Languages
     collectors:
       - type: className
-        regex: App\\Dictionary\\Features\\SupportedLanguages\\.*
+        regex: App\\Dictionary\\Features\\Languages\\.*
 
   - name: WordsFinder
     collectors:
@@ -18,5 +18,5 @@ layers:
 
 ruleset:
   PopulateStorage: ~
-  SupportedLanguages: ~
+  Languages: ~
   WordsFinder: ~

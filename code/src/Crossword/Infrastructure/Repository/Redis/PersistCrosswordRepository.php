@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Repository\Redis;
 
-use App\Crossword\Domain\Dto\CrosswordDto;
-use App\Crossword\Domain\Repository\PersistCrosswordRepositoryInterface;
+use App\Crossword\Features\Constructor\CrosswordDto;
+use App\Crossword\Features\Constructor\PersistCrosswordRepositoryInterface;
 use App\Crossword\Infrastructure\Cache\CacheItem;
 use Psr\Cache\CacheItemPoolInterface;
 

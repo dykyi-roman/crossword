@@ -1,40 +1,40 @@
 paths:
-  - ../
+  - ../Features/
 exclude_files: ~
 layers:
-  - name: Application
+  - name: Constructor
     collectors:
       - type: bool
         must:
           - type: className
-            regex: App\\Crossword\\Application\\.*
+            regex: App\\Crossword\\Features\\Constructor\\.*
         must_not:
           - type: className
-            regex: App\\Crossword\\Application\\Dto
+            regex: App\\Crossword\\Features\\Constructor\\Message\\GenerateCrosswordMessage
 
-  - name: Domain
+  - name: Generator
     collectors:
       - type: className
-        regex: App\\Crossword\\Domain\\.*
+        regex: App\\Crossword\\Features\\Generator\\.*
 
-  - name: Infrastructure
+  - name: Languages
     collectors:
       - type: className
-        regex: App\\Crossword\\Infrastructure\\.*
+        regex: App\\Crossword\\Features\\Languages\\.*
 
-  - name: UI
+  - name: Receiver
     collectors:
       - type: className
-        regex: App\\Crossword\\UI\\.*
+        regex: App\\Crossword\\Features\\Receiver\\.*
+
+  - name: Types
+    collectors:
+      - type: className
+        regex: App\\Crossword\\Features\\Types\\.*
 
 ruleset:
-  UI:
-    - Application
-
-  Application:
-    - Domain
-
-  Domain: ~
-
-  Infrastructure:
-    - Domain
+  Constructor: ~
+  Generator: ~
+  Languages: ~
+  Receiver: ~
+  Types: ~

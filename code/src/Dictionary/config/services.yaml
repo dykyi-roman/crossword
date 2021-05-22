@@ -4,7 +4,7 @@ parameters:
     ru: '%kernel.project_dir%/data/russian.txt'
 
 services:
-  App\Dictionary\Features\SupportedLanguages\LanguagesAction:
+  App\Dictionary\Features\Languages\LanguagesAction:
     tags: [ 'controller.service_arguments' ]
 
   App\Dictionary\Features\WordsFinder\WordAction:
@@ -36,7 +36,7 @@ services:
   App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage: ~
 
   App\Dictionary\Features\PopulateStorage\Populate\Port\WordDefinitionApiGatewayInterface: '@App\Dictionary\Infrastructure\Gateway\Google\WordDefinitionGoogleApiGateway'
-  App\Dictionary\Features\SupportedLanguages\Storage\LanguageStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
+  App\Dictionary\Features\Languages\Storage\LanguageStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
   App\Dictionary\Features\WordsFinder\Storage\ReadWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\ReadWordsStorage'
   App\Dictionary\Features\PopulateStorage\SaveStorage\Storage\WriteWordsStorageInterface: '@App\Dictionary\Infrastructure\Repository\Elastic\WriteWordsStorage'
   App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractorInterface: '@App\Dictionary\Infrastructure\HttpClient\ResponseDataExtractor'

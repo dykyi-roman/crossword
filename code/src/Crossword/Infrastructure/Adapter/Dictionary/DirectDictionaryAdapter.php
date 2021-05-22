@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
-use App\Crossword\Domain\Criteria\WordSearchCriteria;
-use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
-use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Domain\Port\DictionaryInterface;
-use App\Dictionary\Features\SupportedLanguages\SupportedLanguages;
+use App\Crossword\Features\Constructor\Dictionary\DictionarySearchInterface;
+use App\Crossword\Features\Constructor\Dictionary\DictionaryWordDto;
+use App\Crossword\Features\Constructor\Dictionary\WordSearchCriteria;
+use App\Crossword\Features\Languages\Dictionary\DictionaryLanguagesDto;
+use App\Crossword\Features\Languages\Dictionary\DictionaryLanguagesInterface;
+use App\Dictionary\Features\Languages\SupportedLanguages;
 use App\Dictionary\Features\WordsFinder\WordsFinder;
 
-final class DirectDictionaryAdapter implements DictionaryInterface
+final class DirectDictionaryAdapter implements DictionaryLanguagesInterface, DictionarySearchInterface
 {
     private const LIMIT = 100;
 

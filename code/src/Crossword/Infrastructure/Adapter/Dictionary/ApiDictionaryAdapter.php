@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Adapter\Dictionary;
 
-use App\Crossword\Domain\Criteria\WordSearchCriteria;
-use App\Crossword\Domain\Dto\DictionaryLanguagesDto;
-use App\Crossword\Domain\Dto\DictionaryWordDto;
-use App\Crossword\Domain\Exception\ApiClientException;
-use App\Crossword\Domain\Port\DictionaryInterface;
-use App\Crossword\Domain\Service\ResponseDataExtractorInterface;
+use App\Crossword\Features\Constructor\Dictionary\ApiClientException as ConstructorApiClientException;
+use App\Crossword\Features\Constructor\Dictionary\DictionarySearchInterface;
+use App\Crossword\Features\Constructor\Dictionary\DictionaryWordDto;
+use App\Crossword\Features\Constructor\Dictionary\WordSearchCriteria;
+use App\Crossword\Features\Languages\Dictionary\ApiClientException as LanguagesApiClientException;
+use App\Crossword\Features\Languages\Dictionary\DictionaryLanguagesDto;
+use App\Crossword\Features\Languages\Dictionary\DictionaryLanguagesInterface;
+use App\Crossword\Infrastructure\HttpClient\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
 
-final class ApiDictionaryAdapter implements DictionaryInterface
+final class ApiDictionaryAdapter implements DictionaryLanguagesInterface, DictionarySearchInterface
 {
     private string $dictionaryApiHost;
     private ClientInterface $client;
@@ -38,7 +40,7 @@ final class ApiDictionaryAdapter implements DictionaryInterface
 
             return new DictionaryLanguagesDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
-            throw ApiClientException::badRequest($exception->getMessage());
+            throw LanguagesApiClientException::badRequest($exception->getMessage());
         }
     }
 
@@ -56,7 +58,7 @@ final class ApiDictionaryAdapter implements DictionaryInterface
 
             return new DictionaryWordDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
-            throw ApiClientException::badRequest($exception->getMessage());
+            throw ConstructorApiClientException::badRequest($exception->getMessage());
         }
     }
 }

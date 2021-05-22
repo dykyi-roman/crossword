@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Infrastructure\Repository\Elastic;
 
-use App\Dictionary\Features\SupportedLanguages\Storage\LanguageStorageInterface;
-use App\Dictionary\Features\SupportedLanguages\Storage\NotFoundSupportedLanguagesException;
+use App\Dictionary\Features\Languages\Storage\LanguageStorageInterface;
+use App\Dictionary\Features\Languages\Storage\NotFoundSupportedLanguagesException;
 use App\Dictionary\Features\WordsFinder\Mask\Mask;
 use App\Dictionary\Features\WordsFinder\Storage\ReadWordsStorageInterface;
 use App\Dictionary\Features\WordsFinder\Storage\WordNotFoundInStorageException;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Features\WordsFinder\Response;
 
-use App\Dictionary\Features\WordsFinder\Error\ErrorDto;
+use App\Dictionary\Features\WordsFinder\Response\Error\ErrorCriteria;
 
 /**
  * @psalm-immutable
@@ -12,9 +12,9 @@ use App\Dictionary\Features\WordsFinder\Error\ErrorDto;
 final class FailedApiResponse implements ResponseInterface
 {
     private int $status;
-    private ErrorDto $error;
+    private ErrorCriteria $error;
 
-    public function __construct(ErrorDto $error, int $status = HttpStatusCode::HTTP_ERROR)
+    public function __construct(ErrorCriteria $error, int $status = HttpStatusCode::HTTP_ERROR)
     {
         $this->status = $status;
         $this->error = $error;

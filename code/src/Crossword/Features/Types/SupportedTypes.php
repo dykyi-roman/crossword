@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Crossword\Features\Types;
+
+final class SupportedTypes
+{
+    public function receive(): array
+    {
+        return array_values(Type::toArray());
+    }
+}

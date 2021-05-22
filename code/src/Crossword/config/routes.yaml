@@ -1,0 +1,14 @@
+crossword_api_types:
+  path: /api/crossword/types
+  methods: GET
+  controller: App\Crossword\Features\Types\TypesAction
+
+crossword_api_languages:
+  path: /api/crossword/languages
+  methods: GET
+  controller: App\Crossword\Features\Languages\LanguagesAction
+
+crossword_api_construct:
+  path: /api/crossword/construct/{language}/{type}/{words}
+  methods: GET
+  controller: App\Crossword\Features\Receiver\ConstructAction

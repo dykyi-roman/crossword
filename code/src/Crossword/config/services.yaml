@@ -1,9 +1,18 @@
 services:
-  App\Crossword\UI\API\:
-    resource: '../UI/API'
+  App\Crossword\Features\Types\TypesAction:
     tags: [ 'controller.service_arguments' ]
 
-  App\Crossword\Application\Request\ConstructRequest: ~
+  App\Crossword\Features\Languages\LanguagesAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Crossword\Features\Receiver\ConstructAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Crossword\Features\Generator\CrosswordGenerator:
+    arguments:
+
+
+  App\Crossword\Features\Receiver\Request\ConstructRequest: ~
   App\Crossword\Infrastructure\Adapter\Dictionary\ApiDictionaryAdapter: ~
   App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter: ~
   App\Crossword\Infrastructure\Cache\RedisClient: ~
@@ -11,6 +20,7 @@ services:
   App\Crossword\Infrastructure\HttpClient\ResponseDataExtractor: ~
 
   Psr\Cache\CacheItemPoolInterface: '@App\Crossword\Infrastructure\Cache\RedisClient'
-  App\Crossword\Domain\Port\DictionaryInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter'
-  App\Crossword\Domain\Repository\PersistCrosswordRepositoryInterface: '@App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository'
-  App\Crossword\Domain\Service\ResponseDataExtractorInterface: '@App\Crossword\Infrastructure\HttpClient\ResponseDataExtractor'
+  App\Crossword\Features\Constructor\Dictionary\DictionarySearchInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter'
+  App\Crossword\Features\Languages\Dictionary\DictionaryLanguagesInterface: '@App\Crossword\Infrastructure\Adapter\Dictionary\DirectDictionaryAdapter'
+  App\Crossword\Features\Constructor\PersistCrosswordRepositoryInterface: '@App\Crossword\Infrastructure\Repository\Redis\PersistCrosswordRepository'
+  App\Crossword\Infrastructure\HttpClient\ResponseDataExtractorInterface: '@App\Crossword\Infrastructure\HttpClient\ResponseDataExtractor'

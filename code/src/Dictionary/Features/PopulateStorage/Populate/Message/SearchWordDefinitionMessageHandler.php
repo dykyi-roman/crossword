@@ -25,7 +25,6 @@ final class SearchWordDefinitionMessageHandler implements MessageHandlerInterfac
     public function __invoke(SearchWordDefinitionMessage $message): void
     {
         $definition = $this->wordsDefinitionApiGateway->search($message->word(), $message->language());
-        dump($definition); die();
         $this->messageBus->dispatch(new SaveToStorageMessage($message->word(), $definition, $message->language()));
     }
 }

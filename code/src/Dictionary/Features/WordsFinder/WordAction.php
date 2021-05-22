@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Dictionary\Features\WordsFinder;
 
-use App\Dictionary\Features\WordsFinder\Error\ErrorFactory;
 use App\Dictionary\Features\WordsFinder\Request\WordRequest;
+use App\Dictionary\Features\WordsFinder\Response\Error\ErrorFactory;
 use App\Dictionary\Features\WordsFinder\Response\FailedApiResponse;
 use App\Dictionary\Features\WordsFinder\Response\ResponseInterface;
 use App\Dictionary\Features\WordsFinder\Response\SuccessApiResponse;

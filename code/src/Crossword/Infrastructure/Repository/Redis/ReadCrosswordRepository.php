@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Crossword\Infrastructure\Repository\Redis;
 
-use App\Crossword\Domain\Exception\CrosswordNotFoundException;
-use App\Crossword\Domain\Repository\ReadCrosswordRepositoryInterface;
+use App\Crossword\Features\Receiver\CrosswordNotFoundException;
+use App\Crossword\Features\Receiver\ReadCrosswordRepositoryInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 final class ReadCrosswordRepository implements ReadCrosswordRepositoryInterface

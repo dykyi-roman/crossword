@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Adapter\Crossword;
 
-use App\Crossword\Application\Service\CrosswordReceiver;
-use App\Crossword\Application\Service\SupportedLanguages;
+use App\Crossword\Features\Languages\SupportedLanguages;
+use App\Crossword\Features\Receiver\CrosswordReceiver;
 use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
 use App\Game\Domain\Dto\LanguagesDto;
