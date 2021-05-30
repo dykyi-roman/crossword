@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Dao\Doctrine;
 
-use App\Game\Domain\Dao\HistoryDaoInterface;
-use App\Game\Domain\Dto\HistoryRatingDto;
+use App\Game\Features\History\HistoryDaoInterface;
+use App\Game\Features\History\HistoryRatingDto;
 use Doctrine\DBAL\Connection;
 
 final class HistoryDao implements HistoryDaoInterface

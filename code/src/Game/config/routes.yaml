@@ -1,0 +1,24 @@
+game_web_check_post:
+  path: /game/check
+  methods: POST
+  controller: App\Game\Features\Answers\CheckAnswerAction
+
+game_web_login_post:
+  path: /game/login/post
+  methods: POST
+  controller: App\Game\Features\Authorization\PlayerAuthAction
+
+game_web_login_view:
+  path: /game/login
+  methods: GET
+  controller: App\Game\Features\Authorization\ViewLoginPageAction
+
+game_web_play_view:
+  path: /game/play
+  methods: GET
+  controller: App\Game\Features\GamePlay\NewGameAction
+
+game_web_play-rating:
+  path: /game/players-rating
+  methods: GET
+  controller: App\Game\Features\History\PlayerRatingAction

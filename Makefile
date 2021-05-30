@@ -39,6 +39,7 @@ cache:
 
 deptrac:
 	docker/scripts/php "vendor/bin/deptrac analyze depfile.yaml --no-cache"
+	docker/scripts/php "vendor/bin/deptrac analyze src/Game/config/depfile.yaml --no-cache"
 	docker/scripts/php "vendor/bin/deptrac analyze src/Crossword/config/depfile.yaml --no-cache"
 	docker/scripts/php "vendor/bin/deptrac analyze src/Dictionary/config/depfile.yaml --no-cache"
 	@echo "deptrac done"

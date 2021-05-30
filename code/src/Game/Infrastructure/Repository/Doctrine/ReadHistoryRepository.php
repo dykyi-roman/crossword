@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\Doctrine;
 
-use App\Game\Domain\Model\History;
-use App\Game\Domain\Repository\ReadHistoryRepositoryInterface;
+use App\Game\Features\History\History;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class ReadHistoryRepository extends ServiceEntityRepository implements ReadHistoryRepositoryInterface
+final class ReadHistoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

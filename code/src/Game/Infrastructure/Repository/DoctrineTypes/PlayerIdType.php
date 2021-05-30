@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\DoctrineTypes;
 
-use App\Game\Domain\Model\PlayerId;
+use App\Game\Features\Player\Player\PlayerId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\Uid\UuidV4;

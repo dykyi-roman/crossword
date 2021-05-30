@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\DoctrineTypes;
 
-use App\Game\Domain\Model\HistoryId;
+use App\Game\Features\History\HistoryId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 

@@ -1,40 +1,51 @@
 paths:
-  - ../
+  - ../Features/
 exclude_files: ~
 layers:
-  - name: Application
+  - name: Answers
     collectors:
       - type: bool
         must:
           - type: className
-            regex: App\\Game\\Application\\.*
+            regex: App\\Game\\Features\\Answers\\.*
         must_not:
           - type: className
-            regex: App\\Game\\Application\\Dto
+            regex: App\\Game\\Features\\Answers\\CrosswordPuzzleSolvedEvent
 
-  - name: Domain
+  - name: Authorization
     collectors:
       - type: className
-        regex: App\\Game\\Domain\\.*
+        regex: App\\Game\\Features\\Authorization\\.*
 
-  - name: Infrastructure
+  - name: GamePlay
     collectors:
       - type: className
-        regex: App\\Game\\Infrastructure\\.*
+        regex: App\\Game\\Features\\GamePlay\\.*
 
-  - name: UI
+  - name: History
     collectors:
       - type: className
-        regex: App\\Game\\UI\\.*
+        regex: App\\Game\\Features\\History\\.*
+
+  - name: Player
+    collectors:
+      - type: bool
+        must:
+          - type: className
+            regex: App\\Game\\Features\\Player\\.*
+        must_not:
+          - type: className
+            regex: App\\Game\\Features\\Player\\Level\\LevelUpEvent
+
+  - name: Registration
+    collectors:
+      - type: className
+        regex: App\\Game\\Features\\Registration\\.*
 
 ruleset:
-  UI:
-    - Application
-
-  Application:
-    - Domain
-
-  Domain: ~
-
-  Infrastructure:
-    - Domain
+  Answers: ~
+  Authorization: ~
+  GamePlay: ~
+  History: ~
+  Player: ~
+  Registration: ~

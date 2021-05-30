@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Encoder;
 
-use App\Game\Domain\Service\Encoder\LetterEncoderInterface;
+use App\Game\Features\Answers\LetterEncoderInterface;
 
 final class Base64Encoder implements LetterEncoderInterface
 {

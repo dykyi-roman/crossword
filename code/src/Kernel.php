@@ -43,6 +43,9 @@ class Kernel extends BaseKernel
         $path = dirname(__DIR__) . '/src/Crossword/config/routes.yaml';
         is_file($path) && $routes->import($path);
 
+        $path = dirname(__DIR__) . '/src/Game/config/routes.yaml';
+        is_file($path) && $routes->import($path);
+
         $path = dirname(__DIR__) . '/src/Swagger/config/routes.yaml';
         is_file($path) && $routes->import($path);
 

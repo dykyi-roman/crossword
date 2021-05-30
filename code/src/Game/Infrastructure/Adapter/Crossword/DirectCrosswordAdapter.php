@@ -4,22 +4,18 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Adapter\Crossword;
 
-use App\Crossword\Features\Languages\SupportedLanguages;
 use App\Crossword\Features\Receiver\CrosswordReceiver;
-use App\Game\Domain\Criteria\CrosswordCriteria;
-use App\Game\Domain\Dto\CrosswordDto;
-use App\Game\Domain\Dto\LanguagesDto;
-use App\Game\Domain\Port\CrosswordInterface;
+use App\Game\Features\GamePlay\Crossword\CrosswordCriteria;
+use App\Game\Features\GamePlay\Crossword\CrosswordDto;
+use App\Game\Features\GamePlay\Crossword\CrosswordInterface;
 
 final class DirectCrosswordAdapter implements CrosswordInterface
 {
     private CrosswordReceiver $crosswordReceiver;
-    private SupportedLanguages $supportedLanguages;
 
-    public function __construct(CrosswordReceiver $crosswordReceiver, SupportedLanguages $supportedLanguages)
+    public function __construct(CrosswordReceiver $crosswordReceiver)
     {
         $this->crosswordReceiver = $crosswordReceiver;
-        $this->supportedLanguages = $supportedLanguages;
     }
 
     public function construct(CrosswordCriteria $criteria): CrosswordDto
@@ -29,14 +25,6 @@ final class DirectCrosswordAdapter implements CrosswordInterface
         return new CrosswordDto([
             'success' => true,
             'data' => $this->crosswordReceiver->receive($key),
-        ]);
-    }
-
-    public function supportedLanguages(): LanguagesDto
-    {
-        return new LanguagesDto([
-            'success' => true,
-            'data' => $this->supportedLanguages->receive(),
         ]);
     }
 }

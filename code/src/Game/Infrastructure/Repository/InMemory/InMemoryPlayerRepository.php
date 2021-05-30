@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\InMemory;
 
-use App\Game\Domain\Dto\PlayerDto;
-use App\Game\Domain\Dto\RegisteredPlayerDto;
-use App\Game\Domain\Enum\Level;
-use App\Game\Domain\Exception\PlayerNotFoundException;
-use App\Game\Domain\Model\Player;
-use App\Game\Domain\Model\PlayerId;
-use App\Game\Domain\Repository\PersistPlayerRepositoryInterface;
-use App\Game\Domain\Repository\ReadPlayerRepositoryInterface;
+use App\Game\Features\Authorization\PlayerDto as AuthorizationPlayerDto;
+use App\Game\Features\Authorization\Repository\ReadPlayerRepositoryInterface;
+use App\Game\Features\Player\Level\PlayerLevelRepositoryInterface;
+use App\Game\Features\Player\Player\Player;
+use App\Game\Features\Player\Player\PlayerId as PlayerPlayerId;
+use App\Game\Features\Player\Player\PlayerNotFoundException;
+use App\Game\Features\Player\Player\Role;
+use App\Game\Features\Registration\Player\PlayerDto as RegistrationPlayerDto;
+use App\Game\Features\Registration\PlayerRepositoryInterface;
+use Symfony\Component\Uid\UuidV4;
 
-final class InMemoryPlayerRepository implements PersistPlayerRepositoryInterface, ReadPlayerRepositoryInterface
+final class InMemoryPlayerRepository implements
+    PlayerRepositoryInterface,
+    PlayerLevelRepositoryInterface,
+    ReadPlayerRepositoryInterface
 {
     /**
      * @var Player[]
@@ -33,21 +38,20 @@ final class InMemoryPlayerRepository implements PersistPlayerRepositoryInterface
         );
     }
 
-    public function createPlayer(RegisteredPlayerDto $playerDto): void
+    public function createPlayer(RegistrationPlayerDto $playerDto): void
     {
-        $player = new Player($playerDto->playerId());
+        $player = new Player(new PlayerPlayerId($playerDto->playerId()->id()));
         $player->changeNickname($playerDto->nickname());
-        $player->changeLevel($playerDto->level());
-        $player->changeRole($playerDto->role());
+        $player->changeRole(new Role($playerDto->role()->getValue()));
 
         $this->players[(string) $playerDto->playerId()] = $player;
     }
 
-    public function levelUp(PlayerId $playerId): void
+    public function changeLevel(PlayerPlayerId $playerId): void
     {
         if (array_key_exists((string) $playerId, $this->players)) {
             $player = $this->players[(string) $playerId];
-            $this->players[(string) $playerId]->changeLevel(new Level($player->level()->getValue() + 1));
+            $this->players[(string) $playerId]->changeLevel($player->level() + 1);
 
             return;
         }
@@ -55,7 +59,7 @@ final class InMemoryPlayerRepository implements PersistPlayerRepositoryInterface
         throw new PlayerNotFoundException();
     }
 
-    public function findPlayerById(PlayerId $playerId): PlayerDto
+    public function findPlayerById(UuidV4 $playerId): AuthorizationPlayerDto
     {
         if (!array_key_exists((string) $playerId, $this->players)) {
             throw new PlayerNotFoundException();
@@ -63,14 +67,24 @@ final class InMemoryPlayerRepository implements PersistPlayerRepositoryInterface
 
         $player = $this->players[(string) $playerId];
 
-        return new PlayerDto($playerId, $player->nickname(), $player->level(), $player->role());
+        return new AuthorizationPlayerDto(
+            $playerId,
+            $player->nickname(),
+            $player->level(),
+            $player->role()->getValue()
+        );
     }
 
-    public function findPlayerByNicknameAndPassword(string $nickname, string $password): PlayerDto
+    public function findPlayerByNicknameAndPassword(string $nickname, string $password): AuthorizationPlayerDto
     {
         foreach ($this->players as $player) {
             if ($nickname === $player->nickname() && $password === $player->password()) {
-                return new PlayerDto($player->playerId(), $player->nickname(), $player->level(), $player->role());
+                return new AuthorizationPlayerDto(
+                    $player->playerId()->id(),
+                    $player->nickname(),
+                    $player->level(),
+                    $player->role()->getValue()
+                );
             }
         }
 

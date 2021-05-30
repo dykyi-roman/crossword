@@ -1,7 +1,3 @@
-controllers_game:
-    resource: ../../src/Game/UI
-    type: annotation
-
 kernel:
     resource: ../../src/Kernel.php
     type: annotation

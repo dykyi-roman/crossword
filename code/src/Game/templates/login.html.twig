@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login page</title>
+</head>
+<body>
+<form method="post" action="{{ path('game_web_login_post') }}">
+    <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    <label for="inputEmail">Nickname</label>
+    <input type="text" value="" name="nickname" id="nickname" class="form-control" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="password" class="form-control" required>
+
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+</body>
+</html>

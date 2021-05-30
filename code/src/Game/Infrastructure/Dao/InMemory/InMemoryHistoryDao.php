@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Dao\InMemory;
 
-use App\Game\Domain\Dao\HistoryDaoInterface;
-use App\Game\Domain\Dto\HistoryRatingDto;
-use App\Game\Domain\Model\History;
+use App\Game\Features\History\History;
+use App\Game\Features\History\HistoryDaoInterface;
+use App\Game\Features\History\HistoryRatingDto;
 
 final class InMemoryHistoryDao implements HistoryDaoInterface
 {
@@ -31,7 +31,7 @@ final class InMemoryHistoryDao implements HistoryDaoInterface
     public function ratingHistory(int $limit = self::LIMIT): array
     {
         return array_map(
-            static fn (History $history) => new HistoryRatingDto('test', $history->level()->getValue()),
+            static fn (History $history) => new HistoryRatingDto('test', $history->level()),
             $this->histories
         );
     }

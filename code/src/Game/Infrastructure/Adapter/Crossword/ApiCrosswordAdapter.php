@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Adapter\Crossword;
 
-use App\Game\Domain\Criteria\CrosswordCriteria;
-use App\Game\Domain\Dto\CrosswordDto;
-use App\Game\Domain\Dto\LanguagesDto;
-use App\Game\Domain\Exception\ApiClientException;
-use App\Game\Domain\Port\CrosswordInterface;
-use App\Game\Domain\Service\ResponseDataExtractorInterface;
+use App\Game\Features\GamePlay\Crossword\ApiClientException;
+use App\Game\Features\GamePlay\Crossword\CrosswordCriteria;
+use App\Game\Features\GamePlay\Crossword\CrosswordDto;
+use App\Game\Features\GamePlay\Crossword\CrosswordInterface;
+use App\Game\Infrastructure\HttpClient\ResponseDataExtractorInterface;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface;
 use Throwable;
@@ -44,18 +43,6 @@ final class ApiCrosswordAdapter implements CrosswordInterface
             $response = $this->client->sendRequest(new Request('GET', $uri));
 
             return new CrosswordDto($this->responseDataExtractor->extract($response));
-        } catch (Throwable $exception) {
-            throw ApiClientException::badRequest($exception->getMessage());
-        }
-    }
-
-    public function supportedLanguages(): LanguagesDto
-    {
-        $uri = sprintf('%s/languages', $this->crosswordApiHost);
-        try {
-            $response = $this->client->sendRequest(new Request('GET', $uri));
-
-            return new LanguagesDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
             throw ApiClientException::badRequest($exception->getMessage());
         }

@@ -1,24 +1,33 @@
 services:
-  App\Game\UI\Web\:
-    resource: '../UI/Web'
-    tags: [ 'controller.service_arguments' ]
-
-  App\Game\Domain\Events\DomainEventsSubscriber:
+  App\Game\Features\Player\DomainEventsSubscriber:
     arguments:
       [ '@command.bus' ]
     tags:
       - { name: 'doctrine.event_subscriber' }
 
-  App\Game\UI\Web\NewGameAction:
+  App\Game\Features\Authorization\PlayerAuthAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Game\Features\Authorization\ViewLoginPageAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Game\Features\Answers\CheckAnswerAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Game\Features\GamePlay\NewGameAction:
     tags: [ 'controller.service_arguments' ]
     arguments:
-      - '@App\Game\Application\Service\PlayerFromTokenExtractor'
+      [ '@App\Game\Features\GamePlay\Authentication\PlayerFromTokenExtractor' ]
 
-  App\Game\Application\Service\PlayerFromTokenExtractor: ~
-  App\Game\Domain\Service\PlayerTokenHack: ~
-  App\Game\Application\Request\LoginRequest: ~
-  App\Game\Application\Request\AnswersRequest: ~
-  App\Game\Application\Service\Auth\PlayerLogin: ~
+  App\Game\Features\History\PlayerRatingAction:
+    tags: [ 'controller.service_arguments' ]
+
+  App\Game\Features\Answers\Authentication\PlayerFromTokenExtractor: ~
+  App\Game\Features\GamePlay\Authentication\PlayerFromTokenExtractor: ~
+  App\Game\Features\Authorization\PlayerTokenHack: ~
+  App\Game\Features\Authorization\Request\LoginRequest: ~
+  App\Game\Features\Answers\Request\AnswersRequest: ~
+  App\Game\Features\Authorization\PlayerLogin: ~
   App\Game\Infrastructure\Adapter\Crossword\ApiCrosswordAdapter: ~
   App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter: ~
   App\Game\Infrastructure\HttpClient\ResponseDataExtractor: ~
@@ -27,10 +36,11 @@ services:
     arguments:
       - doctrine.dbal.default_connection
 
-  App\Game\Domain\Dao\HistoryDaoInterface: '@App\Game\Infrastructure\Dao\Doctrine\HistoryDao'
-  App\Game\Domain\Repository\PersistPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\PersistPlayerRepository'
-  App\Game\Domain\Repository\ReadPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\ReadPlayerRepository'
-  App\Game\Domain\Service\Encoder\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'
-  App\Game\Domain\Service\Encoder\LetterEncoderInterface: '@App\Game\Infrastructure\Encoder\Base64Encoder'
-  App\Game\Domain\Port\CrosswordInterface: '@App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter'
-  App\Game\Domain\Service\ResponseDataExtractorInterface: '@App\Game\Infrastructure\HttpClient\ResponseDataExtractor'
+  App\Game\Features\History\HistoryDaoInterface: '@App\Game\Infrastructure\Dao\Doctrine\HistoryDao'
+  App\Game\Features\Registration\PlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\PersistPlayerRepository'
+  App\Game\Features\Player\Level\PlayerLevelRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\PersistPlayerRepository'
+  App\Game\Features\Authorization\Repository\ReadPlayerRepositoryInterface: '@App\Game\Infrastructure\Repository\Doctrine\ReadPlayerRepository'
+  App\Game\Infrastructure\Encoder\PasswordEncoderInterface: '@App\Game\Infrastructure\Encoder\MD5Encoder'
+  App\Game\Features\Answers\LetterEncoderInterface: '@App\Game\Infrastructure\Encoder\Base64Encoder'
+  App\Game\Features\GamePlay\Crossword\CrosswordInterface: '@App\Game\Infrastructure\Adapter\Crossword\DirectCrosswordAdapter'
+  App\Game\Infrastructure\HttpClient\ResponseDataExtractorInterface: '@App\Game\Infrastructure\HttpClient\ResponseDataExtractor'

@@ -14,4 +14,4 @@ framework:
              'App\Dictionary\Features\PopulateStorage\Populate\Message\SearchWordDefinitionMessage': messages
              'App\Dictionary\Features\PopulateStorage\SaveStorage\Message\SaveToStorageMessage': messages
              'App\Crossword\Features\Constructor\Message\GenerateCrosswordMessage': messages
-             'App\Game\Domain\Events\Event\LevelUpEvent': events
+             'App\Game\Features\Player\Level\LevelUpEvent': events

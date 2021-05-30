@@ -3,7 +3,7 @@ security:
     providers:
         users:
             entity:
-                class: App\Game\Domain\Model\Player
+                class: App\Game\Features\Player\Player\Player
                 property: nickname
     firewalls:
         dev:

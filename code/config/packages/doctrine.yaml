@@ -15,8 +15,13 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App\Game:
+            App\Game\Features\Player:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Game/config/doctrine/mappings'
-                prefix: 'App\Game\Domain\Model'
+                dir: '%kernel.project_dir%/src/Game/config/doctrine/player'
+                prefix: 'App\Game\Features\Player\Player'
+            App\Game\Features\History:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Game/config/doctrine/history'
+                prefix: 'App\Game\Features\History'

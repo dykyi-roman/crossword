@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Game\Infrastructure\Repository\Doctrine;
 
-use App\Game\Domain\Enum\Level;
-use App\Game\Domain\Model\History;
-use App\Game\Domain\Model\HistoryId;
-use App\Game\Domain\Model\PlayerId;
-use App\Game\Domain\Repository\PersistHistoryRepositoryInterface;
+use App\Game\Features\History\History;
+use App\Game\Features\History\HistoryId;
+use App\Game\Features\History\PersistHistoryRepositoryInterface;
+use App\Game\Features\History\PlayerId;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,7 +18,7 @@ final class PersistHistoryRepository extends ServiceEntityRepository implements 
         parent::__construct($registry, History::class);
     }
 
-    public function createHistory(HistoryId $historyId, PlayerId $playerId, Level $level): void
+    public function createHistory(HistoryId $historyId, PlayerId $playerId, int $level): void
     {
         $history = new History($historyId);
         $history->changePlayer($playerId);

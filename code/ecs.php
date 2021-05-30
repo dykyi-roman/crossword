@@ -54,6 +54,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters->set(
         Option::SKIP,
         array_merge(
+            [__DIR__ . '/src/Kernel.php'],
             array_map(static fn (string $path) => __DIR__ . $path, CROSSWORD_SKIP_PATH),
             array_map(static fn (string $path) => __DIR__ . $path, DICTIONARY_SKIP_PATH),
             array_map(static fn (string $path) => __DIR__ . $path, GAME_SKIP_PATH),
