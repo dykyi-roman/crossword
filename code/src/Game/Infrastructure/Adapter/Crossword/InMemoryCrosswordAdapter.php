@@ -6,19 +6,16 @@ namespace App\Game\Infrastructure\Adapter\Crossword;
 
 use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
-use App\Game\Domain\Dto\LanguagesDto;
 use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Port\CrosswordInterface;
 
 final class InMemoryCrosswordAdapter implements CrosswordInterface
 {
     private null | CrosswordDto $crosswordDto;
-    private null | LanguagesDto $languagesDto;
 
-    public function __construct(null | CrosswordDto $crosswordDto, null | LanguagesDto $languagesDto)
+    public function __construct(null | CrosswordDto $crosswordDto)
     {
         $this->crosswordDto = $crosswordDto;
-        $this->languagesDto = $languagesDto;
     }
 
     public function construct(CrosswordCriteria $criteria): CrosswordDto
@@ -28,13 +25,5 @@ final class InMemoryCrosswordAdapter implements CrosswordInterface
         }
 
         return $this->crosswordDto;
-    }
-
-    public function supportedLanguages(): LanguagesDto
-    {
-        if (null === $this->languagesDto) {
-            throw ApiClientException::badRequest('test error message');
-        }
-        return $this->languagesDto;
     }
 }

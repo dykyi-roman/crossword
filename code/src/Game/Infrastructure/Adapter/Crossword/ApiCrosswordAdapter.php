@@ -6,7 +6,6 @@ namespace App\Game\Infrastructure\Adapter\Crossword;
 
 use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
-use App\Game\Domain\Dto\LanguagesDto;
 use App\Game\Domain\Exception\ApiClientException;
 use App\Game\Domain\Port\CrosswordInterface;
 use App\SharedKernel\Domain\Service\ResponseDataExtractorInterface;
@@ -44,18 +43,6 @@ final class ApiCrosswordAdapter implements CrosswordInterface
             $response = $this->client->sendRequest(new Request('GET', $uri));
 
             return new CrosswordDto($this->responseDataExtractor->extract($response));
-        } catch (Throwable $exception) {
-            throw ApiClientException::badRequest($exception->getMessage());
-        }
-    }
-
-    public function supportedLanguages(): LanguagesDto
-    {
-        $uri = sprintf('%s/languages', $this->crosswordApiHost);
-        try {
-            $response = $this->client->sendRequest(new Request('GET', $uri));
-
-            return new LanguagesDto($this->responseDataExtractor->extract($response));
         } catch (Throwable $exception) {
             throw ApiClientException::badRequest($exception->getMessage());
         }

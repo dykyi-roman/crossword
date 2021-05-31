@@ -6,7 +6,6 @@ namespace App\Game\Domain\Port;
 
 use App\Game\Domain\Criteria\CrosswordCriteria;
 use App\Game\Domain\Dto\CrosswordDto;
-use App\Game\Domain\Dto\LanguagesDto;
 use App\Game\Domain\Exception\ApiClientException;
 
 interface CrosswordInterface
@@ -15,9 +14,4 @@ interface CrosswordInterface
      * @throws ApiClientException
      */
     public function construct(CrosswordCriteria $criteria): CrosswordDto;
-
-    /**
-     * @throws ApiClientException
-     */
-    public function supportedLanguages(): LanguagesDto;
 }
