@@ -9,7 +9,7 @@ use App\Game\Features\Player\Level\Level;
 use App\Game\Features\Player\Level\LevelUpEvent;
 use DateTimeImmutable;
 
-final class Player extends AggregateRoot
+class Player extends AggregateRoot
 {
     private PlayerId $playerId;
     private DateTimeImmutable $createdAt;

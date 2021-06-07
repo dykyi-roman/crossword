@@ -11,7 +11,7 @@ use MyCLabs\Enum\Enum;
  *
  * @todo https://wiki.php.net/rfc/enumerations
  */
-final class Level extends Enum
+class Level extends Enum
 {
     public const LAST_LEVEL = 5;
 }
