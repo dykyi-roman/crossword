@@ -22,7 +22,7 @@ final class GamePlay
     {
         $crossword = $this->constructor->construct(new CrosswordCriteria($language, $type, $wordCount));
         $grid = new Grid($crossword);
-        $definitions = array_map(static fn (array $item) => $item['word']['definition'], $crossword);
+        $definitions = array_map(static fn (array $item): string => $item['word']['definition'], $crossword);
         foreach ($crossword as $index => $line) {
             foreach ($line['line'] as $number => $cell) {
                 $grid->fillLetter($cell);

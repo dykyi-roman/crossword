@@ -33,7 +33,10 @@ final class HistoryDao implements HistoryDaoInterface
             ->fetchAllAssociative();
 
         return array_map(
-            static fn (array $record) => new HistoryRatingDto($record['nickname'], (int) $record['level']),
+            static fn (array $record): HistoryRatingDto => new HistoryRatingDto(
+                $record['nickname'],
+                (int) $record['level']
+            ),
             $records
         );
     }

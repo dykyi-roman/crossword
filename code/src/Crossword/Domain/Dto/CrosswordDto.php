@@ -31,6 +31,6 @@ final class CrosswordDto implements JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return array_map(static fn (LineDto $line) => $line->jsonSerialize(), $this->lines);
+        return array_map(static fn (LineDto $line): array => $line->jsonSerialize(), $this->lines);
     }
 }

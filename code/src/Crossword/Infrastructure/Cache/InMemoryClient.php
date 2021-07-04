@@ -18,7 +18,7 @@ final class InMemoryClient implements CacheItemPoolInterface
 
     public function getItems(array $keys = []): array
     {
-        return array_map(static fn (string $key) => $this->getItem($key), $keys);
+        return array_map(static fn (string $key): CacheItemInterface => $this->getItem($key), $keys);
     }
 
     public function hasItem(string $key): bool
@@ -44,7 +44,7 @@ final class InMemoryClient implements CacheItemPoolInterface
 
     public function deleteItems(array $keys): bool
     {
-        array_map(static fn (string $key) => $this->deleteItem($key), $keys);
+        array_map(static fn (string $key): bool => $this->deleteItem($key), $keys);
 
         return true;
     }

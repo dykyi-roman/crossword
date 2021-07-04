@@ -16,7 +16,10 @@ final class CorrectAnswersAssert extends Assert
     {
         foreach ($answers as $item) {
             if (self::compareAnswers($item['l'], $item['v'])) {
-                $correct = array_map(static fn (array $item) => strtolower(implode('', $item['l'])), $answers);
+                $correct = array_map(
+                    static fn (array $item): string => strtolower(implode('', $item['l'])),
+                    $answers
+                );
 
                 throw new WrongAnswerException($correct);
             }

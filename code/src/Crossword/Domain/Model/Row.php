@@ -89,7 +89,7 @@ final class Row implements IteratorAggregate
      */
     public function mask(): Mask
     {
-        $mask = array_map(static fn (Cell $cell) => $cell->letter() ?: '.', $this->cells);
+        $mask = array_map(static fn (Cell $cell): string => $cell->letter() ?: '.', $this->cells);
         $mask = implode('', $mask);
         while (substr($mask, -1) === '.') {
             $mask = substr($mask, 0, -1);

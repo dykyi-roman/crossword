@@ -31,7 +31,10 @@ final class InMemoryHistoryDao implements HistoryDaoInterface
     public function ratingHistory(int $limit = self::LIMIT): array
     {
         return array_map(
-            static fn (History $history) => new HistoryRatingDto('test', $history->level()->getValue()),
+            static fn (History $history): HistoryRatingDto => new HistoryRatingDto(
+                'test',
+                $history->level()->getValue()
+            ),
             $this->histories
         );
     }
