@@ -32,6 +32,6 @@ final class WordDtoCollection implements JsonSerializable, Countable
      */
     public function jsonSerialize(): array
     {
-        return array_map(static fn (WordDto $word) => $word->jsonSerialize(), $this->words);
+        return array_map(static fn (WordDto $word): array => $word->jsonSerialize(), $this->words);
     }
 }

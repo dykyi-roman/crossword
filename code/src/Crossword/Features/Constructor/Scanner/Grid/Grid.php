@@ -30,7 +30,7 @@ final class Grid implements IteratorAggregate
 
     public function isEmpty(): bool
     {
-        return 0 === count(array_filter($this->cells, static fn (Cell $cell) => null !== $cell->letter()));
+        return 0 === count(array_filter($this->cells, static fn (Cell $cell): bool => null !== $cell->letter()));
     }
 
     public function shiftCell(Coordinate $coordinate): Cell

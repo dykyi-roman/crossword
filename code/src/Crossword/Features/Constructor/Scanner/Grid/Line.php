@@ -72,6 +72,6 @@ final class Line implements IteratorAggregate, JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return array_map(static fn (Cell $cell) => $cell->jsonSerialize(), $this->getIterator()->getArrayCopy());
+        return array_map(static fn (Cell $cell): array => $cell->jsonSerialize(), $this->getIterator()->getArrayCopy());
     }
 }
