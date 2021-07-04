@@ -19,7 +19,10 @@ final class StorageWordDtoCollection implements IteratorAggregate
 
     public function __construct(array $words)
     {
-        $this->words = array_map(static fn (array $attributes) => new StorageWordDto($attributes), $words);
+        $this->words = array_map(
+            static fn (array $attributes): StorageWordDto => new StorageWordDto($attributes),
+            $words
+        );
     }
 
     public function getIterator(): ArrayIterator

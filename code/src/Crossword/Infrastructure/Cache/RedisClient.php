@@ -39,7 +39,7 @@ final class RedisClient implements CacheItemPoolInterface
      */
     public function getItems(array $keys = []): array
     {
-        return array_map(static fn (string $key) => $this->getItem($key), $keys);
+        return array_map(static fn (string $key): CacheItemInterface => $this->getItem($key), $keys);
     }
 
     public function hasItem(string $key): bool
@@ -59,7 +59,7 @@ final class RedisClient implements CacheItemPoolInterface
 
     public function deleteItems(array $keys): bool
     {
-        array_map(static fn (string $key) => $this->deleteItem($key), $keys);
+        array_map(static fn (string $key): bool => $this->deleteItem($key), $keys);
 
         return true;
     }
@@ -78,7 +78,7 @@ final class RedisClient implements CacheItemPoolInterface
 
     public function commit(): bool
     {
-        array_map(static fn (CacheItemInterface $item) => $this->save($item), $this->deferred);
+        array_map(static fn (CacheItemInterface $item): bool => $this->save($item), $this->deferred);
 
         return true;
     }
