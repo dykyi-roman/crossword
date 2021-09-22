@@ -53,7 +53,7 @@ These implementations will be the adapter - `{modue}\Infrastructure\Adapter`:
 To make the code organised each module uses Layered Architecture and each functional area is divided on four layers:
 
 * `Application`
-* `Doman`
+* `Domain`
 * `Infrastructure`
 * `UI`
 
